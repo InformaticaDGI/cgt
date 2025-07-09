@@ -1,4 +1,3 @@
-import { BiChevronDown } from "react-icons/bi"
 import styled from "styled-components"
 
 const FilterBody = () => {
