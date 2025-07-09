@@ -79,40 +79,16 @@ const SelectArrow = styled.div`
 
 
 
-const Select = styled.select`
-  appearance: none;
-  width: 290px;
-  border: 1px solid #98F4E3;
-  border-radius: 15px;
-  padding: 12px;
-  background:rgba(240, 253, 250, 0.5);
-  transition: 0.4s;
-  color: #2D3748;
-  font-size: 14px;
-  font-weight: 600;
+// const Select = styled.select`
+//   border: 1px solid #98F4E3;
+//   border-radius: 15px;
+//   padding: 12px;
+//   background:rgba(240, 253, 250, 0.5);
+//   transition: 0.4s;
+//   color: #2D3748;
+//   font-size: 14px;
+//   font-weight: 600;
 
-  &::before, after {
-    --size: 0.3rem;
-    position: absolute;
-    content: "";
-    right: 1rem;
-    pointer-events: none;
-  }
-
-  &::before {
-    border-left: var(--size) solid transparent;
-    border-right: var(--size) solid transparent;
-    border-bottom: var(--size) solid black;
-    top: 40%;
-  }
-
-  &::after {
-    border-left: var(--size) solid transparent;
-    border-right: var(--size) solid transparent;
-    border-top: var(--size) solid black;
-    top: 55%;
-}
-
-`
+// `
 
 export default FilterBody
