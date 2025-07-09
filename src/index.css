@@ -1,0 +1,19 @@
+:root{
+  --primary: #20B2AA;
+  --secondary: #008080;
+  --background: #ffffff;
+  --text_primary: #1AA9A2;
+  --text_foreground: #ffffff;
+}
+
+*,*::after,*::before {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
