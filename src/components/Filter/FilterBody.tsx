@@ -32,24 +32,26 @@ const StyledSelectWrapper = styled.div`
 `;
 
 const StyledSelect = styled.select`
-  appearance: none; /* Oculta la flecha nativa en la mayoría de los navegadores */
-  -webkit-appearance: none; /* Para Safari y Chrome */
-  -moz-appearance: none; /* Para Firefox */
-  background-color: #fff;
-  border: 1px solid #ccc;
-  padding: 10px 40px 10px 15px; /* Más espacio a la derecha para el icono */
-  border-radius: 5px;
-  font-size: 16px;
+  appearance: none; 
+  -webkit-appearance: none; 
+  -moz-appearance: none; 
+  color: #2D3748;
+  transition: 0.4s;
+  background-color: rgba(240, 253, 250, 0.5);
+  padding: 12px;
+  border-radius: 15px;
+  border: 1px solid #98F4E3;
+  padding: 10px 80px 10px 15px;
+  font-weight: 600;
+  font-size: 14px;
   cursor: pointer;
-  outline: none; /* Elimina el borde de enfoque predeterminado */
-  width: 100%; /* Para que ocupe el ancho de su contenedor */
+  outline: none; 
+  width: 100%;
 
   &:focus {
     border-color: #007bff; /* Color de borde al enfocar */
     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
   }
-
-  /* Estilos para las opciones (dependen del navegador, pero puedes intentar estilizarlas) */
   option {
     padding: 10px;
   }
@@ -75,20 +77,5 @@ const SelectArrow = styled.div`
     line-height: 1; /* Asegura que el icono no añada espacio extra */
   }
 `;
-
-
-
-
-// const Select = styled.select`
-//   border: 1px solid #98F4E3;
-//   border-radius: 15px;
-//   padding: 12px;
-//   background:rgba(240, 253, 250, 0.5);
-//   transition: 0.4s;
-//   color: #2D3748;
-//   font-size: 14px;
-//   font-weight: 600;
-
-// `
 
 export default FilterBody
