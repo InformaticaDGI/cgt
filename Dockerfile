@@ -12,4 +12,4 @@ FROM node:20-slim AS production
 WORKDIR /app
 COPY --from=base /app .
 EXPOSE 5002
-CMD ["yarn", "preview"]
+CMD ["yarn", "preview", "--h 0.0.0.0"]
