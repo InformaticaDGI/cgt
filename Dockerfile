@@ -1,6 +1,6 @@
 # Multistage Dockerfile
 
-FROM node:20-alpine AS base
+FROM node:20-alpine AS build
 WORKDIR /app
 COPY package*.json yarn.lock* ./
 RUN yarn --frozen-lockfile
@@ -8,8 +8,9 @@ COPY . .
 RUN yarn build
 
 
-FROM node:20-slim AS production
-WORKDIR /app
-COPY --from=base /app .
+FROM nginx:alpine
+COPY --from=build /app/dist /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
 EXPOSE 5002
-CMD ["yarn", "preview", "--host", "0.0.0.0"]
+CMD ["nginx", "-g", "daemon off;"]
