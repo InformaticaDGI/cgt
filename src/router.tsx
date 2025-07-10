@@ -1,11 +1,15 @@
 import { createBrowserRouter } from 'react-router'
-import Navigation from './components/Navigation/Navigation'
-import FilterBody from './components/Filter/FilterBody'
+import HomeView from './pages/HomeView'
+
 
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <Navigation><FilterBody /></Navigation>
+        element: <HomeView />
+    },
+    {
+        path: '/programa1/proyecto1/actividad1/tarea1',
+        element: <HomeView />
     }
 ])
 

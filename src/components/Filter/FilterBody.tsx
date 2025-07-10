@@ -1,15 +1,23 @@
 import styled from "styled-components"
 
-const FilterBody = () => {
+export type Option = {
+    label: string
+    value: string
+}
+
+export type SelectProps = {
+    placeholder?: string
+    data: Option[]
+}
+
+const FilterBody = ({ placeholder, data }: SelectProps) => {
 
     return (
         <div>
             <StyledSelectWrapper>
                 <StyledSelect>
-                    <option value="">Selecciona una opción</option>
-                    <option value="opcion1">Opción 1</option>
-                    <option value="opcion2">Opción 2</option>
-                    <option value="opcion3">Opción 3</option>
+                    <option value="">{placeholder}</option>
+                    {data.map(item => <option value={item.value} key={item.value}>{item.label}</option>)}
                 </StyledSelect>
                 <SelectArrow />
             </StyledSelectWrapper>
@@ -17,40 +25,39 @@ const FilterBody = () => {
     )
 }
 
-// Tu icono SVG. Puedes importarlo o definirlo como una cadena.
-// Para este ejemplo, usaremos un SVG simple.
+
 const CustomArrowIcon = `
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M7 10L12 15L17 10H7Z" fill="currentColor"/>
-  </svg>
+<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M4 6L8 10L12 6" stroke="black" stroke-opacity="0.5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
 `;
+
 
 const StyledSelectWrapper = styled.div`
   position: relative;
-  display: inline-block; /* O block si quieres que ocupe todo el ancho */
-  width: fit-content; // Ajusta el ancho al contenido o establece uno fijo
+  display: inline-block;
+  width: 100%; 
 `;
 
 const StyledSelect = styled.select`
   appearance: none; 
   -webkit-appearance: none; 
   -moz-appearance: none; 
-  color: #2D3748;
+  color: #555555;
   transition: 0.4s;
   background-color: rgba(240, 253, 250, 0.5);
   padding: 12px;
   border-radius: 15px;
   border: 1px solid #98F4E3;
   padding: 10px 80px 10px 15px;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 14px;
   cursor: pointer;
   outline: none; 
   width: 100%;
 
-  &:focus {
-    border-color: #007bff; /* Color de borde al enfocar */
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  &:hover {
+    background: #ffffff;
   }
   option {
     padding: 10px;
@@ -60,22 +67,21 @@ const StyledSelect = styled.select`
 const SelectArrow = styled.div`
   position: absolute;
   top: 50%;
-  right: 15px; /* Posiciona el icono a la derecha */
+  right: 15px; 
   transform: translateY(-50%);
-  pointer-events: none; /* Permite hacer clic en el select a través del icono */
+  pointer-events: none; 
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #555; /* Color del icono */
+  color: #555; 
 
-  /* Inyecta el SVG como fondo o directamente si el navegador lo permite */
+
   &::after {
     content: url('data:image/svg+xml;utf8,${encodeURIComponent(CustomArrowIcon)}');
     display: block;
-    width: 24px; // Tamaño de tu icono
-    height: 24px; // Tamaño de tu icono
-    line-height: 1; /* Asegura que el icono no añada espacio extra */
-  }
+    width: 16px;
+    height: 16px; 
+    line-height: 1; 
 `;
 
 export default FilterBody
