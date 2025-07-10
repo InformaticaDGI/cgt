@@ -3,19 +3,19 @@ import BreadCrump from "./BreadCrump";
 
 const Header = () => {
 
-    return <HeaderContent>
+    return <StyledHeader>
         <BreadCrump />
         <div>
             {/*TODO*/}
         </div>
-    </HeaderContent>
+    </StyledHeader>
 
 }
 
 export default Header
 
 
-const HeaderContent = styled.div`
+const StyledHeader = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;

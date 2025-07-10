@@ -1,15 +1,16 @@
 import styled from "styled-components";
+import Text from "../Ui/Text";
 
 const BreadCrumpItem = ({ children, href, placement = "default" }: { children: string, href: string, placement?: "start" | "end" | "default" }) => {
 
     if(placement === 'end'){
-        return <BreadCrumpElement href={href}>{children}</BreadCrumpElement>
+        return <StyledBreadCrumpItem href={href}>{children}</StyledBreadCrumpItem>
     }
 
     if(placement === 'start') {
         return <>
             <Text>/</Text>
-            <BreadCrumpElement href={href}>{children}</BreadCrumpElement>
+            <StyledBreadCrumpItem href={href}>{children}</StyledBreadCrumpItem>
             <Text>/</Text>
         </>
     }
@@ -17,7 +18,7 @@ const BreadCrumpItem = ({ children, href, placement = "default" }: { children: s
 
     return (
         <>
-            <BreadCrumpElement href={href}>{children}</BreadCrumpElement>
+            <StyledBreadCrumpItem href={href}>{children}</StyledBreadCrumpItem>
             <Text>/</Text>
         </>
     )
@@ -25,13 +26,11 @@ const BreadCrumpItem = ({ children, href, placement = "default" }: { children: s
 
 export default BreadCrumpItem
 
-const BreadCrumpElement = styled.a`
+const StyledBreadCrumpItem = styled.a`
     text-decoration: none;
     font-size: 20px;
     color: #2D3748;
+    &:hover {
+        text-decoration: underline;
+    }
 `
-const Text = styled.p<{ variant?: "title" | "normal" }>`
-    color: ${props => props.variant === 'title' ? "#A0AEC0" : "#2D3748"};
-    font-size: 20px;
-    font-weight: 600;
-`;

@@ -1,38 +1,34 @@
 import styled from "styled-components";
 import BreadCrumpItem from "./BreadCrumpItem";
+import Text from "../Ui/Text";
 
 const BreadCrump = () => {
 
-    const url = window.location.pathname;
-    const splittedUrl = url.split("/").filter(Boolean);
-    const lastIndex = splittedUrl.length - 1;
+    const pathname = window.location.pathname;
+    const splittedPathname = pathname.split("/").filter(Boolean);
+    const lastIndex = splittedPathname.length - 1;
 
-    return (<BreadCrumpContent>
+    return (<StyledBreadCrump>
         <Text variant="title">Paginas</Text>
         <Text>/</Text>
         <BreadCrumpItem href="/" placement="end">Indicadores</BreadCrumpItem>
-        {splittedUrl.map((url, index) => {
+        {splittedPathname.map((dirname, index) => {
+            const pathname = "/" + splittedPathname.slice(0, index + 1).join("/");
             const isFirstIndex = index === 0;
             const isLastIndex = lastIndex === index
 
-            if(isFirstIndex) return <BreadCrumpItem href={splittedUrl.slice(0,index).join('/')} placement="start" key={crypto.randomUUID()}>{url}</BreadCrumpItem>
-            if(isLastIndex) return <BreadCrumpItem href={splittedUrl.slice(0,index).join('/')} placement="end" key={crypto.randomUUID()}>{url}</BreadCrumpItem>
-            return <BreadCrumpItem href={splittedUrl.slice(0,index).join('/')} key={crypto.randomUUID()}>{url}</BreadCrumpItem>
+            if(isFirstIndex) return <BreadCrumpItem href={pathname} placement="start" key={crypto.randomUUID()}>{dirname}</BreadCrumpItem>
+            if(isLastIndex) return <BreadCrumpItem href={pathname} placement="end" key={crypto.randomUUID()}>{dirname}</BreadCrumpItem>
+            return <BreadCrumpItem href={pathname} key={crypto.randomUUID()}>{dirname}</BreadCrumpItem>
         })}
-    </BreadCrumpContent>)
+    </StyledBreadCrump>)
 }
 
 export default BreadCrump
 
 
-const BreadCrumpContent = styled.div`
+const StyledBreadCrump = styled.div`
     display: flex;
     flex-direction: row;
     gap: 8px;
-`;
-
-const Text = styled.p<{ variant?: "title" | "normal" }>`
-    color: ${props => props.variant === 'title' ? "#A0AEC0" : "#2D3748"};
-    font-size: 20px;
-    font-weight: 600;
 `;

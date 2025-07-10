@@ -1,4 +1,16 @@
 import styled from 'styled-components';
+import Text from '../Ui/Text';
+
+
+export default function Logo() {
+
+    return (
+        <LogoWrapper>
+            <Image src='/logo.png' />
+            <Text style={{fontWeight: 'bolder', fontSize: '14px', color: '#ffffff'}}>CGT GUÁRICO</Text>
+        </LogoWrapper>
+    )
+}
 
 const LogoWrapper = styled.div`
             display: flex;
@@ -12,22 +24,3 @@ const Image = styled.img`
         width: 24px;
         height: 24px;
     `;
-
-const Text = styled.p`
-            font-family: inherit;
-            font-weight: bolder;
-            font-size: 14px;
-            color: #ffffff;
-    `;
-
-
-
-export default function Logo() {
-
-    return (
-        <LogoWrapper>
-            <Image src='/logo.png' />
-            <Text>CGT GUÁRICO</Text>
-        </LogoWrapper>
-    )
-}

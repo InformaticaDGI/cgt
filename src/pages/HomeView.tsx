@@ -2,12 +2,17 @@ import styled from "styled-components"
 import Navigation from "../components/Navigation/Navigation"
 import FilterTool from "../components/FilterTool";
 import Header from "../components/Header/Header";
+import Tabs from "../components/Tabs/Tabs";
+import CardHeader from "../components/Card/CardHeader";
 
 const HomeView = () => {
     return <Navigation>
         <MainWrapper>
             <Header />
             <FilterTool />
+            <Tabs/>
+            
+            <CardHeader />
             <p>...</p>
         </MainWrapper>
     </Navigation>

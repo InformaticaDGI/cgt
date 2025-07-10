@@ -4,15 +4,14 @@ import type { NavLinkProps } from "./config"
 
 const NavLink = ({ item }: { item: NavLinkProps }) => {
     const location = useLocation();
-    console.log(location.pathname);
     const Icon = item.icon; 
     return (
-        <Link currentPage={location.pathname === item.to} as="a" href={item.to}>
+        <StyledNavLink currentPage={location.pathname === item.to} as="a" href={item.to}>
             <IconWrapper currentPage={location.pathname === item.to}>
                 <Icon />
             </IconWrapper>
-            <Text currentPage={location.pathname === item.to}>{item.label}</Text>
-        </Link>
+            <StyledLink currentPage={location.pathname === item.to}>{item.label}</StyledLink>
+        </StyledNavLink>
     )
 }
 
@@ -20,7 +19,7 @@ export default NavLink
 
 
 
-const Link = styled.div<{ currentPage: boolean }>`
+const StyledNavLink = styled.div<{ currentPage: boolean }>`
     display: flex;
     padding: 15px;
     align-items: center;
@@ -49,7 +48,7 @@ const IconWrapper = styled.div<{ currentPage: boolean }>`
     height: 30px;
     border-radius: 12px;
 `
-const Text = styled.p<{currentPage: boolean}>`
+const StyledLink = styled.p<{currentPage: boolean}>`
     color: ${props => props.currentPage ? "var(--text_primary)":"var(--text_foreground)"};
     font-size: 12px;
     font-Weight: bold;
