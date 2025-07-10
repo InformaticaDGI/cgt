@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Text from "../Ui/Text";
 
-const BreadCrumpItem = ({ children, href, placement = "default" }: { children: string, href: string, placement?: "start" | "end" | "default" }) => {
+const BreadCrumpItem = ({ children, href, placement = "default" }: { children: string, href: string, placement?: "start" | "end" | "middle" | "default" }) => {
 
     if(placement === 'end'){
         return <StyledBreadCrumpItem href={href}>{children}</StyledBreadCrumpItem>
@@ -12,6 +12,13 @@ const BreadCrumpItem = ({ children, href, placement = "default" }: { children: s
             <Text>/</Text>
             <StyledBreadCrumpItem href={href}>{children}</StyledBreadCrumpItem>
             <Text>/</Text>
+        </>
+    }
+
+    if(placement === 'middle') {
+        return <>
+            <Text>/</Text>
+            <StyledBreadCrumpItem href={href}>{children}</StyledBreadCrumpItem>
         </>
     }
 

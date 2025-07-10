@@ -2,14 +2,14 @@ import styled from "styled-components"
 import Text from "../Ui/Text";
 import { ChevronRight } from "lucide-react";
 
-const CardHeader = () => {
+const CardHeader = ({ title, count, iconState = "closed" }: { title: string | false, count: string | false, iconState?: "open" | "closed" }) => {
 
     return (
         <StyledCardHeader>
-            <Text style={{color: '#0C777C', fontWeight: '500'}}>Titulo</Text>
+            {title !== false && <Text style={{ fontSize: '16px', color: '#0C777C', fontWeight: '500' }}>{title}</Text>}
             <StyledInfoHeader>
-                <Text style={{fontSize: '14px', color: '#889C9D', fontWeight: 'normal'}}>Cantidad</Text>
-                <ChevronRight strokeWidth="1" color="#889C9D" />
+                {count !== false && <Text style={{ fontSize: '14px', color: '#889C9D', fontWeight: 'normal' }}>{count}</Text>}
+                <ChevronRight strokeWidth="1" style={{rotate: iconState === "open" ? "90deg": "0deg", color: "#889C9D"}} />
             </StyledInfoHeader>
         </StyledCardHeader>
     )

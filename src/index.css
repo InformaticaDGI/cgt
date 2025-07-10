@@ -12,8 +12,13 @@
   box-sizing: border-box;
 }
 
-body {
-  min-height: 100vh;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+@font-face {
+  font-family: "Inter";   /*Can be any text*/
+  src: local("Inter"),
+    url("./fonts/Inter_18pt-Regular.ttf") format("truetype");
 }
 
+body {
+  min-height: 100vh;
+  font-family: Inter, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
