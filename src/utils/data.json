@@ -1,9 +1,23 @@
 {
     "evaluacionSistema": {
-        "usuario": [
+        "usuarios": [
             {
-                "nombre": "Juan Pérez",
-                "idInstitucion": "INST_UNESR_001"
+                "nombreUsuario": "Gobernador",
+                "idUsuario": "USR_GOB_001",
+                "idDependencia": "",
+                "role": "admin"
+            },
+            {
+                "nombreUsuario": "Imugua",
+                "idUsuario": "USR_IMUGUA_001",
+                "idDependencia": "DEP_IMUBGUA",
+                "role": "gestor"
+            },
+            {
+                "nombreUsuario": "IPMEBG",
+                "idUsuario": "USR_IPMEBG_001",
+                "idDependencia": "DEP_IPMEBG",
+                "role": "gestor"
             }
         ],
         "institucion": [
