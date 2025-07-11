@@ -413,6 +413,287 @@
                 "nombreDependencia": "ALCARAVÁN SISTEMAS TECNOLÓGICOS",
                 "idSecretariaAsociada": "SEC_ECOSOC_CONOC"
             }
+        ],
+        "secretarias_territoriales": [
+            {
+                "idSecretariaTerritorial": "ST_JG_ROSCIO",
+                "nombreSecretariaTerritorial": "Juan German Roscio"
+            },
+            {
+                "idSecretariaTerritorial": "ST_EJE_1",
+                "nombreSecretariaTerritorial": "Eje 1"
+            },
+            {
+                "idSecretariaTerritorial": "ST_EJE_2",
+                "nombreSecretariaTerritorial": "Eje 2"
+            },
+            {
+                "idSecretariaTerritorial": "ST_EJE_3",
+                "nombreSecretariaTerritorial": "Eje 3"
+            }
+        ],
+        "municipios": [
+            {
+                "idMunicipio": "MUN_JG_ROSCIO",
+                "nombreMunicipio": "Juan Germán Roscio Nieves",
+                "idSecretariaTerritorialAsociada": "ST_JG_ROSCIO",
+                "parroquias": [
+                    {
+                        "idParroquia": "PAR_CANTAGALLO",
+                        "nombreParroquia": "Cantagallo"
+                    },
+                    {
+                        "idParroquia": "PAR_SAN_JUAN",
+                        "nombreParroquia": "San Juan de los Morros"
+                    },
+                    {
+                        "idParroquia": "PAR_PARAPARA",
+                        "nombreParroquia": "Parapara"
+                    }
+                ]
+            },
+            {
+                "idMunicipio": "MUN_FRANCISCO_MIRANDA",
+                "nombreMunicipio": "Francisco de Miranda",
+                "idSecretariaTerritorialAsociada": "ST_EJE_1",
+                "parroquias": [
+                    {
+                        "idParroquia": "PAR_EL_CALVARIO",
+                        "nombreParroquia": "El Calvario"
+                    },
+                    {
+                        "idParroquia": "PAR_EL_RASTRO",
+                        "nombreParroquia": "El Rastro"
+                    },
+                    {
+                        "idParroquia": "PAR_GUARDATINAJAS",
+                        "nombreParroquia": "Guardatinajas"
+                    },
+                    {
+                        "idParroquia": "PAR_CALABOZO_CAPITAL",
+                        "nombreParroquia": "Capital Urbana Calabozo"
+                    }
+                ]
+            },
+            {
+                "idMunicipio": "MUN_ORTIZ",
+                "nombreMunicipio": "Ortiz",
+                "idSecretariaTerritorialAsociada": "ST_EJE_1",
+                "parroquias": [
+                    {
+                        "idParroquia": "PAR_SAN_JOSE_TIZNADOS",
+                        "nombreParroquia": "San José de Tiznados"
+                    },
+                    {
+                        "idParroquia": "PAR_SAN_FRANCISCO_TIZNADOS",
+                        "nombreParroquia": "San Francisco de Tiznados"
+                    },
+                    {
+                        "idParroquia": "PAR_SAN_LORENZO_TIZNADOS",
+                        "nombreParroquia": "San Lorenzo de Tiznados"
+                    },
+                    {
+                        "idParroquia": "PAR_ORTIZ_CAPITAL",
+                        "nombreParroquia": "Ortiz"
+                    }
+                ]
+            },
+            {
+                "idMunicipio": "MUN_JULIAN_MELLADO",
+                "nombreMunicipio": "Julián Mellado",
+                "idSecretariaTerritorialAsociada": "ST_EJE_1",
+                "parroquias": [
+                    {
+                        "idParroquia": "PAR_EL_SOMBRERO",
+                        "nombreParroquia": "El Sombrero"
+                    },
+                    {
+                        "idParroquia": "PAR_SOSA",
+                        "nombreParroquia": "Sosa"
+                    }
+                ]
+            },
+            {
+                "idMunicipio": "MUN_SAN_JERONIMO_GUAYABAL",
+                "nombreMunicipio": "San Jerónimo de Guayabal",
+                "idSecretariaTerritorialAsociada": "ST_EJE_1",
+                "parroquias": [
+                    {
+                        "idParroquia": "PAR_GUAYABAL",
+                        "nombreParroquia": "Guayabal"
+                    },
+                    {
+                        "idParroquia": "PAR_CAZORLA",
+                        "nombreParroquia": "Cazorla"
+                    }
+                ]
+            },
+            {
+                "idMunicipio": "MUN_CAMAGUAN",
+                "nombreMunicipio": "Camaguán",
+                "idSecretariaTerritorialAsociada": "ST_EJE_1",
+                "parroquias": [
+                    {
+                        "idParroquia": "PAR_CAMAGUAN_CAPITAL",
+                        "nombreParroquia": "Camaguán"
+                    },
+                    {
+                        "idParroquia": "PAR_PUERTO_MIRANDA",
+                        "nombreParroquia": "Puerto Miranda"
+                    },
+                    {
+                        "idParroquia": "PAR_UVERITO",
+                        "nombreParroquia": "Uverito"
+                    }
+                ]
+            },
+            {
+                "idMunicipio": "MUN_LEONARDO_INFANTE",
+                "nombreMunicipio": "Leonardo Infante",
+                "idSecretariaTerritorialAsociada": "ST_EJE_2",
+                "parroquias": [
+                    {
+                        "idParroquia": "PAR_VALLE_PASCUA",
+                        "nombreParroquia": "Valle de la Pascua"
+                    },
+                    {
+                        "idParroquia": "PAR_ESPINO",
+                        "nombreParroquia": "Espino"
+                    }
+                ]
+            },
+            {
+                "idMunicipio": "MUN_JOSE_FELIX_RIBAS",
+                "nombreMunicipio": "José Félix Ribas",
+                "idSecretariaTerritorialAsociada": "ST_EJE_2",
+                "parroquias": [
+                    {
+                        "idParroquia": "PAR_TUCUPIDO",
+                        "nombreParroquia": "Tucupido"
+                    },
+                    {
+                        "idParroquia": "PAR_SAN_RAFAEL_LAYA",
+                        "nombreParroquia": "San Rafael de Laya"
+                    }
+                ]
+            },
+            {
+                "idMunicipio": "MUN_PEDRO_ZARAZA",
+                "nombreMunicipio": "Pedro Zaraza",
+                "idSecretariaTerritorialAsociada": "ST_EJE_2",
+                "parroquias": [
+                    {
+                        "idParroquia": "PAR_SAN_JOSE_UNARE",
+                        "nombreParroquia": "San José de Unare"
+                    },
+                    {
+                        "idParroquia": "PAR_ZARAZA",
+                        "nombreParroquia": "Zaraza"
+                    }
+                ]
+            },
+            {
+                "idMunicipio": "MUN_SANTA_MARIA_IPIRE",
+                "nombreMunicipio": "Santa María de Ipire",
+                "idSecretariaTerritorialAsociada": "ST_EJE_2",
+                "parroquias": [
+                    {
+                        "idParroquia": "PAR_SANTA_MARIA_IPIRE_CAPITAL",
+                        "nombreParroquia": "Santa María de Ipire"
+                    },
+                    {
+                        "idParroquia": "PAR_ALTAMIRA",
+                        "nombreParroquia": "Altamira"
+                    }
+                ]
+            },
+            {
+                "idMunicipio": "MUN_EL_SOCORRO",
+                "nombreMunicipio": "El Socorro",
+                "idSecretariaTerritorialAsociada": "ST_EJE_2",
+                "parroquias": [
+                    {
+                        "idParroquia": "PAR_EL_SOCORRO_CAPITAL",
+                        "nombreParroquia": "El Socorro"
+                    }
+                ]
+            },
+            {
+                "idMunicipio": "MUN_JOSE_TADEO_MONAGAS",
+                "nombreMunicipio": "José Tadeo Monagas",
+                "idSecretariaTerritorialAsociada": "ST_EJE_3",
+                "parroquias": [
+                    {
+                        "idParroquia": "PAR_ALTAGRACIA_ORITUCO",
+                        "nombreParroquia": "Altagracia de Orituco"
+                    },
+                    {
+                        "idParroquia": "PAR_SAN_RAFAEL_ORITUCO",
+                        "nombreParroquia": "San Rafael de Orituco"
+                    },
+                    {
+                        "idParroquia": "PAR_SAN_FRANCISCO_LEZAMA",
+                        "nombreParroquia": "San Francisco Javier de Lezama"
+                    },
+                    {
+                        "idParroquia": "PAR_PASO_REAL_MACAIRA",
+                        "nombreParroquia": "Paso Real de Macaira"
+                    },
+                    {
+                        "idParroquia": "PAR_CARLOS_SOUBLETTE",
+                        "nombreParroquia": "Carlos Soublette"
+                    },
+                    {
+                        "idParroquia": "PAR_SAN_FRANCISCO_MACAIRA",
+                        "nombreParroquia": "San Francisco de Macaira"
+                    },
+                    {
+                        "idParroquia": "PAR_LIBERTAD_ORITUCO",
+                        "nombreParroquia": "Libertad de Orituco"
+                    }
+                ]
+            },
+            {
+                "idMunicipio": "MUN_SAN_JOSE_GUARIBE",
+                "nombreMunicipio": "San José de Guaribe",
+                "idSecretariaTerritorialAsociada": "ST_EJE_3",
+                "parroquias": [
+                    {
+                        "idParroquia": "PAR_SAN_JOSE_GUARIBE_CAPITAL",
+                        "nombreParroquia": "San José de Guaribe"
+                    }
+                ]
+            },
+            {
+                "idMunicipio": "MUN_CHAGUARAMAS",
+                "nombreMunicipio": "Chaguaramas",
+                "idSecretariaTerritorialAsociada": "ST_EJE_3",
+                "parroquias": [
+                    {
+                        "idParroquia": "PAR_CHAGUARAMAS_CAPITAL",
+                        "nombreParroquia": "Chaguaramas"
+                    }
+                ]
+            },
+            {
+                "idMunicipio": "MUN_JUAN_JOSE_RONDON",
+                "nombreMunicipio": "Juan José Rondón",
+                "idSecretariaTerritorialAsociada": "ST_EJE_3",
+                "parroquias": [
+                    {
+                        "idParroquia": "PAR_LAS_MERCEDES",
+                        "nombreParroquia": "Las Mercedes"
+                    },
+                    {
+                        "idParroquia": "PAR_CABRUTA",
+                        "nombreParroquia": "Cabruta"
+                    },
+                    {
+                        "idParroquia": "PAR_SANTA_RITA_MANAPIRE",
+                        "nombreParroquia": "Santa Rita de Manapire"
+                    }
+                ]
+            }
         ]
     }
 }
