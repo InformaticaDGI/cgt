@@ -1,16 +1,17 @@
 import styled from "styled-components";
 import Text from "../Ui/Text";
+import type React from "react";
 
-const BreadCrumpItem = ({ children, href, placement = "default" }: { children: string, href: string, placement?: "start" | "end" | "middle" | "default" }) => {
+const BreadCrumpItem = ({ children, href, placement = "default", ...props }: { children: string, href: string, placement?: "start" | "end" | "middle" | "default" } & React.ComponentPropsWithoutRef<'a'>) => {
 
     if(placement === 'end'){
-        return <StyledBreadCrumpItem href={href}>{children}</StyledBreadCrumpItem>
+        return <StyledBreadCrumpItem {...props} href={href}>{children}</StyledBreadCrumpItem>
     }
 
     if(placement === 'start') {
         return <>
             <Text>/</Text>
-            <StyledBreadCrumpItem href={href}>{children}</StyledBreadCrumpItem>
+            <StyledBreadCrumpItem {...props} href={href}>{children}</StyledBreadCrumpItem>
             <Text>/</Text>
         </>
     }
@@ -18,14 +19,14 @@ const BreadCrumpItem = ({ children, href, placement = "default" }: { children: s
     if(placement === 'middle') {
         return <>
             <Text>/</Text>
-            <StyledBreadCrumpItem href={href}>{children}</StyledBreadCrumpItem>
+            <StyledBreadCrumpItem {...props} href={href}>{children}</StyledBreadCrumpItem>
         </>
     }
 
 
     return (
         <>
-            <StyledBreadCrumpItem href={href}>{children}</StyledBreadCrumpItem>
+            <StyledBreadCrumpItem {...props} href={href}>{children}</StyledBreadCrumpItem>
             <Text>/</Text>
         </>
     )

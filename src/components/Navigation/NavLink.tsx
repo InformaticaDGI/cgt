@@ -7,11 +7,11 @@ const NavLink = ({ item }: { item: NavLinkProps }) => {
     console.log(location)
     const Icon = item.icon; 
     return (
-        <StyledNavLink currentPage={location.pathname === item.to} as="a" href={item.to}>
-            <IconWrapper currentPage={location.pathname === item.to}>
+        <StyledNavLink currentPage={location.pathname.includes(item.to)} as="a" href={item.to}>
+            <IconWrapper currentPage={location.pathname.includes(item.to)}>
                 <Icon />
             </IconWrapper>
-            <StyledLink currentPage={location.pathname === item.to}>{item.label}</StyledLink>
+            <StyledLink currentPage={location.pathname.includes(item.to)}>{item.label}</StyledLink>
         </StyledNavLink>
     )
 }

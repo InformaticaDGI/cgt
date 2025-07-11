@@ -10,16 +10,14 @@ const BreadCrump = () => {
     
     return (<StyledBreadCrump>
         <Text style={{fontWeight: '500'}} variant="title">Paginas</Text>
-        <Text>/</Text>
-        <BreadCrumpItem href="/" placement="end">Indicadores</BreadCrumpItem>
         {splittedPathname.map((dirname, index) => {
             const pathname = "/" + splittedPathname.slice(0, index + 1).join("/");
             const isFirstIndex = index === 0;
             const isLastIndex = lastIndex === index;
             if(isFirstIndex && isLastIndex) {
-                return <BreadCrumpItem href={pathname} placement="middle" key={crypto.randomUUID()}>{dirname}</BreadCrumpItem>
+                return <BreadCrumpItem href={pathname} placement="middle" style={{ textTransform: 'capitalize' }} key={crypto.randomUUID()}>{dirname}</BreadCrumpItem>
             }
-            if(isFirstIndex) return <BreadCrumpItem href={pathname} placement="start" key={crypto.randomUUID()}>{dirname}</BreadCrumpItem>
+            if (isFirstIndex) return <BreadCrumpItem href={pathname} style={{ textTransform: 'capitalize' }} placement="start" key={crypto.randomUUID()}>{dirname}</BreadCrumpItem>
             if(isLastIndex) return <BreadCrumpItem href={pathname} placement="end" key={crypto.randomUUID()}>{dirname}</BreadCrumpItem>
             return <BreadCrumpItem href={pathname} key={crypto.randomUUID()}>{dirname}</BreadCrumpItem>
         })}

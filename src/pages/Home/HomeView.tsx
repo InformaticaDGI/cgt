@@ -15,32 +15,32 @@ const HomeView = () => {
             <FilterTool />
             <Tabs/>
             <StyledGrid>
-            <Card to="programa1">
+            <Card to="indicadores/programa1">
                 <CardHeader title="Programa Ejemplo 1" count="6 Proyectos"  />
                 <CardBody subtitle="Secretaria Territorial 1" description="SECRETARIA EJECUTIVA DE PROTECCIÓN SOCIAL Y GESTIÓN TERRITORIAL" info="SECRETARIA DE PROTECCIÓN SOCIAL" progress={20} />
                 <CardFooter location="Juan German Roscio, San Juan de los Morros" status="social" />
             </Card>
-            <Card to="programa2">
+            <Card to="indicadores/programa2">
                 <CardHeader title="Programa Ejemplo 1" count="6 Proyectos"  />
                 <CardBody subtitle="Secretaria Territorial 1" description="SECRETARIA EJECUTIVA DE PROTECCIÓN SOCIAL Y GESTIÓN TERRITORIAL" info="SECRETARIA DE PROTECCIÓN SOCIAL" progress={20} />
                 <CardFooter location="Juan German Roscio, San Juan de los Morros" status="social" />
             </Card>
-            <Card to="programa3">
+            <Card to="indicadores/programa3">
                 <CardHeader title="Programa Ejemplo 1" count="6 Proyectos"  />
                 <CardBody subtitle="Secretaria Territorial 1" description="SECRETARIA EJECUTIVA DE PROTECCIÓN SOCIAL Y GESTIÓN TERRITORIAL" info="SECRETARIA DE PROTECCIÓN SOCIAL" progress={20} />
                 <CardFooter location="Juan German Roscio, San Juan de los Morros" status="social" />
             </Card>
-            <Card to="programa4">
+            <Card to="indicadores/programa4">
                 <CardHeader title="Programa Ejemplo 1" count="6 Proyectos"  />
                 <CardBody subtitle="Secretaria Territorial 1" description="SECRETARIA EJECUTIVA DE PROTECCIÓN SOCIAL Y GESTIÓN TERRITORIAL" info="SECRETARIA DE PROTECCIÓN SOCIAL" progress={20} />
                 <CardFooter location="Juan German Roscio, San Juan de los Morros" status="social" />
             </Card>
-            <Card to="programa5">
+            <Card to="indicadores/programa5">
                 <CardHeader title="Programa Ejemplo 1" count="6 Proyectos"  />
                 <CardBody subtitle="Secretaria Territorial 1" description="SECRETARIA EJECUTIVA DE PROTECCIÓN SOCIAL Y GESTIÓN TERRITORIAL" info="SECRETARIA DE PROTECCIÓN SOCIAL" progress={20} />
                 <CardFooter location="Juan German Roscio, San Juan de los Morros" status="social" />
             </Card>
-            <Card to="programa6">
+            <Card to="indicadores/programa6">
                 <CardHeader title="Programa Ejemplo 1" count="6 Proyectos"  />
                 <CardBody subtitle="Secretaria Territorial 1" description="SECRETARIA EJECUTIVA DE PROTECCIÓN SOCIAL Y GESTIÓN TERRITORIAL" info="SECRETARIA DE PROTECCIÓN SOCIAL" progress={20} />
                 <CardFooter location="Juan German Roscio, San Juan de los Morros" status="social" />

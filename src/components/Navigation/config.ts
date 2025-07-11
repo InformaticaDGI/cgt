@@ -8,7 +8,7 @@ import { IoIosExit } from "react-icons/io";
 const NavItems: NavItems = [
         {
             id: 'dashboard',
-            to: '/',
+            to: '/indicadores',
             label: 'Indicadores',
             icon: BsBarChartFill,
             roles: ['*']
