@@ -33,24 +33,40 @@
                         "nombrePrograma": "Aprovechamiento de minerales no metalicos del estado Bolivariano de Guárico",
                         "descripcion": "Programa enfocado en la gestión y aprovechamiento sostenible de recursos minerales no metálicos para el desarrollo local y el beneficio comunitario en el estado Guárico.",
                         "porcentaje": 77,
+                        "idDependencia": "DEP_IPMEBG",
+                        "idSecretariaAsociada": "SEC_ECO_TRANS",
+                        "idMunicipio": "MUN_JG_ROSCIO",
+                        "idSecretariaTerritorialAsociada": "ST_JG_ROSCIO",
                         "proyectos": [
                             {
                                 "idProyecto": "PROY_MATERIAL_001",
                                 "nombreProyecto": "Entrega de Material Granulado No Metálico para Construcción",
-                                "descripcion": "El proyecto consiste en la entrega fraccionada de 75 m3 de arena lavada y 50 m3 de piedra picada en seis (06) partes al circuito Lazo Martí, para beneficiar a 2100 familias. La construcción de aceras y brocales será realizada por el circuito Lazo Martí, conformado por 6 consejos comunales donde habitan 9 comunidades. La donación de dicho material genera un ahorro al circuito comunal de aproximadamente 2.600$.",
+                                "descripcion": "El proyecto consiste en la entrega fraccionada de 75 m3 de arena lavada y 50 m3 de piedra picada en seis (06) partes al circuito Lazo Martí, para beneficiar a 2100 familias. La construcción de aceras y brocales será realizado por el circuito Lazo Martí, conformado por 6 consejos comunales donde habitan 9 comunidades. La donación de dicho material genera un ahorro al circuito comunal de aproximadamente 2.600$.",
                                 "porcentaje": 80,
+                                "idDependencia": "DEP_IPMEBG",
+                                "idSecretariaAsociada": "SEC_ECO_TRANS",
+                                "idMunicipio": "MUN_JG_ROSCIO",
+                                "idSecretariaTerritorialAsociada": "ST_JG_ROSCIO",
                                 "actividades": [
                                     {
                                         "idActividad": "ACT_INSP_TECNICA_001",
                                         "nombreActividad": "Inspección Técnica de Campo",
                                         "descripcion": "Verificación y evaluación de las condiciones del terreno y necesidades del circuito comunal.",
                                         "porcentaje": 100,
+                                        "idDependencia": "DEP_IPMEBG",
+                                        "idSecretariaAsociada": "SEC_ECO_TRANS",
+                                        "idMunicipio": "MUN_JG_ROSCIO",
+                                        "idSecretariaTerritorialAsociada": "ST_JG_ROSCIO",
                                         "tareas": [
                                             {
                                                 "idTarea": "TAR_VISITA_001",
                                                 "nombreTarea": "Realización de Visita al Circuito Comunal Lazo Martí",
                                                 "descripcion": "Visita para corroborar las dimensiones y requerimientos para la entrega de materiales.",
                                                 "porcentaje": 100,
+                                                "idDependencia": "DEP_IPMEBG",
+                                                "idSecretariaAsociada": "SEC_ECO_TRANS",
+                                                "idMunicipio": "MUN_JG_ROSCIO",
+                                                "idSecretariaTerritorialAsociada": "ST_JG_ROSCIO",
                                                 "indicadoresEvaluacion": [
                                                     {
                                                         "nombreIndicador": "Porcentaje de visitas técnicas completadas",
@@ -75,12 +91,20 @@
                                         "nombreActividad": "Levantamiento Topográfico de la Zona",
                                         "descripcion": "Mapeo topográfico para precisar cantidades y puntos de entrega del material.",
                                         "porcentaje": 80,
+                                        "idDependencia": "DEP_IPMEBG",
+                                        "idSecretariaAsociada": "SEC_ECO_TRANS",
+                                        "idMunicipio": "MUN_JG_ROSCIO",
+                                        "idSecretariaTerritorialAsociada": "ST_JG_ROSCIO",
                                         "tareas": [
                                             {
                                                 "idTarea": "TAR_PLANOS_001",
                                                 "nombreTarea": "Elaboración de Planos y Volúmenes de Material",
                                                 "descripcion": "Cálculo preciso de las cantidades de arena y piedra picada necesarias.",
                                                 "porcentaje": 80,
+                                                "idDependencia": "DEP_IPMEBG",
+                                                "idSecretariaAsociada": "SEC_ECO_TRANS",
+                                                "idMunicipio": "MUN_JG_ROSCIO",
+                                                "idSecretariaTerritorialAsociada": "ST_JG_ROSCIO",
                                                 "indicadoresEvaluacion": [
                                                     {
                                                         "nombreIndicador": "Planos topográficos elaborados (%)",
@@ -105,12 +129,20 @@
                                         "nombreActividad": "Carga del Material Granular No Metálico (Arena y Piedra Picada)",
                                         "descripcion": "Preparación y carga del material en las canteras para su posterior traslado.",
                                         "porcentaje": 60,
+                                        "idDependencia": "DEP_IPMEBG",
+                                        "idSecretariaAsociada": "SEC_ECO_TRANS",
+                                        "idMunicipio": "MUN_JG_ROSCIO",
+                                        "idSecretariaTerritorialAsociada": "ST_JG_ROSCIO",
                                         "tareas": [
                                             {
                                                 "idTarea": "TAR_ACOPIO_001",
                                                 "nombreTarea": "Acopio y Clasificación Inicial del Material",
                                                 "descripcion": "Separación y preparación de los tipos de materiales a despachar.",
                                                 "porcentaje": 60,
+                                                "idDependencia": "DEP_IPMEBG",
+                                                "idSecretariaAsociada": "SEC_ECO_TRANS",
+                                                "idMunicipio": "MUN_JG_ROSCIO",
+                                                "idSecretariaTerritorialAsociada": "ST_JG_ROSCIO",
                                                 "indicadoresEvaluacion": [
                                                     {
                                                         "nombreIndicador": "Volumen de material acopiado (m3)",
@@ -137,18 +169,30 @@
                                 "nombreProyecto": "Optimización del Suministro de Áridos para Proyectos Comunitarios",
                                 "descripcion": "Este proyecto busca establecer un sistema eficiente para la extracción y distribución controlada de áridos (arena y piedra picada) a comunidades que requieran material para infraestructuras básicas, minimizando costos y promoviendo la participación local en la gestión de recursos.",
                                 "porcentaje": 75,
+                                "idDependencia": "DEP_IPMEBG",
+                                "idSecretariaAsociada": "SEC_ECO_TRANS",
+                                "idMunicipio": "MUN_JG_ROSCIO",
+                                "idSecretariaTerritorialAsociada": "ST_JG_ROSCIO",
                                 "actividades": [
                                     {
                                         "idActividad": "ACT_ESTUDIO_CANTERA_001",
                                         "nombreActividad": "Estudio de Nuevas Fuentes de Materiales (Canteras)",
                                         "descripcion": "Identificación y evaluación de canteras potenciales para asegurar el suministro a largo plazo.",
                                         "porcentaje": 80,
+                                        "idDependencia": "DEP_IPMEBG",
+                                        "idSecretariaAsociada": "SEC_ECO_TRANS",
+                                        "idMunicipio": "MUN_JG_ROSCIO",
+                                        "idSecretariaTerritorialAsociada": "ST_JG_ROSCIO",
                                         "tareas": [
                                             {
                                                 "idTarea": "TAR_EVAL_GEOLOGICA_001",
                                                 "nombreTarea": "Evaluación Geológica y Ambiental de Canteras",
                                                 "descripcion": "Análisis de la viabilidad de nuevas fuentes y el impacto ambiental.",
                                                 "porcentaje": 80,
+                                                "idDependencia": "DEP_IPMEBG",
+                                                "idSecretariaAsociada": "SEC_ECO_TRANS",
+                                                "idMunicipio": "MUN_JG_ROSCIO",
+                                                "idSecretariaTerritorialAsociada": "ST_JG_ROSCIO",
                                                 "indicadoresEvaluacion": [
                                                     {
                                                         "nombreIndicador": "Número de nuevas canteras identificadas",
@@ -173,12 +217,20 @@
                                         "nombreActividad": "Capacitación a Comunidades en Uso Eficiente de Materiales",
                                         "descripcion": "Talleres para optimizar el uso de los áridos en las construcciones comunitarias.",
                                         "porcentaje": 70,
+                                        "idDependencia": "DEP_IPMEBG",
+                                        "idSecretariaAsociada": "SEC_ECO_TRANS",
+                                        "idMunicipio": "MUN_JG_ROSCIO",
+                                        "idSecretariaTerritorialAsociada": "ST_JG_ROSCIO",
                                         "tareas": [
                                             {
                                                 "idTarea": "TAR_DISENO_TALLER_001",
                                                 "nombreTarea": "Diseño y Preparación de Material Didáctico",
                                                 "descripcion": "Creación de contenidos y herramientas para las capacitaciones.",
                                                 "porcentaje": 70,
+                                                "idDependencia": "DEP_IPMEBG",
+                                                "idSecretariaAsociada": "SEC_ECO_TRANS",
+                                                "idMunicipio": "MUN_JG_ROSCIO",
+                                                "idSecretariaTerritorialAsociada": "ST_JG_ROSCIO",
                                                 "indicadoresEvaluacion": [
                                                     {
                                                         "nombreIndicador": "Módulos de capacitación desarrollados (%)",
@@ -216,24 +268,40 @@
                         "nombrePrograma": "Fortalecimiento de la Mujer y la Familia en el Guárico",
                         "descripcion": "Programa integral para empoderar a la mujer y fortalecer los núcleos familiares a través de la formación, apoyo psicológico y asesoría jurídica, promoviendo su participación activa en el desarrollo comunitario.",
                         "porcentaje": 78,
+                        "idDependencia": "DEP_IMUBGUA",
+                        "idSecretariaAsociada": "SEC_SOCIAL_VIVIR",
+                        "idMunicipio": "MUN_JG_ROSCIO",
+                        "idSecretariaTerritorialAsociada": "ST_JG_ROSCIO",
                         "proyectos": [
                             {
                                 "idProyecto": "PROY_BRIGADAS_DDMUF_001",
                                 "nombreProyecto": "Creación de Brigadas Defensoras de la Mujer y la Familia (DDMUF) en Juan Germán Roscio Nieves",
                                 "descripcion": "Creación de brigadas defensoras delegadas de la mujer y la familia (DDMUF) 'Mujeres sin límites' en el municipio de Juan Germán Roscio Nieves, en sus 3 parroquias (Parapara, Cantagallo, San Juan de los Morros). Estarán integradas por 20 mujeres guerreras de las diferentes fuerzas vivas existentes en el territorio para dar formación socio política, atención psicológica y asesoría jurídica, con el propósito de agrupar 1340 mujeres comprometidas a visibilizar y realizar el sector feminista del municipio.",
                                 "porcentaje": 78,
+                                "idDependencia": "DEP_IMUBGUA",
+                                "idSecretariaAsociada": "SEC_SOCIAL_VIVIR",
+                                "idMunicipio": "MUN_JG_ROSCIO",
+                                "idSecretariaTerritorialAsociada": "ST_JG_ROSCIO",
                                 "actividades": [
                                     {
                                         "idActividad": "ACT_REUNION_FUERZAS_VIVAS_001",
                                         "nombreActividad": "Reunión con las Fuerzas Vivas de la Revolución",
                                         "descripcion": "Coordinación y sensibilización con UBCH, Consejos Comunales, CLAP y Somos Venezuela para el apoyo a las brigadas DDMUF.",
                                         "porcentaje": 90,
+                                        "idDependencia": "DEP_IMUBGUA",
+                                        "idSecretariaAsociada": "SEC_SOCIAL_VIVIR",
+                                        "idMunicipio": "MUN_JG_ROSCIO",
+                                        "idSecretariaTerritorialAsociada": "ST_JG_ROSCIO",
                                         "tareas": [
                                             {
                                                 "idTarea": "TAR_CONVOCATORIA_001",
                                                 "nombreTarea": "Convocatoria y Realización de Reuniones Preliminares",
                                                 "descripcion": "Organizar encuentros para presentar la iniciativa y obtener el respaldo de las organizaciones.",
                                                 "porcentaje": 90,
+                                                "idDependencia": "DEP_IMUBGUA",
+                                                "idSecretariaAsociada": "SEC_SOCIAL_VIVIR",
+                                                "idMunicipio": "MUN_JG_ROSCIO",
+                                                "idSecretariaTerritorialAsociada": "ST_JG_ROSCIO",
                                                 "indicadoresEvaluacion": [
                                                     {
                                                         "nombreIndicador": "Número de reuniones con fuerzas vivas realizadas",
@@ -258,12 +326,20 @@
                                         "nombreActividad": "Conformación de 66 Brigadas DDMUF",
                                         "descripcion": "Selección e integración de las 1320 mujeres en las brigadas por parroquia.",
                                         "porcentaje": 85,
+                                        "idDependencia": "DEP_IMUBGUA",
+                                        "idSecretariaAsociada": "SEC_SOCIAL_VIVIR",
+                                        "idMunicipio": "MUN_JG_ROSCIO",
+                                        "idSecretariaTerritorialAsociada": "ST_JG_ROSCIO",
                                         "tareas": [
                                             {
                                                 "idTarea": "TAR_REGISTRO_DDMUF_001",
                                                 "nombreTarea": "Proceso de Inscripción y Registro de Brigadistas",
                                                 "descripcion": "Organizar puntos de inscripción y formalizar la participación de las mujeres.",
                                                 "porcentaje": 85,
+                                                "idDependencia": "DEP_IMUBGUA",
+                                                "idSecretariaAsociada": "SEC_SOCIAL_VIVIR",
+                                                "idMunicipio": "MUN_JG_ROSCIO",
+                                                "idSecretariaTerritorialAsociada": "ST_JG_ROSCIO",
                                                 "indicadoresEvaluacion": [
                                                     {
                                                         "nombreIndicador": "Número de brigadas conformadas",
@@ -288,12 +364,20 @@
                                         "nombreActividad": "Atención Psicológica, Jurídica Civil y Orientación Política",
                                         "descripcion": "Ofrecer soporte integral a las brigadas DDMUF.",
                                         "porcentaje": 70,
+                                        "idDependencia": "DEP_IMUBGUA",
+                                        "idSecretariaAsociada": "SEC_SOCIAL_VIVIR",
+                                        "idMunicipio": "MUN_JG_ROSCIO",
+                                        "idSecretariaTerritorialAsociada": "ST_JG_ROSCIO",
                                         "tareas": [
                                             {
                                                 "idTarea": "TAR_JORNADAS_ATENCION_001",
                                                 "nombreTarea": "Realización de Jornadas de Atención Integral",
                                                 "descripcion": "Organizar sesiones periódicas para las brigadistas.",
                                                 "porcentaje": 70,
+                                                "idDependencia": "DEP_IMUBGUA",
+                                                "idSecretariaAsociada": "SEC_SOCIAL_VIVIR",
+                                                "idMunicipio": "MUN_JG_ROSCIO",
+                                                "idSecretariaTerritorialAsociada": "ST_JG_ROSCIO",
                                                 "indicadoresEvaluacion": [
                                                     {
                                                         "nombreIndicador": "Número de jornadas de atención realizadas",
@@ -318,12 +402,20 @@
                                         "nombreActividad": "Realización de la Cartografía Violeta (Matriz FODA)",
                                         "descripcion": "Mapeo de la situación de la mujer en el municipio para identificar fortalezas, oportunidades, debilidades y amenazas.",
                                         "porcentaje": 60,
+                                        "idDependencia": "DEP_IMUBGUA",
+                                        "idSecretariaAsociada": "SEC_SOCIAL_VIVIR",
+                                        "idMunicipio": "MUN_JG_ROSCIO",
+                                        "idSecretariaTerritorialAsociada": "ST_JG_ROSCIO",
                                         "tareas": [
                                             {
                                                 "idTarea": "TAR_RECOPILACION_DATOS_001",
                                                 "nombreTarea": "Recopilación y Análisis de Datos para FODA",
                                                 "descripcion": "Aplicación de encuestas y grupos focales para la matriz FODA.",
                                                 "porcentaje": 60,
+                                                "idDependencia": "DEP_IMUBGUA",
+                                                "idSecretariaAsociada": "SEC_SOCIAL_VIVIR",
+                                                "idMunicipio": "MUN_JG_ROSCIO",
+                                                "idSecretariaTerritorialAsociada": "ST_JG_ROSCIO",
                                                 "indicadoresEvaluacion": [
                                                     {
                                                         "nombreIndicador": "Porcentaje de datos recolectados para FODA",
@@ -348,12 +440,20 @@
                                         "nombreActividad": "Creación y Capacitación de Oficio para Articular con el Programa Aprendo y Emprendo",
                                         "descripcion": "Desarrollo de talleres de capacitación laboral para fomentar el emprendimiento femenino.",
                                         "porcentaje": 70,
+                                        "idDependencia": "DEP_IMUBGUA",
+                                        "idSecretariaAsociada": "SEC_SOCIAL_VIVIR",
+                                        "idMunicipio": "MUN_JG_ROSCIO",
+                                        "idSecretariaTerritorialAsociada": "ST_JG_ROSCIO",
                                         "tareas": [
                                             {
                                                 "idTarea": "TAR_TALLERES_EMPREND_001",
                                                 "nombreTarea": "Implementación de Talleres de Oficio",
                                                 "descripcion": "Realizar cursos de corte y costura, panadería, repostería, entre otros.",
                                                 "porcentaje": 70,
+                                                "idDependencia": "DEP_IMUBGUA",
+                                                "idSecretariaAsociada": "SEC_SOCIAL_VIVIR",
+                                                "idMunicipio": "MUN_JG_ROSCIO",
+                                                "idSecretariaTerritorialAsociada": "ST_JG_ROSCIO",
                                                 "indicadoresEvaluacion": [
                                                     {
                                                         "nombreIndicador": "Número de talleres de oficio realizados",
@@ -378,12 +478,20 @@
                                         "nombreActividad": "Encuentro de las Guerreras DDMUF 'Mujeres sin límites' con el Gobernador",
                                         "descripcion": "Evento protocolar para la entrega del manifiesto de voluntad, lealtad y compromiso feminista.",
                                         "porcentaje": 50,
+                                        "idDependencia": "DEP_IMUBGUA",
+                                        "idSecretariaAsociada": "SEC_SOCIAL_VIVIR",
+                                        "idMunicipio": "MUN_JG_ROSCIO",
+                                        "idSecretariaTerritorialAsociada": "ST_JG_ROSCIO",
                                         "tareas": [
                                             {
                                                 "idTarea": "TAR_LOGISTICA_ENCUENTRO_001",
                                                 "nombreTarea": "Coordinación Logística del Encuentro",
                                                 "descripcion": "Planificación del lugar, fecha, hora y asistencia para el evento.",
                                                 "porcentaje": 50,
+                                                "idDependencia": "DEP_IMUBGUA",
+                                                "idSecretariaAsociada": "SEC_SOCIAL_VIVIR",
+                                                "idMunicipio": "MUN_JG_ROSCIO",
+                                                "idSecretariaTerritorialAsociada": "ST_JG_ROSCIO",
                                                 "indicadoresEvaluacion": [
                                                     {
                                                         "nombreIndicador": "Logística del evento coordinada (%)",
