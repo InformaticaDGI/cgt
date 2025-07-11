@@ -13,7 +13,7 @@ const ProgramView = () => {
         <MainWrapper>
             <Header />
             <Card to={false}>
-                <CardHeader title="Programa Ejemplo 1" count="10 Actividades"  iconState="open" />
+                <CardHeader title="Programa Ejemplo 1" count="6 Proyectos"  iconState="open" />
                 <CardBody subtitle={false} description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." info={false} progress={20} />
                 <CardFooter location={false} status={false} />
             </Card>

@@ -11,4 +11,5 @@ export default NavSectionTitle
 const Title = styled.h1`
         font-size: 14px;
         color: white;
+        font-weight: 600;
     `;

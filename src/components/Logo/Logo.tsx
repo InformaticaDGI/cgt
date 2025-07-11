@@ -7,7 +7,7 @@ export default function Logo() {
     return (
         <LogoWrapper>
             <Image src='/logo.png' />
-            <Text style={{fontWeight: 'bolder', fontSize: '14px', color: '#ffffff'}}>CGT GUÁRICO</Text>
+            <Text style={{fontWeight: '600', fontSize: '14px', color: '#ffffff'}}>CGT GUÁRICO</Text>
         </LogoWrapper>
     )
 }

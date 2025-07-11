@@ -9,7 +9,7 @@ const BreadCrump = () => {
     const lastIndex = splittedPathname.length - 1;
     
     return (<StyledBreadCrump>
-        <Text variant="title">Paginas</Text>
+        <Text style={{fontWeight: '500'}} variant="title">Paginas</Text>
         <Text>/</Text>
         <BreadCrumpItem href="/" placement="end">Indicadores</BreadCrumpItem>
         {splittedPathname.map((dirname, index) => {

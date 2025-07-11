@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import MenuItem from "./MenuItem";
-import menuItems from "./config";
+import buildNavItems from "./config";
 
 
 const NavItems = () => {
+  const menuItems = buildNavItems('admin');
   const RenderMenuItems = menuItems.map((navItem, index) => <MenuItem item={navItem} key={index} />)
   return <Menu>{RenderMenuItems}</Menu>
 }

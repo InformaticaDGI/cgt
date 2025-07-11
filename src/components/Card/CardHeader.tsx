@@ -6,7 +6,7 @@ const CardHeader = ({ title, count, iconState = "closed" }: { title: string | fa
 
     return (
         <StyledCardHeader>
-            {title !== false && <Text style={{ fontSize: '16px', color: '#0C777C', fontWeight: '500' }}>{title}</Text>}
+            {title !== false && <Text style={{ fontSize: '16px', color: '#0C777C', fontWeight: '700' }}>{title}</Text>}
             <StyledInfoHeader>
                 {count !== false && <Text style={{ fontSize: '14px', color: '#889C9D', fontWeight: 'normal' }}>{count}</Text>}
                 <ChevronRight strokeWidth="1" style={{rotate: iconState === "open" ? "90deg": "0deg", color: "#889C9D"}} />

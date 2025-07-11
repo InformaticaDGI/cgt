@@ -4,6 +4,7 @@ import type { NavLinkProps } from "./config"
 
 const NavLink = ({ item }: { item: NavLinkProps }) => {
     const location = useLocation();
+    console.log(location)
     const Icon = item.icon; 
     return (
         <StyledNavLink currentPage={location.pathname === item.to} as="a" href={item.to}>
@@ -51,5 +52,5 @@ const IconWrapper = styled.div<{ currentPage: boolean }>`
 const StyledLink = styled.p<{currentPage: boolean}>`
     color: ${props => props.currentPage ? "var(--text_primary)":"var(--text_foreground)"};
     font-size: 12px;
-    font-Weight: bold;
+    font-weight: 600;
 `

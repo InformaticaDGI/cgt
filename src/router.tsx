@@ -2,6 +2,8 @@ import { createBrowserRouter } from 'react-router'
 import HomeView from './pages/Home/HomeView'
 import ProgramView from './pages/Home/[programId]/Program/ProgramView'
 import ProjectView from './pages/Home/[programId]/Program/[projectId]/Project/ProjectView'
+import ActivityView from './pages/Home/[programId]/Program/[projectId]/Project/[activityId]/Activity/ActivityView'
+import TaskView from './pages/Home/[programId]/Program/[projectId]/Project/[activityId]/Activity/[taskId]/Task/TaskView'
 
 
 const router = createBrowserRouter([
@@ -18,8 +20,12 @@ const router = createBrowserRouter([
         element: <ProjectView />
     },
     {
-        path: '/:programId/:projectId/:taskId',
-        element: <ProjectView />
+        path: '/:programId/:projectId/:activityId',
+        element: <ActivityView />
+    },
+    {
+        path: '/:programId/:projectId/:activityId/:taskId',
+        element: <TaskView />
     }
 ])
 

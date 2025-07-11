@@ -25,9 +25,10 @@ const Progress = ({ progress = 75, size = 200, strokeWidth = 20, color = '#FF000
           outerRadius={outerRadius}
           startAngle={90} // Inicia en la parte superior
           endAngle={-270} // Termina según el progreso
+          cornerRadius={24}
           paddingAngle={0} // Espacio entre segmentos (lo dejamos en 0 para un solo anillo)
           dataKey="value"
-          isAnimationActive={false} // Desactivar animación si prefieres una carga estática
+          // isAnimationActive={false} // Desactivar animación si prefieres una carga estática
         >
           {/* El primer Cell es para el progreso */}
           {/* El segundo Cell es para el resto del círculo (fondo) */}

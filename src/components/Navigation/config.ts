@@ -35,7 +35,8 @@ const NavItems: NavItems = [
             roles: ['*']
         },
         {
-            sectionTitle: 'Cuenta'
+            sectionTitle: 'Cuenta',
+            roles: ['*']
         },
         {
             id: 'profile',
@@ -59,12 +60,27 @@ const NavItems: NavItems = [
             roles: ['*']
         }
     ]
+const resolveRoles = (currentRole: string, navItems: NavItems) => {
+    const NavItemsResult = navItems.filter(navItem => {
+        if(navItem.roles.includes('*')) return true;
+        return navItem.roles.includes(currentRole);
+    })
 
-export default NavItems
+    return NavItemsResult
+}
+
+export const buildNavItems = (currentRole: string) => {
+    const validNavItems = resolveRoles(currentRole, NavItems);
+    return validNavItems;
+}
+
+export default buildNavItems
+
 
 
 export type NavSectionTitleProps = {
-    sectionTitle: string
+    sectionTitle: string,
+    roles: string[]
 }
 
 export type NavLinkProps = {
@@ -72,7 +88,7 @@ export type NavLinkProps = {
     to: string;
     label: string;
     icon: React.ElementType;
-    roles?: string[]
+    roles: string[]
 }
 
 export type NavGroupProps = {
@@ -80,7 +96,7 @@ export type NavGroupProps = {
     to: string;
     label: string;
     icon: React.ElementType;
-    roles?: string[]
+    roles: string[]
     children?: (NavGroupProps | NavLinkProps)[]
 }
 
