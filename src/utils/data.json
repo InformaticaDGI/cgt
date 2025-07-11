@@ -20,86 +20,111 @@
                 "role": "gestor"
             }
         ],
-        "institucion": [
+        "listado_programas": [
             {
-                "nombreInstitucion": "Universidad Nacional Experimental Simón Rodríguez",
-                "idArea": "AREA_ACADEMICA",
+                "idDependencia": "DEP_IPMEBG",
+                "idSecretariaAsociada": "SEC_ECO_TRANS",
+                "idMunicipio": "MUN_JG_ROSCIO",
+                "idSecretariaTerritorialAsociada": "ST_JG_ROSCIO",
+                "porcentaje": 77,
                 "programas": [
                     {
-                        "idPrograma": "PROG_EDUC_001",
-                        "nombrePrograma": "Programa de Fortalecimiento Educativo Comunitario",
+                        "idPrograma": "PROG_MINERAL_001",
+                        "nombrePrograma": "Aprovechamiento de minerales no metalicos del estado Bolivariano de Guárico",
+                        "descripcion": "Programa enfocado en la gestión y aprovechamiento sostenible de recursos minerales no metálicos para el desarrollo local y el beneficio comunitario en el estado Guárico.",
+                        "porcentaje": 77,
                         "proyectos": [
                             {
-                                "idProyecto": "PROY_LECTURA_001",
-                                "nombreProyecto": "Fomento de la Lectura en Comunidades Rurales",
+                                "idProyecto": "PROY_MATERIAL_001",
+                                "nombreProyecto": "Entrega de Material Granulado No Metálico para Construcción",
+                                "descripcion": "El proyecto consiste en la entrega fraccionada de 75 m3 de arena lavada y 50 m3 de piedra picada en seis (06) partes al circuito Lazo Martí, para beneficiar a 2100 familias. La construcción de aceras y brocales será realizada por el circuito Lazo Martí, conformado por 6 consejos comunales donde habitan 9 comunidades. La donación de dicho material genera un ahorro al circuito comunal de aproximadamente 2.600$.",
+                                "porcentaje": 80,
                                 "actividades": [
                                     {
-                                        "idActividad": "ACT_CAPACITACION_001",
-                                        "nombreActividad": "Capacitación de Voluntarios en Técnicas de Lectura",
+                                        "idActividad": "ACT_INSP_TECNICA_001",
+                                        "nombreActividad": "Inspección Técnica de Campo",
+                                        "descripcion": "Verificación y evaluación de las condiciones del terreno y necesidades del circuito comunal.",
+                                        "porcentaje": 100,
                                         "tareas": [
                                             {
-                                                "idTarea": "TAR_MODULOS_001",
-                                                "nombreTarea": "Diseño de Módulos de Capacitación",
+                                                "idTarea": "TAR_VISITA_001",
+                                                "nombreTarea": "Realización de Visita al Circuito Comunal Lazo Martí",
+                                                "descripcion": "Visita para corroborar las dimensiones y requerimientos para la entrega de materiales.",
+                                                "porcentaje": 100,
                                                 "indicadoresEvaluacion": [
                                                     {
-                                                        "nombreIndicador": "Número de módulos diseñados",
-                                                        "unidadMedida": "cantidad",
-                                                        "meta": 5,
-                                                        "resultadoActual": 4,
-                                                        "observaciones": "Falta módulo de evaluación de impacto."
-                                                    },
-                                                    {
-                                                        "nombreIndicador": "Porcentaje de módulos aprobados por expertos",
+                                                        "nombreIndicador": "Porcentaje de visitas técnicas completadas",
                                                         "unidadMedida": "%",
-                                                        "meta": 90,
-                                                        "resultadoActual": 75,
-                                                        "observaciones": "Se requieren ajustes en la metodología de enseñanza."
-                                                    }
-                                                ]
-                                            },
-                                            {
-                                                "idTarea": "TAR_LOGISTICA_001",
-                                                "nombreTarea": "Coordinación Logística para Talleres",
-                                                "indicadoresEvaluacion": [
-                                                    {
-                                                        "nombreIndicador": "Talleres programados a tiempo",
-                                                        "unidadMedida": "boolean",
-                                                        "meta": true,
-                                                        "resultadoActual": false,
-                                                        "observaciones": "Retraso en la disponibilidad de espacios comunitarios."
+                                                        "meta": 100,
+                                                        "resultadoActual": 100,
+                                                        "observaciones": "Visita completada y informe generado."
                                                     },
                                                     {
-                                                        "nombreIndicador": "Materiales didácticos disponibles",
-                                                        "unidadMedida": "boolean",
-                                                        "meta": true,
-                                                        "resultadoActual": true,
-                                                        "observaciones": "Todos los materiales listos para los talleres."
+                                                        "nombreIndicador": "Conformidad de levantamiento de necesidades (%)",
+                                                        "unidadMedida": "%",
+                                                        "meta": 95,
+                                                        "resultadoActual": 98,
+                                                        "observaciones": "Datos de necesidades validados con la comunidad."
                                                     }
                                                 ]
                                             }
                                         ]
                                     },
                                     {
-                                        "idActividad": "ACT_IMPLEM_002",
-                                        "nombreActividad": "Implementación de Círculos de Lectura",
+                                        "idActividad": "ACT_LEVANT_TOPO_002",
+                                        "nombreActividad": "Levantamiento Topográfico de la Zona",
+                                        "descripcion": "Mapeo topográfico para precisar cantidades y puntos de entrega del material.",
+                                        "porcentaje": 80,
                                         "tareas": [
                                             {
-                                                "idTarea": "TAR_GRUPOS_001",
-                                                "nombreTarea": "Conformación de Grupos de Lectura",
+                                                "idTarea": "TAR_PLANOS_001",
+                                                "nombreTarea": "Elaboración de Planos y Volúmenes de Material",
+                                                "descripcion": "Cálculo preciso de las cantidades de arena y piedra picada necesarias.",
+                                                "porcentaje": 80,
                                                 "indicadoresEvaluacion": [
                                                     {
-                                                        "nombreIndicador": "Número de grupos conformados",
-                                                        "unidadMedida": "cantidad",
-                                                        "meta": 10,
-                                                        "resultadoActual": 8,
-                                                        "observaciones": "Dificultad para integrar a jóvenes en dos comunidades."
+                                                        "nombreIndicador": "Planos topográficos elaborados (%)",
+                                                        "unidadMedida": "%",
+                                                        "meta": 100,
+                                                        "resultadoActual": 80,
+                                                        "observaciones": "Pendiente revisión final y aprobación de un plano."
                                                     },
                                                     {
-                                                        "nombreIndicador": "Participación activa por grupo (%)",
+                                                        "nombreIndicador": "Precisión de cálculo de volúmenes (error %)",
                                                         "unidadMedida": "%",
-                                                        "meta": 80,
-                                                        "resultadoActual": 65,
-                                                        "observaciones": "Necesidad de estrategias para fomentar mayor compromiso."
+                                                        "meta": 5,
+                                                        "resultadoActual": 3,
+                                                        "observaciones": "Cálculos con margen de error aceptable."
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "idActividad": "ACT_CARGA_MATERIAL_003",
+                                        "nombreActividad": "Carga del Material Granular No Metálico (Arena y Piedra Picada)",
+                                        "descripcion": "Preparación y carga del material en las canteras para su posterior traslado.",
+                                        "porcentaje": 60,
+                                        "tareas": [
+                                            {
+                                                "idTarea": "TAR_ACOPIO_001",
+                                                "nombreTarea": "Acopio y Clasificación Inicial del Material",
+                                                "descripcion": "Separación y preparación de los tipos de materiales a despachar.",
+                                                "porcentaje": 60,
+                                                "indicadoresEvaluacion": [
+                                                    {
+                                                        "nombreIndicador": "Volumen de material acopiado (m3)",
+                                                        "unidadMedida": "m3",
+                                                        "meta": 125,
+                                                        "resultadoActual": 75,
+                                                        "observaciones": "Falta acopiar el 40% del material."
+                                                    },
+                                                    {
+                                                        "nombreIndicador": "Equipos de carga operativos (%)",
+                                                        "unidadMedida": "%",
+                                                        "meta": 100,
+                                                        "resultadoActual": 100,
+                                                        "observaciones": "Todos los equipos disponibles y en buen estado."
                                                     }
                                                 ]
                                             }
@@ -108,61 +133,66 @@
                                 ]
                             },
                             {
-                                "idProyecto": "PROY_DIGITAL_002",
-                                "nombreProyecto": "Acceso Digital a Recursos Educativos",
+                                "idProyecto": "PROY_MATERIAL_002",
+                                "nombreProyecto": "Optimización del Suministro de Áridos para Proyectos Comunitarios",
+                                "descripcion": "Este proyecto busca establecer un sistema eficiente para la extracción y distribución controlada de áridos (arena y piedra picada) a comunidades que requieran material para infraestructuras básicas, minimizando costos y promoviendo la participación local en la gestión de recursos.",
+                                "porcentaje": 75,
                                 "actividades": [
                                     {
-                                        "idActividad": "ACT_PLATAFORMA_001",
-                                        "nombreActividad": "Desarrollo y Mantenimiento de Plataforma Online",
+                                        "idActividad": "ACT_ESTUDIO_CANTERA_001",
+                                        "nombreActividad": "Estudio de Nuevas Fuentes de Materiales (Canteras)",
+                                        "descripcion": "Identificación y evaluación de canteras potenciales para asegurar el suministro a largo plazo.",
+                                        "porcentaje": 80,
                                         "tareas": [
                                             {
-                                                "idTarea": "TAR_FUNC_001",
-                                                "nombreTarea": "Implementación de Nuevas Funcionalidades",
+                                                "idTarea": "TAR_EVAL_GEOLOGICA_001",
+                                                "nombreTarea": "Evaluación Geológica y Ambiental de Canteras",
+                                                "descripcion": "Análisis de la viabilidad de nuevas fuentes y el impacto ambiental.",
+                                                "porcentaje": 80,
                                                 "indicadoresEvaluacion": [
                                                     {
-                                                        "nombreIndicador": "Funcionalidades implementadas (%)",
+                                                        "nombreIndicador": "Número de nuevas canteras identificadas",
+                                                        "unidadMedida": "cantidad",
+                                                        "meta": 3,
+                                                        "resultadoActual": 2,
+                                                        "observaciones": "Una cantera en fase de evaluación."
+                                                    },
+                                                    {
+                                                        "nombreIndicador": "Porcentaje de estudios ambientales aprobados",
                                                         "unidadMedida": "%",
-                                                        "meta": 100,
-                                                        "resultadoActual": 70,
-                                                        "observaciones": "Retraso en la integración de módulo de videollamadas."
+                                                        "meta": 90,
+                                                        "resultadoActual": 80,
+                                                        "observaciones": "Pendiente aprobación de un estudio ambiental."
                                                     }
                                                 ]
                                             }
                                         ]
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "idPrograma": "PROG_SALUD_002",
-                        "nombrePrograma": "Programa de Salud Comunitaria y Prevención",
-                        "proyectos": [
-                            {
-                                "idProyecto": "PROY_VACUNACION_001",
-                                "nombreProyecto": "Campaña de Vacunación Infantil",
-                                "actividades": [
+                                    },
                                     {
-                                        "idActividad": "ACT_CONCIENCIA_001",
-                                        "nombreActividad": "Campañas de Concientización en Escuelas",
+                                        "idActividad": "ACT_CAPACITACION_LOCAL_002",
+                                        "nombreActividad": "Capacitación a Comunidades en Uso Eficiente de Materiales",
+                                        "descripcion": "Talleres para optimizar el uso de los áridos en las construcciones comunitarias.",
+                                        "porcentaje": 70,
                                         "tareas": [
                                             {
-                                                "idTarea": "TAR_CHARLAS_001",
-                                                "nombreTarea": "Organización de Charlas Informativas",
+                                                "idTarea": "TAR_DISENO_TALLER_001",
+                                                "nombreTarea": "Diseño y Preparación de Material Didáctico",
+                                                "descripcion": "Creación de contenidos y herramientas para las capacitaciones.",
+                                                "porcentaje": 70,
                                                 "indicadoresEvaluacion": [
                                                     {
-                                                        "nombreIndicador": "Charlas realizadas",
-                                                        "unidadMedida": "cantidad",
-                                                        "meta": 15,
-                                                        "resultadoActual": 12,
-                                                        "observaciones": "3 charlas canceladas por falta de personal."
+                                                        "nombreIndicador": "Módulos de capacitación desarrollados (%)",
+                                                        "unidadMedida": "%",
+                                                        "meta": 100,
+                                                        "resultadoActual": 70,
+                                                        "observaciones": "Falta desarrollar el módulo de seguridad."
                                                     },
                                                     {
-                                                        "nombreIndicador": "Asistencia promedio por charla",
-                                                        "unidadMedida": "personas",
-                                                        "meta": 50,
-                                                        "resultadoActual": 45,
-                                                        "observaciones": "Buena receptividad en general."
+                                                        "nombreIndicador": "Participación esperada en talleres (%)",
+                                                        "unidadMedida": "%",
+                                                        "meta": 80,
+                                                        "resultadoActual": 75,
+                                                        "observaciones": "Buena receptividad en las comunidades visitadas."
                                                     }
                                                 ]
                                             }
