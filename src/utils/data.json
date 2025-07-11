@@ -203,6 +203,211 @@
                         ]
                     }
                 ]
+            },
+            {
+                "idDependencia": "DEP_IMUBGUA",
+                "idSecretariaAsociada": "SEC_SOCIAL_VIVIR",
+                "idMunicipio": "MUN_JG_ROSCIO",
+                "idSecretariaTerritorialAsociada": "ST_JG_ROSCIO",
+                "porcentaje": 78,
+                "programas": [
+                    {
+                        "idPrograma": "PROG_DDMUF_001",
+                        "nombrePrograma": "Fortalecimiento de la Mujer y la Familia en el Guárico",
+                        "descripcion": "Programa integral para empoderar a la mujer y fortalecer los núcleos familiares a través de la formación, apoyo psicológico y asesoría jurídica, promoviendo su participación activa en el desarrollo comunitario.",
+                        "porcentaje": 78,
+                        "proyectos": [
+                            {
+                                "idProyecto": "PROY_BRIGADAS_DDMUF_001",
+                                "nombreProyecto": "Creación de Brigadas Defensoras de la Mujer y la Familia (DDMUF) en Juan Germán Roscio Nieves",
+                                "descripcion": "Creación de brigadas defensoras delegadas de la mujer y la familia (DDMUF) 'Mujeres sin límites' en el municipio de Juan Germán Roscio Nieves, en sus 3 parroquias (Parapara, Cantagallo, San Juan de los Morros). Estarán integradas por 20 mujeres guerreras de las diferentes fuerzas vivas existentes en el territorio para dar formación socio política, atención psicológica y asesoría jurídica, con el propósito de agrupar 1340 mujeres comprometidas a visibilizar y realizar el sector feminista del municipio.",
+                                "porcentaje": 78,
+                                "actividades": [
+                                    {
+                                        "idActividad": "ACT_REUNION_FUERZAS_VIVAS_001",
+                                        "nombreActividad": "Reunión con las Fuerzas Vivas de la Revolución",
+                                        "descripcion": "Coordinación y sensibilización con UBCH, Consejos Comunales, CLAP y Somos Venezuela para el apoyo a las brigadas DDMUF.",
+                                        "porcentaje": 90,
+                                        "tareas": [
+                                            {
+                                                "idTarea": "TAR_CONVOCATORIA_001",
+                                                "nombreTarea": "Convocatoria y Realización de Reuniones Preliminares",
+                                                "descripcion": "Organizar encuentros para presentar la iniciativa y obtener el respaldo de las organizaciones.",
+                                                "porcentaje": 90,
+                                                "indicadoresEvaluacion": [
+                                                    {
+                                                        "nombreIndicador": "Número de reuniones con fuerzas vivas realizadas",
+                                                        "unidadMedida": "cantidad",
+                                                        "meta": 3,
+                                                        "resultadoActual": 3,
+                                                        "observaciones": "Reuniones completadas en las 3 parroquias."
+                                                    },
+                                                    {
+                                                        "nombreIndicador": "Porcentaje de acuerdo y apoyo de organizaciones",
+                                                        "unidadMedida": "%",
+                                                        "meta": 80,
+                                                        "resultadoActual": 90,
+                                                        "observaciones": "Alto nivel de compromiso expresado."
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "idActividad": "ACT_CONFORMACION_BRIGADAS_002",
+                                        "nombreActividad": "Conformación de 66 Brigadas DDMUF",
+                                        "descripcion": "Selección e integración de las 1320 mujeres en las brigadas por parroquia.",
+                                        "porcentaje": 85,
+                                        "tareas": [
+                                            {
+                                                "idTarea": "TAR_REGISTRO_DDMUF_001",
+                                                "nombreTarea": "Proceso de Inscripción y Registro de Brigadistas",
+                                                "descripcion": "Organizar puntos de inscripción y formalizar la participación de las mujeres.",
+                                                "porcentaje": 85,
+                                                "indicadoresEvaluacion": [
+                                                    {
+                                                        "nombreIndicador": "Número de brigadas conformadas",
+                                                        "unidadMedida": "cantidad",
+                                                        "meta": 66,
+                                                        "resultadoActual": 56,
+                                                        "observaciones": "Faltan 10 brigadas por completar cupos."
+                                                    },
+                                                    {
+                                                        "nombreIndicador": "Mujeres incorporadas a brigadas (acumulado)",
+                                                        "unidadMedida": "cantidad",
+                                                        "meta": 1320,
+                                                        "resultadoActual": 1120,
+                                                        "observaciones": "Avanzando en la captación de participantes."
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "idActividad": "ACT_ATENCION_DDMUF_003",
+                                        "nombreActividad": "Atención Psicológica, Jurídica Civil y Orientación Política",
+                                        "descripcion": "Ofrecer soporte integral a las brigadas DDMUF.",
+                                        "porcentaje": 70,
+                                        "tareas": [
+                                            {
+                                                "idTarea": "TAR_JORNADAS_ATENCION_001",
+                                                "nombreTarea": "Realización de Jornadas de Atención Integral",
+                                                "descripcion": "Organizar sesiones periódicas para las brigadistas.",
+                                                "porcentaje": 70,
+                                                "indicadoresEvaluacion": [
+                                                    {
+                                                        "nombreIndicador": "Número de jornadas de atención realizadas",
+                                                        "unidadMedida": "cantidad",
+                                                        "meta": 12,
+                                                        "resultadoActual": 8,
+                                                        "observaciones": "Se han cubierto 2/3 de las jornadas planificadas."
+                                                    },
+                                                    {
+                                                        "nombreIndicador": "Porcentaje de brigadistas atendidas",
+                                                        "unidadMedida": "%",
+                                                        "meta": 90,
+                                                        "resultadoActual": 75,
+                                                        "observaciones": "Alta demanda de atención psicológica."
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "idActividad": "ACT_CARTOGRAFIA_VIOLETA_004",
+                                        "nombreActividad": "Realización de la Cartografía Violeta (Matriz FODA)",
+                                        "descripcion": "Mapeo de la situación de la mujer en el municipio para identificar fortalezas, oportunidades, debilidades y amenazas.",
+                                        "porcentaje": 60,
+                                        "tareas": [
+                                            {
+                                                "idTarea": "TAR_RECOPILACION_DATOS_001",
+                                                "nombreTarea": "Recopilación y Análisis de Datos para FODA",
+                                                "descripcion": "Aplicación de encuestas y grupos focales para la matriz FODA.",
+                                                "porcentaje": 60,
+                                                "indicadoresEvaluacion": [
+                                                    {
+                                                        "nombreIndicador": "Porcentaje de datos recolectados para FODA",
+                                                        "unidadMedida": "%",
+                                                        "meta": 100,
+                                                        "resultadoActual": 60,
+                                                        "observaciones": "Faltan datos de dos parroquias."
+                                                    },
+                                                    {
+                                                        "nombreIndicador": "Matriz FODA elaborada (%)",
+                                                        "unidadMedida": "%",
+                                                        "meta": 100,
+                                                        "resultadoActual": 0,
+                                                        "observaciones": "En espera de culminar la recolección de datos."
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "idActividad": "ACT_CREACION_CAPACITACION_OFICIO_005",
+                                        "nombreActividad": "Creación y Capacitación de Oficio para Articular con el Programa Aprendo y Emprendo",
+                                        "descripcion": "Desarrollo de talleres de capacitación laboral para fomentar el emprendimiento femenino.",
+                                        "porcentaje": 70,
+                                        "tareas": [
+                                            {
+                                                "idTarea": "TAR_TALLERES_EMPREND_001",
+                                                "nombreTarea": "Implementación de Talleres de Oficio",
+                                                "descripcion": "Realizar cursos de corte y costura, panadería, repostería, entre otros.",
+                                                "porcentaje": 70,
+                                                "indicadoresEvaluacion": [
+                                                    {
+                                                        "nombreIndicador": "Número de talleres de oficio realizados",
+                                                        "unidadMedida": "cantidad",
+                                                        "meta": 5,
+                                                        "resultadoActual": 3,
+                                                        "observaciones": "Faltan 2 talleres por coordinar y ejecutar."
+                                                    },
+                                                    {
+                                                        "nombreIndicador": "Mujeres capacitadas en oficios (acumulado)",
+                                                        "unidadMedida": "cantidad",
+                                                        "meta": 200,
+                                                        "resultadoActual": 120,
+                                                        "observaciones": "Buena asistencia a los talleres impartidos."
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "idActividad": "ACT_ENCUENTRO_GUERRERAS_006",
+                                        "nombreActividad": "Encuentro de las Guerreras DDMUF 'Mujeres sin límites' con el Gobernador",
+                                        "descripcion": "Evento protocolar para la entrega del manifiesto de voluntad, lealtad y compromiso feminista.",
+                                        "porcentaje": 50,
+                                        "tareas": [
+                                            {
+                                                "idTarea": "TAR_LOGISTICA_ENCUENTRO_001",
+                                                "nombreTarea": "Coordinación Logística del Encuentro",
+                                                "descripcion": "Planificación del lugar, fecha, hora y asistencia para el evento.",
+                                                "porcentaje": 50,
+                                                "indicadoresEvaluacion": [
+                                                    {
+                                                        "nombreIndicador": "Logística del evento coordinada (%)",
+                                                        "unidadMedida": "%",
+                                                        "meta": 100,
+                                                        "resultadoActual": 50,
+                                                        "observaciones": "Fecha tentativa y lugar pre-reservado."
+                                                    },
+                                                    {
+                                                        "nombreIndicador": "Porcentaje de brigadas confirmadas para el encuentro",
+                                                        "unidadMedida": "%",
+                                                        "meta": 80,
+                                                        "resultadoActual": 40,
+                                                        "observaciones": "Proceso de confirmación en curso."
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
             }
         ],
         "secretarias": [
