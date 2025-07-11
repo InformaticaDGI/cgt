@@ -1,46 +1,418 @@
-[
-    {
-        "id": "1",
-        "name": "Test 1",
-        "projects": [
+{
+    "evaluacionSistema": {
+        "usuario": [
             {
-                "id": "1",
-                "name": "Test 1",
-                "activities": [
+                "nombre": "Juan Pérez",
+                "idInstitucion": "INST_UNESR_001"
+            }
+        ],
+        "institucion": [
+            {
+                "nombreInstitucion": "Universidad Nacional Experimental Simón Rodríguez",
+                "idArea": "AREA_ACADEMICA",
+                "programas": [
                     {
-                        "id": "1",
-                        "name": "Test 1",
-                        "tasks": [
+                        "idPrograma": "PROG_EDUC_001",
+                        "nombrePrograma": "Programa de Fortalecimiento Educativo Comunitario",
+                        "proyectos": [
                             {
-                                "id": "1",
-                                "name": "Test 1"
+                                "idProyecto": "PROY_LECTURA_001",
+                                "nombreProyecto": "Fomento de la Lectura en Comunidades Rurales",
+                                "actividades": [
+                                    {
+                                        "idActividad": "ACT_CAPACITACION_001",
+                                        "nombreActividad": "Capacitación de Voluntarios en Técnicas de Lectura",
+                                        "tareas": [
+                                            {
+                                                "idTarea": "TAR_MODULOS_001",
+                                                "nombreTarea": "Diseño de Módulos de Capacitación",
+                                                "indicadoresEvaluacion": [
+                                                    {
+                                                        "nombreIndicador": "Número de módulos diseñados",
+                                                        "unidadMedida": "cantidad",
+                                                        "meta": 5,
+                                                        "resultadoActual": 4,
+                                                        "observaciones": "Falta módulo de evaluación de impacto."
+                                                    },
+                                                    {
+                                                        "nombreIndicador": "Porcentaje de módulos aprobados por expertos",
+                                                        "unidadMedida": "%",
+                                                        "meta": 90,
+                                                        "resultadoActual": 75,
+                                                        "observaciones": "Se requieren ajustes en la metodología de enseñanza."
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "idTarea": "TAR_LOGISTICA_001",
+                                                "nombreTarea": "Coordinación Logística para Talleres",
+                                                "indicadoresEvaluacion": [
+                                                    {
+                                                        "nombreIndicador": "Talleres programados a tiempo",
+                                                        "unidadMedida": "boolean",
+                                                        "meta": true,
+                                                        "resultadoActual": false,
+                                                        "observaciones": "Retraso en la disponibilidad de espacios comunitarios."
+                                                    },
+                                                    {
+                                                        "nombreIndicador": "Materiales didácticos disponibles",
+                                                        "unidadMedida": "boolean",
+                                                        "meta": true,
+                                                        "resultadoActual": true,
+                                                        "observaciones": "Todos los materiales listos para los talleres."
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "idActividad": "ACT_IMPLEM_002",
+                                        "nombreActividad": "Implementación de Círculos de Lectura",
+                                        "tareas": [
+                                            {
+                                                "idTarea": "TAR_GRUPOS_001",
+                                                "nombreTarea": "Conformación de Grupos de Lectura",
+                                                "indicadoresEvaluacion": [
+                                                    {
+                                                        "nombreIndicador": "Número de grupos conformados",
+                                                        "unidadMedida": "cantidad",
+                                                        "meta": 10,
+                                                        "resultadoActual": 8,
+                                                        "observaciones": "Dificultad para integrar a jóvenes en dos comunidades."
+                                                    },
+                                                    {
+                                                        "nombreIndicador": "Participación activa por grupo (%)",
+                                                        "unidadMedida": "%",
+                                                        "meta": 80,
+                                                        "resultadoActual": 65,
+                                                        "observaciones": "Necesidad de estrategias para fomentar mayor compromiso."
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "idProyecto": "PROY_DIGITAL_002",
+                                "nombreProyecto": "Acceso Digital a Recursos Educativos",
+                                "actividades": [
+                                    {
+                                        "idActividad": "ACT_PLATAFORMA_001",
+                                        "nombreActividad": "Desarrollo y Mantenimiento de Plataforma Online",
+                                        "tareas": [
+                                            {
+                                                "idTarea": "TAR_FUNC_001",
+                                                "nombreTarea": "Implementación de Nuevas Funcionalidades",
+                                                "indicadoresEvaluacion": [
+                                                    {
+                                                        "nombreIndicador": "Funcionalidades implementadas (%)",
+                                                        "unidadMedida": "%",
+                                                        "meta": 100,
+                                                        "resultadoActual": 70,
+                                                        "observaciones": "Retraso en la integración de módulo de videollamadas."
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "idPrograma": "PROG_SALUD_002",
+                        "nombrePrograma": "Programa de Salud Comunitaria y Prevención",
+                        "proyectos": [
+                            {
+                                "idProyecto": "PROY_VACUNACION_001",
+                                "nombreProyecto": "Campaña de Vacunación Infantil",
+                                "actividades": [
+                                    {
+                                        "idActividad": "ACT_CONCIENCIA_001",
+                                        "nombreActividad": "Campañas de Concientización en Escuelas",
+                                        "tareas": [
+                                            {
+                                                "idTarea": "TAR_CHARLAS_001",
+                                                "nombreTarea": "Organización de Charlas Informativas",
+                                                "indicadoresEvaluacion": [
+                                                    {
+                                                        "nombreIndicador": "Charlas realizadas",
+                                                        "unidadMedida": "cantidad",
+                                                        "meta": 15,
+                                                        "resultadoActual": 12,
+                                                        "observaciones": "3 charlas canceladas por falta de personal."
+                                                    },
+                                                    {
+                                                        "nombreIndicador": "Asistencia promedio por charla",
+                                                        "unidadMedida": "personas",
+                                                        "meta": 50,
+                                                        "resultadoActual": 45,
+                                                        "observaciones": "Buena receptividad en general."
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
                             }
                         ]
                     }
                 ]
             }
-        ]
-    },
-    {
-        "id": "2",
-        "name": "Test 2",
-        "projects": [
+        ],
+        "secretarias": [
             {
-                "id": "1",
-                "name": "Test 1",
-                "activities": [
-                    {
-                        "id": "1",
-                        "name": "Test 1",
-                        "tasks": [
-                            {
-                                "id": "1",
-                                "name": "Test 1"
-                            }
-                        ]
-                    }
-                ]
+                "idSecretaria": "SEC_ECO_TRANS",
+                "nombreSecretaria": "SECRETARÍA PARA LA TRASFORMACIÓN ECONÓMICA"
+            },
+            {
+                "idSecretaria": "SEC_SERV_INFRA",
+                "nombreSecretaria": "SECRETARÍA PARA LOS SERVICIOS PÚBLICOS E INFRAESTRUCTURA"
+            },
+            {
+                "idSecretaria": "SEC_SEG_PAZ",
+                "nombreSecretaria": "SECRETARÍA PARA LA TRANSFORMACIÓN DE LA SEGURIDAD Y LA PAZ"
+            },
+            {
+                "idSecretaria": "SEC_SOCIAL_VIVIR",
+                "nombreSecretaria": "SECRETARÍA PARA LA TRANSFORMACIÓN SOCIAL Y DEL BUEN VIVIR"
+            },
+            {
+                "idSecretaria": "SEC_PODER_PART",
+                "nombreSecretaria": "SECRETARÍA PARA LA TRANSFORMACIÓN DEL PODER POPULAR Y DEMOCRACIA PARTICIPATIVA"
+            },
+            {
+                "idSecretaria": "SEC_ECOSOC_CONOC",
+                "nombreSecretaria": "SECRETARÍA PARA LA TRANSFORMACIÓN DEL ECOSOCIALISMO Y EL CONOCIMIENTO"
+            }
+        ],
+        "dependencias": [
+            {
+                "idDependencia": "DEP_IND_COM",
+                "nombreDependencia": "SECRETARÍA DE INDUSTRIA Y COMERCIO",
+                "idSecretariaAsociada": "SEC_ECO_TRANS"
+            },
+            {
+                "idDependencia": "DEP_PROD_AGRO",
+                "nombreDependencia": "SECRETARÍA DE PRODUCCIÓN AGROPECUARIA",
+                "idSecretariaAsociada": "SEC_ECO_TRANS"
+            },
+            {
+                "idDependencia": "DEP_ALIMENTACION",
+                "nombreDependencia": "SECRETARÍA DE ALIMENTACIÓN",
+                "idSecretariaAsociada": "SEC_ECO_TRANS"
+            },
+            {
+                "idDependencia": "DEP_FONDER",
+                "nombreDependencia": "FONDO DE DESARROLLO REGIONAL (FONDER)",
+                "idSecretariaAsociada": "SEC_ECO_TRANS"
+            },
+            {
+                "idDependencia": "DEP_FODESOPREGUA",
+                "nombreDependencia": "FODESOPREGUA",
+                "idSecretariaAsociada": "SEC_ECO_TRANS"
+            },
+            {
+                "idDependencia": "DEP_CORPOTUREBG",
+                "nombreDependencia": "CORPOTUREBG",
+                "idSecretariaAsociada": "SEC_ECO_TRANS"
+            },
+            {
+                "idDependencia": "DEP_AGROGUARICO",
+                "nombreDependencia": "AGROGUARICO POTENCIA",
+                "idSecretariaAsociada": "SEC_ECO_TRANS"
+            },
+            {
+                "idDependencia": "DEP_CORPOGUARICO",
+                "nombreDependencia": "CORPOGUARICO POTENCIA",
+                "idSecretariaAsociada": "SEC_ECO_TRANS"
+            },
+            {
+                "idDependencia": "DEP_ALGUARISA",
+                "nombreDependencia": "ALGUARISA",
+                "idSecretariaAsociada": "SEC_ECO_TRANS"
+            },
+            {
+                "idDependencia": "DEP_IPMEBG",
+                "nombreDependencia": "IPMEBG",
+                "idSecretariaAsociada": "SEC_ECO_TRANS"
+            },
+            {
+                "idDependencia": "DEP_AGUAS_TERMALES",
+                "nombreDependencia": "AGUAS TERMALES, HOTEL",
+                "idSecretariaAsociada": "SEC_ECO_TRANS"
+            },
+            {
+                "idDependencia": "DEP_SISOPROGUA",
+                "nombreDependencia": "SISOPROGUA",
+                "idSecretariaAsociada": "SEC_ECO_TRANS"
+            },
+            {
+                "idDependencia": "DEP_OBRAS_PUBLICAS",
+                "nombreDependencia": "SECRETARÍA DE OBRAS PÚBLICAS",
+                "idSecretariaAsociada": "SEC_SERV_INFRA"
+            },
+            {
+                "idDependencia": "DEP_SERV_PUBLICOS",
+                "nombreDependencia": "SECRETARÍA DE SERVICIOS PÚBLICOS",
+                "idSecretariaAsociada": "SEC_SERV_INFRA"
+            },
+            {
+                "idDependencia": "DEP_TRANSPORTE",
+                "nombreDependencia": "SECRETARÍA DE TRANSPORTE",
+                "idSecretariaAsociada": "SEC_SERV_INFRA"
+            },
+            {
+                "idDependencia": "DEP_CONSTRUGUARICO",
+                "nombreDependencia": "CONSTRUGUARICO",
+                "idSecretariaAsociada": "SEC_SERV_INFRA"
+            },
+            {
+                "idDependencia": "DEP_CONSTRUVIALGUA",
+                "nombreDependencia": "CONSTRUVIALGUA",
+                "idSecretariaAsociada": "SEC_SERV_INFRA"
+            },
+            {
+                "idDependencia": "DEP_PATRIA_SOCIALISTA",
+                "nombreDependencia": "FUNDACIÓN PATRIA SOCIALISTA",
+                "idSecretariaAsociada": "SEC_SERV_INFRA"
+            },
+            {
+                "idDependencia": "DEP_BUSGUARICO",
+                "nombreDependencia": "BUSGUARICO",
+                "idSecretariaAsociada": "SEC_SERV_INFRA"
+            },
+            {
+                "idDependencia": "DEP_CONSTRUSALUD",
+                "nombreDependencia": "CONSTRUSALUD",
+                "idSecretariaAsociada": "SEC_SERV_INFRA"
+            },
+            {
+                "idDependencia": "DEP_IAVHEBG",
+                "nombreDependencia": "IAVHEBG",
+                "idSecretariaAsociada": "SEC_SERV_INFRA"
+            },
+            {
+                "idDependencia": "DEP_SEG_DEFENSA",
+                "nombreDependencia": "SECRETARÍA DE SEGURIDAD Y DEFENSA",
+                "idSecretariaAsociada": "SEC_SEG_PAZ"
+            },
+            {
+                "idDependencia": "DEP_BOMBEROS",
+                "nombreDependencia": "DIRECCIÓN DE CUERPO DE BOMBEROS TERRITORIAL",
+                "idSecretariaAsociada": "SEC_SEG_PAZ"
+            },
+            {
+                "idDependencia": "DEP_PROT_CIVIL",
+                "nombreDependencia": "DIRECCIÓN DE PROTECCIÓN CIVIL",
+                "idSecretariaAsociada": "SEC_SEG_PAZ"
+            },
+            {
+                "idDependencia": "DEP_IAPEBG",
+                "nombreDependencia": "IAPEBG",
+                "idSecretariaAsociada": "SEC_SEG_PAZ"
+            },
+            {
+                "idDependencia": "DEP_IPESGUA",
+                "nombreDependencia": "IPESGUA",
+                "idSecretariaAsociada": "SEC_SEG_PAZ"
+            },
+            {
+                "idDependencia": "DEP_CEFOPOL",
+                "nombreDependencia": "CEFOPOL GUÁRICO",
+                "idSecretariaAsociada": "SEC_SEG_PAZ"
+            },
+            {
+                "idDependencia": "DEP_PROT_SOCIAL",
+                "nombreDependencia": "SECRETARÍA DE PROTECCIÓN SOCIAL",
+                "idSecretariaAsociada": "SEC_SOCIAL_VIVIR"
+            },
+            {
+                "idDependencia": "DEP_SALUD_PUBLICA",
+                "nombreDependencia": "SECRETARÍA DE SALUD PÚBLICA",
+                "idSecretariaAsociada": "SEC_SOCIAL_VIVIR"
+            },
+            {
+                "idDependencia": "DEP_FUSAMIEBG",
+                "nombreDependencia": "FUSAMIEBG",
+                "idSecretariaAsociada": "SEC_SOCIAL_VIVIR"
+            },
+            {
+                "idDependencia": "DEP_ASOMECID",
+                "nombreDependencia": "ASOMECID",
+                "idSecretariaAsociada": "SEC_SOCIAL_VIVIR"
+            },
+            {
+                "idDependencia": "DEP_IRDEBG",
+                "nombreDependencia": "IRDEBG",
+                "idSecretariaAsociada": "SEC_SOCIAL_VIVIR"
+            },
+            {
+                "idDependencia": "DEP_IMUBGUA",
+                "nombreDependencia": "IMUBGUA",
+                "idSecretariaAsociada": "SEC_SOCIAL_VIVIR"
+            },
+            {
+                "idDependencia": "DEP_INJUVEBG",
+                "nombreDependencia": "INJUVEBG",
+                "idSecretariaAsociada": "SEC_SOCIAL_VIVIR"
+            },
+            {
+                "idDependencia": "DEP_NINO_SIMON",
+                "nombreDependencia": "FUNDACIÓN REGIONAL “EL NIÑO SIMÓN”",
+                "idSecretariaAsociada": "SEC_SOCIAL_VIVIR"
+            },
+            {
+                "idDependencia": "DEP_EDUC_CULT_DEP",
+                "nombreDependencia": "SECRETARÍA DE EDUCACIÓN, CULTURA Y DEPORTE",
+                "idSecretariaAsociada": "SEC_SOCIAL_VIVIR"
+            },
+            {
+                "idDependencia": "DEP_FOSIJEG",
+                "nombreDependencia": "FOSIJEG",
+                "idSecretariaAsociada": "SEC_SOCIAL_VIVIR"
+            },
+            {
+                "idDependencia": "DEP_FOSEG",
+                "nombreDependencia": "FOSEG",
+                "idSecretariaAsociada": "SEC_SOCIAL_VIVIR"
+            },
+            {
+                "idDependencia": "DEP_BIBLIOTECAS",
+                "nombreDependencia": "RED DE BIBLIOTECAS PÚBLICAS",
+                "idSecretariaAsociada": "SEC_SOCIAL_VIVIR"
+            },
+            {
+                "idDependencia": "DEP_GESTION_TERRITORIAL",
+                "nombreDependencia": "SECRETARÍA DE GESTIÓN TERRITORIAL",
+                "idSecretariaAsociada": "SEC_PODER_PART"
+            },
+            {
+                "idDependencia": "DEP_EMCOMUNA",
+                "nombreDependencia": "EMCOMUNA",
+                "idSecretariaAsociada": "SEC_PODER_PART"
+            },
+            {
+                "idDependencia": "DEP_INST_ECOSOC",
+                "nombreDependencia": "INSTITUTO DE ECOSOCIALISMO",
+                "idSecretariaAsociada": "SEC_ECOSOC_CONOC"
+            },
+            {
+                "idDependencia": "DEP_INCITEBG",
+                "nombreDependencia": "INCITEBG",
+                "idSecretariaAsociada": "SEC_ECOSOC_CONOC"
+            },
+            {
+                "idDependencia": "DEP_EDUC_UNIV",
+                "nombreDependencia": "SECRETARÍA DE EDUCACIÓN UNIVERSITARIA",
+                "idSecretariaAsociada": "SEC_ECOSOC_CONOC"
+            },
+            {
+                "idDependencia": "DEP_ALCARAVAN_SIST",
+                "nombreDependencia": "ALCARAVÁN SISTEMAS TECNOLÓGICOS",
+                "idSecretariaAsociada": "SEC_ECOSOC_CONOC"
             }
         ]
     }
-]
+}
