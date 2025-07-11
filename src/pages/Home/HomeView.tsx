@@ -7,8 +7,10 @@ import Card from "../../components/Card/Card";
 import CardBody from "../../components/Card/CardBody";
 import CardFooter from "../../components/Card/CardFooter";
 import CardHeader from "../../components/Card/CardHeader";
+import usePrograms from "../../hooks/usePrograms";
 
 const HomeView = () => {
+    const { data } = usePrograms()
     return <Navigation>
         <MainWrapper>
             <Header />
