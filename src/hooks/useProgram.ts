@@ -10,7 +10,7 @@ const useProgram = (programId: string) => {
 
 
 const fetchProgramById = (programId: string) => {
-    const matchProgram = data.find(program => program.id === programId);
+    const matchProgram = data.evaluacionSistema.listado_programas[0].programas.find(program => program.idPrograma === programId);
     if(!matchProgram) throw new Error('Program not found')
     return matchProgram;
 }

@@ -10,8 +10,8 @@ const useProject = (projectId: string) => {
 
 
 const fetchProjectById = (projectId: string) => {
-    const [matchProject] = data.map(program => {
-        const project = program.projects.find(project => project.id === projectId)
+    const [matchProject] = data.evaluacionSistema.listado_programas[0].programas.map(program => {
+        const project = program.proyectos.find(project => project.idProyecto === projectId)
         if(!project) throw new Error('Project not found')
         return project
     })

@@ -10,9 +10,9 @@ const useActivity = (activityId: string) => {
 
 
 const fetchActivityById = (activityId: string) => {
-    const [matchActivity] = data.map(program => {
-        const [projects] = program.projects.map(project => {
-            const activity = project.activities.find(activity => activity.id === activityId)
+    const [matchActivity] = data.evaluacionSistema.listado_programas[0].programas.map(program => {
+        const [projects] = program.proyectos.map(project => {
+            const activity = project.actividades.find(activity => activity.idActividad === activityId)
             if(!activity) throw new Error('activity not found')
             return activity
         })

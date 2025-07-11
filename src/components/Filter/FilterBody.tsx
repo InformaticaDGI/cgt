@@ -7,15 +7,17 @@ export type Option = {
 
 export type SelectProps = {
     placeholder?: string
-    data: Option[]
+    data: Option[],
+    value?: string | undefined,
+    onChange?: (value: string) => void | undefined
 }
 
-const FilterBody = ({ placeholder, data }: SelectProps) => {
+const FilterBody = ({ placeholder, data, onChange, value }: SelectProps) => {
 
     return (
         <div>
             <StyledSelectWrapper>
-                <StyledSelect>
+                <StyledSelect value={value} onChange={(evt) => onChange?.(evt.target.value)}>
                     <option value="">{placeholder}</option>
                     {data.map(item => <option value={item.value} key={item.value}>{item.label}</option>)}
                 </StyledSelect>
