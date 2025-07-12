@@ -4,21 +4,21 @@ import type React from "react";
 
 const BreadCrumpItem = ({ children, href, placement = "default", ...props }: { children: string, href: string, placement?: "start" | "end" | "middle" | "default" } & React.ComponentPropsWithoutRef<'a'>) => {
 
-    if(placement === 'end'){
+    if (placement === 'end') {
         return <StyledBreadCrumpItem {...props} href={href}>{children}</StyledBreadCrumpItem>
     }
 
-    if(placement === 'start') {
+    if (placement === 'start') {
         return <>
-            <Text>/</Text>
+            <StyledBreadCrumpItemText>/</StyledBreadCrumpItemText>
             <StyledBreadCrumpItem {...props} href={href}>{children}</StyledBreadCrumpItem>
-            <Text>/</Text>
+            <StyledBreadCrumpItemText>/</StyledBreadCrumpItemText>
         </>
     }
 
-    if(placement === 'middle') {
+    if (placement === 'middle') {
         return <>
-            <Text>/</Text>
+            <StyledBreadCrumpItemText>/</StyledBreadCrumpItemText>
             <StyledBreadCrumpItem {...props} href={href}>{children}</StyledBreadCrumpItem>
         </>
     }
@@ -27,17 +27,24 @@ const BreadCrumpItem = ({ children, href, placement = "default", ...props }: { c
     return (
         <>
             <StyledBreadCrumpItem {...props} href={href}>{children}</StyledBreadCrumpItem>
-            <Text>/</Text>
+            <StyledBreadCrumpItemText>/</StyledBreadCrumpItemText>
         </>
     )
 }
 
 export default BreadCrumpItem
 
+const StyledBreadCrumpItemText = styled(Text)`
+    font-size: 14px;
+    color: var(--text-secondary);
+    font-weight: 500;
+`
+
 const StyledBreadCrumpItem = styled.a`
     text-decoration: none;
-    font-size: 20px;
-    color: #2D3748;
+    font-size: 14px;
+    color: var(--text-secondary);
+    font-weight: 500;
     &:hover {
         text-decoration: underline;
     }

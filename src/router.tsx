@@ -5,6 +5,7 @@ import ProjectView from './pages/Home/[programId]/Program/[projectId]/Project/Pr
 import ActivityView from './pages/Home/[programId]/Program/[projectId]/Project/[activityId]/Activity/ActivityView'
 import TaskView from './pages/Home/[programId]/Program/[projectId]/Project/[activityId]/Activity/[taskId]/Task/TaskView'
 import CreateProgramView from './pages/Home/CreateProgram/CreateProgram.view'
+import CreateProjectView from './pages/Home/CreateProject/CreateProjectView'
 
 const router = createBrowserRouter([
     {
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
     {
         path: '/crear-programa',
         element: <CreateProgramView />
+    },
+    {
+        path: '/crear-proyecto',
+        element: <CreateProjectView />
     },
     {
         path: '/indicadores',

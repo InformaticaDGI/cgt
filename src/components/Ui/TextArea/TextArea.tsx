@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
-export const Input = styled.input`
+export const TextArea = styled.textarea<TextAreaProps>`
     width: 100%;
-    height: 40px;
+    height: ${({ rows }) => rows ? `${rows * 20}px` : '120px'};
     border-radius: var(--border-radius);
     border: 1px solid var(--primary);
-    padding: 0 12px;
+    padding: 12px;
     font-size: var(--input-font-size);
     font-weight: 400;
     color: var(--text-secondary);
@@ -17,8 +17,8 @@ export const Input = styled.input`
         border-color: var(--primary);
         background-color: var(--input-background-focus);
     }
-
-    &[type="date"] {
-        color: var(--text-secondary);
-    }
 `
+
+type TextAreaProps = {
+    rows?: number
+}
