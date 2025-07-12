@@ -5,6 +5,8 @@ import { Search, Map, MapPin, MapPinned, Building, Network } from "lucide-react"
 import { useAppStore } from "../../store/store";
 import { SecretarySelect } from "./SecretarySelect";
 import { TerritorialSecreatarySelect } from "./TerritorialSecretarySelect";
+import { MunicipalitySelect } from "./MunicipalitySelect";
+import { ParrishSelect } from "./ParrishSelect";
 
 
 const FilterTool = () => {
@@ -35,13 +37,13 @@ const FilterTool = () => {
                 <Filter style={{ gridColumn: 'span 2' }}>
                     <FilterContainer>
                         <FilterHeader icon={<MapPinned color="white" height={"16px"} width={"16px"} />} fill="linear-gradient(180deg, #FFA500 0%, #FF4500 100%);">Municipio</FilterHeader>
-                        {/* TODO: Add municipality select */}
+                        <MunicipalitySelect onChange={(municipalityId) => store.setMunicipalityId(municipalityId)} value={store.municipalityId} />
                     </FilterContainer>
                 </Filter>
                 <Filter style={{ gridColumn: 'span 2' }}>
                     <FilterContainer>
                         <FilterHeader icon={<MapPin color="white" height={"16px"} width={"16px"} />} fill="linear-gradient(180deg, #98FB98 0%, #008000 100%)">Parroquia</FilterHeader>
-                        {/* TODO: Add parrish select */}
+                        <ParrishSelect onChange={(parrishId) => store.setParrishId(parrishId)} value={store.parrishId} municipalityId={store.municipalityId} />
                     </FilterContainer>
                 </Filter>
             </Container>

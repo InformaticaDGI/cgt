@@ -20,14 +20,14 @@ export const useAppStore = create<AppState>()(
     (set) => ({
      // Initial State
       secretaryRootId: '',
-      secretarialterritoryId: '',
+      secretarialTerritoryId: '',
       secretaryParentId: '',
       municipalityId: '',
       parrishId: '',
 
       // Setter Functions
       setSecretaryRootId: (secretaryRootId) => set({ secretaryRootId }),
-      setSecretarialTerritoryId: (secretarialterritoryId) => set({ secretarialTerritoryId: secretarialterritoryId }),
+      setSecretarialTerritoryId: (secretarialTerritoryId) => set({ secretarialTerritoryId }),
       setSecretaryParentId: (secretaryParentId) => set({ secretaryParentId }),
       setMunicipalityId: (municipalityId) => set({ municipalityId }),
       setParrishId: (parrishId) => set({ parrishId }),

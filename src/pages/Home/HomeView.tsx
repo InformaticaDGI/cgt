@@ -8,21 +8,25 @@ import CardBody from "../../components/Card/CardBody";
 import CardFooter from "../../components/Card/CardFooter";
 import CardHeader from "../../components/Card/CardHeader";
 import usePrograms from "../../hooks/usePrograms";
+import { Button } from "../../components/Ui/Button/Button";
+import { useAppStore } from "../../store/store";
+import { getSecretaryName } from "../../utils/libs";
 
 const HomeView = () => {
 
     const { data } = usePrograms()
-
+    const store = useAppStore()
     return <Navigation>
         <MainWrapper>
             <Header />
             <FilterTool />
             <Tabs/>
+            <Button onClick={() => console.log(store)}>Ver</Button>
             <StyledGrid>
                 {data.map(program => (
                     <Card to="indicadores/programa1" key={program.id}>
                         <CardHeader title={program.name} count={`${0} Proyectos`}  />
-                        <CardBody subtitle="Secretaria Territorial 1" description="SECRETARIA EJECUTIVA DE PROTECCIÓN SOCIAL Y GESTIÓN TERRITORIAL" info="SECRETARIA DE PROTECCIÓN SOCIAL" progress={20} />
+                        <CardBody subtitle={getSecretaryName(program.secretaryId)} description="SECRETARIA EJECUTIVA DE PROTECCIÓN SOCIAL Y GESTIÓN TERRITORIAL" info="SECRETARIA DE PROTECCIÓN SOCIAL" progress={20} />
                         <CardFooter location="Juan German Roscio, San Juan de los Morros" status="social" />
                     </Card>
                 ))}

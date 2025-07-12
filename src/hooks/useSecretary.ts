@@ -15,18 +15,18 @@ type UseSecretaryProps = {
     parentId?: string
 }
 
-const fetchRootSecretaries = async () => {
+const fetchRootSecretaries = async (): Promise<Secretary[]> => {
     const url = `${config.apiUrl}/secretaries/root/list`
     const response = await fetch(url)
     const data = await response.json()
-    return data.map((secretary: any) => ({ value: secretary.id, label: secretary.name }))
+    return data.map((secretary: Secretary) => ({ value: secretary.id, label: secretary.name }))
 }
 
-const fetchSecretaries = async (parentId: string) => {
+const fetchSecretaries = async (parentId: string): Promise<Secretary[]> => {
     const url = `${config.apiUrl}/secretaries/${parentId}/hierarchy`
     const response = await fetch(url)
     const data = await response.json()
-    return data.children.map((secretary: any) => ({ value: secretary.id, label: secretary.name }))
+    return data.children.map((secretary: Secretary) => ({ value: secretary.id, label: secretary.name }))
 }
 
 const getQueryFn = (props: UseSecretaryProps) => {
@@ -43,6 +43,15 @@ const getEnabled = (props: UseSecretaryProps) => {
         return false
     }
     return true
+}
+
+export type Secretary = {
+    id: string,
+    name: string,
+    parentId: string,
+    canHaveProjects: boolean,
+    createdAt: string,
+    updatedAt: string
 }
 
 export default useSecretary

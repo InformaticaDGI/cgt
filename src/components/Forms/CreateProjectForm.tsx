@@ -19,7 +19,7 @@ export default function CreateProjectForm({ onSubmit, initialValues, isLoading }
         }
     })
 
-    return <Card to="#">
+    return <Card to={false}>
         <Grid columns="repeat(24, 1fr)" gap="12px" width="100%">
             <GridItem colSpan={12}>
                 <FormControl label="Secretaría territorial" required>
