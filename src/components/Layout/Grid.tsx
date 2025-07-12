@@ -9,6 +9,7 @@ interface GridProps {
     padding?: string;
     margin?: string;
     backgroundColor?: string;
+    children: React.ReactNode;
 }
 
 export const Grid = styled.div<GridProps>`
@@ -22,3 +23,15 @@ export const Grid = styled.div<GridProps>`
     margin: ${({ margin }) => margin || '0'};
     background-color: ${({ backgroundColor }) => backgroundColor || 'transparent'};
 `;
+
+export const GridItem = styled.div<GridItemProps>`
+    grid-column: ${({ column, colSpan }) => column ? column : `span ${colSpan || 1}`};
+    grid-row: ${({ row, rowSpan }) => row ? row : `span ${rowSpan || 1}`};
+`;
+
+type GridItemProps = {
+    column?: string;
+    row?: string;
+    colSpan?: number;
+    rowSpan?: number;
+};

@@ -3,7 +3,7 @@ interface Config {
 }
 
 const localConfig: Config = {
-  apiUrl: 'http://localhost:8081/api',
+  apiUrl: 'http://localhost:3000',
 }
 
 const prodConfig: Config = {

@@ -4,11 +4,16 @@ import ProgramView from './pages/Home/[programId]/Program/ProgramView'
 import ProjectView from './pages/Home/[programId]/Program/[projectId]/Project/ProjectView'
 import ActivityView from './pages/Home/[programId]/Program/[projectId]/Project/[activityId]/Activity/ActivityView'
 import TaskView from './pages/Home/[programId]/Program/[projectId]/Project/[activityId]/Activity/[taskId]/Task/TaskView'
+import CreateProgramView from './pages/Home/CreateProgram/CreateProgram.view'
 
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <Navigate to={'/indicadores'} replace />
+        element: <Navigate to={'/indicadores'} replace />,
+    },
+    {
+        path: '/crear-programa',
+        element: <CreateProgramView />
     },
     {
         path: '/indicadores',
