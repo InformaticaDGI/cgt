@@ -1,50 +1,50 @@
 import { AlertCircleIcon, AlertTriangleIcon, CheckIcon, InfoIcon, XIcon } from "lucide-react"
 import { useEffect, useState } from "react"
+import { createPortal } from "react-dom"
 import styled from "styled-components"
 
-let alertContainer: HTMLDivElement | null = null
+class AlertContainerSingleton {
+    private static instance: HTMLDivElement | null = null;
 
-function ensureAlertContainer() {
-    if (!alertContainer) {
-        alertContainer = document.createElement("div")
-        alertContainer.id = "global-alert-container"
-        alertContainer.style.position = "fixed"
-        alertContainer.style.top = "0"
-        alertContainer.style.right = "0"
-        alertContainer.style.width = "300px"
-        alertContainer.style.height = "100px"
-        alertContainer.style.zIndex = "1000"
-        alertContainer.style.display = "flex"
-        alertContainer.style.alignItems = "center"
-        alertContainer.style.justifyContent = "center"
-        alertContainer.style.gap = "12px"
-        document.body.appendChild(alertContainer)
+    static getInstance(): HTMLDivElement {
+        if (!AlertContainerSingleton.instance) {
+            const container = document.createElement("div");
+            container.id = "global-alert-container";
+            container.style.position = "fixed";
+            container.style.top = "0";
+            container.style.right = "0";
+            container.style.width = "300px";
+            container.style.height = "100px";
+            container.style.zIndex = "1000";
+            container.style.display = "flex";
+            container.style.alignItems = "center";
+            container.style.justifyContent = "center";
+            container.style.gap = "12px";
+            document.getElementById("root")?.appendChild(container);
+            AlertContainerSingleton.instance = container;
+        }
+        return AlertContainerSingleton.instance;
     }
-    return alertContainer
+
+    static clearInstance() {
+        if (AlertContainerSingleton.instance) {
+            if (AlertContainerSingleton.instance.parentNode) {
+                AlertContainerSingleton.instance.parentNode.removeChild(AlertContainerSingleton.instance);
+            }
+            AlertContainerSingleton.instance = null;
+        }
+    }
 }
 
 export function renderGlobalAlert(element: React.ReactNode): () => void {
-    // @ts-ignore
-    ensureAlertContainer()
-    import("react-dom").then(ReactDOM => {
-        if (alertContainer) {
-            ReactDOM.createPortal(element, alertContainer)
-        }
-    })
+    createPortal(element, AlertContainerSingleton.getInstance())
     return () => {
         unmountGlobalAlert()
     }
 }
 
 export function unmountGlobalAlert() {
-    if (alertContainer) {
-        import("react-dom").then(() => {
-            if (alertContainer) {
-                document.body.removeChild(alertContainer)
-            }
-            alertContainer = null
-        });
-    }
+    AlertContainerSingleton.clearInstance()
 }
 
 type AlertProps = {
@@ -75,12 +75,10 @@ export const useAlert = (props: AlertProps) => {
     }
 
     useEffect(() => {
-        if (isOpen && alertProps) {
+        if (isOpen) {
             const unmountFn = renderGlobalAlert(
                 <Alert
                     {...alertProps}
-                    isOpen={isOpen}
-                    show={() => setIsOpen(true)}
                     hide={hide}
                 />
             )
@@ -96,11 +94,8 @@ export const useAlert = (props: AlertProps) => {
     return { show, hide, isOpen }
 }
 
-const Alert = ({ variant, title, description, children, onClose, isOpen, show, hide }: AlertProps & { isOpen: boolean, show: () => void, hide: () => void }) => {
-    useEffect(() => {
-        if (isOpen) show()
-        else hide()
-    }, [isOpen])
+const Alert = ({ variant, title, description, children, hide }: AlertProps & { hide: () => void }) => {
+
 
     return <AlertWrapper variant={variant}>
         <AlertIcon>

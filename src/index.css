@@ -9,8 +9,8 @@
 
   --border-radius: 18px;
 
-  --input-background: #f2f9f8;
-  --input-background-focus: #e8f8f7;
+  --input-background: #f5faf9;
+  --input-background-focus: #fefefe;
 
   --input-font-size: 14px;
 
@@ -19,6 +19,7 @@
   --gradient-tertiary: linear-gradient(180deg, #D3CCFF 0%, #483D8B 100%);
   --gradient-quaternary: linear-gradient(180deg, #87CEEB 0%, #1E90FF 100%);
   --gradient-quinary: linear-gradient(180deg, #FFA500 0%, #FF4500 100%);
+
 }
 
 *,*::after,*::before {

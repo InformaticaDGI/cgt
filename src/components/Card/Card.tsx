@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-const Card = ({ children, to }: { to: string | false, children: React.ReactElement[] }) => {
+const Card = ({ children, to }: { to: string | false, children: React.ReactElement |React.ReactElement[] }) => {
 
     if(to === false){
         return <StyledCard animation={false}>
