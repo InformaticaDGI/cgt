@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import Navigation from "../../components/Navigation/Navigation"
-import FilterTool from "../../components/FilterTool";
+import FilterTool from "../../components/Prebuilt/FilterTool";
 import Header from "../../components/Header/Header";
 import Tabs from "../../components/Tabs/Tabs";
 import Card from "../../components/Card/Card";
@@ -12,6 +12,7 @@ import usePrograms from "../../hooks/usePrograms";
 const HomeView = () => {
 
     const { data } = usePrograms()
+
     return <Navigation>
         <MainWrapper>
             <Header />
@@ -19,8 +20,8 @@ const HomeView = () => {
             <Tabs/>
             <StyledGrid>
                 {data.map(program => (
-                    <Card to="indicadores/programa1" key={program.idPrograma}>
-                        <CardHeader title={program.nombrePrograma} count={`${program.proyectos.length} Proyectos`}  />
+                    <Card to="indicadores/programa1" key={program.id}>
+                        <CardHeader title={program.name} count={`${0} Proyectos`}  />
                         <CardBody subtitle="Secretaria Territorial 1" description="SECRETARIA EJECUTIVA DE PROTECCIÓN SOCIAL Y GESTIÓN TERRITORIAL" info="SECRETARIA DE PROTECCIÓN SOCIAL" progress={20} />
                         <CardFooter location="Juan German Roscio, San Juan de los Morros" status="social" />
                     </Card>

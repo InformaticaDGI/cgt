@@ -7,7 +7,7 @@ const localConfig: Config = {
 }
 
 const prodConfig: Config = {
-  apiUrl: "https://api-cgt.guarico.gob.ve/api"
+  apiUrl: "https://api-cgt.guarico.gob.ve"
 }
 
 export const config = import.meta.env.VITE_ENV === 'local' ? localConfig : prodConfig

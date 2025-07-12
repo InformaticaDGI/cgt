@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import Text from "../Ui/Text"
+import Text from "../Ui/Text/Text"
 import CircularProgress from "./CirularProgress"
 
 const CardBody = ({ progress, subtitle, info, description }: { progress: number, subtitle: string | false, info: string | false, description: string | false }) => {

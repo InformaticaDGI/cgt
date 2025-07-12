@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import Text from "./Text";
+import Text from "../Text/Text";
 
 export type StatusInfo = "economy" | "ecology" | "social"
 
@@ -9,19 +9,19 @@ const Statuses = {
     ecology: "Ecologia"
 }
 
-const Status = ({ variant = "social" }: { variant?: StatusInfo }) => {
+const Badge = ({ variant = "social" }: { variant?: StatusInfo }) => {
 
 
     return (
-        <StyledStatus variant={variant}>
+        <StyledBadge variant={variant}>
             <Text style={{fontSize: '12px', fontWeight: '600', color: "#ffffff"}}>{Statuses[variant]}</Text>
-        </StyledStatus>
+        </StyledBadge>
     )
 }
 
-export default Status
+export default Badge
 
-const StyledStatus = styled.div<{ variant?: StatusInfo }>`
+const StyledBadge = styled.div<{ variant?: StatusInfo }>`
     display: flex;
     background: ${props => {
 

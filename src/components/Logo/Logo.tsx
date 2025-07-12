@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Text from '../Ui/Text';
+import Text from '../Ui/Text/Text';
 
 
 export default function Logo() {

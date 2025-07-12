@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
+import { config } from "../config"
 
 const useSecretary = (props: UseSecretaryProps = {}) => {
     return useQuery({
@@ -15,14 +16,14 @@ type UseSecretaryProps = {
 }
 
 const fetchRootSecretaries = async () => {
-    const url = 'http://localhost:3000/secretaries/root/list'
+    const url = `${config.apiUrl}/secretaries/root/list`
     const response = await fetch(url)
     const data = await response.json()
     return data.map((secretary: any) => ({ value: secretary.id, label: secretary.name }))
 }
 
 const fetchSecretaries = async (parentId: string) => {
-    const url = `http://localhost:3000/secretaries/${parentId}/hierarchy`
+    const url = `${config.apiUrl}/secretaries/${parentId}/hierarchy`
     const response = await fetch(url)
     const data = await response.json()
     return data.children.map((secretary: any) => ({ value: secretary.id, label: secretary.name }))

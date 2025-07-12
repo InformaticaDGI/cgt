@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import Text from "../Ui/Text";
+import Text from "../Ui/Text/Text";
 import { ChevronRight } from "lucide-react";
 
 const CardHeader = ({ title, count, iconState = "closed" }: { title: string | false, count: string | false, iconState?: "open" | "closed" }) => {
