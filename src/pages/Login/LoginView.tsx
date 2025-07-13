@@ -2,8 +2,8 @@ import { Navigate, useNavigate } from "react-router"
 import { useLogin } from "../../hooks/useAuth"
 import { useState } from "react"
 import { Flex } from "../../components/Layout/Flex"
-import { $Input } from "../../components/Ui/Input/Input"
-import { $Button } from "../../components/Ui/Button/Button"
+import { Input } from "../../components/Ui/Input/Input"
+import { Button } from "../../components/Ui/Button/Button"
 import { FormControl } from "../../components/Ui/FormControl/FormControl"
 import Text from "../../components/Ui/Text/Text"
 import Card from "../../components/Card/Card"
@@ -53,17 +53,17 @@ export const LoginView = () => {
                             <Text style={{ fontSize: '24px', fontWeight: 'bold', color: 'var(--secondary)' }}>CGT - Bievenido de nuevo</Text>
                             <Text style={{ fontSize: '14px', fontWeight: '500' }}>Ingresa tus credenciales para acceder</Text>
                             <FormControl label="Usuario">
-                                <$Input style={{ border: error ? '1px solid var(--error)' : '1px solid var(--primary)', backgroundColor: error ? 'var(--error-light)' : 'var(--input-background)' }}  placeholder="Usuario" value={credentials.email} onChange={(e) => setCredentials({ ...credentials, email: e.target.value })} />
+                                <Input style={{ border: error ? '1px solid var(--error)' : '1px solid var(--primary)', backgroundColor: error ? 'var(--error-light)' : 'var(--input-background)' }}  placeholder="Usuario" value={credentials.email} onChange={(e) => setCredentials({ ...credentials, email: e.target.value })} />
                             </FormControl>
                             <FormControl label="Contraseña">
-                                <$Input style={{ border: error ? '1px solid var(--error)' : '1px solid var(--primary)', backgroundColor: error ? 'var(--error-light)' : 'var(--input-background)' }} type="password" placeholder="Contraseña" value={credentials.password} onChange={(e) => setCredentials({ ...credentials, password: e.target.value })} />
+                                <Input style={{ border: error ? '1px solid var(--error)' : '1px solid var(--primary)', backgroundColor: error ? 'var(--error-light)' : 'var(--input-background)' }} type="password" placeholder="Contraseña" value={credentials.password} onChange={(e) => setCredentials({ ...credentials, password: e.target.value })} />
                             </FormControl>
                             <Flex $align="stretch" $direction="column" $gap="12px">
                                 {error && <Flex $justify="start" $align="center" $direction="row" $gap="4px">
                                     <InfoIcon width={16} height={16} style={{ color: 'var(--error)' }} />
                                     <Text style={{ fontSize: '12px', fontWeight: '500', color: 'var(--error)' }}>{error}</Text>
                                 </Flex>}
-                                <$Button type="submit" $variant="primary">Acceder</$Button>
+                                <Button type="submit" $variant="primary">Acceder</Button>
                             </Flex>
                             <Flex $align="stretch" $direction="column" $gap="12px">
                                 <Flex $direction="column" $gap="12px">
