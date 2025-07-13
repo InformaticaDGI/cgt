@@ -1,7 +1,7 @@
-import Header from "../../components/Header/Header";
-import { Flex } from "../../components/Layout/Flex"
-import MapViewer from "../../components/MapViewer/MapViewer";
-import FilterTool from "../../components/Prebuilt/FilterTool";
+import Header from "../../../components/Header/Header";
+import { Flex } from "../../../components/Layout/Flex"
+import MapViewer from "../../../components/MapViewer/MapViewer";
+import FilterTool from "../../../components/Prebuilt/FilterTool";
 
 const MapView = () => {
     return <Flex direction="column" gap="12px" padding="16px" align="stretch" height="100vh">

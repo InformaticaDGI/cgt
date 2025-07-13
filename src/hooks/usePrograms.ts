@@ -3,7 +3,7 @@ import { useAppStore } from "../store/store";
 import axios from "axios";
 import { config } from "../config";
 const usePrograms = () => {
-    const {secretarialTerritoryId, secretaryParentId, secretaryRootId, municipalityId, parrishId} = useAppStore()
+    const { secretarialTerritoryId, secretaryParentId, secretaryRootId, municipalityId, parrishId } = useAppStore()
 
     return useQuery({
         queryKey: ['programs', secretarialTerritoryId, secretaryParentId, secretaryRootId, municipalityId, parrishId],
@@ -13,8 +13,8 @@ const usePrograms = () => {
 }
 
 
-const fetchPrograms = async (filters: { secretarialTerritoryId: string, secretaryParentId: string, secretaryRootId: string, municipalityId: string, parrishId: string }) => {
-    
+const fetchPrograms = async (_: { secretarialTerritoryId: string, secretaryParentId: string, secretaryRootId: string, municipalityId: string, parrishId: string }) => {
+
     const { data } = await axios.get<Program[]>(`${config.apiUrl}/programs`)
 
     return data
