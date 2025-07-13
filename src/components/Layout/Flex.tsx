@@ -4,7 +4,7 @@ interface FlexProps {
     direction?: 'row' | 'column';
     gap?: string;
     align?: 'center' | 'start' | 'end' | 'stretch';
-    justify?: 'center' | 'start' | 'end' | 'stretch';
+    justify?: 'center' | 'start' | 'end' | 'stretch' | 'space-between';
     width?: string;
     height?: string;
     padding?: string;
@@ -22,5 +22,5 @@ export const Flex = styled.div<FlexProps>`
     height: ${({ height }) => height || '100%'};
     padding: ${({ padding }) => padding || '0'};
     margin: ${({ margin }) => margin || '0'};
-    background-color: ${({ backgroundColor }) => backgroundColor || 'transparent'};
+    background: ${({ backgroundColor }) => backgroundColor || 'transparent'};
 `;

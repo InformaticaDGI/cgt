@@ -4,7 +4,6 @@ import type { NavLinkProps } from "./config"
 
 const NavLink = ({ item }: { item: NavLinkProps }) => {
     const location = useLocation();
-    console.log(location)
     const Icon = item.icon; 
     return (
         <StyledNavLink currentPage={location.pathname.includes(item.to)} as="a" href={item.to}>

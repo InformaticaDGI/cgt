@@ -6,42 +6,48 @@ import ActivityView from './pages/Home/[programId]/Program/[projectId]/Project/[
 import TaskView from './pages/Home/[programId]/Program/[projectId]/Project/[activityId]/Activity/[taskId]/Task/TaskView'
 import CreateProgramView from './pages/Home/CreateProgram/CreateProgram.view'
 import CreateProjectView from './pages/Home/CreateProject/CreateProjectView'
+import { LoginView } from './pages/Login/LoginView'
+import { ProtectedRoute } from './components/ProtectedRoute/ProtectedRoute'
 
 const router = createBrowserRouter([
+    {
+        path: '/login',
+        element: <LoginView />
+    },
     {
         path: '/',
         element: <Navigate to={'/indicadores'} replace />,
     },
     {
         path: '/crear-programa',
-        element: <CreateProgramView />
+        element: <ProtectedRoute><CreateProgramView /></ProtectedRoute>
     },
     {
         path: '/crear-proyecto',
-        element: <CreateProjectView />
+        element: <ProtectedRoute><CreateProjectView /></ProtectedRoute>
     },
     {
         path: '/indicadores',
         children: [
             {
                 index: true,
-                element: <HomeView />
+                element: <ProtectedRoute><HomeView /></ProtectedRoute>
             },
             {
                 path: ':programId',
-                element: <ProgramView />
+                element: <ProtectedRoute><ProgramView /></ProtectedRoute>
             },
             {
                 path: ':programId/:projectId',
-                element: <ProjectView />
+                element: <ProtectedRoute><ProjectView /></ProtectedRoute>
             },
             {
                 path: ':programId/:projectId/:activityId',
-                element: <ActivityView />
+                element: <ProtectedRoute><ActivityView /></ProtectedRoute>
             },
             {
                 path: ':programId/:projectId/:activityId/:taskId',
-                element: <TaskView />
+                element: <ProtectedRoute><TaskView /></ProtectedRoute>
             }
         ]
     },

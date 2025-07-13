@@ -1,6 +1,6 @@
 import { Cell, Pie, ResponsiveContainer, PieChart } from "recharts"
 
-const Progress = ({ progress = 75, size = 200, strokeWidth = 20, color = '#FF0000', backgroundColor = '#FFFFFF' }) => {
+const CircularProgress = ({ progress = 75, size = 200, strokeWidth = 20, color = '#FF0000', backgroundColor = '#FFFFFF' }) => {
   // Aseguramos que el progreso esté entre 0 y 100
   const actualProgress = Math.min(100, Math.max(0, progress));
 
@@ -44,4 +44,4 @@ const Progress = ({ progress = 75, size = 200, strokeWidth = 20, color = '#FF000
   );
 };
 
-export default Progress;
+export default CircularProgress;

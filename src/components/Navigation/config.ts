@@ -1,11 +1,11 @@
-import { BsBarChartFill, BsDatabaseFillAdd } from "react-icons/bs";
-import { FaUsersGear } from "react-icons/fa6";
+import { BsBarChartFill } from "react-icons/bs";
+import { FaChartBar, FaHammer, FaUsersGear } from "react-icons/fa6";
 import { FaMapLocationDot } from "react-icons/fa6";
 import { MdShield } from "react-icons/md";
 import { FaUserAlt } from "react-icons/fa";
 import { IoIosExit } from "react-icons/io";
 
-const NavItems: NavItems = [
+const createNavItems: (logout: () => void) => NavItems = (logout: () => void) => [
         {
             id: 'dashboard',
             to: '/indicadores',
@@ -13,13 +13,31 @@ const NavItems: NavItems = [
             icon: BsBarChartFill,
             roles: ['*']
         },
+
         {
-            id: 'registry',
-            to: '/registro',
-            label: 'Registro',
-            icon: BsDatabaseFillAdd,
+            sectionTitle: 'Registro',
             roles: ['*']
         },
+        {
+            id: 'create-program',
+            to: '/crear-programa',
+            label: 'Crear Programa',
+            icon: FaChartBar,
+            roles: ['*']
+        },
+        {
+            id: 'create-project',
+            to: '/crear-proyecto',
+            label: 'Crear Proyecto',
+            icon: FaHammer,
+            roles: ['*']
+        },
+
+        {
+           sectionTitle: 'Gestión',
+           roles: ['*']
+        },
+
         {
             id: 'paysheet',
             to: '/nomina',
@@ -34,6 +52,8 @@ const NavItems: NavItems = [
             icon: FaMapLocationDot,
             roles: ['*']
         },
+
+
         {
             sectionTitle: 'Cuenta',
             roles: ['*']
@@ -54,13 +74,18 @@ const NavItems: NavItems = [
         },
         {
             id: 'exit',
-            to: '/salir',
             label: 'Salir',
             icon: IoIosExit,
+            button: true,
+            onClick: () => {
+                logout()
+            },
             roles: ['*']
         }
     ]
 const resolveRoles = (currentRole: string, navItems: NavItems) => {
+
+   
     const NavItemsResult = navItems.filter(navItem => {
         if(navItem.roles.includes('*')) return true;
         return navItem.roles.includes(currentRole);
@@ -69,8 +94,10 @@ const resolveRoles = (currentRole: string, navItems: NavItems) => {
     return NavItemsResult
 }
 
-export const buildNavItems = (currentRole: string) => {
-    const validNavItems = resolveRoles(currentRole, NavItems);
+export const buildNavItems = (currentRole: string, logout: () => void) => {
+    console.log(currentRole)
+    const navItems = createNavItems(logout);
+    const validNavItems = resolveRoles(currentRole, navItems);
     return validNavItems;
 }
 
@@ -83,11 +110,23 @@ export type NavSectionTitleProps = {
     roles: string[]
 }
 
+// Base type for navigation items
 export type NavLinkProps = {
     id: string;
     to: string;
     label: string;
     icon: React.ElementType;
+    button?: never;
+    onClick?: never;
+    roles: string[]
+}
+
+export type NavButtonProps = {
+    id: string;
+    label: string;
+    icon: React.ElementType;
+    button: true;
+    onClick: () => void;
     roles: string[]
 }
 
@@ -97,7 +136,9 @@ export type NavGroupProps = {
     label: string;
     icon: React.ElementType;
     roles: string[]
-    children?: (NavGroupProps | NavLinkProps)[]
+    button?: never;
+    onClick?: never;
+    children?: (NavGroupProps)[]
 }
 
-export type NavItems = (NavLinkProps | NavGroupProps | NavSectionTitleProps)[]
+export type NavItems = (NavLinkProps | NavGroupProps | NavSectionTitleProps | NavButtonProps)[]

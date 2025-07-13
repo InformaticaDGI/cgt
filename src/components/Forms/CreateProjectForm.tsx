@@ -19,7 +19,7 @@ export default function CreateProjectForm({ onSubmit, initialValues, isLoading }
         }
     })
 
-    return <Card to={false}>
+    return <Card isSelectable={false} padding="24px" >
         <Grid columns="repeat(24, 1fr)" gap="12px" width="100%">
             <GridItem colSpan={12}>
                 <FormControl label="Secretaría territorial" required>
@@ -85,7 +85,7 @@ export default function CreateProjectForm({ onSubmit, initialValues, isLoading }
                     />
                 </FormControl>
             </GridItem>
-            <GridItem colSpan={24} style={{ display: 'flex', justifyContent: 'center' }}>
+            <GridItem colSpan={24} style={{ display: 'flex', justifyContent: 'start' }}>
                 <Button type="submit" onClick={() => formik.handleSubmit()} variant="primary" disabled={!formik.isValid || isLoading}>Crear proyecto</Button>
             </GridItem>
         </Grid>

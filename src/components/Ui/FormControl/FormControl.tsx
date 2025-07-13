@@ -25,6 +25,7 @@ const StyledFormControl = styled.div`
     display: flex;
     flex-direction: column;
     gap: 8px;
+    width: 100%;
     label {
         font-size: 12px;
         font-weight: 500;
