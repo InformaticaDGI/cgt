@@ -7,6 +7,8 @@ import { Button } from "../../components/Ui/Button/Button"
 import { FormControl } from "../../components/Ui/FormControl/FormControl"
 import Text from "../../components/Ui/Text/Text"
 import Card from "../../components/Card/Card"
+import { Box } from "../../components/Layout/Box"
+import { InfoIcon } from "lucide-react"
 
 export const LoginView = () => {
 
@@ -14,6 +16,8 @@ export const LoginView = () => {
         email: '',
         password: ''
     })
+
+    const [error, setError] = useState('')
 
     const login = useLogin()
 
@@ -26,6 +30,10 @@ export const LoginView = () => {
             navigate('/indicadores')
         } catch (err) {
             console.error(err)
+            setError('Usuario  y/o contraseña incorrectos')
+            setTimeout(() => {
+                setError('')
+            }, 3000)
         }
     }
 
@@ -39,12 +47,16 @@ export const LoginView = () => {
                             <Text style={{ fontSize: '24px', fontWeight: 'bold', color: 'var(--secondary)' }}>CGT - Bievenido de nuevo</Text>
                             <Text style={{ fontSize: '14px', fontWeight: '500' }}>Ingresa tus credenciales para acceder</Text>
                             <FormControl label="Usuario">
-                                <Input placeholder="Usuario" value={credentials.email} onChange={(e) => setCredentials({ ...credentials, email: e.target.value })} />
+                                <Input style={{ border: error ? '1px solid var(--error)' : '1px solid var(--primary)', backgroundColor: error ? 'var(--error-light)' : 'var(--input-background)' }}  placeholder="Usuario" value={credentials.email} onChange={(e) => setCredentials({ ...credentials, email: e.target.value })} />
                             </FormControl>
                             <FormControl label="Contraseña">
-                                <Input type="password" placeholder="Contraseña" value={credentials.password} onChange={(e) => setCredentials({ ...credentials, password: e.target.value })} />
+                                <Input style={{ border: error ? '1px solid var(--error)' : '1px solid var(--primary)', backgroundColor: error ? 'var(--error-light)' : 'var(--input-background)' }} type="password" placeholder="Contraseña" value={credentials.password} onChange={(e) => setCredentials({ ...credentials, password: e.target.value })} />
                             </FormControl>
                             <Flex align="stretch" direction="column" gap="12px">
+                                {error && <Flex justify="start" align="center" direction="row" gap="4px">
+                                    <InfoIcon width={16} height={16} style={{ color: 'var(--error)' }} />
+                                    <Text style={{ fontSize: '12px', fontWeight: '500', color: 'var(--error)' }}>{error}</Text>
+                                </Flex>}
                                 <Button type="submit" variant="primary">Acceder</Button>
                             </Flex>
                             <Flex align="stretch" direction="column" gap="12px">

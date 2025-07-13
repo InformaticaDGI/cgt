@@ -8,6 +8,7 @@ import CreateProgramView from './pages/Home/CreateProgram/CreateProgram.view'
 import CreateProjectView from './pages/Home/CreateProject/CreateProjectView'
 import { LoginView } from './pages/Login/LoginView'
 import { ProtectedRoute } from './components/ProtectedRoute/ProtectedRoute'
+import NotFoundView from './pages/NotFoundView/NotFoundView'
 
 const router = createBrowserRouter([
     {
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
             }
         ]
     },
+    {
+        path: '*',
+        element: <NotFoundView />
+    }
 ])
 
 export default router

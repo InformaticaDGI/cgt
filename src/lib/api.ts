@@ -1,11 +1,16 @@
 import axios from "axios";
 import { useAuthStorage } from "../store/auth-storage";
+import { config } from "../config";
 
-const api = axios.create({
+const cgt = axios.create({
+    baseURL: `${config.apiUrl}`,
+})
+
+const auth = axios.create({
     baseURL: 'https://auth.guarico.gob.ve/api/v1/',
 })
 
-api.interceptors.request.use((config) => {
+cgt.interceptors.request.use((config) => {
     const token = useAuthStorage.getState().token
     if(token) {
         config.headers.Authorization = `Bearer ${token}`
@@ -15,7 +20,7 @@ api.interceptors.request.use((config) => {
 })
 
 
-api.interceptors.response.use(
+cgt.interceptors.response.use(
     (response) => response,
     (error) => {
         if(error.response?.status === 401) {
@@ -27,4 +32,7 @@ api.interceptors.response.use(
     }
 )
 
-export default api
+export default {
+    cgt,
+    auth
+}

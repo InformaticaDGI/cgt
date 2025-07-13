@@ -26,6 +26,7 @@ const StyledFormControl = styled.div`
     flex-direction: column;
     gap: 8px;
     width: 100%;
+    align-items: flex-start;
     label {
         font-size: 12px;
         font-weight: 500;
@@ -35,6 +36,7 @@ const StyledFormControl = styled.div`
         display: flex;
         flex-direction: column;
         gap: 8px;
+        width: 100%;
     }
     .required {
         color: var(--error);

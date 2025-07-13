@@ -10,9 +10,9 @@ export const useLogin = () => {
 
     return useMutation({
         mutationFn: async (credentials: { email: string; password: string }) => {
-            const response = await api.post('/users/auth', { appId: 'd77c7648-500e-4650-b786-6eb1754bf418', ...credentials })
+            const response = await api.auth.post('/users/auth', { appId: 'db701dae-f19d-484d-909c-ea0d0a5e02dc', ...credentials })
             const responseData = response.data
-            const roles = await api.get(`/users/id/${responseData.id}/`, {
+            const roles = await api.auth.get(`/users/id/${responseData.id}/`, {
                 headers: {
                     Authorization: `Bearer ${responseData.token}`
                 }
@@ -42,7 +42,7 @@ export const useLogout = () => {
 
     return useMutation({
         mutationFn: async () => {
-            await api.post('/auth/logout')
+            await api.auth.post('/auth/logout')
         },
         onSuccess: () => {
             logout()
