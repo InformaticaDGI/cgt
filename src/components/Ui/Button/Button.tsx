@@ -1,15 +1,20 @@
 import styled, { css } from "styled-components";
 
-export const $Button = styled.button<$ButtonProps>`
+export const Button = styled.button<ButtonProps>`
     background: ${({ $variant }) => $variant === "primary" ? "var(--gradient-primary)" : $variant === "secondary" ? "var(--gradient-secondary)" : "var(--gradient-tertiary)"};
     color: ${({ $variant }) => $variant === "primary" ? "var(--text_foreground)" : $variant === "secondary" ? "var(--text_foreground)" : "var(--text_foreground)"};
-    padding: 12px 24px;
+    padding: ${({ $size }) => $size === "small" ? "8px 16px" : $size === "medium" ? "12px 24px" : "16px 32px"};
+    height: ${({ $size }) => $size === "small" ? "32px" : $size === "medium" ? "40px" : "48px"};
     border-radius: var(--border-radius);
     border: none;
     cursor: pointer;
-    font-size: var(--input-font-size);
+    font-size: ${({ $size }) => $size === "small" ? "var(--input-font-size-xsmall)" : $size === "medium" ? "var(--input-font-size-small)" : "var(--input-font-size-medium)"};
     font-weight: 600;
     transition: all 0.3s ease;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    gap: 8px;
     &:hover {
         filter: brightness(0.8);
         scale: 1.01;
@@ -33,8 +38,9 @@ export const $Button = styled.button<$ButtonProps>`
     `}
 `
 
-type $ButtonProps = {
-    htmlType?: "button" | "submit" | "reset"
+type ButtonProps = {
+    $htmlType?: "button" | "submit" | "reset"
     $variant?: "primary" | "secondary" | "tertiary"
     $disabled?: boolean
+    $size?: "small" | "medium" | "large"
 }

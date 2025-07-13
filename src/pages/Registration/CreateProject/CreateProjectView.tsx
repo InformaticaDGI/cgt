@@ -10,6 +10,7 @@ export default function CreateProjectView() {
     return <MainWrapper>
             <Header />
             <CreateProjectForm onSubmit={(values) => {
+                console.log(values)
                 createProject(values)
             }}
                 initialValues={{
@@ -20,7 +21,8 @@ export default function CreateProjectView() {
                     endDate: '',
                     observations: '',
                     municipalityId: '',
-                    parrishId: ''
+                    parrishId: '',
+                    kpiBaseId: []
                 }}
                 isLoading={isPending}
             />
