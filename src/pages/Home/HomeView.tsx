@@ -26,7 +26,7 @@ const HomeView = () => {
             <Tabs />
             <Grid>
                 {data.map(program => (
-                    <Card as="a" href={`/indicadores/${program.name.toLowerCase().replace(/\s+/g, '-')}`} key={program.id}>
+                    <Card as="a" href={`/indicadores/${program.id}`} key={program.id}>
                         <CardHeader>
                             <Text style={{ fontSize: '14px', color: '#0C777C', fontWeight: '700', textWrap: 'nowrap' }}>{program.name}</Text>
                             <Flex direction="row" justify="end" align="center" gap="8px">
