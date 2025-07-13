@@ -3,7 +3,6 @@ import Card from "../../../../../../../../../../components/Card/Card";
 import CardBody from "../../../../../../../../../../components/Card/CardBody";
 import Header from "../../../../../../../../../../components/Header/Header";
 import Tabs from "../../../../../../../../../../components/Tabs/Tabs";
-import Navigation from "../../../../../../../../../../components/Navigation/Navigation";
 import CardHeader from "../../../../../../../../../../components/Card/CardHeader";
 import Text from "../../../../../../../../../../components/Ui/Text/Text";
 import { Flex } from "../../../../../../../../../../components/Layout/Flex";
@@ -12,8 +11,7 @@ import IndicatorProgress from "../../../../../../../../../../components/Indicato
 
 const TaskView = () => {
 
-    return <Navigation>
-        <MainWrapper>
+    return <MainWrapper>
             <Header />
             <Card isSelectable={false}>
                 <CardHeader>
@@ -33,7 +31,6 @@ const TaskView = () => {
             </Card>
             <Tabs/>
         </MainWrapper>
-    </Navigation>
 }
 
 const MainWrapper = styled.div`

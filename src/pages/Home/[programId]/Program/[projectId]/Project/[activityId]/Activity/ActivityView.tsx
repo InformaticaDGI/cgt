@@ -3,7 +3,6 @@ import Card from "../../../../../../../../components/Card/Card";
 import CardBody from "../../../../../../../../components/Card/CardBody";
 import Header from "../../../../../../../../components/Header/Header";
 import Tabs from "../../../../../../../../components/Tabs/Tabs";
-import Navigation from "../../../../../../../../components/Navigation/Navigation";
 import CardHeader from "../../../../../../../../components/Card/CardHeader";
 import IndicatorIcon from "../../../../../../../../components/Prebuilt/IndicatorIcon";
 import Text from "../../../../../../../../components/Ui/Text/Text";
@@ -13,8 +12,7 @@ import IndicatorProgress from "../../../../../../../../components/Indicator/Indi
 const ActivityView = () => {
     const pathname = window.location.pathname;
 
-    return <Navigation>
-        <MainWrapper>
+    return <MainWrapper>
             <Header />
             <Card isSelectable={false}>
                 <CardHeader>
@@ -53,7 +51,6 @@ const ActivityView = () => {
                 </Card>
             </StyledGrid>
         </MainWrapper>
-    </Navigation>
 }
 
 const MainWrapper = styled.div`

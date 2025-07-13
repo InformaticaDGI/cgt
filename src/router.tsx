@@ -9,48 +9,61 @@ import CreateProjectView from './pages/Home/CreateProject/CreateProjectView'
 import { LoginView } from './pages/Login/LoginView'
 import { ProtectedRoute } from './components/ProtectedRoute/ProtectedRoute'
 import NotFoundView from './pages/NotFoundView/NotFoundView'
+import MapView from './pages/Map/MapView'
+import Navigation from './components/Navigation/Navigation'
 
 const router = createBrowserRouter([
-    {
-        path: '/login',
-        element: <LoginView />
-    },
+
     {
         path: '/',
-        element: <Navigate to={'/indicadores'} replace />,
-    },
-    {
-        path: '/crear-programa',
-        element: <ProtectedRoute><CreateProgramView /></ProtectedRoute>
-    },
-    {
-        path: '/crear-proyecto',
-        element: <ProtectedRoute><CreateProjectView /></ProtectedRoute>
-    },
-    {
-        path: '/indicadores',
+        element: <ProtectedRoute><Navigation /></ProtectedRoute>,
         children: [
             {
                 index: true,
-                element: <ProtectedRoute><HomeView /></ProtectedRoute>
+                element: <Navigate to={'/indicadores'} replace />
             },
             {
-                path: ':programId',
-                element: <ProtectedRoute><ProgramView /></ProtectedRoute>
+                path: 'indicadores',
+                children: [
+                    {
+                        index: true,
+                        element: <HomeView />
+                    },
+                    {
+                        path: ':programId',
+                        element: <ProgramView />
+                    },
+                    {
+                        path: ':programId/:projectId',
+                        element: <ProjectView />
+                    },
+                    {
+                        path: ':programId/:projectId/:activityId',
+                        element: <ActivityView />
+                    },
+                    {
+                        path: ':programId/:projectId/:activityId/:taskId',
+                        element: <TaskView />
+                    }
+                ]
             },
             {
-                path: ':programId/:projectId',
-                element: <ProtectedRoute><ProjectView /></ProtectedRoute>
+                path: 'crear-programa',
+                element: <CreateProgramView />
             },
             {
-                path: ':programId/:projectId/:activityId',
-                element: <ProtectedRoute><ActivityView /></ProtectedRoute>
+                path: 'crear-proyecto',
+                element: <CreateProjectView />
             },
             {
-                path: ':programId/:projectId/:activityId/:taskId',
-                element: <ProtectedRoute><TaskView /></ProtectedRoute>
+                path: 'mapa',
+                element: <MapView />
             }
         ]
+    },
+    {
+        path: 'login',
+        element: <LoginView />
     },
     {
         path: '*',

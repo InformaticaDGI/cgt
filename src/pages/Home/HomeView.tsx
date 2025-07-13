@@ -1,4 +1,3 @@
-import Navigation from "../../components/Navigation/Navigation"
 import FilterTool from "../../components/Prebuilt/FilterTool";
 import Header from "../../components/Header/Header";
 import Tabs from "../../components/Tabs/Tabs";
@@ -19,8 +18,7 @@ import IndicatorIcon from "../../components/Prebuilt/IndicatorIcon";
 const HomeView = () => {
 
     const { data } = usePrograms()
-    return <Navigation>
-        <Flex direction="column" gap="12px" padding="16px" align="stretch">
+    return <Flex direction="column" gap="12px" padding="16px" align="stretch">
             <Header />
             <FilterTool />
             <Tabs />
@@ -52,7 +50,6 @@ const HomeView = () => {
                 ))}
             </Grid>
         </Flex>
-    </Navigation>
 }
 
 

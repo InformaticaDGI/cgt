@@ -3,7 +3,6 @@ import Card from "../../../../components/Card/Card";
 import CardBody from "../../../../components/Card/CardBody";
 import Header from "../../../../components/Header/Header";
 import Tabs from "../../../../components/Tabs/Tabs";
-import Navigation from "../../../../components/Navigation/Navigation";
 import CardHeader from "../../../../components/Card/CardHeader";
 import Text from "../../../../components/Ui/Text/Text";
 import IndicatorIcon from "../../../../components/Prebuilt/IndicatorIcon";
@@ -22,10 +21,9 @@ const ProgramView = () => {
     const pathname = window.location.pathname;
 
 
-    if (!program) return <div>Loading...</div>
+    if (!program) return <Flex justify="end" height="100vh" align="end" padding="12px"><Text style={{  padding: '12px', fontSize: '12px', color: 'var(--secondary)', background: 'var(--input-background)', fontWeight: '500', textWrap: 'nowrap' }}>Cargando...</Text></Flex>
 
-    return <Navigation>
-        <MainWrapper>
+    return <MainWrapper>
             <Header />
             <Card isSelectable={false}>
                         <CardHeader>
@@ -71,7 +69,6 @@ const ProgramView = () => {
                 </Card>
             </StyledGrid>
         </MainWrapper>
-    </Navigation>
 }
 
 const StyledGrid = styled.div`

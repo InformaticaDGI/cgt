@@ -8,8 +8,7 @@ export default function CreateProjectView() {
 
     const { mutate: createProject, isPending } = useCreateProject()
 
-    return <Navigation>
-        <MainWrapper>
+    return <MainWrapper>
             <Header />
             <CreateProjectForm onSubmit={(values) => {
                 createProject(values)
@@ -27,7 +26,6 @@ export default function CreateProjectView() {
                 isLoading={isPending}
             />
         </MainWrapper>
-    </Navigation>
 }
 
 const MainWrapper = styled.div`
