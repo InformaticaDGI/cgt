@@ -1,9 +1,9 @@
 import { useFormik } from "formik";
-import { $Input } from "../Ui/Input/Input";
+import { Input } from "../Ui/Input/Input";
 import { Grid, GridItem } from "../Layout/Grid";
 import { SecretarySelect } from "../Prebuilt/SecretarySelect";
 import { FormControl } from "../Ui/FormControl/FormControl";
-import { $Button } from "../Ui/Button/Button";
+import { Button } from "../Ui/Button/Button";
 import { ProgramSelect } from "../Prebuilt/ProgramSelect";
 import { $TextArea } from "../Ui/TextArea/TextArea";
 import { MunicipalitySelect } from "../Prebuilt/MunicipalitySelect";
@@ -40,7 +40,7 @@ export default function CreateProjectForm({ onSubmit, initialValues, isLoading }
         </GridItem>
         <GridItem $colSpan={24}>
             <FormControl label="Nombre del proyecto" required>
-                <$Input name="name" placeholder="Nombre del proyecto"
+                <Input name="name" placeholder="Nombre del proyecto"
                     value={formik.values.name} onChange={(e) => formik.setFieldValue('name', e.target.value)}
                     onBlur={formik.handleBlur}
                 />
@@ -62,7 +62,7 @@ export default function CreateProjectForm({ onSubmit, initialValues, isLoading }
         </GridItem>
         <GridItem $colSpan={12}>
             <FormControl label="Fecha de inicio" required>
-                <$Input type="date" name="initialDate" placeholder="Fecha de inicio"
+                <Input type="date" name="initialDate" placeholder="Fecha de inicio"
                     value={formik.values.initialDate} onChange={(e) => formik.setFieldValue('initialDate', e.target.value)}
                     onBlur={formik.handleBlur}
                 />
@@ -70,7 +70,7 @@ export default function CreateProjectForm({ onSubmit, initialValues, isLoading }
         </GridItem>
         <GridItem $colSpan={12}>
             <FormControl label="Fecha de fin" required>
-                <$Input type="date" name="endDate" placeholder="Fecha de fin"
+                <Input type="date" name="endDate" placeholder="Fecha de fin"
                     value={formik.values.endDate} onChange={(e) => formik.setFieldValue('endDate', e.target.value)}
                     onBlur={formik.handleBlur}
                 />
@@ -88,7 +88,7 @@ export default function CreateProjectForm({ onSubmit, initialValues, isLoading }
             <KpiBaseInput value={formik.values.kpiBaseId} onChange={(value) => formik.setFieldValue('kpiBaseId', value)} />
         </GridItem>
         <GridItem $colSpan={24} style={{ display: 'flex', justifyContent: 'center' }}>
-            <$Button type="submit" onClick={() => formik.handleSubmit()} variant="primary" disabled={!formik.isValid || isLoading}>Crear proyecto</$Button>
+            <Button type="submit" onClick={() => formik.handleSubmit()} $variant="primary" disabled={!formik.isValid || isLoading}>Crear proyecto</Button>
         </GridItem>
     </Grid>
 }

@@ -2,11 +2,11 @@ import styled, { css } from "styled-components";
 
 export const Input = styled.input<InputProps>`
     width: 100%;
-    height: ${({ size }) => size === "small" ? "32px" : size === "medium" ? "40px" : "48px"};
+    height: ${({ $size }) => $size === "small" ? "32px" : $size === "medium" ? "40px" : "48px"};
     border-radius: var(--border-radius);
     border: 1px solid var(--primary);
-    padding: ${({ size }) => size === "small" ? "0 8px" : size === "medium" ? "0 12px" : "0 16px"};
-    font-size: ${({ size }) => size === "small" ? "var(--input-font-size-xsmall)" : size === "medium" ? "var(--input-font-size-small)" : "var(--input-font-size-medium)"};
+    padding: ${({ $size }) => $size === "small" ? "0 8px" : $size === "medium" ? "0 12px" : "0 16px"};
+    font-size: ${({ $size }) => $size === "small" ? "var(--input-font-size-xsmall)" : $size === "medium" ? "var(--input-font-size-small)" : "var(--input-font-size-medium)"};
     font-weight: 400;
     color: var(--text-secondary);
     background-color: var(--input-background);
@@ -23,8 +23,8 @@ export const Input = styled.input<InputProps>`
     }
 
     &[type="checkbox"] {
-        width: ${({ size }) => size === "small" ? "16px" : size === "medium" ? "20px" : "24px"};
-        height: ${({ size }) => size === "small" ? "16px" : size === "medium" ? "20px" : "24px"};
+        width: ${({ $size }) => $size === "small" ? "16px" : $size === "medium" ? "20px" : "24px"};
+        height: ${({ $size }) => $size === "small" ? "16px" : $size === "medium" ? "20px" : "24px"};
         border-radius: 4px;
         border: 1px solid var(--primary);
         background-color: var(--input-background);
@@ -46,7 +46,7 @@ export const Input = styled.input<InputProps>`
         }
     }
 
-    ${({ disabled }) => disabled && css`
+    ${({ $disabled }) => $disabled && css`
         background-color: var(--input-background-disabled);
         cursor: not-allowed;
         opacity: 0.6;
@@ -54,6 +54,6 @@ export const Input = styled.input<InputProps>`
 `
 
 type InputProps = {
-    size?: "small" | "medium" | "large"
-    disabled?: boolean
+    $size?: "small" | "medium" | "large"
+    $disabled?: boolean
 }
