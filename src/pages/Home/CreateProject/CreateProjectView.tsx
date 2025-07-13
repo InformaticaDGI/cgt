@@ -1,5 +1,4 @@
 import Header from "../../../components/Header/Header";
-import Navigation from "../../../components/Navigation/Navigation";
 import styled from "styled-components";
 import CreateProjectForm from "../../../components/Forms/CreateProjectForm";
 import { useCreateProject } from "../../../hooks/mutations/useCreateProject";
