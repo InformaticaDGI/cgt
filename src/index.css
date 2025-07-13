@@ -13,6 +13,10 @@
   --input-background-focus: #fefefe;
 
   --input-font-size: 14px;
+  --input-font-size-xsmall: 10px;
+  --input-font-size-small: 12px;
+  --input-font-size-medium: 14px;
+  --input-font-size-large: 16px;
 
   --gradient-primary: linear-gradient(180deg, #20B2AA 0%, #008080 100%);
   --gradient-secondary: linear-gradient(180deg, #FFDEAD 0%, #A0522D 100%);
