@@ -7,7 +7,7 @@ const NotFoundView = () => {
     const { isAuthenticated } = useAuthStorage.getState()
     
     return (
-        <Flex height='30vh' padding="24px" justify="start" align="start" direction="column" gap="16px">
+        <Flex $height='30vh' $padding="24px" $justify="start" $align="start" $direction="column" $gap="16px">
             <Text style={{ fontSize: '48px', fontWeight: 'bold', color: 'var(--secondary)' }}>
                 404
             </Text>

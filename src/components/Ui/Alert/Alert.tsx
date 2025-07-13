@@ -47,25 +47,25 @@ export function unmountGlobalAlert() {
     AlertContainerSingleton.clearInstance()
 }
 
-type AlertProps = {
-    variant: "success" | "error" | "warning" | "info" | "default"
+type $AlertProps = {
+    $variant: "success" | "error" | "warning" | "info" | "default"
     title?: string
     description?: string
     children?: React.ReactNode
     onClose?: () => void
 }
 
-export const useAlert = (props: AlertProps) => {
-    const [isOpen, setIsOpen] = useState(false)
-    const [alertProps] = useState<AlertProps>(props)
+export const useAlert = (props: $AlertProps) => {
+    const [isOpen, setisOpen] = useState(false)
+    const [alertProps] = useState<$AlertProps>(props)
     const [unmount, setUnmount] = useState<(() => void) | null>(null)
 
     const show = () => {
-        setIsOpen(true)
+        setisOpen(true)
     }
 
     const hide = () => {
-        setIsOpen(false)
+        setisOpen(false)
         if (unmount) {
             unmount()
             setUnmount(null)
@@ -94,29 +94,29 @@ export const useAlert = (props: AlertProps) => {
     return { show, hide, isOpen }
 }
 
-const Alert = ({ variant, title, description, children, hide }: AlertProps & { hide: () => void }) => {
+const Alert = ({ $variant, title, description, children, hide }: $AlertProps & { hide: () => void }) => {
 
 
-    return <AlertWrapper variant={variant}>
-        <AlertIcon>
-            {variant === "success" && <CheckIcon />}
-            {variant === "error" && <XIcon />}
-            {variant === "warning" && <AlertTriangleIcon />}
-            {variant === "info" && <InfoIcon />}
-            {variant === "default" && <AlertCircleIcon />}
-        </AlertIcon>
-        <AlertContent>
-            <AlertTitle>{title}</AlertTitle>
-            <AlertDescription>{description}</AlertDescription>
-        </AlertContent>
+    return <$AlertWrapper $variant={$variant}>
+        <$AlertIcon>
+            {$variant === "success" && <CheckIcon />}
+            {$variant === "error" && <XIcon />}
+            {$variant === "warning" && <AlertTriangleIcon />}
+            {$variant === "info" && <InfoIcon />}
+            {$variant === "default" && <AlertCircleIcon />}
+        </$AlertIcon>
+        <$AlertContent>
+            <$AlertTitle>{title}</$AlertTitle>
+            <$AlertDescription>{description}</$AlertDescription>
+        </$AlertContent>
         {children}
-        <AlertCloseButton onClick={hide}>
+        <$AlertCloseButton onClick={hide}>
             <XIcon size={16} />
-        </AlertCloseButton>
-    </AlertWrapper>
+        </$AlertCloseButton>
+    </$AlertWrapper>
 }
 
-const AlertCloseButton = styled.button`
+const $AlertCloseButton = styled.button`
     position: absolute;
     top: 12px;
     right: 12px;
@@ -127,28 +127,28 @@ const AlertCloseButton = styled.button`
     cursor: pointer;
 `
 
-const AlertIcon = styled.div`
+const $AlertIcon = styled.div`
     width: 24px;
     height: 24px;
 `
 
-const AlertContent = styled.div`
+const $AlertContent = styled.div`
     display: flex;
     flex-direction: column;
     gap: 4px;
 `
 
-const AlertTitle = styled.h3`
+const $AlertTitle = styled.h3`
     font-size: 16px;
     font-weight: 600;
 `
 
-const AlertDescription = styled.p`
+const $AlertDescription = styled.p`
     font-size: 14px;
     font-weight: 400;
 `
 
-const AlertWrapper = styled.div<AlertProps>`
+const $AlertWrapper = styled.div<$AlertProps>`
     padding: 12px;
     display: flex;
     align-items: center;
@@ -157,5 +157,5 @@ const AlertWrapper = styled.div<AlertProps>`
     height: 100%;
     border-radius: var(--border-radius);
     transition: all 0.3s ease;
-    background-color: ${({ variant }) => variant === "success" ? "var(--alert-success)" : variant === "error" ? "var(--alert-error)" : variant === "warning" ? "var(--alert-warning)" : variant === "info" ? "var(--alert-info)" : "var(--alert-default)"};
+    background-color: ${({ $variant }) => $variant === "success" ? "var(--alert-success)" : $variant === "error" ? "var(--alert-error)" : $variant === "warning" ? "var(--alert-warning)" : $variant === "info" ? "var(--alert-info)" : $variant === "default" ? "var(--alert-default)" : "var(--alert-default)"};
 `

@@ -1,10 +1,10 @@
 import styled from "styled-components"
 
 export const Select = ({ options, value, onChange, placeholder }: SelectProps) => {
-    return <StyledSelect value={value} onChange={(evt) => onChange?.(evt.target.value)}>
+    return <$StyledSelect value={value} onChange={(evt: React.ChangeEvent<HTMLSelectElement>) => onChange?.(evt.target.value)}>
         <option value="">{placeholder || 'Seleccione una opción'}</option>
         {options.map(option => <option value={option.value} key={option.value}>{option.label}</option>)}
-    </StyledSelect>
+    </$StyledSelect>
 }
 
 type SelectProps = {
@@ -14,7 +14,7 @@ type SelectProps = {
     placeholder?: string
 }
 
-const StyledSelect = styled.select`
+const $StyledSelect = styled.select`
     width: 100%;
     height: 40px;
     border-radius: var(--border-radius);

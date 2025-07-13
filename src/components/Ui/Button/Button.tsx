@@ -1,8 +1,8 @@
 import styled, { css } from "styled-components";
 
-export const Button = styled.button<ButtonProps>`
-    background: ${({ variant }) => variant === "primary" ? "var(--gradient-primary)" : variant === "secondary" ? "var(--gradient-secondary)" : "var(--gradient-tertiary)"};
-    color: ${({ variant }) => variant === "primary" ? "var(--text_foreground)" : variant === "secondary" ? "var(--text_foreground)" : "var(--text_foreground)"};
+export const $Button = styled.button<$ButtonProps>`
+    background: ${({ $variant }) => $variant === "primary" ? "var(--gradient-primary)" : $variant === "secondary" ? "var(--gradient-secondary)" : "var(--gradient-tertiary)"};
+    color: ${({ $variant }) => $variant === "primary" ? "var(--text_foreground)" : $variant === "secondary" ? "var(--text_foreground)" : "var(--text_foreground)"};
     padding: 12px 24px;
     border-radius: var(--border-radius);
     border: none;
@@ -27,14 +27,14 @@ export const Button = styled.button<ButtonProps>`
         box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
         filter: brightness(0.9);
     }
-    ${({ disabled }) => disabled && css`
+    ${({ $disabled }) => $disabled && css`
         filter: brightness(0.5);
         cursor: not-allowed;
     `}
 `
 
-type ButtonProps = {
+type $ButtonProps = {
     htmlType?: "button" | "submit" | "reset"
-    variant?: "primary" | "secondary" | "tertiary"
-    disabled?: boolean
+    $variant?: "primary" | "secondary" | "tertiary"
+    $disabled?: boolean
 }

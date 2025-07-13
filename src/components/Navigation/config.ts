@@ -95,7 +95,6 @@ const resolveRoles = (currentRole: string, navItems: NavItems) => {
 }
 
 export const buildNavItems = (currentRole: string, logout: () => void) => {
-    console.log(currentRole)
     const navItems = createNavItems(logout);
     const validNavItems = resolveRoles(currentRole, navItems);
     return validNavItems;

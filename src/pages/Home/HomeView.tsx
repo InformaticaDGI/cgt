@@ -18,7 +18,7 @@ import IndicatorIcon from "../../components/Prebuilt/IndicatorIcon";
 const HomeView = () => {
 
     const { data } = usePrograms()
-    return <Flex direction="column" gap="12px" padding="16px" align="stretch">
+    return <Flex $direction="column" $gap="12px" $padding="16px" $align="stretch">
             <Header />
             <FilterTool />
             <Tabs />
@@ -27,15 +27,15 @@ const HomeView = () => {
                     <Card as="a" href={`/indicadores/${program.id}`} key={program.id}>
                         <CardHeader>
                             <Text style={{ fontSize: '14px', color: '#0C777C', fontWeight: '700', textWrap: 'nowrap' }}>{program.name}</Text>
-                            <Flex direction="row" justify="end" align="center" gap="8px">
+                            <Flex $direction="row" $justify="end" $align="center" $gap="8px">
                                 <Text style={{ fontSize: '14px', color: '#889C9D', fontWeight: 'normal', textWrap: 'nowrap' }}>{"21 Proyectos"}</Text>
-                                <IndicatorIcon isOpen={false} />
+                                <IndicatorIcon $isOpen={false} />
                             </Flex>
                         </CardHeader>
                         <CardBody>
-                            <Flex align="stretch" direction="column" gap={"8px"}>
+                            <Flex $align="stretch" $direction="column" $gap={"8px"}>
                                 <Text style={{ fontSize: '14px', color: '#5A787A' }}>No Definido</Text>
-                                <Flex align="stretch" direction="column" gap={"4px"}>
+                                <Flex $align="stretch" $direction="column" $gap={"4px"}>
                                     <IndicatorProgress value={42} />
                                     <IndicatorSecretary secretaryId={program.secretaryId} />
                                     <IndicatorTerritorialSecretary parentId={program.secretaryId} />

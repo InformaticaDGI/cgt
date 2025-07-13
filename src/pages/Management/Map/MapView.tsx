@@ -4,8 +4,8 @@ import MapViewer from "../../../components/MapViewer/MapViewer";
 import FilterTool from "../../../components/Prebuilt/FilterTool";
 
 const MapView = () => {
-    return <Flex direction="column" gap="12px" padding="16px" align="stretch" height="100vh">
-        <Flex direction="column" style={{ flex: 1 }} justify="start" align="start" gap="12px">
+    return <Flex $direction="column" $gap="12px" $padding="16px" $align="stretch" $height="100vh">
+        <Flex $direction="column" style={{ flex: 1 }} $justify="start" $align="start" $gap="12px">
             <Header />
             <FilterTool />
         </Flex>

@@ -13,22 +13,22 @@ const Badge = ({ variant = "social" }: { variant?: StatusInfo }) => {
 
 
     return (
-        <StyledBadge variant={variant}>
+        <$StyledBadge $variant={variant}>
             <Text style={{fontSize: '12px', fontWeight: '600', color: "#ffffff"}}>{Statuses[variant]}</Text>
-        </StyledBadge>
+        </$StyledBadge>
     )
 }
 
 export default Badge
 
-const StyledBadge = styled.div<{ variant?: StatusInfo }>`
+const $StyledBadge = styled.div<{ $variant?: StatusInfo }>`
     display: flex;
     background: ${props => {
 
-        if(props.variant === 'ecology'){
+        if(props.$variant === 'ecology'){
             return "linear-gradient(90deg, #25C330 0%, #0F7705 100%)"
         }
-        if(props.variant === 'economy') {
+        if(props.$variant === 'economy') {
             return "linear-gradient(90deg, #CEDD03 0%, #FFB01C 100%)"
         }
 
