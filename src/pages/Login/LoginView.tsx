@@ -7,7 +7,6 @@ import { Button } from "../../components/Ui/Button/Button"
 import { FormControl } from "../../components/Ui/FormControl/FormControl"
 import Text from "../../components/Ui/Text/Text"
 import Card from "../../components/Card/Card"
-import { Box } from "../../components/Layout/Box"
 import { InfoIcon } from "lucide-react"
 
 export const LoginView = () => {
