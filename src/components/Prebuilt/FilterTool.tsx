@@ -1,20 +1,28 @@
 import styled from "styled-components"
 import { Filter, FilterContainer } from "../Filter/Filter";
 import FilterHeader from "../Filter/FilterHeader";
-import { Search, Map, MapPin, MapPinned, Building, Network } from "lucide-react";
+import { Search, Map, MapPin, MapPinned, Building, Network, MapPinIcon } from "lucide-react";
 import { useAppStore } from "../../store/store";
 import { SecretarySelect } from "./SecretarySelect";
 import { TerritorialSecreatarySelect } from "./TerritorialSecretarySelect";
 import { MunicipalitySelect } from "./MunicipalitySelect";
 import { ParrishSelect } from "./ParrishSelect";
+import { Flex } from "../Layout/Flex";
+import LocateToMap from "./LocateToMap";
+import { useLocation } from "react-router";
 
 
 const FilterTool = () => {
     const store = useAppStore()
 
+    const pathname = useLocation()
+
     return (
         <FilterToolCard>
-            <FilterHeader icon={<Search color="white" height={"20px"} width={"20px"} />} fill="linear-gradient(180deg, #20B2AA 0%, #008080 100%)">Filtrar por:</FilterHeader>
+            <Flex $direction="row" $justify="space-between" $align="center" $gap="8px">
+                <FilterHeader icon={<Search color="white" height={"20px"} width={"20px"} />} fill="linear-gradient(180deg, #20B2AA 0%, #008080 100%)">Filtrar por:</FilterHeader>
+                {!pathname.pathname.includes('mapa') && <LocateToMap /> }
+            </Flex>
             <Container>
                 <Filter style={{ gridColumn: 'span 3' }}>
                     <FilterContainer>
@@ -31,7 +39,7 @@ const FilterTool = () => {
                 <Filter style={{ gridColumn: 'span 2' }}>
                     <FilterContainer>
                         <FilterHeader icon={<Map color="white" height={"16px"} width={"16px"} />} fill="linear-gradient(180deg, #87CEEB 0%, #1E90FF 100%)">Secretaria Territorial (Eje)</FilterHeader>
-                       <TerritorialSecreatarySelect onChange={(secretarialTerritoryId) => store.setSecretarialTerritoryId(secretarialTerritoryId)} value={store.secretarialTerritoryId} />
+                        <TerritorialSecreatarySelect onChange={(secretarialTerritoryId) => store.setSecretarialTerritoryId(secretarialTerritoryId)} value={store.secretarialTerritoryId} />
                     </FilterContainer>
                 </Filter>
                 <Filter style={{ gridColumn: 'span 2' }}>
@@ -48,9 +56,9 @@ const FilterTool = () => {
                 </Filter>
             </Container>
         </FilterToolCard>
-        
+
     )
-} 
+}
 
 export default FilterTool
 
