@@ -15,24 +15,24 @@ export const CreateKpiBaseForm = ({ onSubmit, initialValues }: CreateKpiBaseForm
         }
     })
 
-    return <Grid columns="repeat(24, 1fr)" gap="12px" width="100%">
-        <GridItem colSpan={24}>
+    return <Grid $columns="repeat(24, 1fr)" $gap="12px" $width="100%">
+        <GridItem $colSpan={24}>
             <FormControl label="Nombre de la meta" required>
                 <Input type="text" placeholder="Nombre" value={formik.values.name} onChange={(e) => formik.setFieldValue('name', e.target.value)} />
             </FormControl>
         </GridItem>
-        <GridItem colSpan={24}>
+        <GridItem $colSpan={24}>
             <FormControl label="Unidad de medida" required>
                 <SearchMeasurementUnit onChange={(value) => formik.setFieldValue('measurementUnitId', value)} />
             </FormControl>
         </GridItem>
-        <GridItem colSpan={24}> 
+        <GridItem $colSpan={24}> 
             <FormControl label="Área de aplicación" required>
                 <AreaSelect value={formik.values.areaId} onChange={(value) => formik.setFieldValue('areaId', value)} />
             </FormControl>
         </GridItem>
-        <GridItem colSpan={24} style={{ display: 'flex', justifyContent: 'center' }}>
-            <Button type="submit" variant="primary" onClick={() => formik.handleSubmit()}>Crear meta</Button>
+        <GridItem $colSpan={24} style={{ display: 'flex', justifyContent: 'center' }}>
+            <Button type="submit" $variant="primary" onClick={() => formik.handleSubmit()}>Crear meta</Button>
         </GridItem>
     </Grid>
 }

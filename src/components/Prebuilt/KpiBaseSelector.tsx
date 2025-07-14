@@ -118,8 +118,8 @@ const AvailableKpiBasesSection = ({
                     align: "center",
                     render: (row: BaseKpi) => (
                         <Button
-                            variant="primary"
-                            size="small"
+                            $variant="primary"
+                            $size="small"
                             onClick={() => handleAddKpiBase(row)}
                         >
                             Agregar al proyecto
@@ -177,8 +177,8 @@ const SelectedKpiBasesSection = ({
                     label: "Acciones",
                     render: (row: KpiInstance) => (
                         <Button
-                            variant="primary"
-                            size="small"
+                            $variant="primary"
+                            $size="small"
                             onClick={() => handleRemoveKpiBase(row.kpiBase!)}
                         >
                             Quitar
@@ -214,7 +214,7 @@ const KpiBaseSelectorItem = ({
             <Input
                 style={{ width: "100px", marginLeft: "12px" }}
                 placeholder={`En ${kpiBase.measurement?.name}`}
-                size="small"
+                $size="small"
                 type="number"
                 onChange={(e) =>
                     onUpdateExpectedValue(kpiBase, Number(e.target.value))
