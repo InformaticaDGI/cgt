@@ -105,10 +105,10 @@ const AvailableKpiBasesSection = ({
         </Flex>
         <Table
             size="small"
-            headers={[
+            columns={[
                 {
                     key: "name",
-                    label: "Nombre",
+                    label: "Meta",
                     render: (row: BaseKpi) =>
                         `${row.name} (${row.measurement?.symbol || row.measurement?.name})`,
                 },
@@ -116,6 +116,7 @@ const AvailableKpiBasesSection = ({
                     key: "id",
                     label: "Acciones",
                     align: "center",
+                    width: "200px",
                     render: (row: BaseKpi) => (
                         <Button
                             $variant="primary"
@@ -160,7 +161,7 @@ const SelectedKpiBasesSection = ({
         </Flex>
         <Table
             size="small"
-            headers={[
+            columns={[
                 {
                     key: "name",
                     label: "Meta",
@@ -175,6 +176,7 @@ const SelectedKpiBasesSection = ({
                     key: "id",
                     align: "center",
                     label: "Acciones",
+                    width: "100px",
                     render: (row: KpiInstance) => (
                         <Button
                             $variant="primary"
@@ -212,7 +214,7 @@ const KpiBaseSelectorItem = ({
                 {kpiBase.name} ({kpiBase.measurement?.symbol || kpiBase.measurement?.name})
             </h4>
             <Input
-                style={{ width: "100px", marginLeft: "12px" }}
+                style={{ width: "150px", marginLeft: "12px" }}
                 placeholder={`En ${kpiBase.measurement?.name}`}
                 $size="small"
                 type="number"

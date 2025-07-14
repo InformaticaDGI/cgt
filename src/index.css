@@ -20,10 +20,9 @@
   --input-font-size-large: 16px;
 
   --gradient-primary: linear-gradient(180deg, #20B2AA 0%, #008080 100%);
-  --gradient-secondary: linear-gradient(180deg, #FFDEAD 0%, #A0522D 100%);
+  --gradient-secondary: linear-gradient(180deg, #FFA500 0%, #FF4500 100%);
   --gradient-tertiary: linear-gradient(180deg, #D3CCFF 0%, #483D8B 100%);
   --gradient-quaternary: linear-gradient(180deg, #87CEEB 0%, #1E90FF 100%);
-  --gradient-quinary: linear-gradient(180deg, #FFA500 0%, #FF4500 100%);
 
 }
 

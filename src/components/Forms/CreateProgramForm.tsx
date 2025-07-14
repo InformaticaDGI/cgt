@@ -15,8 +15,10 @@ export default function CreateProgramForm({ onSubmit, initialValues, isLoading }
         }
     })
 
-    return <Card $isSelectable={false} $padding="28px" >
-    <Grid $columns="repeat(24, 1fr)" $gap="12px" $width="100%">
+    return <Grid $columns="repeat(24, 1fr)" $gap="12px" $width="100%">
+        <GridItem $colSpan={24}>
+            <h3 style={{ color: "var(--text-secondary)", marginBottom: "12px" }}>Información del programa</h3>
+        </GridItem>
         <GridItem $colSpan={24}>
             <FormControl label="Nombre del programa" required>
                 <Input name="name" placeholder="Nombre del programa"
@@ -38,11 +40,10 @@ export default function CreateProgramForm({ onSubmit, initialValues, isLoading }
                     onChange={(value) => formik.setFieldValue('secretaryId', value)} />
             </FormControl>
         </GridItem>
-        <GridItem $colSpan={24} style={{ display: 'flex', justifyContent: 'start' }}>
-            <Button type="submit" onClick={() => formik.handleSubmit()} $variant="primary" disabled={!formik.isValid || isLoading}>Crear programa</Button>
+        <GridItem $colSpan={24} style={{ display: 'flex', justifyContent: 'center', paddingTop: "12px" }}>
+            <Button $size="large" type="submit" onClick={() => formik.handleSubmit()} $variant="primary" disabled={!formik.isValid || isLoading}>Crear programa</Button>
         </GridItem>
     </Grid>
-    </Card>
 }
 
 type CreateProgramFormValues = {
