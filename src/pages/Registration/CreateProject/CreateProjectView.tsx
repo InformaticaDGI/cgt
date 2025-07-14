@@ -1,32 +1,51 @@
+import { useCreateProject } from "../../../hooks/mutations/useCreateProject";
 import Header from "../../../components/Header/Header";
 import styled from "styled-components";
 import CreateProjectForm from "../../../components/Forms/CreateProjectForm";
-import { useCreateProject } from "../../../hooks/mutations/useCreateProject";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router";
 
 export default function CreateProjectView() {
 
     const { mutate: createProject, isPending } = useCreateProject()
-
+    const navigate = useNavigate()
     return <MainWrapper>
-            <Header />
-            <CreateProjectForm onSubmit={(values) => {
-                console.log(values)
-                createProject(values)
+        <Header />
+        <CreateProjectForm onSubmit={(values) => {
+            createProject(values, {
+                onSuccess: () => {
+                    Swal.fire({
+                        title: 'Su proyecto ha sido creado.',
+                        icon: 'success',
+                        position: 'center',
+                        timer: 1500
+                    })
+                    navigate('/indicadores')
+                },
+                onError: () => {
+                    Swal.fire({
+                        title: 'Ocurrió un error al crear el proyecto.',
+                        icon: 'error',
+                        position: 'center',
+                        timer: 1500
+                    })
+                }
+            })
+        }}
+            initialValues={{
+                name: '',
+                secretaryId: '',
+                programId: '',
+                initialDate: '',
+                finalDate: '',
+                observations: '',
+                municipalityId: '',
+                parrishId: '',
+                kpiInstances: [],
             }}
-                initialValues={{
-                    name: '',
-                    secretaryId: '',
-                    programId: '',
-                    initialDate: '',
-                    endDate: '',
-                    observations: '',
-                    municipalityId: '',
-                    parrishId: '',
-                    kpiBaseId: []
-                }}
-                isLoading={isPending}
-            />
-        </MainWrapper>
+            isLoading={isPending}
+        />
+    </MainWrapper>
 }
 
 const MainWrapper = styled.div`

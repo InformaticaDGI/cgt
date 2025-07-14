@@ -2,20 +2,40 @@ import Header from "../../../components/Header/Header";
 import CreateProgramForm from "../../../components/Forms/CreateProgramForm";
 import styled from "styled-components";
 import { useCreateProgram } from "../../../hooks/mutations/useCreateProgram";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router";
 
 export default function CreateProgramView() {
 
     const { mutate: createProgram, isPending } = useCreateProgram()
-
+    const navigate = useNavigate()
     return <MainWrapper>
-            <Header />
-            <CreateProgramForm onSubmit={(values) => {
-                createProgram(values)
-            }}
-                initialValues={{ name: '', secretaryId: '' }}
-                isLoading={isPending}
-            />
-        </MainWrapper>
+        <Header />
+        <CreateProgramForm onSubmit={(values) => {
+            createProgram(values, {
+                onSuccess: () => {
+                    Swal.fire({
+                        title: 'Su programa ha sido creado.',
+                        position: 'center',
+                        icon: 'success',
+                        timer: 3000,
+                    })
+                    navigate('/indicadores')
+                },
+                onError: () => {
+                    Swal.fire({
+                        title: 'Ocurrió un error al crear el programa.',
+                        icon: 'error',
+                        position: 'center',
+                        timer: 3000
+                    })
+                }
+            })
+        }}
+            initialValues={{ name: '', secretaryId: '' }}
+            isLoading={isPending}
+        />
+    </MainWrapper>
 }
 
 const MainWrapper = styled.div`

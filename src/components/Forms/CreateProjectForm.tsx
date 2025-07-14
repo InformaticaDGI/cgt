@@ -9,6 +9,7 @@ import { $TextArea } from "../Ui/TextArea/TextArea";
 import { MunicipalitySelect } from "../Prebuilt/MunicipalitySelect";
 import { ParrishSelect } from "../Prebuilt/ParrishSelect";
 import { KpiBaseInput } from "../Prebuilt/KpiBaseInput";
+import type { KpiInstance } from "../../hooks/mutations/useKpiInstances";
 
 export default function CreateProjectForm({ onSubmit, initialValues, isLoading }: CreateProjectFormProps) {
 
@@ -70,8 +71,8 @@ export default function CreateProjectForm({ onSubmit, initialValues, isLoading }
         </GridItem>
         <GridItem $colSpan={12}>
             <FormControl label="Fecha de fin" required>
-                <Input type="date" name="endDate" placeholder="Fecha de fin"
-                    value={formik.values.endDate} onChange={(e) => formik.setFieldValue('endDate', e.target.value)}
+                <Input type="date" name="finalDate" placeholder="Fecha de fin"
+                    value={formik.values.finalDate} onChange={(e) => formik.setFieldValue('finalDate', e.target.value)}
                     onBlur={formik.handleBlur}
                 />
             </FormControl>
@@ -85,7 +86,7 @@ export default function CreateProjectForm({ onSubmit, initialValues, isLoading }
             </FormControl>
         </GridItem>
         <GridItem $colSpan={24} style={{ display: 'flex', justifyContent: 'center' }}>
-            <KpiBaseInput value={formik.values.kpiBaseId} onChange={(value) => formik.setFieldValue('kpiBaseId', value)} />
+            <KpiBaseInput value={formik.values.kpiInstances} onChange={(value) => formik.setFieldValue('kpiInstances', value)} />
         </GridItem>
         <GridItem $colSpan={24} style={{ display: 'flex', justifyContent: 'center' }}>
             <Button type="submit" onClick={() => formik.handleSubmit()} $variant="primary" disabled={!formik.isValid || isLoading}>Crear proyecto</Button>
@@ -99,11 +100,11 @@ type CreateProjectFormValues = {
     programId: string
     parentId?: string
     initialDate: string
-    endDate: string
+    finalDate: string
     observations: string
     municipalityId: string
     parrishId: string
-    kpiBaseId: string[]
+    kpiInstances: KpiInstance[]
 }
 
 type CreateProjectFormProps = {
