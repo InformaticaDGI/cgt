@@ -2,7 +2,6 @@ import { BsBarChartFill } from "react-icons/bs";
 import { FaChartBar, FaHammer, FaUsersGear } from "react-icons/fa6";
 import { FaMapLocationDot } from "react-icons/fa6";
 import { MdShield } from "react-icons/md";
-import { FaUserAlt } from "react-icons/fa";
 import { IoIosExit } from "react-icons/io";
 import authRoles from "./authRoles.ts"
 
