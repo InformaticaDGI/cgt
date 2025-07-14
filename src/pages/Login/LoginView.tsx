@@ -26,14 +26,14 @@ export const LoginView = () => {
     const { isAuthenticated } = useAuthStorage()
 
     if(isAuthenticated) {
-        return <Navigate to="/indicadores" replace />
+        return <Navigate to="/mapa" replace />
     }
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         try {
             await login.mutateAsync(credentials)
-            navigate('/indicadores')
+            navigate('/mapa')
         } catch (err) {
             console.error(err)
             setError('Usuario  y/o contraseña incorrectos')

@@ -28,7 +28,7 @@ const HomeView = () => {
                         <CardHeader>
                             <Text style={{ fontSize: '14px', color: '#0C777C', fontWeight: '700', textWrap: 'nowrap' }}>{program.name}</Text>
                             <Flex $direction="row" $justify="end" $align="center" $gap="8px">
-                                <Text style={{ fontSize: '14px', color: '#889C9D', fontWeight: 'normal', textWrap: 'nowrap' }}>{"21 Proyectos"}</Text>
+                                <Text style={{ fontSize: '14px', color: '#889C9D', fontWeight: 'normal', textWrap: 'nowrap' }}>{`${program.projects.length} Proyectos`}</Text>
                                 <IndicatorIcon $isOpen={false} />
                             </Flex>
                         </CardHeader>
@@ -36,7 +36,7 @@ const HomeView = () => {
                             <Flex $align="stretch" $direction="column" $gap={"8px"}>
                                 <Text style={{ fontSize: '14px', color: '#5A787A' }}>No Definido</Text>
                                 <Flex $align="stretch" $direction="column" $gap={"4px"}>
-                                    <IndicatorProgress value={42} />
+                                    <IndicatorProgress value={program.promediateProjectPercentage} />
                                     <IndicatorSecretary secretaryId={program.secretaryId} />
                                     <IndicatorTerritorialSecretary parentId={program.secretaryId} />
                                 </Flex>

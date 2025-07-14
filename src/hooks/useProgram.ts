@@ -12,7 +12,7 @@ const useProgram = (programId: string | undefined) => {
 
 const fetchProgramById = async (programId: string | undefined) => {
     if (!programId) throw new Error('Program ID is required')
-    const { data } = await api.cgt.get<Program>(`/programs/${programId}`)
+    const { data } = await api.cgt.get<Program>(`/programs/with-projects-and-kpi-instances/${programId}`)
     return data
 }
 

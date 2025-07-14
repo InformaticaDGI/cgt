@@ -23,13 +23,16 @@ const ProgramView = () => {
 
     if (!program) return <Flex $justify="end" $height="100vh" $align="end" $padding="12px"><Text style={{  padding: '12px', fontSize: '12px', color: 'var(--secondary)', background: 'var(--input-background)', fontWeight: '500', textWrap: 'nowrap' }}>Cargando...</Text></Flex>
 
+
+    // return <Progress value={10} max={100} color="green" size="10px" />
+    
     return <MainWrapper>
             <Header />
             <Card $isSelectable={false}>
                         <CardHeader>
                             <Text style={{ fontSize: '14px', color: '#0C777C', fontWeight: '700', textWrap: 'nowrap' }}>{program.name}</Text>
                             <Flex $direction="row" $justify="end" $align="center" $gap="8px">
-                                <Text style={{ fontSize: '14px', color: '#889C9D', fontWeight: 'normal', textWrap: 'nowrap' }}>{"21 Proyectos"}</Text>
+                                <Text style={{ fontSize: '14px', color: '#889C9D', fontWeight: 'normal', textWrap: 'nowrap' }}>{`${program.projects.length} Proyectos`}</Text>
                                 <IndicatorIcon $isOpen={true} />
                             </Flex>
                         </CardHeader>
@@ -37,9 +40,9 @@ const ProgramView = () => {
                             <Flex $align="stretch" $direction="column" $gap={"8px"}>
                                 <Text style={{ fontSize: '14px', color: '#5A787A' }}>No Definido</Text>
                                 <Flex $align="stretch" $direction="column" $gap={"4px"}>
-                                    <IndicatorProgress value={42} />
-                                    <IndicatorSecretary secretaryId={program.secretaryId} />
-                                    <IndicatorTerritorialSecretary parentId={program.secretaryId} />
+                                    <IndicatorProgress value={program?.promediateProjectPercentage || 0} />
+                                    <IndicatorSecretary secretaryId={program?.secretaryId || ''} />
+                                    <IndicatorTerritorialSecretary parentId={program?.secretaryId || ''} />
                                 </Flex>
                             </Flex>
                         </CardBody>
@@ -50,9 +53,10 @@ const ProgramView = () => {
                     </Card>
             <Tabs />
             <StyledGrid>
-                <Card as="a" href={`${pathname}/proyecto1`}>
+                {program?.projects.map(project => (
+                <Card as="a" href={`${pathname}/${project.id}`}>
                     <CardHeader>
-                        <Text style={{ fontSize: '14px', color: '#0C777C', fontWeight: '700', textWrap: 'nowrap' }}>Proyecto Ejemplo 1</Text>
+                        <Text style={{ fontSize: '14px', color: '#0C777C', fontWeight: '700', textWrap: 'nowrap' }}>{project.name}</Text>
                         <Flex $direction="row" $justify="end" $align="center" $gap="8px">
                             <Text style={{ fontSize: '14px', color: '#889C9D', fontWeight: 'normal', textWrap: 'nowrap', textAlign: 'justify' }}>{"21 Actividades"}</Text>
                             <IndicatorIcon $isOpen={false} />
@@ -61,12 +65,13 @@ const ProgramView = () => {
                     <CardBody>
                         <Flex $align="stretch" $direction="column" $gap={"8px"}>
                             <Flex $align="stretch" $direction="column" $gap={"8px"}>
-                                <IndicatorProgress value={42} />
-                                <Text style={{ color: '#7A8E8B', fontSize: '11px', fontWeight: '600', textAlign: 'justify' }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</Text>
+                                <IndicatorProgress value={project.promediatePercentage} />
+                                <Text style={{ color: '#7A8E8B', fontSize: '11px', fontWeight: '600', textAlign: 'justify' }}>{project.observations}</Text>
                             </Flex>
                         </Flex>
                     </CardBody>
                 </Card>
+                ))}
             </StyledGrid>
         </MainWrapper>
 }

@@ -4,38 +4,47 @@ import { FaMapLocationDot } from "react-icons/fa6";
 import { MdShield } from "react-icons/md";
 import { FaUserAlt } from "react-icons/fa";
 import { IoIosExit } from "react-icons/io";
+import authRoles from "./authRoles.ts"
+
 
 const createNavItems: (logout: () => void) => NavItems = (logout: () => void) => [
+        {
+            id: 'map',
+            to: '/mapa',
+            label: 'Mapa',
+            icon: FaMapLocationDot,
+            roles: authRoles.Public
+        },
         {
             id: 'dashboard',
             to: '/indicadores',
             label: 'Indicadores',
             icon: BsBarChartFill,
-            roles: ['*']
+            roles: authRoles.Public
         },
 
         {
             sectionTitle: 'Registro',
-            roles: ['*']
+            roles: authRoles.Usuario
         },
         {
             id: 'create-program',
             to: '/crear-programa',
             label: 'Crear Programa',
             icon: FaChartBar,
-            roles: ['*']
+            roles: authRoles.Usuario
         },
         {
             id: 'create-project',
             to: '/crear-proyecto',
             label: 'Crear Proyecto',
             icon: FaHammer,
-            roles: ['*']
+            roles: authRoles.Usuario
         },
 
         {
            sectionTitle: 'Gestión',
-           roles: ['*']
+           roles: authRoles.Public
         },
 
         {
@@ -43,34 +52,20 @@ const createNavItems: (logout: () => void) => NavItems = (logout: () => void) =>
             to: '/nomina',
             label: 'Nomina',
             icon: FaUsersGear,
-            roles: ['*']
-        },
-        {
-            id: 'map',
-            to: '/mapa',
-            label: 'Mapa',
-            icon: FaMapLocationDot,
-            roles: ['*']
+            roles: authRoles.Public
         },
 
 
         {
             sectionTitle: 'Cuenta',
-            roles: ['*']
-        },
-        {
-            id: 'profile',
-            to: '/perfil',
-            label: 'Perfil',
-            icon: FaUserAlt,
-            roles: ['*']
+            roles: authRoles.Public
         },
         {
             id: 'security',
             to: '/seguridad',
             label: 'Seguridad',
             icon: MdShield,
-            roles: ['*']
+            roles: authRoles.Admin
         },
         {
             id: 'exit',
@@ -80,12 +75,11 @@ const createNavItems: (logout: () => void) => NavItems = (logout: () => void) =>
             onClick: () => {
                 logout()
             },
-            roles: ['*']
+            roles: authRoles.Public
         }
     ]
 const resolveRoles = (currentRole: string, navItems: NavItems) => {
 
-   
     const NavItemsResult = navItems.filter(navItem => {
         if(navItem.roles.includes('*')) return true;
         return navItem.roles.includes(currentRole);

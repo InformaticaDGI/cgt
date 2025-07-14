@@ -18,9 +18,14 @@ const router = createBrowserRouter([
         path: '/',
         element: <ProtectedRoute><Navigation /></ProtectedRoute>,
         children: [
+            
             {
                 index: true,
-                element: <Navigate to={'/indicadores'} replace />
+                element: <Navigate to={'/mapa'} replace />
+            },
+            {
+                path: 'mapa',
+                element: <MapView />
             },
             {
                 path: 'indicadores',
@@ -55,10 +60,6 @@ const router = createBrowserRouter([
                 path: 'crear-proyecto',
                 element: <CreateProjectView />
             },
-            {
-                path: 'mapa',
-                element: <MapView />
-            }
         ]
     },
     {

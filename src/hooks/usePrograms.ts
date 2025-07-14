@@ -15,10 +15,11 @@ const usePrograms = () => {
 
 const fetchPrograms = async (_: { secretarialTerritoryId: string, secretaryParentId: string, secretaryRootId: string, municipalityId: string, parrishId: string }) => {
 
-    const { data } = await axios.get<Program[]>(`${config.apiUrl}/programs`)
+    const { data } = await axios.get<Program[]>(`${config.apiUrl}/programs/with-projects-and-kpi-instances/list`)
 
     return data
 }
+
 
 export type Program = {
     id: string
@@ -26,6 +27,9 @@ export type Program = {
     secretaryId: string
     createdAt: string
     updatedAt: string
+    projects: any[]
+    kpiInstances: any[]
+    promediateProjectPercentage: number
 }
 
 export default usePrograms
