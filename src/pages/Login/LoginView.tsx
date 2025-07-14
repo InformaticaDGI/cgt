@@ -56,7 +56,7 @@ export const LoginView = () => {
                     left: '50%',
                     top: '50%',
                     transform: 'translate(-50%, -50%)',
-                    opacity: 0.08,
+                    opacity: 0.18,
                     width: '70vw',
                     maxWidth: '900px',
                     minWidth: '300px',
