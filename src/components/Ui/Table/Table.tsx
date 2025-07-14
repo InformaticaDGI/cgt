@@ -11,8 +11,20 @@ const getHeaderLabel = (header: HeaderConfig): string => {
     return header.label || header.key || ''
 }
 
+const getHeaderWidth = (header: HeaderConfig, index: number, columnWidths?: (string | number)[]): string | number | undefined => {
+    if (typeof header === 'string') {
+        return columnWidths?.[index]
+    }
+    return header.width || columnWidths?.[index]
+}
+
+const getHeaderColSpan = (header: HeaderConfig): number => {
+    if (typeof header === 'string') return 1
+    return header.colSpan || 1
+}
+
 export const Table = ({ 
-    headers, 
+    columns, 
     data, 
     columnWidths,
     rowKey,
@@ -23,19 +35,27 @@ export const Table = ({
     return (
         <TableContainer>
             <TableHeader $size={size}>
-                {headers.map((header, index) => (
-                    <TableHeaderCell 
-                        key={getHeaderKey(header, index)} 
-                        $size={size}
-                        align={header.align}
-                        style={{ 
-                            flex: columnWidths?.[index] ? 'none' : 1,
-                            width: columnWidths?.[index] || 'auto'
-                        }}
-                    >
-                        {getHeaderLabel(header)}
-                    </TableHeaderCell>
-                ))}
+                {columns.map((header, index) => {
+                    const headerKey = getHeaderKey(header, index)
+                    const headerWidth = getHeaderWidth(header, index, columnWidths)
+                    const colSpan = getHeaderColSpan(header)
+                    
+                    return (
+                        <TableHeaderCell 
+                            key={headerKey} 
+                            $size={size}
+                            align={header.align}
+                            $colSpan={colSpan}
+                            style={{ 
+                                flex: headerWidth ? 'none' : colSpan,
+                                width: headerWidth || 'auto',
+                                minWidth: headerWidth || 'auto'
+                            }}
+                        >
+                            {getHeaderLabel(header)}
+                        </TableHeaderCell>
+                    )
+                })}
             </TableHeader>
             <TableBody>
                 {data.map((row, rowIndex) => {
@@ -47,9 +67,11 @@ export const Table = ({
                             $clickable={!!onRowClick}
                             $size={size}
                         >
-                            {headers.map((header, colIndex) => {
+                            {columns.map((header, colIndex) => {
                                 const headerKey = getHeaderKey(header, colIndex)
                                 const cellKeyValue = cellKey ? cellKey(row, headerKey, rowIndex, colIndex) : `${rowKeyValue}-${headerKey}`
+                                const headerWidth = getHeaderWidth(header, colIndex, columnWidths)
+                                const colSpan = getHeaderColSpan(header)
                                 
                                 // Render the cell based on header configuration
                                 const cellContent = renderCellContent(row, header, rowIndex, colIndex)
@@ -59,9 +81,11 @@ export const Table = ({
                                         key={cellKeyValue}
                                         $size={size}
                                         align={header.align}
+                                        $colSpan={colSpan}
                                         style={{ 
-                                            flex: columnWidths?.[colIndex] ? 'none' : 1,
-                                            width: columnWidths?.[colIndex] || 'auto'
+                                            flex: headerWidth ? 'none' : colSpan,
+                                            width: headerWidth || 'auto',
+                                            minWidth: headerWidth || 'auto'
                                         }}
                                     >
                                         {cellContent}
@@ -98,13 +122,15 @@ type HeaderConfig = {
     key: string
     label: string
     align?: "left" | "center" | "right"
+    width?: string | number
+    colSpan?: number
     render?: (row: any, rowIndex: number, colIndex: number) => React.ReactNode
 }
 
 type TableSize = "normal" | "small"
 
 type TableProps<T = any> = {
-    headers: HeaderConfig[]
+    columns: HeaderConfig[]
     data: T[]
     columnWidths?: (string | number)[]
     rowKey?: (row: T, index: number) => string | number
@@ -128,8 +154,12 @@ const TableHeader = styled.div<{ $size: TableSize }>`
     border-bottom: 1px solid #e2e8f0;
 `
 
-const TableHeaderCell = styled.div<{ $size: TableSize; align?: "left" | "center" | "right" }>`
-    flex: 1;
+const TableHeaderCell = styled.div<{ 
+    $size: TableSize; 
+    align?: "left" | "center" | "right";
+    $colSpan?: number;
+}>`
+    flex: ${props => props.$colSpan || 1};
     font-weight: 600;
     color: #374151;
     text-align: ${props => props.align || "left"};
@@ -163,8 +193,12 @@ const TableBodyRow = styled.div<{ $clickable: boolean; $size: TableSize }>`
     }
 `
 
-const TableBodyCell = styled.div<{ $size: TableSize; align?: "left" | "center" | "right" }>`
-    flex: 1;
+const TableBodyCell = styled.div<{ 
+    $size: TableSize; 
+    align?: "left" | "center" | "right";
+    $colSpan?: number;
+}>`
+    flex: ${props => props.$colSpan || 1};
     color: #374151;
     text-align: ${props => props.align || "left"};
     display: flex;
