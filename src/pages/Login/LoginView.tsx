@@ -71,7 +71,7 @@ export const LoginView = () => {
                 <Card style={{ padding: '24px', backgroundColor: 'var(--background)' }} $isSelectable={false} $height="450px">
                     <form style={{ height: '100%' }} onSubmit={handleSubmit}>
                         <Flex $justify="space-between" $align="start" $direction="column" $gap="16px">
-                            <img src={cgtLogo} alt="Logo CGT" style={{ width: '124px', alignSelf: 'center', marginBottom: '8px' }} />
+                            <img src={cgtLogo} alt="Logo CGT" style={{ maxWidth: '140px', width: '100%', height: 'auto', alignSelf: 'center', marginBottom: '8px' }} />
                                                         <FormControl label="Usuario">
                                 <Input style={{ border: error ? '1px solid var(--error)' : '1px solid var(--primary)', backgroundColor: error ? 'var(--error-light)' : 'var(--input-background)' }}  placeholder="Usuario" value={credentials.email} onChange={(e) => setCredentials({ ...credentials, email: e.target.value })} />
                             </FormControl>
