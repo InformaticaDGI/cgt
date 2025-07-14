@@ -20,11 +20,11 @@ export default function CreateProjectView() {
                     secretaryId: '',
                     programId: '',
                     initialDate: '',
-                    endDate: '',
+                    finalDate: '',
                     observations: '',
                     municipalityId: '',
                     parrishId: '',
-                    kpiBaseId: []
+                    kpiInstances: [],
                 }}
                 isLoading={isPending}
             />

@@ -1,106 +1,344 @@
-import { Flex } from "../Layout/Flex"
-import { useBaseKpis, type BaseKpi } from "../../hooks/mutations/useBaseKpis"
-import { Table } from "../Ui/Table/Table"
-import { Button } from "../Ui/Button/Button"
-import { Modal, useModal } from "../Ui/Modal/Modal"
-import { CreateKpiBaseForm, type CreateKpiBaseFormValues } from "../Forms/CreateKpiBaseForm"
-import { useEffect, useState } from "react"
-import { useCreateBaseKpi } from "../../hooks/mutations/useCreateBaseKpi"
-import { Input } from "../Ui/Input/Input"
+import { Flex } from "../Layout/Flex";
+import { useBaseKpis, type BaseKpi } from "../../hooks/mutations/useBaseKpis";
+import { Table } from "../Ui/Table/Table";
+import { Button } from "../Ui/Button/Button";
+import { Modal, useModal } from "../Ui/Modal/Modal";
+import { CreateKpiBaseForm, type CreateKpiBaseFormValues } from "../Forms/CreateKpiBaseForm";
+import { useEffect, useState } from "react";
+import { useCreateBaseKpi } from "../../hooks/mutations/useCreateBaseKpi";
+import { Input } from "../Ui/Input/Input";
+import type { KpiInstance } from "../../hooks/mutations/useKpiInstances";
 
-type KpiBaseSelectorProps = {
-    value: string[]
-    onChange: (value: string[]) => void
-}
+type KpiInstanceSelectorProps = {
+    value: KpiInstance[];
+    onChange: (value: KpiInstance[]) => void;
+};
 
-export const KpiBaseSelector = ({ value, onChange }: KpiBaseSelectorProps) => {
+// --- Helper Components ---
 
-    const { baseKpis, isLoading, isError, isSuccess } = useBaseKpis()
+const NoKpiBasesFound = ({
+    isCreateKpiBaseOpen,
+    setIsCreateKpiBaseOpen,
+    handleCreateBaseKpi,
+}: {
+    isCreateKpiBaseOpen: boolean;
+    setIsCreateKpiBaseOpen: (open: boolean) => void;
+    handleCreateBaseKpi: (values: CreateKpiBaseFormValues) => void;
+}) => (
+    <Flex
+        style={{
+            width: "100%",
+            height: "100%",
+            alignItems: "center",
+            justifyContent: "center",
+        }}
+    >
+        <h4>No se encontraron metas base</h4>
+        <h6
+            style={{
+                color: "var(--primary)",
+                cursor: "pointer",
+                textDecoration: "underline",
+            }}
+            onClick={() => setIsCreateKpiBaseOpen(true)}
+        >
+            Haz click para crear una nueva meta
+        </h6>
+        <Modal
+            isOpen={isCreateKpiBaseOpen}
+            onClose={() => setIsCreateKpiBaseOpen(false)}
+            title="Crear meta base"
+        >
+            <CreateKpiBaseForm
+                onSubmit={handleCreateBaseKpi}
+                initialValues={{ name: "", measurementUnitId: "", areaId: "" }}
+            />
+        </Modal>
+    </Flex>
+);
 
-    const { isOpen: isCreateKpiBaseOpen, setIsOpen: setIsCreateKpiBaseOpen } = useModal()
+const AvailableKpiBasesSection = ({
+    availableKpiBases,
+    handleAddKpiBase,
+    isCreateKpiBaseOpen,
+    setIsCreateKpiBaseOpen,
+    handleCreateBaseKpi,
+}: {
+    availableKpiBases: BaseKpi[];
+    handleAddKpiBase: (kpiBase: BaseKpi) => void;
+    isCreateKpiBaseOpen: boolean;
+    setIsCreateKpiBaseOpen: (open: boolean) => void;
+    handleCreateBaseKpi: (values: CreateKpiBaseFormValues) => void;
+}) => (
+    <div style={{ width: "49%" }}>
+        <Flex
+            style={{
+                flexDirection: "column",
+                flexWrap: "nowrap",
+                paddingBottom: "12px",
+                height: "80px",
+                alignItems: "flex-start",
+                justifyContent: "flex-end",
+            }}
+        >
+            <h4>Metas disponibles</h4>
+            <h6
+                style={{
+                    color: "var(--primary)",
+                    cursor: "pointer",
+                    textDecoration: "underline",
+                }}
+                onClick={() => setIsCreateKpiBaseOpen(true)}
+            >
+                Haz click para crear una nueva meta si no encuentras el que buscas
+            </h6>
+            <Modal
+                isOpen={isCreateKpiBaseOpen}
+                onClose={() => setIsCreateKpiBaseOpen(false)}
+                title="Crear meta base"
+            >
+                <CreateKpiBaseForm
+                    onSubmit={handleCreateBaseKpi}
+                    initialValues={{ name: "", measurementUnitId: "", areaId: "" }}
+                />
+            </Modal>
+        </Flex>
+        <Table
+            size="small"
+            headers={[
+                {
+                    key: "name",
+                    label: "Nombre",
+                    render: (row: BaseKpi) =>
+                        `${row.name} (${row.measurement?.symbol || row.measurement?.name})`,
+                },
+                {
+                    key: "id",
+                    label: "Acciones",
+                    align: "center",
+                    render: (row: BaseKpi) => (
+                        <Button
+                            variant="primary"
+                            size="small"
+                            onClick={() => handleAddKpiBase(row)}
+                        >
+                            Agregar al proyecto
+                        </Button>
+                    ),
+                },
+            ]}
+            data={availableKpiBases}
+            rowKey={(row: BaseKpi) => row.id}
+        />
+    </div>
+);
 
-    const { createBaseKpi, isPending: isCreatingKpiBase } = useCreateBaseKpi()
+const SelectedKpiBasesSection = ({
+    selectedKpiBases,
+    handleRemoveKpiBase,
+    handleUpdateExpectedValue,
+}: {
+    selectedKpiBases: KpiInstance[];
+    handleRemoveKpiBase: (kpiBase: BaseKpi) => void;
+    handleUpdateExpectedValue: (kpiBase: BaseKpi, expectedValue: number) => void;
+}) => (
+    <div style={{ width: "49%" }}>
+        <Flex
+            style={{
+                flexDirection: "column",
+                flexWrap: "nowrap",
+                paddingBottom: "12px",
+                height: "80px",
+                alignItems: "flex-start",
+                justifyContent: "flex-end",
+            }}
+        >
+            <h4>Metas seleccionadas</h4>
+            <h6 style={{ color: "var(--text-secondary)" }}>
+                Las metas listadas a continuación serán usadas como base para las actividades del proyecto
+            </h6>
+        </Flex>
+        <Table
+            size="small"
+            headers={[
+                {
+                    key: "name",
+                    label: "Meta",
+                    render: (row: KpiInstance) => (
+                        <KpiBaseSelectorItem
+                            kpiBase={row.kpiBase!}
+                            onUpdateExpectedValue={handleUpdateExpectedValue}
+                        />
+                    ),
+                },
+                {
+                    key: "id",
+                    align: "center",
+                    label: "Acciones",
+                    render: (row: KpiInstance) => (
+                        <Button
+                            variant="primary"
+                            size="small"
+                            onClick={() => handleRemoveKpiBase(row.kpiBase!)}
+                        >
+                            Quitar
+                        </Button>
+                    ),
+                },
+            ]}
+            data={selectedKpiBases}
+            rowKey={(row: KpiInstance) => row.kpiBaseId}
+        />
+    </div>
+);
 
-    const [availableKpiBases, setAvailableKpiBases] = useState<BaseKpi[]>([])
-    const [selectedKpiBases, setSelectedKpiBases] = useState<BaseKpi[]>(value.map((id) => baseKpis.find((kpi: BaseKpi) => kpi.id === id)).filter((kpi: BaseKpi | undefined) => kpi !== undefined))
+const KpiBaseSelectorItem = ({
+    kpiBase,
+    onUpdateExpectedValue,
+}: {
+    kpiBase: BaseKpi;
+    onUpdateExpectedValue: (kpiBase: BaseKpi, expectedValue: number) => void;
+}) => {
+    return (
+        <Flex
+            style={{
+                flexDirection: "row",
+                flexWrap: "nowrap",
+                alignItems: "center",
+                justifyContent: "space-between",
+            }}
+        >
+            <h4>
+                {kpiBase.name} ({kpiBase.measurement?.symbol || kpiBase.measurement?.name})
+            </h4>
+            <Input
+                style={{ width: "100px", marginLeft: "12px" }}
+                placeholder={`En ${kpiBase.measurement?.name}`}
+                size="small"
+                type="number"
+                onChange={(e) =>
+                    onUpdateExpectedValue(kpiBase, Number(e.target.value))
+                }
+            />
+        </Flex>
+    );
+};
+
+// --- Main Component ---
+
+export const KpiInstanceSelector = ({ value, onChange }: KpiInstanceSelectorProps) => {
+    const { baseKpis, isLoading, isError, isSuccess } = useBaseKpis();
+    const { isOpen: isCreateKpiBaseOpen, setIsOpen: setIsCreateKpiBaseOpen } = useModal();
+    const { createBaseKpi } = useCreateBaseKpi();
+
+    const [availableKpiBases, setAvailableKpiBases] = useState<BaseKpi[]>([]);
+    const [selectedKpiInstances, setSelectedKpiInstances] = useState<KpiInstance[]>(value);
+
+    // --- Handlers ---
 
     const handleCreateBaseKpi = (values: CreateKpiBaseFormValues) => {
-        createBaseKpi({
-            name: values.name,
-            measurementId: values.measurementUnitId,
-            areaId: values.areaId,
-        }, {
-            onSuccess: (data) => {
-                setAvailableKpiBases([...availableKpiBases, data])
-                setIsCreateKpiBaseOpen(false)
+        createBaseKpi(
+            {
+                name: values.name,
+                measurementId: values.measurementUnitId,
+                areaId: values.areaId,
+            },
+            {
+                onSuccess: (data) => {
+                    setAvailableKpiBases([...availableKpiBases, data]);
+                    setIsCreateKpiBaseOpen(false);
+                },
             }
-        })
-    }
+        );
+    };
 
     const handleRemoveKpiBase = (kpiBase: BaseKpi) => {
-        setSelectedKpiBases(selectedKpiBases.filter(kpi => kpi.id !== kpiBase.id))
-    }
+        setSelectedKpiInstances(
+            selectedKpiInstances.filter((kpi) => kpi.kpiBaseId !== kpiBase.id)
+        );
+    };
 
     const handleAddKpiBase = (kpiBase: BaseKpi) => {
-        setSelectedKpiBases([...selectedKpiBases, kpiBase])
-    }
+        setSelectedKpiInstances([
+            ...selectedKpiInstances,
+            {
+                id: kpiBase.id,
+                kpiBaseId: kpiBase.id,
+                kpiBase,
+                expectedValue: 0,
+            },
+        ]);
+    };
+
+    const handleUpdateExpectedValue = (
+        kpiBase: BaseKpi,
+        expectedValue: number
+    ) => {
+        setSelectedKpiInstances(
+            selectedKpiInstances.map((kpi) =>
+                kpi.kpiBaseId === kpiBase.id
+                    ? { ...kpi, expectedValue }
+                    : kpi
+            )
+        );
+    };
+
+    // --- Effects ---
 
     useEffect(() => {
         if (isSuccess && baseKpis.length > 0) {
-            setAvailableKpiBases(baseKpis.filter((kpi: BaseKpi) => !selectedKpiBases.map((kpi: BaseKpi) => kpi.id).includes(kpi.id)))
+            setAvailableKpiBases(
+                baseKpis.filter(
+                    (kpi: BaseKpi) =>
+                        !selectedKpiInstances
+                            .map((kpi: KpiInstance) => kpi.kpiBaseId)
+                            .includes(kpi.id)
+                )
+            );
         }
-    }, [baseKpis, selectedKpiBases, isSuccess])
+    }, [baseKpis, selectedKpiInstances, isSuccess]);
 
     useEffect(() => {
-        onChange(selectedKpiBases.map((kpi: BaseKpi) => kpi.id))
-    }, [selectedKpiBases])
+        onChange(selectedKpiInstances);
+    }, [selectedKpiInstances]);
 
-    if (isLoading) return <div>Cargando...</div>
-    if (isError) return <div>Error</div>
-    if (isSuccess && baseKpis.length === 0) return <Flex style={{ width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center' }}>
-        <h4>No se encontraron metas base</h4>
-        <h6 style={{ color: 'var(--primary)', cursor: 'pointer', textDecoration: 'underline' }} onClick={() => setIsCreateKpiBaseOpen(true)}>Haz click para crear una nueva meta</h6>
-        <Modal isOpen={isCreateKpiBaseOpen} onClose={() => setIsCreateKpiBaseOpen(false)} title="Crear meta base">
-            <CreateKpiBaseForm onSubmit={handleCreateBaseKpi} initialValues={{ name: '', measurementUnitId: '', areaId: '' }} />
-        </Modal>
-    </Flex>
+    // --- Render ---
+
+    if (isLoading) return <div>Cargando...</div>;
+    if (isError) return <div>Error</div>;
+    if (isSuccess && baseKpis.length === 0)
+        return (
+            <NoKpiBasesFound
+                isCreateKpiBaseOpen={isCreateKpiBaseOpen}
+                setIsCreateKpiBaseOpen={setIsCreateKpiBaseOpen}
+                handleCreateBaseKpi={handleCreateBaseKpi}
+            />
+        );
 
     return (
-        <Flex style={{ width: '100%', gap: '12px', flexDirection: 'row', flexWrap: 'wrap', alignItems: 'flex-start', justifyContent: 'flex-start', alignContent: 'flex-start' }}>
-            <div style={{ width: '49%', }}>
-                <Flex style={{ flexDirection: 'column', flexWrap: 'nowrap', paddingBottom: '12px', height: '80px', alignItems: 'flex-start', justifyContent: 'flex-end' }}>
-                    <h4>Metas disponibles</h4>
-                    <h6 style={{ color: 'var(--primary)', cursor: 'pointer', textDecoration: 'underline' }} onClick={() => setIsCreateKpiBaseOpen(true)}>Haz click para crear una nueva meta si no encuentras el que buscas</h6>
-                    <Modal isOpen={isCreateKpiBaseOpen} onClose={() => setIsCreateKpiBaseOpen(false)} title="Crear meta base">
-                        <CreateKpiBaseForm onSubmit={handleCreateBaseKpi} initialValues={{ name: '', measurementUnitId: '', areaId: '' }} />
-                    </Modal>
-                </Flex>
-                <Table
-                    size="small"
-                    headers={[
-                        { key: 'name', label: 'Nombre', render: (row: BaseKpi) => `${row.name} (${row.measurement?.symbol || row.measurement?.name})` },
-                        { key: 'id', label: 'Agregar', align: 'center', render: (row: BaseKpi) => <Button variant="primary" size="small" onClick={() => handleAddKpiBase(row)}>Agregar</Button> }
-                    ]}
-                    data={availableKpiBases}
-                    rowKey={(row: BaseKpi) => row.id}
-                />
-            </div>
-            <div style={{ width: '49%', }}>
-                <Flex style={{ flexDirection: 'column', flexWrap: 'nowrap', paddingBottom: '12px', height: '80px', alignItems: 'flex-start', justifyContent: 'flex-end' }}>
-                    <h4>Metas seleccionadas</h4>
-                    <h6 style={{ color: 'var(--text-secondary)' }}>Las metas listadas a continuación serán usadas como base para las actividades del proyecto</h6>
-                </Flex>
-                <Table
-                    size="small"
-                    headers={[
-                        { key: 'name', label: 'Nombre', render: (row: BaseKpi) => `${row.name} (${row.measurement?.symbol || row.measurement?.name})` },
-                        { key: 'expectedValue', label: 'Meta planificada', render: (row: BaseKpi) => <Input placeholder={`En ${row.measurement?.name}`} size="small" type="number" onChange={(e) => console.log(row, e.target.value)} /> },
-                        { key: 'id', align: 'center', label: 'Quitar', render: (row: BaseKpi) => <Button variant="primary" size="small" onClick={() => handleRemoveKpiBase(row)}>Quitar</Button> }
-                    ]}
-                    data={selectedKpiBases}
-                    rowKey={(row: BaseKpi) => row.id}
-                />
-            </div>
+        <Flex
+            style={{
+                width: "100%",
+                gap: "12px",
+                flexDirection: "row",
+                flexWrap: "wrap",
+                alignItems: "flex-start",
+                justifyContent: "flex-start",
+                alignContent: "flex-start",
+            }}
+        >
+            <AvailableKpiBasesSection
+                availableKpiBases={availableKpiBases}
+                handleAddKpiBase={handleAddKpiBase}
+                isCreateKpiBaseOpen={isCreateKpiBaseOpen}
+                setIsCreateKpiBaseOpen={setIsCreateKpiBaseOpen}
+                handleCreateBaseKpi={handleCreateBaseKpi}
+            />
+            <SelectedKpiBasesSection
+                selectedKpiBases={selectedKpiInstances}
+                handleRemoveKpiBase={handleRemoveKpiBase}
+                handleUpdateExpectedValue={handleUpdateExpectedValue}
+            />
         </Flex>
-    )
-}
+    );
+};
