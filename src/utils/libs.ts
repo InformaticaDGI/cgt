@@ -1,3 +1,4 @@
+
 export type Color = {
     min: number,
     max: number,
@@ -9,7 +10,7 @@ export const toHexColor = (colorRanges: Array<Color>, target: number) => {
         return target >= colorItem.min && target <= colorItem.max
     })
 
-    if(!matchedRange) throw Error('The color range does not match');
+    if (!matchedRange) throw Error('The color range does not match');
 
     const hexColor = matchedRange.color;
 

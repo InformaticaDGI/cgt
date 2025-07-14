@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query"
-import data from '../utils/data.json';
-const useProgram = (programId: string) => {
+import api from "../lib/api";
+import type { Program } from "./usePrograms";
+const useProgram = (programId: string | undefined) => {
     return useQuery({
         queryKey: ['program', programId],
         queryFn: () => fetchProgramById(programId),
@@ -9,10 +10,10 @@ const useProgram = (programId: string) => {
 }
 
 
-const fetchProgramById = (programId: string) => {
-    const matchProgram = data.evaluacionSistema.listado_programas[0].programas.find(program => program.idPrograma === programId);
-    if(!matchProgram) throw new Error('Program not found')
-    return matchProgram;
+const fetchProgramById = async (programId: string | undefined) => {
+    if (!programId) throw new Error('Program ID is required')
+    const { data } = await api.cgt.get<Program>(`/programs/${programId}`)
+    return data
 }
 
 export default useProgram

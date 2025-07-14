@@ -1,6 +1,5 @@
 import Header from "../../../components/Header/Header";
 import CreateProgramForm from "../../../components/Forms/CreateProgramForm";
-import Navigation from "../../../components/Navigation/Navigation";
 import styled from "styled-components";
 import { useCreateProgram } from "../../../hooks/mutations/useCreateProgram";
 
@@ -8,8 +7,7 @@ export default function CreateProgramView() {
 
     const { mutate: createProgram, isPending } = useCreateProgram()
 
-    return <Navigation>
-        <MainWrapper>
+    return <MainWrapper>
             <Header />
             <CreateProgramForm onSubmit={(values) => {
                 createProgram(values)
@@ -18,7 +16,6 @@ export default function CreateProgramView() {
                 isLoading={isPending}
             />
         </MainWrapper>
-    </Navigation>
 }
 
 const MainWrapper = styled.div`

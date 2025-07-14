@@ -5,7 +5,7 @@ const FilterHeader = ({ icon, fill, children }: { icon?: ReactNode, fill?: strin
 
     return <HeaderWrapper>
         <Header>
-            <IconWrapper fill={fill}>
+            <IconWrapper $fill={fill}>
                 {icon}
             </IconWrapper>
             <Title>{children}</Title>
@@ -33,13 +33,13 @@ const Title = styled.h1`
     color: #2D3748;
 `;
 
-const IconWrapper = styled.div<{ fill?: string }>`
+const IconWrapper = styled.div<{ $fill?: string }>`
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 4px;
     border-radius: 4px;
-    background: ${props => props.fill ? props.fill : "linear-gradient(180deg, #008000 0%, #006400 100%)"};
+    background: ${props => props.$fill ? props.$fill : "linear-gradient(180deg, #008000 0%, #006400 100%)"};
 `;
 
 export default FilterHeader

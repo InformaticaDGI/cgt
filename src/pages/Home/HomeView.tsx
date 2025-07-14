@@ -1,48 +1,56 @@
-import styled from "styled-components"
-import Navigation from "../../components/Navigation/Navigation"
-import FilterTool from "../../components/FilterTool";
+import FilterTool from "../../components/Prebuilt/FilterTool";
 import Header from "../../components/Header/Header";
 import Tabs from "../../components/Tabs/Tabs";
 import Card from "../../components/Card/Card";
-import CardBody from "../../components/Card/CardBody";
 import CardFooter from "../../components/Card/CardFooter";
-import CardHeader from "../../components/Card/CardHeader";
 import usePrograms from "../../hooks/usePrograms";
+import IndicatorSecretary from "../../components/Indicator/IndicatorSecretary";
+import IndicatorProgress from "../../components/Indicator/IndicatorProgress";
+import IndicatorTerritorialSecretary from "../../components/Indicator/IndicatorTerritorialSecretary";
+import { Grid } from "../../components/Layout/Grid";
+import { Flex } from "../../components/Layout/Flex";
+import Text from "../../components/Ui/Text/Text";
+import Badge from "../../components/Ui/Badge/Badge";
+import CardBody from "../../components/Card/CardBody";
+import CardHeader from "../../components/Card/CardHeader";
+import IndicatorIcon from "../../components/Prebuilt/IndicatorIcon";
 
 const HomeView = () => {
 
     const { data } = usePrograms()
-    return <Navigation>
-        <MainWrapper>
+    return <Flex $direction="column" $gap="12px" $padding="16px" $align="stretch">
             <Header />
             <FilterTool />
-            <Tabs/>
-            <StyledGrid>
+            <Tabs />
+            <Grid>
                 {data.map(program => (
-                    <Card to="indicadores/programa1" key={program.idPrograma}>
-                        <CardHeader title={program.nombrePrograma} count={`${program.proyectos.length} Proyectos`}  />
-                        <CardBody subtitle="Secretaria Territorial 1" description="SECRETARIA EJECUTIVA DE PROTECCIÓN SOCIAL Y GESTIÓN TERRITORIAL" info="SECRETARIA DE PROTECCIÓN SOCIAL" progress={20} />
-                        <CardFooter location="Juan German Roscio, San Juan de los Morros" status="social" />
+                    <Card as="a" href={`/indicadores/${program.id}`} key={program.id}>
+                        <CardHeader>
+                            <Text style={{ fontSize: '14px', color: '#0C777C', fontWeight: '700', textWrap: 'nowrap' }}>{program.name}</Text>
+                            <Flex $direction="row" $justify="end" $align="center" $gap="8px">
+                                <Text style={{ fontSize: '14px', color: '#889C9D', fontWeight: 'normal', textWrap: 'nowrap' }}>{"21 Proyectos"}</Text>
+                                <IndicatorIcon $isOpen={false} />
+                            </Flex>
+                        </CardHeader>
+                        <CardBody>
+                            <Flex $align="stretch" $direction="column" $gap={"8px"}>
+                                <Text style={{ fontSize: '14px', color: '#5A787A' }}>No Definido</Text>
+                                <Flex $align="stretch" $direction="column" $gap={"4px"}>
+                                    <IndicatorProgress value={42} />
+                                    <IndicatorSecretary secretaryId={program.secretaryId} />
+                                    <IndicatorTerritorialSecretary parentId={program.secretaryId} />
+                                </Flex>
+                            </Flex>
+                        </CardBody>
+                        <CardFooter>
+                            <Text style={{ color: '#7A8E8B', fontSize: '11px', fontWeight: '600' }}>No Definido</Text>
+                            <Badge variant={'social'} />
+                        </CardFooter>
                     </Card>
                 ))}
-            </StyledGrid>
-        </MainWrapper>
-    </Navigation>
+            </Grid>
+        </Flex>
 }
 
-const StyledGrid = styled.div`
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-`;
-
-const MainWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    width: 100%;
-    height: 100%;
-    padding: 16px;
-`;
 
 export default HomeView

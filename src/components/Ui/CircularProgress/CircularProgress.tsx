@@ -1,6 +1,7 @@
-import { Cell, Pie, ResponsiveContainer, PieChart } from "recharts"
+import { Cell, Pie, PieChart } from "recharts"
+import { Flex } from "../../Layout/Flex";
 
-const Progress = ({ progress = 75, size = 200, strokeWidth = 20, color = '#FF0000', backgroundColor = '#FFFFFF' }) => {
+const CircularProgress = ({ progress = 75, size = 200, strokeWidth = 20, color = '#FF0000', backgroundColor = '#FFFFFF' }) => {
   // Aseguramos que el progreso esté entre 0 y 100
   const actualProgress = Math.min(100, Math.max(0, progress));
 
@@ -15,7 +16,7 @@ const Progress = ({ progress = 75, size = 200, strokeWidth = 20, color = '#FF000
   const outerRadius = size / 2;
 
   return (
-    <ResponsiveContainer width={size} height={size} style={{ pointerEvents: 'none' }}>
+    <Flex $justify="center" $align="center" $width={size.toString()} $height={size.toString()} style={{ pointerEvents: 'none' }}>
       <PieChart width={size} height={size} >
         <Pie
           data={data}
@@ -40,8 +41,8 @@ const Progress = ({ progress = 75, size = 200, strokeWidth = 20, color = '#FF000
           {`${actualProgress}%`}
         </text>
       </PieChart>
-    </ResponsiveContainer>
+    </Flex>
   );
 };
 
-export default Progress;
+export default CircularProgress;

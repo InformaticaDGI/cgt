@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import BreadCrumpItem from "./BreadCrumpItem";
-import Text from "../Ui/Text";
+import Text from "../Ui/Text/Text";
 
 const BreadCrump = () => {
 

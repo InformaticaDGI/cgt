@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import Logo from "../Logo/Logo";
 import NavItems from "./NavItems";
+import { Outlet } from "react-router";
 
 
-const Navigation = ({ children }: { children: React.JSX.Element }) => {
+const Navigation = () => {
 
   return (
     <DrawerWrapper>
@@ -14,7 +15,7 @@ const Navigation = ({ children }: { children: React.JSX.Element }) => {
           <NavItems />
         </Nav>
       </Drawer>
-      {children}
+      <Outlet />
     </DrawerWrapper>
   )
 };

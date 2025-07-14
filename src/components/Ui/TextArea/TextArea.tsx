@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-export const TextArea = styled.textarea<TextAreaProps>`
+export const $TextArea = styled.textarea<$TextAreaProps>`
     width: 100%;
-    height: ${({ rows }) => rows ? `${rows * 20}px` : '120px'};
+    height: ${({ $rows }) => $rows ? `${$rows * 20}px` : '120px'};
     border-radius: var(--border-radius);
     border: 1px solid var(--primary);
     padding: 12px;
@@ -19,6 +19,6 @@ export const TextArea = styled.textarea<TextAreaProps>`
     }
 `
 
-type TextAreaProps = {
-    rows?: number
+type $TextAreaProps = {
+    $rows?: number
 }

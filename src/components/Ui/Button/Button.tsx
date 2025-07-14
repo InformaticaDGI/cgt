@@ -1,14 +1,14 @@
 import styled, { css } from "styled-components";
 
 export const Button = styled.button<ButtonProps>`
-    background: ${({ variant }) => variant === "primary" ? "var(--gradient-primary)" : variant === "secondary" ? "var(--gradient-secondary)" : "var(--gradient-tertiary)"};
-    color: ${({ variant }) => variant === "primary" ? "var(--text_foreground)" : variant === "secondary" ? "var(--text_foreground)" : "var(--text_foreground)"};
-    padding: ${({ size }) => size === "small" ? "8px 16px" : size === "medium" ? "12px 24px" : "16px 32px"};
-    height: ${({ size }) => size === "small" ? "32px" : size === "medium" ? "40px" : "48px"};
+    background: ${({ $variant }) => $variant === "primary" ? "var(--gradient-primary)" : $variant === "secondary" ? "var(--gradient-secondary)" : "var(--gradient-tertiary)"};
+    color: ${({ $variant }) => $variant === "primary" ? "var(--text_foreground)" : $variant === "secondary" ? "var(--text_foreground)" : "var(--text_foreground)"};
+    padding: ${({ $size }) => $size === "small" ? "8px 16px" : $size === "medium" ? "12px 24px" : "16px 32px"};
+    height: ${({ $size }) => $size === "small" ? "32px" : $size === "medium" ? "40px" : "48px"};
     border-radius: var(--border-radius);
     border: none;
     cursor: pointer;
-    font-size: ${({ size }) => size === "small" ? "var(--input-font-size-xsmall)" : size === "medium" ? "var(--input-font-size-small)" : "var(--input-font-size-medium)"};
+    font-size: ${({ $size }) => $size === "small" ? "var(--input-font-size-xsmall)" : $size === "medium" ? "var(--input-font-size-small)" : "var(--input-font-size-medium)"};
     font-weight: 600;
     transition: all 0.3s ease;
     align-items: center;
@@ -32,15 +32,15 @@ export const Button = styled.button<ButtonProps>`
         box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
         filter: brightness(0.9);
     }
-    ${({ disabled }) => disabled && css`
+    ${({ $disabled }) => $disabled && css`
         filter: brightness(0.5);
         cursor: not-allowed;
     `}
 `
 
 type ButtonProps = {
-    htmlType?: "button" | "submit" | "reset"
-    variant?: "primary" | "secondary" | "tertiary"
-    disabled?: boolean
-    size?: "small" | "medium" | "large"
+    $htmlType?: "button" | "submit" | "reset"
+    $variant?: "primary" | "secondary" | "tertiary"
+    $disabled?: boolean
+    $size?: "small" | "medium" | "large"
 }

@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import Progress from "./Progress"
+import CircularProgress from "../Ui/CircularProgress/CircularProgress"
 import { toHexColor, type Color } from "../../utils/libs";
 
-const CircularProgress = ({ progress }: { progress: number }) => {
+const IndicatorProgress = ({ value }: { value: number }) => {
 
   const colors: Array<Color> = [
     { min: 0, max: 25, color: "#DC2626" },
@@ -11,18 +11,18 @@ const CircularProgress = ({ progress }: { progress: number }) => {
     { min: 76, max: 100, color: "#14AE5C" }
   ]
 
-  const progressColor = toHexColor(colors, progress);
+  const progressColor = toHexColor(colors, value);
 
   return (
     <StyledProgressIndicator>
-      <Progress progress={progress} color={progressColor} backgroundColor="#F3F4F6" strokeWidth={10} size={130} />
+      <CircularProgress progress={value} color={progressColor} backgroundColor="#F3F4F6" strokeWidth={10} size={130} />
     </StyledProgressIndicator>
   )
 
 
 }
 
-export default CircularProgress
+export default IndicatorProgress
 
 const StyledProgressIndicator = styled.div`
   display: flex;
