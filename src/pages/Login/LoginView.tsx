@@ -9,6 +9,8 @@ import Text from "../../components/Ui/Text/Text"
 import Card from "../../components/Card/Card"
 import { InfoIcon } from "lucide-react"
 import { useAuthStorage } from "../../store/auth-storage"
+import cgtLogo from '../../assets/cgt.png';
+import marcaLogo from '../../assets/marca.png';
 
 export const LoginView = () => {
 
@@ -45,14 +47,32 @@ export const LoginView = () => {
 
 
     return (
-        <Flex $justify="center" $align="center" $height="100vh" $backgroundColor="var(--gradient-primary)">
+        <div style={{ position: 'relative', width: '100vw', height: '100vh', overflow: 'hidden', background: 'var(--gradient-primary)' }}>
+            <img 
+                src={marcaLogo}
+                alt="Marca de agua"
+                style={{
+                    position: 'absolute',
+                    left: '50%',
+                    top: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    opacity: 0.08,
+                    width: '70vw',
+                    maxWidth: '900px',
+                    minWidth: '300px',
+                    zIndex: 1,
+                    pointerEvents: 'none',
+                    userSelect: 'none',
+                }}
+            />
+            <Flex $justify="center" $align="center" $height="100vh" style={{ position: 'relative', zIndex: 2 }}>
+
             <Flex $justify="center" $align="stretch" style={{ maxWidth: '400px' }}>
                 <Card style={{ padding: '24px', backgroundColor: 'var(--background)' }} $isSelectable={false} $height="450px">
                     <form style={{ height: '100%' }} onSubmit={handleSubmit}>
                         <Flex $justify="space-between" $align="start" $direction="column" $gap="16px">
-                            <Text style={{ fontSize: '24px', fontWeight: 'bold', color: 'var(--secondary)' }}>CGT - Bievenido de nuevo</Text>
-                            <Text style={{ fontSize: '14px', fontWeight: '500' }}>Ingresa tus credenciales para acceder</Text>
-                            <FormControl label="Usuario">
+                            <img src={cgtLogo} alt="Logo CGT" style={{ width: '124px', alignSelf: 'center', marginBottom: '8px' }} />
+                                                        <FormControl label="Usuario">
                                 <Input style={{ border: error ? '1px solid var(--error)' : '1px solid var(--primary)', backgroundColor: error ? 'var(--error-light)' : 'var(--input-background)' }}  placeholder="Usuario" value={credentials.email} onChange={(e) => setCredentials({ ...credentials, email: e.target.value })} />
                             </FormControl>
                             <FormControl label="Contraseña">
@@ -75,5 +95,6 @@ export const LoginView = () => {
                 </Card>
             </Flex>
         </Flex>
+    </div>
     )
 }
