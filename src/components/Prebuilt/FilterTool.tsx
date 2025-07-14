@@ -45,7 +45,7 @@ const FilterTool = () => {
                 <Filter style={{ gridColumn: 'span 2' }}>
                     <FilterContainer>
                         <FilterHeader icon={<MapPinned color="white" height={"16px"} width={"16px"} />} fill="linear-gradient(180deg, #FFA500 0%, #FF4500 100%);">Municipio</FilterHeader>
-                        <MunicipalitySelect onChange={(municipalityId) => store.setMunicipalityId(municipalityId)} value={store.municipalityId} />
+                        <MunicipalitySelect territorialSecretaryId={store.secretarialTerritoryId} onChange={(municipalityId) => store.setMunicipalityId(municipalityId)} value={store.municipalityId} />
                     </FilterContainer>
                 </Filter>
                 <Filter style={{ gridColumn: 'span 2' }}>

@@ -1,7 +1,8 @@
 import { useQuery } from "@tanstack/react-query"
 import axios from "axios";
 import { config } from "../config";
-const useTerritorialSecretary = () => {
+
+const useTerritorialSecretaries = () => {
     return useQuery({
         queryKey: ['territorial-secretary'],
         queryFn: fetchTerritorialSecretary,
@@ -23,4 +24,4 @@ export type TerritorialSecretary = {
     updatedAt: string
 }
 
-export default useTerritorialSecretary
+export default useTerritorialSecretaries

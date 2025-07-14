@@ -2,14 +2,34 @@ import { useQuery } from "@tanstack/react-query"
 import { config } from "../../config"
 import axios from "axios"
 
-export const useMunicipalities = () => {
+type UseMunicipalitiesProps = {
+    territorialSecretaryId?: string
+}
+
+export const useMunicipalities = ({ territorialSecretaryId }: UseMunicipalitiesProps) => {
     return useQuery<Municipality[]>({
-        queryKey: ['municipalities'],
+        queryKey: ['municipalities', territorialSecretaryId],
         queryFn: async () => {
-            const response = await axios.get(`${config.apiUrl}/municipalities`)
-            return response.data
+            if (territorialSecretaryId) {
+                return await getMunicipalitiesByTerritorialSecretaryId(territorialSecretaryId)
+            }
+            return await getMunicipalities()
         }
     })
+}
+
+const getMunicipalities = async (territorialSecretaryId?: string) => {
+    const response = await axios.get(`${config.apiUrl}/municipalities`, {
+        params: {
+            territorialSecretaryId
+        }
+    })
+    return response.data
+}
+
+const getMunicipalitiesByTerritorialSecretaryId = async (territorialSecretaryId: string) => {
+    const response = await axios.get(`${config.apiUrl}/municipalities/territorial-secretary/${territorialSecretaryId}`)
+    return response.data
 }
 
 type Municipality = {
