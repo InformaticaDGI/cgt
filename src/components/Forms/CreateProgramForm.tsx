@@ -4,8 +4,6 @@ import { Grid, GridItem } from "../Layout/Grid";
 import { SecretarySelect } from "../Prebuilt/SecretarySelect";
 import { FormControl } from "../Ui/FormControl/FormControl";
 import { Button } from "../Ui/Button/Button";
-import { useAlert } from "../Ui/Alert/Alert";
-import { useEffect } from "react";
 import Card from "../Card/Card";
 
 export default function CreateProgramForm({ onSubmit, initialValues, isLoading }: CreateProgramFormProps) {
@@ -16,17 +14,6 @@ export default function CreateProgramForm({ onSubmit, initialValues, isLoading }
             onSubmit(values)
         }
     })
-
-    const { show } = useAlert({
-        $variant: "success",
-        title: "Programa creado correctamente",
-        description: "El programa ha sido creado correctamente"
-    })
-
-    useEffect(() => {
-        show()
-    }, [])
-
 
     return <Card $isSelectable={false} $padding="28px" >
     <Grid $columns="repeat(24, 1fr)" $gap="12px" $width="100%">

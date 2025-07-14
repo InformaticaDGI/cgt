@@ -27,6 +27,30 @@
 
 }
 
+.swal2-popup {
+  background-color: var(--background);
+  border-radius: var(--border-radius);
+}
+
+.swal2-popup .swal2-title {
+  color: var(--primary);
+}
+
+.swal2-popup .swal2-content {
+  color: var(--text-secondary);
+}
+
+.swal2-popup .swal2-confirm {
+  background-color: var(--primary);
+  color: var(--text_foreground);
+  border-radius: var(--border-radius);
+  border: none;
+  padding: 10px 20px;
+  font-size: var(--input-font-size);
+  font-weight: 600;
+}
+
+
 *,*::after,*::before {
   padding: 0;
   margin: 0;

@@ -10,7 +10,11 @@ export const useCreateProject = () => {
                 name: data.name,
                 secretaryId: data.secretaryId,
                 programId: data.programId,
-                kpiInstances: data.kpiInstances,
+                kpiInstances: data.kpiInstances
+                    .map(kpi => ({
+                        expected: kpi.expectedValue,
+                        baseKpiId: kpi.kpiBaseId,
+                    })),
                 initialDate: data.initialDate,
                 finalDate: data.finalDate,
                 observations: data.observations,

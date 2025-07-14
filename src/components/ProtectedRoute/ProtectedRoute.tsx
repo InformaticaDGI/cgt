@@ -8,7 +8,6 @@ interface ProtectedRouteProps {
 
 export const ProtectedRoute = ({ children, requiredRoles }: ProtectedRouteProps) => {
     const { isAuthenticated, user } = useAuthStorage()
-
     if(!isAuthenticated) {
         return <Navigate to="/login" replace />
     }
