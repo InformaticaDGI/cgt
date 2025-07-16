@@ -14,7 +14,7 @@ const Card = styled.div<$CardProps>`
     border: 1px solid #98F4E3;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 16px;
     padding: ${props => props.$padding || "12px"};
     margin: ${props => props.$margin || "0"};
     background-color: ${props => props.$backgroundColor || "transparent"};

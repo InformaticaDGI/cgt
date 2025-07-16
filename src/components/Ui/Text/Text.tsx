@@ -11,4 +11,5 @@ const StyledText = styled.p<{ $variant?: "title" | "normal" }>`
     color: ${props => props.$variant === 'title' ? "#A0AEC0" : "#2D3748"};
     font-size: 20px;
     font-weight: 600;
+    font-family: 'Inter', sans-serif;
 `;

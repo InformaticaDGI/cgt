@@ -2,7 +2,7 @@ import styled from "styled-components";
 import CircularProgress from "../Ui/CircularProgress/CircularProgress"
 import { toHexColor, type Color } from "../../utils/libs";
 
-const IndicatorProgress = ({ value, size = 130, strokeWidth = 10 }: { value: number, size?: number, strokeWidth?: number }) => {
+const IndicatorProgress = ({ value, size = 180, strokeWidth = 10 }: { value: number, size?: number, strokeWidth?: number }) => {
 
   const colors: Array<Color> = [
     { min: 0, max: 25, color: "#DC2626" },

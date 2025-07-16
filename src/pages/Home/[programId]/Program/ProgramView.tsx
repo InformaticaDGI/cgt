@@ -63,21 +63,22 @@ const ProgramView = () => {
                     </CardHeader>
                     <CardBody>
                         <Flex $align="stretch" $direction="column" $gap={"32px"} >
-                            <Flex $align="center" $justify="center" $direction="column" $gap={"4px"}>
+                            {/* <Flex $align="center" $justify="center" $direction="column" $gap={"4px"}>
                                 <Text style={{ color: '#7A8E8B', fontSize: '11px', fontWeight: '500', textAlign: 'justify' }}>{"ESTADO DEL PROYECTO"}</Text>
-                            </Flex>
-                            <Flex $align="stretch" $direction="row" $gap={"2px"}>
-                                {Array.from({ length: project.kpiInstances.length > 3 ? 3 : project.kpiInstances.length }).map((_, index) => {
-                                    const kpi = project.kpiInstances[index];
-                                    console.log(kpi);
-                                    if (index === 1 || project.kpiInstances.length === 1) return (
-                                        <Flex $align="center" $justify="center" $direction="column" $gap={"16px"} key={index}>
-                                            <IndicatorProgress value={project.promediatePercentage} />
+                            </Flex> */}
+                            <Flex $align="stretch" $direction="row" $gap={"2px"} >
+                                {Array.from({ length: 4 }).map((_, index) => {
+                                    const kpi = project.kpiInstances[index] || { fullFillmentRatePercentage: 0 };
+                                    if (index === 3) return (
+                                        <Flex $align="center" $justify="center" $direction="column" $gap={"4px"} key={index}>
+                                            <IndicatorProgress value={project.promediatePercentage} strokeWidth={7} size={100} />
+                                            <Text style={{ color: '#7A8E8B', fontSize: '11px', fontWeight: '600', textAlign: 'justify' }}>Meta</Text>
                                         </Flex>
                                     );
                                     return (
                                     <Flex $align="center" $direction="column" $gap={"4px"} key={index}>
                                         <IndicatorProgress value={kpi.fullFillmentRatePercentage} size={60} strokeWidth={5} />
+                                        <Text style={{ color: '#7A8E8B', fontSize: '11px', fontWeight: '600', textAlign: 'justify' }}>{index === 0 ? "Tiempo" : index === 1 ? "Recursos" : "Eficacia"}</Text>
                                     </Flex>
                                     )
                                 })}
@@ -86,6 +87,9 @@ const ProgramView = () => {
 
                             <Flex $align="stretch" $direction="column" $gap={"16px"}>
                                 <Flex $align="stretch" $justify="space-between" $direction="row" $gap={"4px"}>
+                                    <Flex $align="start" $direction="column" $gap={"4px"}>
+                                       <Badge variant={'social'} />
+                                    </Flex>
                                     <Flex $align="end" $direction="column" $gap={"4px"}>
                                         <Text style={{ color: '#7A8E8B', fontSize: '11px', fontWeight: '500', textAlign: 'justify' }}>Tiempo de ejecución: {project.timePercentage}%</Text>
                                         <Progress value={project.timePercentage} max={100} color="#0C777C" backgroundColor="#F3F4F6" />
