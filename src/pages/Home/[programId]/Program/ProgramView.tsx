@@ -16,7 +16,7 @@ import CardFooter from "../../../../components/Card/CardFooter";
 import Badge from "../../../../components/Ui/Badge/Badge";
 import Progress from "../../../../components/Ui/Progress/Progress";
 import StatusBadge from "../../../../components/Prebuilt/StatusBadge";
-import { MdOutlineInventory, MdOutlineTimer, MdOutlineTrendingUp, MdOutlineAssignment } from "react-icons/md";
+import { MdOutlineInventory, MdOutlineTimer, MdOutlineTrendingUp } from "react-icons/md";
 import { Trophy } from "lucide-react";
 
 const ProgramView = () => {
