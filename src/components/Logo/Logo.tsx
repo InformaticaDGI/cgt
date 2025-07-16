@@ -5,7 +5,7 @@ export default function Logo() {
 
     return (
         <LogoWrapper>
-            <Image src='/cgtblanco.svg' />
+            <Image src='/cgtblanco2.svg' />
         </LogoWrapper>
     )
 }
