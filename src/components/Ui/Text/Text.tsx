@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Text = ({ children, variant = "normal", ...props }: { children: string, variant?: "title" | "normal"  } & React.ComponentPropsWithoutRef<'p'>) => {
+const Text = ({ children, variant = "normal", ...props }: { children: React.ReactNode, variant?: "title" | "normal"  } & React.ComponentPropsWithoutRef<'p'>) => {
     return <StyledText $variant={variant} {...props}>{children}</StyledText>
 }
 

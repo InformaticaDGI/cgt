@@ -10,7 +10,7 @@ import Card from "../../components/Card/Card"
 import { InfoIcon } from "lucide-react"
 import { useAuthStorage } from "../../store/auth-storage"
 import cgtLogo from '../../assets/cgt.png';
-import marcaLogo from '../../assets/marca.png';
+import porAmorAGuarico from '../../assets/por-amor-a-guarico-remark.png';
 
 export const LoginView = () => {
 
@@ -27,7 +27,7 @@ export const LoginView = () => {
 
     const { isAuthenticated } = useAuthStorage()
 
-    if(isAuthenticated) {
+    if (isAuthenticated) {
         return <Navigate to="/mapa" replace />
     }
 
@@ -48,53 +48,38 @@ export const LoginView = () => {
 
     return (
         <div style={{ position: 'relative', width: '100vw', height: '100vh', overflow: 'hidden', background: 'var(--gradient-primary)' }}>
-            <img 
-                src={marcaLogo}
-                alt="Marca de agua"
-                style={{
-                    position: 'absolute',
-                    left: '50%',
-                    top: '50%',
-                    transform: 'translate(-50%, -50%)',
-                    opacity: 0.18,
-                    width: '70vw',
-                    maxWidth: '900px',
-                    minWidth: '300px',
-                    zIndex: 1,
-                    pointerEvents: 'none',
-                    userSelect: 'none',
-                }}
-            />
-            <Flex $justify="center" $align="center" $height="100vh" style={{ position: 'relative', zIndex: 2 }}>
-
-            <Flex $justify="center" $align="stretch" style={{ maxWidth: '400px' }}>
-                <Card style={{ padding: '24px', backgroundColor: 'var(--background)' }} $isSelectable={false} $height="450px">
-                    <form style={{ height: '100%' }} onSubmit={handleSubmit}>
-                        <Flex $justify="space-between" $align="start" $direction="column" $gap="16px">
-                            <img src={cgtLogo} alt="Logo CGT" style={{ maxWidth: '140px', width: '100%', height: 'auto', alignSelf: 'center', marginBottom: '8px' }} />
-                                                        <FormControl label="Usuario">
-                                <Input style={{ border: error ? '1px solid var(--error)' : '1px solid var(--primary)', backgroundColor: error ? 'var(--error-light)' : 'var(--input-background)' }}  placeholder="Usuario" value={credentials.email} onChange={(e) => setCredentials({ ...credentials, email: e.target.value })} />
-                            </FormControl>
-                            <FormControl label="Contraseña">
-                                <Input style={{ border: error ? '1px solid var(--error)' : '1px solid var(--primary)', backgroundColor: error ? 'var(--error-light)' : 'var(--input-background)' }} type="password" placeholder="Contraseña" value={credentials.password} onChange={(e) => setCredentials({ ...credentials, password: e.target.value })} />
-                            </FormControl>
-                            <Flex $align="stretch" $direction="column" $gap="12px">
-                                {error && <Flex $justify="start" $align="center" $direction="row" $gap="4px">
-                                    <InfoIcon width={16} height={16} style={{ color: 'var(--error)' }} />
-                                    <Text style={{ fontSize: '12px', fontWeight: '500', color: 'var(--error)' }}>{error}</Text>
-                                </Flex>}
-                                <Button type="submit" $variant="primary">Acceder</Button>
-                            </Flex>
-                            <Flex $align="stretch" $direction="column" $gap="12px">
-                                <Flex $direction="column" $gap="12px">
-                                    <Text style={{ fontSize: '12px', fontWeight: '500' }}> © 2025 - Dirección General de Informática</Text>
+            <Flex $justify="center" $align="center" $height="100vh">
+                <Flex $align="center" $direction="column" $gap="4px">
+                    <img src={porAmorAGuarico} alt="Por amor a guarico" width={150}  />
+                    <Flex $justify="center" $align="stretch" $height="500px" style={{ maxWidth: '400px' }}>
+                        <Card style={{ padding: '24px', backgroundColor: 'var(--background)' }} $isSelectable={false} $height="450px">
+                            <form style={{ height: '100%' }} onSubmit={handleSubmit}>
+                                <Flex $justify="space-between" $align="start" $direction="column" $gap="16px">
+                                    <img src={cgtLogo} alt="Logo CGT" style={{ maxWidth: '140px', width: '100%', height: 'auto', alignSelf: 'center', marginBottom: '8px' }} />
+                                    <FormControl label="Usuario">
+                                        <Input style={{ border: error ? '1px solid var(--error)' : '1px solid var(--primary)', backgroundColor: error ? 'var(--error-light)' : 'var(--input-background)' }} placeholder="Usuario" value={credentials.email} onChange={(e) => setCredentials({ ...credentials, email: e.target.value })} />
+                                    </FormControl>
+                                    <FormControl label="Contraseña">
+                                        <Input style={{ border: error ? '1px solid var(--error)' : '1px solid var(--primary)', backgroundColor: error ? 'var(--error-light)' : 'var(--input-background)' }} type="password" placeholder="Contraseña" value={credentials.password} onChange={(e) => setCredentials({ ...credentials, password: e.target.value })} />
+                                    </FormControl>
+                                    <Flex $align="stretch" $direction="column" $gap="12px">
+                                        {error && <Flex $justify="start" $align="center" $direction="row" $gap="4px">
+                                            <InfoIcon width={16} height={16} style={{ color: 'var(--error)' }} />
+                                            <Text style={{ fontSize: '12px', fontWeight: '500', color: 'var(--error)' }}>{error}</Text>
+                                        </Flex>}
+                                        <Button type="submit" $variant="primary">Acceder</Button>
+                                    </Flex>
+                                    <Flex $align="stretch" $direction="column" $gap="12px">
+                                        <Flex $direction="column" $gap="12px">
+                                            <Text style={{ fontSize: '12px', fontWeight: '500' }}> © {new Date().getFullYear()} - Dirección General de Informática</Text>
+                                        </Flex>
+                                    </Flex>
                                 </Flex>
-                            </Flex>
-                        </Flex>
-                    </form>
-                </Card>
+                            </form>
+                        </Card>
+                    </Flex>
+                </Flex>
             </Flex>
-        </Flex>
-    </div>
+        </div>
     )
 }

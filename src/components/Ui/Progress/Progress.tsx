@@ -1,40 +1,31 @@
 import styled from "styled-components"
-import { Box } from "../../Layout/Box"
 
 
-const ProgressBar = styled.div<{ $size: string, $color: string }>`
-    height: ${({ $size }) => $size};
-    background-color: ${({ $color }) => $color};
-    border-radius: 10px;
-`;
-
-const ProgressContainer = styled.div`
+const StyledProgress = styled.div<{ $progress: number, $color: string,$backgroundColor: string }>`
     position: relative;
-    width: 100%;
-    height: 10px;
-    background-color: #e0e0e0;
-    border-radius: 10px;
+    height: 8px;
+    background-color: ${({ $backgroundColor }) => $backgroundColor};
+    border-radius: 4px;
+    width: 260px;
+    &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: ${({ $progress }) => $progress}%;
+        height: 100%;
+        background-color: ${({ $color }) => $color};
+        border-radius: 4px;
+    }
 `;
 
 
 
-const Progress = ({ value, max, color, size }: { value: number, max: number, color: string, size: string }) => {
+const Progress = ({ value, max, color, backgroundColor }: { value: number, max: number, color: string, backgroundColor: string }) => {
 
     const progress = (value / max) * 100
 
-    return (
-
-        <ProgressContainer>
-            <ProgressBar $size={size} $color={color}>
-                <Box className={`h-full bg-${color} rounded-full`} style={{ height: '100%', width: `${progress}%` }}></Box>
-            </ProgressBar>
-            <ProgressBar $size={size} $color={color}>
-                <Box className={`h-full bg-${color} rounded-full`} style={{ height: '100%', width: `${progress}%` }}></Box>
-            </ProgressBar>
-        </ProgressContainer>
-
-
-    )
+    return <StyledProgress $progress={progress} $color={color} $backgroundColor={backgroundColor} />
 }
 
 export default Progress;
