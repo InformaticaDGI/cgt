@@ -15,11 +15,20 @@ import IndicatorTerritorialSecretary from "../../../../components/Indicator/Indi
 import CardFooter from "../../../../components/Card/CardFooter";
 import Badge from "../../../../components/Ui/Badge/Badge";
 import Progress from "../../../../components/Ui/Progress/Progress";
+import StatusBadge from "../../../../components/Prebuilt/StatusBadge";
+import { MdOutlineInventory, MdOutlineTimer, MdOutlineTrendingUp, MdOutlineAssignment } from "react-icons/md";
+import { Trophy } from "lucide-react";
 
 const ProgramView = () => {
     const { programId } = useParams();
     const { data: program } = useProgram(programId);
     const pathname = window.location.pathname;
+
+    const KPI_ICONS: Record<number, React.ElementType> = {
+        0: MdOutlineTimer,
+        1: MdOutlineInventory,
+        2: MdOutlineTrendingUp
+    }
 
 
     if (!program) return <Flex $justify="end" $height="100vh" $align="end" $padding="12px"><Text style={{ padding: '12px', fontSize: '12px', color: 'var(--secondary)', background: 'var(--input-background)', fontWeight: '500', textWrap: 'nowrap' }}>Cargando...</Text></Flex>
@@ -63,23 +72,26 @@ const ProgramView = () => {
                     </CardHeader>
                     <CardBody>
                         <Flex $align="stretch" $direction="column" $gap={"32px"} >
-                            {/* <Flex $align="center" $justify="center" $direction="column" $gap={"4px"}>
-                                <Text style={{ color: '#7A8E8B', fontSize: '11px', fontWeight: '500', textAlign: 'justify' }}>{"ESTADO DEL PROYECTO"}</Text>
-                            </Flex> */}
                             <Flex $align="stretch" $direction="row" $gap={"2px"} >
                                 {Array.from({ length: 4 }).map((_, index) => {
                                     const kpi = project.kpiInstances[index] || { fullFillmentRatePercentage: 0 };
                                     if (index === 3) return (
-                                        <Flex $align="center" $justify="center" $direction="column" $gap={"4px"} key={index}>
-                                            <IndicatorProgress value={project.promediatePercentage} strokeWidth={7} size={100} />
-                                            <Text style={{ color: '#7A8E8B', fontSize: '11px', fontWeight: '600', textAlign: 'justify' }}>Meta</Text>
+                                        <Flex $align="center" $justify="center" $direction="column" $gap={"8px"} key={index}>
+                                            <IndicatorProgress value={project.promediatePercentage} strokeWidth={5} size={60} textSize={12} backgroundColor={"#9eb5b7"} />
+                                            <Flex $align="center" $justify="center" $direction="column" $gap={"4px"}>
+                                                <Trophy size={24} color="#5A787A" />
+                                                <Text style={{ color: '#5A787A', fontSize: '11px', fontWeight: '600', textAlign: 'justify' }}>Meta</Text>
+                                            </Flex>
                                         </Flex>
                                     );
                                     return (
-                                    <Flex $align="center" $direction="column" $gap={"4px"} key={index}>
-                                        <IndicatorProgress value={kpi.fullFillmentRatePercentage} size={60} strokeWidth={5} />
-                                        <Text style={{ color: '#7A8E8B', fontSize: '11px', fontWeight: '600', textAlign: 'justify' }}>{index === 0 ? "Tiempo" : index === 1 ? "Recursos" : "Eficacia"}</Text>
-                                    </Flex>
+                                        <Flex $align="center" $direction="column" $gap={"8px"} key={index}>
+                                            <IndicatorProgress value={kpi.fullFillmentRatePercentage} size={60} strokeWidth={5} textSize={12} />
+                                            <Flex $align="center" $justify="center" $direction="column" $gap={"4px"}>
+                                                <KPIIcon icon={KPI_ICONS[index]} />
+                                                <Text style={{ color: '#7A8E8B', fontSize: '11px', fontWeight: '600', textAlign: 'justify' }}>{index === 0 ? "Tiempo" : index === 1 ? "Recursos" : "Eficacia"}</Text>
+                                            </Flex>
+                                        </Flex>
                                     )
                                 })}
                             </Flex>
@@ -88,11 +100,11 @@ const ProgramView = () => {
                             <Flex $align="stretch" $direction="column" $gap={"16px"}>
                                 <Flex $align="stretch" $justify="space-between" $direction="row" $gap={"4px"}>
                                     <Flex $align="start" $direction="column" $gap={"4px"}>
-                                       <Badge variant={'social'} />
+                                        <StatusBadge variant={project.status} />
                                     </Flex>
                                     <Flex $align="end" $direction="column" $gap={"4px"}>
                                         <Text style={{ color: '#7A8E8B', fontSize: '11px', fontWeight: '500', textAlign: 'justify' }}>Tiempo de ejecución: {project.timePercentage}%</Text>
-                                        <Progress value={project.timePercentage} max={100} color="#0C777C" backgroundColor="#F3F4F6" />
+                                        <Progress value={project.timePercentage} max={100} color="var(--primary)" backgroundColor="#F3F4F6" />
                                     </Flex>
                                 </Flex>
 
@@ -119,5 +131,10 @@ const MainWrapper = styled.div`
     height: 100%;
     padding: 16px;
 `;
+
+const KPIIcon = ({ icon }: { icon: React.ElementType }) => {
+    const Icon = icon;
+    return <Icon size={24} color="#7A8E8B" />
+}
 
 export default ProgramView
