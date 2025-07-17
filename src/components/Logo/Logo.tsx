@@ -15,11 +15,11 @@ const LogoWrapper = styled.div`
             justify-content: center;
             flex-direction: row;
             gap: 8px;
-            padding-bottom: 16px;
             align-items: center;
     `;
 
 const Image = styled.img`
         width: 128px;
         height: auto;
+        filter: drop-shadow(0 0 0.04rem #ffffff);
     `;

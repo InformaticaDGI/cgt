@@ -35,14 +35,15 @@ export default Navigation;
 
   const Nav = styled.div`
       display: flex;
-      gap: 0.7em;
+      gap: 1.4em;
       flex-direction: column;
-      padding-left: 17px;
-      padding-top: 44px;
+      padding-left: 12px;
+      padding-right: 12px;
+      padding-top: 1.4em;
   `;
 
   const Spacer = styled.div`
         border: 1px solid transparent;
-        border-image: linear-gradient(to right, rgba(224, 225, 226, 0) 0%, rgba(224, 225, 226, 1) 50%, rgba(224, 225, 226, 0.16) 100%) 1;
+        border-image: linear-gradient(to right, rgba(255, 225, 255, 0) 0%, rgba(255, 255, 255, 1) 50%, rgba(255, 225, 255, 0.16) 100%) 1;
         max-width: 95%;
   `;
