@@ -118,7 +118,7 @@ const renderCellContent = (row: any, header: HeaderConfig, rowIndex: number, col
     return null
 }
 
-type HeaderConfig = {
+export type HeaderConfig = {
     key: string
     label: string
     align?: "left" | "center" | "right"

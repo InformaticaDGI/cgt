@@ -15,6 +15,7 @@ import CardBody from "../../components/Card/CardBody";
 import CardHeader from "../../components/Card/CardHeader";
 import IndicatorIcon from "../../components/Prebuilt/IndicatorIcon";
 import { Trophy } from "lucide-react";
+import { Link } from "react-router";
 
 const HomeView = () => {
 
@@ -25,7 +26,7 @@ const HomeView = () => {
         <Tabs />
         <Grid>
             {data.map(program => (
-                <Card as="a" href={`/indicadores/${program.id}`} key={program.id}>
+                <Card as={Link} to={`/indicadores/${program.id}`} key={program.id}>
                     <CardHeader>
                         <Text style={{ fontSize: '14px', color: '#0C777C', fontWeight: '700', textWrap: 'nowrap' }}>{program.name}</Text>
                         <Flex $direction="row" $justify="end" $align="center" $gap="8px">
@@ -44,7 +45,6 @@ const HomeView = () => {
                                         <Text style={{ color: '#7A8E8B', fontSize: '11px', fontWeight: '600', textAlign: 'justify' }}>Meta</Text>
                                     </Flex>
                                 </Flex>
-
                                 <IndicatorSecretary secretaryId={program.secretaryId} />
                                 <IndicatorTerritorialSecretary parentId={program.secretaryId} />
                             </Flex>
@@ -53,7 +53,7 @@ const HomeView = () => {
                     <CardFooter>
 
                         <Flex $align="center" $justify="end" $direction="row" $gap={"4px"}>
-                            <Badge variant={'social'} />
+                            <Badge parentId={program.secretaryId} />
                         </Flex>
                         {/* <Text style={{ color: '#7A8E8B', fontSize: '11px', fontWeight: '600' }}>No Definido</Text> */}
                     </CardFooter>

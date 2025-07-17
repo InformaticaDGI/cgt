@@ -8,6 +8,7 @@ import IndicatorIcon from "../../../../../../components/Prebuilt/IndicatorIcon";
 import Text from "../../../../../../components/Ui/Text/Text";
 import { Flex } from "../../../../../../components/Layout/Flex";
 import IndicatorProgress from "../../../../../../components/Indicator/IndicatorProgress";
+import { Link } from "react-router";
 
 const ProjectView = () => {
     const pathname = window.location.pathname;
@@ -32,7 +33,7 @@ const ProjectView = () => {
             </Card>
             <Tabs/>
             <StyledGrid>
-            <Card as="a" href={`${pathname}/actividad1`}>
+            <Card as={Link} to={`${pathname}/actividad1`}>
                 <CardHeader>
                     <Text style={{ fontSize: '14px', color: '#0C777C', fontWeight: '700', textWrap: 'nowrap' }}>Actividad Ejemplo 1</Text>
                     <Flex $direction="row" $justify="end" $align="center" $gap="8px">

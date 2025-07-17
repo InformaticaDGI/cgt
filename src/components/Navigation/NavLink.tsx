@@ -1,12 +1,13 @@
 import styled from "styled-components"
-import { useLocation } from "react-router";
+import { Link, useLocation } from "react-router";
 import type { NavLinkProps } from "./config"
 
 const NavLink = ({ item }: { item: NavLinkProps }) => {
     const location = useLocation();
-    const Icon = item.icon; 
+    const Icon = item.icon;
+     
     return (
-        <StyledNavLink $currentPage={location.pathname.includes(item.to)} as="a" href={item.to}>
+        <StyledNavLink $currentPage={location.pathname.includes(item.to)} as={Link} to={item.to}>
             <IconWrapper $currentPage={location.pathname.includes(item.to)}>
                 <Icon />
             </IconWrapper>

@@ -9,7 +9,7 @@ import IndicatorIcon from "../../../../components/Prebuilt/IndicatorIcon";
 import { Flex } from "../../../../components/Layout/Flex";
 import IndicatorProgress from "../../../../components/Indicator/IndicatorProgress";
 import useProgram from "../../../../hooks/useProgram";
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router";
 import IndicatorSecretary from "../../../../components/Indicator/IndicatorSecretary";
 import IndicatorTerritorialSecretary from "../../../../components/Indicator/IndicatorTerritorialSecretary";
 import CardFooter from "../../../../components/Card/CardFooter";
@@ -64,7 +64,7 @@ const ProgramView = () => {
             <CardFooter>
 
                 <Flex $align="center" $justify="end" $direction="row" $gap={"4px"}>
-                    <Badge variant={'social'} />
+                    <Badge parentId={program.secretaryId} />
                 </Flex>
                 {/* <Text style={{ color: '#7A8E8B', fontSize: '11px', fontWeight: '600' }}>No Definido</Text> */}
             </CardFooter>
@@ -72,7 +72,7 @@ const ProgramView = () => {
         <Tabs />
         <StyledGrid>
             {program?.projects.map(project => (
-                <Card as="a" href={`${pathname}/${project.id}`} key={project.id}>
+                <Card as={Link} to={`${pathname}/${project.id}`} key={project.id}>
                     <CardHeader>
                         <Text style={{ fontSize: '14px', color: '#0C777C', fontWeight: '700', textWrap: 'nowrap' }}>{project.name}</Text>
                         <Flex $direction="row" $justify="end" $align="center" $gap="8px">
@@ -107,10 +107,10 @@ const ProgramView = () => {
                             <Flex $align="stretch" $direction="column" $gap={"16px"}>
                                 <Flex $align="stretch" $justify="space-between" $direction="row" $gap={"4px"}>
                                     <Flex $align="start" $direction="column" $gap={"4px"}>
-                                        <StatusBadge variant={'in_progress'} />
+                                        <StatusBadge variant={project.status} />
                                     </Flex>
                                     <Flex $align="end" $direction="column" $gap={"4px"}>
-                                        <Text style={{ color: '#7A8E8B', fontSize: '11px', fontWeight: '500', textAlign: 'justify' }}>Tiempo de ejecución: {project.progressByTime}%</Text>
+                                        <Text style={{ color: '#7A8E8B', fontSize: '12px', fontWeight: '500', textAlign: 'justify' }}>Dias restantes: {project.daysRemaining}</Text>
                                         <Progress value={project.progressByTime} max={100} color="var(--primary)" backgroundColor="#F3F4F6" />
                                     </Flex>
                                 </Flex>

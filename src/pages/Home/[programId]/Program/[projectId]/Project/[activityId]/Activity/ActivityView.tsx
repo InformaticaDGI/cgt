@@ -8,6 +8,7 @@ import IndicatorIcon from "../../../../../../../../components/Prebuilt/Indicator
 import Text from "../../../../../../../../components/Ui/Text/Text";
 import { Flex } from "../../../../../../../../components/Layout/Flex";
 import IndicatorProgress from "../../../../../../../../components/Indicator/IndicatorProgress";
+import { Link } from "react-router";
 
 const ActivityView = () => {
     const pathname = window.location.pathname;
@@ -33,7 +34,7 @@ const ActivityView = () => {
             </Card>
             <Tabs />
             <StyledGrid>
-                <Card as="a" href={`${pathname}/tarea1/`} >
+                <Card as={Link} to={`${pathname}/tarea1/`} >
                     <CardHeader>
                         <Text style={{ fontSize: '14px', color: '#0C777C', fontWeight: '700', textWrap: 'nowrap' }}>Tarea Ejemplo 1</Text>
                         <Flex $direction="row" $justify="end" $align="center" $gap="8px">

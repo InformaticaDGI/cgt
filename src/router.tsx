@@ -11,6 +11,7 @@ import { ProtectedRoute } from './components/ProtectedRoute/ProtectedRoute'
 import NotFoundView from './pages/NotFound/NotFoundView'
 import MapView from './pages/Management/Map/MapView'
 import Navigation from './components/Navigation/Navigation'
+import SecurityView from './pages/Security/SecurityView'
 
 const router = createBrowserRouter([
 
@@ -60,6 +61,10 @@ const router = createBrowserRouter([
                 path: 'crear-proyecto',
                 element: <CreateProjectView />
             },
+            {
+                path: 'seguridad',
+                element: <SecurityView />
+            }
         ]
     },
     {
