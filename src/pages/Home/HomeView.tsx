@@ -14,42 +14,55 @@ import Badge from "../../components/Ui/Badge/Badge";
 import CardBody from "../../components/Card/CardBody";
 import CardHeader from "../../components/Card/CardHeader";
 import IndicatorIcon from "../../components/Prebuilt/IndicatorIcon";
+import { MdOutlineTrendingUp } from "react-icons/md";
+import { IoMdTrophy } from "react-icons/io";
+import { Trophy } from "lucide-react";
 
 const HomeView = () => {
 
     const { data } = usePrograms()
     return <Flex $direction="column" $gap="12px" $padding="16px" $align="stretch">
-            <Header />
-            <FilterTool />
-            <Tabs />
-            <Grid>
-                {data.map(program => (
-                    <Card as="a" href={`/indicadores/${program.id}`} key={program.id}>
-                        <CardHeader>
-                            <Text style={{ fontSize: '14px', color: '#0C777C', fontWeight: '700', textWrap: 'nowrap' }}>{program.name}</Text>
-                            <Flex $direction="row" $justify="end" $align="center" $gap="8px">
-                                <Text style={{ fontSize: '14px', color: '#889C9D', fontWeight: 'normal', textWrap: 'nowrap' }}>{`${program.projects.length} Proyectos`}</Text>
-                                <IndicatorIcon $isOpen={false} />
-                            </Flex>
-                        </CardHeader>
-                        <CardBody>
-                            <Flex $align="stretch" $direction="column" $gap={"8px"}>
-                                <Text style={{ fontSize: '14px', color: '#5A787A' }}>No Definido</Text>
-                                <Flex $align="stretch" $direction="column" $gap={"4px"}>
-                                    <IndicatorProgress value={program.overallProgramProgress} />
-                                    <IndicatorSecretary secretaryId={program.secretaryId} />
-                                    <IndicatorTerritorialSecretary parentId={program.secretaryId} />
+        <Header />
+        <FilterTool />
+        <Tabs />
+        <Grid>
+            {data.map(program => (
+                <Card as="a" href={`/indicadores/${program.id}`} key={program.id}>
+                    <CardHeader>
+                        <Text style={{ fontSize: '14px', color: '#0C777C', fontWeight: '700', textWrap: 'nowrap' }}>{program.name}</Text>
+                        <Flex $direction="row" $justify="end" $align="center" $gap="8px">
+                            <Text style={{ fontSize: '14px', color: '#889C9D', fontWeight: 'normal', textWrap: 'nowrap' }}>{`${program.projects.length} Proyectos`}</Text>
+                            <IndicatorIcon $isOpen={false} />
+                        </Flex>
+                    </CardHeader>
+                    <CardBody>
+                        <Flex $align="stretch" $direction="column" $gap={"8px"}>
+                            {/* <Text style={{ fontSize: '14px', color: '#5A787A' }}>No Definido</Text> */}
+                            <Flex $align="stretch" $direction="column" $gap={"4px"}>
+                                <Flex $align="center" $justify="center" $direction="column" $gap={"8px"}>
+                                    <IndicatorProgress value={program.overallProgramProgress} size={130} strokeWidth={8} />
+                                    <Flex $align="center" $justify="center" $direction="column" $gap={"4px"}>
+                                        <Trophy size={20} color="var(--text-secondary)" />
+                                        <Text style={{ color: '#7A8E8B', fontSize: '11px', fontWeight: '600', textAlign: 'justify' }}>Meta</Text>
+                                    </Flex>
                                 </Flex>
+
+                                <IndicatorSecretary secretaryId={program.secretaryId} />
+                                <IndicatorTerritorialSecretary parentId={program.secretaryId} />
                             </Flex>
-                        </CardBody>
-                        <CardFooter>
-                            <Text style={{ color: '#7A8E8B', fontSize: '11px', fontWeight: '600' }}>No Definido</Text>
+                        </Flex>
+                    </CardBody>
+                    <CardFooter>
+
+                        <Flex $align="center" $justify="end" $direction="row" $gap={"4px"}>
                             <Badge variant={'social'} />
-                        </CardFooter>
-                    </Card>
-                ))}
-            </Grid>
-        </Flex>
+                        </Flex>
+                        {/* <Text style={{ color: '#7A8E8B', fontSize: '11px', fontWeight: '600' }}>No Definido</Text> */}
+                    </CardFooter>
+                </Card>
+            ))}
+        </Grid>
+    </Flex>
 }
 
 

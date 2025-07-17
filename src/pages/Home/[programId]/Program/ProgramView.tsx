@@ -46,17 +46,27 @@ const ProgramView = () => {
             </CardHeader>
             <CardBody>
                 <Flex $align="stretch" $direction="column" $gap={"8px"}>
-                    <Text style={{ fontSize: '14px', color: '#5A787A' }}>No Definido</Text>
+                    {/* <Text style={{ fontSize: '14px', color: '#5A787A' }}>No Definido</Text> */}
                     <Flex $align="stretch" $direction="column" $gap={"4px"}>
-                        <IndicatorProgress value={program.overallProgramProgress} />
+                        <Flex $align="center" $justify="center" $direction="column" $gap={"8px"}>
+                            <IndicatorProgress value={program.overallProgramProgress} size={130} strokeWidth={8} />
+                            <Flex $align="center" $justify="center" $direction="column" $gap={"4px"}>
+                                <Trophy size={20} color="var(--text-secondary)" />
+                                <Text style={{ color: '#7A8E8B', fontSize: '11px', fontWeight: '600', textAlign: 'justify' }}>Meta</Text>
+                            </Flex>
+                        </Flex>
+
                         <IndicatorSecretary secretaryId={program.secretaryId} />
                         <IndicatorTerritorialSecretary parentId={program.secretaryId} />
                     </Flex>
                 </Flex>
             </CardBody>
             <CardFooter>
-                <Text style={{ color: '#7A8E8B', fontSize: '11px', fontWeight: '600' }}>No Definido</Text>
-                <Badge variant={'social'} />
+
+                <Flex $align="center" $justify="end" $direction="row" $gap={"4px"}>
+                    <Badge variant={'social'} />
+                </Flex>
+                {/* <Text style={{ color: '#7A8E8B', fontSize: '11px', fontWeight: '600' }}>No Definido</Text> */}
             </CardFooter>
         </Card>
         <Tabs />
@@ -75,7 +85,7 @@ const ProgramView = () => {
                             <Flex $align="center" $justify="center" $direction="column" $gap={"8px"}>
                                 <IndicatorProgress value={project.overallProjectProgress} strokeWidth={7} size={80} textSize={14} />
                                 <Flex $align="center" $justify="center" $direction="column" $gap={"4px"}>
-                                    <Trophy size={24} color="var(--text-secondary)"  />
+                                    <Trophy size={24} color="var(--text-secondary)" />
                                     <Text style={{ color: '#7A8E8B', fontSize: '11px', fontWeight: '600', textAlign: 'justify' }}>Meta</Text>
                                 </Flex>
                             </Flex>
