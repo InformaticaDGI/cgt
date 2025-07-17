@@ -14,8 +14,6 @@ import Badge from "../../components/Ui/Badge/Badge";
 import CardBody from "../../components/Card/CardBody";
 import CardHeader from "../../components/Card/CardHeader";
 import IndicatorIcon from "../../components/Prebuilt/IndicatorIcon";
-import { MdOutlineTrendingUp } from "react-icons/md";
-import { IoMdTrophy } from "react-icons/io";
 import { Trophy } from "lucide-react";
 
 const HomeView = () => {
