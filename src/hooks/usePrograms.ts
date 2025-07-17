@@ -29,7 +29,7 @@ export type Program = {
     updatedAt: string
     projects: any[]
     kpiInstances: any[]
-    promediateProjectPercentage: number
+    overallProgramProgress: number
 }
 
 export default usePrograms

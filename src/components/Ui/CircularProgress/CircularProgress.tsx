@@ -16,26 +16,40 @@ const CircularProgress = ({ progress = 75, size = 200, textSize = 20, strokeWidt
   const outerRadius = size / 2;
 
   return (
-    <Flex $justify="center" $align="center" $width={size.toString()} $height={size.toString()} style={{ pointerEvents: 'none' }}>
+<Flex $justify="center" $align="center" $width={size.toString()} $height={size.toString()} style={{ pointerEvents: 'none' }}>
       <PieChart width={size} height={size} >
+        {/* Background circle without corner radius */}
         <Pie
-          data={data}
-          cx="50%" // Centro X
-          cy="50%" // Centro Y
+          data={[{ name: 'Background', value: 100 }]}
+          cx="50%"
+          cy="50%"
           innerRadius={innerRadius}
           outerRadius={outerRadius}
-          startAngle={90} // Inicia en la parte superior
-          endAngle={-270} // Termina según el progreso
-          // cornerRadius={12}
-          paddingAngle={0} // Espacio entre segmentos (lo dejamos en 0 para un solo anillo)
+          startAngle={90}
+          endAngle={-270}
+          paddingAngle={0}
           dataKey="value"
-          // isAnimationActive={false} // Desactivar animación si prefieres una carga estática
         >
-          {/* El primer Cell es para el progreso */}
-          {/* El segundo Cell es para el resto del círculo (fondo) */}
-          <Cell key="progress-segment" fill={color} stroke="none" />
-          <Cell key="remaining-segment" fill={backgroundColor} stroke="none" />
+          <Cell key="background" fill={backgroundColor} stroke="none" />
         </Pie>
+        
+        {/* Progress circle with corner radius */}
+        <Pie
+          data={data}
+          cx="50%"
+          cy="50%"
+          innerRadius={innerRadius}
+          outerRadius={outerRadius}
+          startAngle={90}
+          endAngle={-270}
+          cornerRadius={12}
+          paddingAngle={0}
+          dataKey="value"
+        >
+          <Cell key="progress-segment" fill={color} stroke="none" />
+          <Cell key="remaining-segment" fill="transparent" stroke="none" />
+        </Pie>
+        
         {/* Puedes añadir texto en el centro si lo deseas, por ejemplo el porcentaje */}
         <text x="53%" y="50%" textAnchor="middle" dominantBaseline="middle" fill="#333" fontSize={textSize} fontWeight={'600'}>
           {`${actualProgress}%`}

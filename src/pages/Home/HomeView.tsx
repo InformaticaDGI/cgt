@@ -36,7 +36,7 @@ const HomeView = () => {
                             <Flex $align="stretch" $direction="column" $gap={"8px"}>
                                 <Text style={{ fontSize: '14px', color: '#5A787A' }}>No Definido</Text>
                                 <Flex $align="stretch" $direction="column" $gap={"4px"}>
-                                    <IndicatorProgress value={program.promediateProjectPercentage} />
+                                    <IndicatorProgress value={program.overallProgramProgress} />
                                     <IndicatorSecretary secretaryId={program.secretaryId} />
                                     <IndicatorTerritorialSecretary parentId={program.secretaryId} />
                                 </Flex>
