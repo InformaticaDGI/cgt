@@ -4,19 +4,15 @@ import { config } from "../config";
 
 const cgt = axios.create({
     baseURL: `${config.apiUrl}`,
+    headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${useAuthStorage.getState().token}`
+    }
 })
 
 const auth = axios.create({
     baseURL: 'https://auth.guarico.gob.ve/api/v1/',
-})
-
-cgt.interceptors.request.use((config) => {
-    const token = useAuthStorage.getState().token
-    if(token) {
-        config.headers.Authorization = `Bearer ${token}`
-    }
-
-    return config
 })
 
 
