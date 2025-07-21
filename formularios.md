@@ -4,6 +4,7 @@
   - Fecha de inicio
   - Fecha de fin
   - Observaciones
+  - Area
 * Ubicacion
   - Municipio
   - Parroquia
