@@ -1,19 +1,23 @@
+import useAccessLogs from "../../hooks/useAccessLogs";
 import { Table, type HeaderConfig } from "../Ui/Table/Table";
+import Text from "../Ui/Text/Text";
 
 const AccessLogTable = () => {
+
+    const { data: accessLogs } = useAccessLogs()
 
     const columnsAccess: HeaderConfig[] = [
         {
             key: 'user',
             label: 'Usuario',
             align: 'left',
-            render: (row: any) => row.user,
+            render: (row: any) => <Text style={{ fontSize: '12px', fontWeight: '500', maxWidth: '300px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{row.payload.name}</Text>
         },
         {
             key: 'institution',
             label: 'Institución',
             align: 'left',
-            render: (row: any) => row.institution,
+            render: (row: any) => row.institutionId,
         },
         {
             key: 'ip',
@@ -25,11 +29,17 @@ const AccessLogTable = () => {
             key: 'date',
             label: 'Fecha de Acceso',
             align: 'left',
-            render: (row: any) => row.date,
+            render: (row: any) => new Date(row.createdAt).toLocaleString('es-VE', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+            }),
         }
     ]
 
-    return <Table columns={columnsAccess} data={[{ user: 'Juan Perez', institution: 'Institución 1', ip: '192.168.1.1', date: '2021-01-01' }]} />
+    return <Table columns={columnsAccess} data={accessLogs ?? []} />
 }
 
 export default AccessLogTable;

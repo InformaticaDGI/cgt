@@ -1,0 +1,113 @@
+import Card from "../../../components/Card/Card"
+import { Button } from "../../../components/Ui/Button/Button"
+import useStepper from "../../../components/Stepper/useStepper"
+import { Flex } from "../../../components/Layout/Flex"
+import { Grid, GridItem } from "../../../components/Layout/Grid"
+import { FormControl } from "../../../components/Ui/FormControl/FormControl"
+import { Input } from "../../../components/Ui/Input/Input"
+import { $TextArea } from "../../../components/Ui/TextArea/TextArea"
+import { AreaSelect } from "../../../components/Prebuilt/AreaSelect"
+import { useFormik } from "formik"
+import { useAppStore } from "../../../store/store"
+
+const BasicInformation = () => {
+
+    const { nextStep, isFirstStep, previousStep, isLastStep } = useStepper()
+    const { formState, setFormState } = useAppStore()
+
+
+    const handleBack = () => {
+        if (isFirstStep) return;
+        previousStep()
+    }
+
+    const validate = (values: any) => {
+        const errors: any = {};
+        if (!values.name) errors.name = "El nombre es requerido";
+        if (!values.initialDate) errors.initialDate = "La fecha de inicio es requerida";
+        if (!values.finalDate) errors.finalDate = "La fecha de fin es requerida";
+        if (!values.areaId) errors.areaId = "El área es requerida";
+        if (!values.description) errors.description = "La descripción es requerida";
+        return errors;
+    }
+
+
+    const formik = useFormik({
+        initialValues: {
+            name: formState.projectName,
+            initialDate: formState.projectInitialDate,
+            finalDate: formState.projectFinalDate,
+            areaId: formState.projectAreaId,
+            description: formState.projectDescription,
+        },
+        onSubmit: (values) => {
+            if (isLastStep) return;
+            setFormState({
+                ...formState,
+                projectName: values.name,
+                projectInitialDate: values.initialDate,
+                projectFinalDate: values.finalDate,
+                projectAreaId: values.areaId,
+                projectDescription: values.description,
+            })
+            nextStep()
+        },
+        validate
+    })
+
+    return (
+        <form onSubmit={formik.handleSubmit}>
+            <Card $isSelectable={false} $padding="32px">
+                <Grid $columns="repeat(24, 1fr)" $gap="12px" $width="100%">
+                    <GridItem $colSpan={24}>
+                        <h3 style={{ color: "var(--text-secondary)", marginBottom: "12px" }}>Información Básica</h3>
+                    </GridItem>
+
+                    <GridItem $colSpan={24}>
+                        <FormControl label="Nombre del proyecto" required error={formik.errors.name && formik.touched.name ? formik.errors.name : undefined}>
+                            <Input name="name" placeholder="Nombre del proyecto"
+                                value={formik.values.name} onChange={(e) => formik.setFieldValue("name", e.target.value)}
+                                onBlur={formik.handleBlur}
+                            />
+                        </FormControl>
+                    </GridItem>
+                    <GridItem $colSpan={12}>
+                        <FormControl label="Fecha de inicio" required error={formik.errors.initialDate && formik.touched.initialDate ? formik.errors.initialDate : undefined}>
+                            <Input type="date" name="initialDate" placeholder="Fecha de inicio"
+                                value={formik.values.initialDate} onChange={(e) => formik.setFieldValue("initialDate", e.target.value)}
+                                onBlur={formik.handleBlur}
+                            />
+                        </FormControl>
+                    </GridItem>
+                    <GridItem $colSpan={12}>
+                        <FormControl label="Fecha de fin" required error={formik.errors.finalDate && formik.touched.finalDate ? formik.errors.finalDate : undefined}>
+                            <Input type="date" name="finalDate" placeholder="Fecha de fin"
+                                value={formik.values.finalDate} onChange={(e) => formik.setFieldValue("finalDate", e.target.value)}
+                                onBlur={formik.handleBlur}
+                            />
+                        </FormControl>
+                    </GridItem>
+                    <GridItem $colSpan={24} style={{ display: 'flex', justifyContent: 'center' }}>
+                        <FormControl label="Area" error={formik.errors.areaId && formik.touched.areaId ? formik.errors.areaId : undefined}>
+                            <AreaSelect value={formik.values.areaId} onChange={(value) => formik.setFieldValue("areaId", value)} />
+                        </FormControl>
+                    </GridItem>
+                    <GridItem $colSpan={24}>
+                        <FormControl label="Descripción" error={formik.errors.description && formik.touched.description ? formik.errors.description : undefined}>
+                            <$TextArea name="description" placeholder="Descripción"
+                                value={formik.values.description} onChange={(e) => formik.setFieldValue("description", e.target.value)}
+                                onBlur={formik.handleBlur}
+                            />
+                        </FormControl>
+                    </GridItem>
+                </Grid>
+                <Flex $direction="row" $justify="end" $gap="12px">
+                    <Button $variant="primary" $disabled={isFirstStep} onClick={handleBack}>Atras</Button>
+                    <Button $variant="primary" $disabled={isLastStep} type="submit">Siguiente</Button>
+                </Flex>
+            </Card>
+        </form>
+    )
+}
+
+export default BasicInformation;

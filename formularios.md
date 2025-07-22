@@ -11,7 +11,7 @@
   - Circuito comunal
   - Geolocalizacion
 * Recursos del proyecto
-  - Presupuesto
+  - Presupuesto -> Budget
   - Mano de obra calificada
   - Mano de obra no calificada
   - Mano de obra indirecta
