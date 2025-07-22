@@ -94,9 +94,7 @@ export default function CreateProjectForm({ onSubmit, initialValues, isLoading }
         <GridItem $colSpan={24} style={{ display: 'flex', justifyContent: 'center' }}>
             <KpiBaseInput value={formik.values.kpiInstances} onChange={(value) => formik.setFieldValue('kpiInstances', value)} />
         </GridItem>
-        <GridItem $colSpan={24} style={{ display: 'flex', justifyContent: 'center', paddingTop: "12px" }}>
-            <Button $size="large" type="submit" onClick={() => formik.handleSubmit()} $variant="primary" disabled={!formik.isValid || isLoading}>Crear proyecto</Button>
-        </GridItem>
+        
     </Grid>
 }
 

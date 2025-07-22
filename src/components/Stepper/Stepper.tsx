@@ -35,12 +35,12 @@ const Stepper: StepperComponent = ({ children, config }: StepperProps) => {
     const nextStep = () => {
         if (isLastStep) return
         setStepperConfig(stepperConfig.map((step, index) => index === currentStep ? { ...step, done: true } : step))
-        setStep(currentStep + 1)
+        setCurrentStep(currentStep + 1)
     }
 
     const previousStep = () => {
         if (isFirstStep) return
-        setStep(currentStep - 1)
+        setCurrentStep(currentStep - 1)
     }
 
     const setStep = (step: number) => {

@@ -39,7 +39,7 @@ export default function CreateProjectView() {
                 <BasicInformation />
             </Stepper.Step>
             <Stepper.Step>
-                <h1>{/** TODO - STEP 2 */}</h1>
+                <h1>FDDWADw</h1>
             </Stepper.Step>
             <Stepper.Step>
                 <h1>{/** TODO - STEP 3 */}</h1>
