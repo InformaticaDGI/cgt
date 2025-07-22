@@ -1,11 +1,17 @@
 import { create } from "zustand"
 import { persist } from "zustand/middleware"
 
+interface Role {
+    id: string
+    name: string
+    policies: string[]
+}
+
 interface User {
     id: string
     email: string
     name: string
-    role: string
+    role: Role
   }
   
   interface UserState {
