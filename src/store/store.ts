@@ -4,17 +4,18 @@ import type { Secretary } from '../hooks/useSecretary'
 
 interface FormState {
   // Basic Information
-  projectName: string
-  projectDescription: string
-  projectInitialDate: string
-  projectFinalDate: string
-  projectAreaId: string
+  projectName: string;
+  projectDescription: string;
+  projectInitialDate: string;
+  projectFinalDate: string;
+  projectAreaId: string;
 
   // Geolocation
-  projectParrishId: string
-  projectCommunityCircuitId: string
-  projectLatitude: number
-  projectLongitude: number
+  projectMunicipalityId: string;
+  projectParrishId: string;
+  projectCommunityCircuitId: string;
+  projectLatitude: number;
+  projectLongitude: number;
 
   // Budget
   projectBudgetSource: number
