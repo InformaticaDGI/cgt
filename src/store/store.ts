@@ -18,7 +18,8 @@ interface FormState {
   projectLongitude: number;
 
   // Budget
-  projectBudgetSource: number
+  projectBudgetSourceId: string
+  projectBudget: number
   projectDirectLabor: number
   projectIndirectLabor: number
   projectQualifiedLabor: number
@@ -71,9 +72,14 @@ export const useAppStore = create<AppState>()(
         projectCommunityCircuitId: '',
         projectLatitude: 0,
         projectLongitude: 0,
-        projectBudgetSource: 0,
+        projectBudgetSourceId: '',
+        projectBudget: 0,
         projectDirectLabor: 0,
         projectIndirectLabor: 0,
+        projectQualifiedLabor: 0,
+        projectUnqualifiedLabor: 0,
+        projectFemaleLabor: 0,
+        projectMaleLabor: 0,
       },
       setFormState: (formState) => set({ formState }),
       // Setter Functions
