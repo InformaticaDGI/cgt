@@ -24,21 +24,21 @@ const createNavItems: (logout: () => void) => NavItems = (logout: () => void) =>
 
         {
             sectionTitle: 'Registro',
-            roles: authRoles.Usuario
+            roles: ['*']
         },
         {
             id: 'create-program',
             to: '/crear-programa',
             label: 'Crear Programa',
             icon: FaChartBar,
-            roles: authRoles.Usuario
+            roles: ['*']
         },
         {
             id: 'create-project',
             to: '/crear-proyecto',
             label: 'Crear Proyecto',
             icon: FaHammer,
-            roles: authRoles.Usuario
+            roles: ['*']
         },
 
         {
