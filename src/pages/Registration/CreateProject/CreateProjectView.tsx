@@ -37,31 +37,7 @@ export default function CreateProjectView() {
   return (
     <MainWrapper>
       <Header />
-      <Formik
-        initialValues={{
-          name: "",
-          initialDate: "",
-          finalDate: "",
-          areaId: "",
-          description: "",
-          municipalityId: "",
-          parrishId: "",
-          circuitId: "",
-          coords: null,
-          fundSource: "",
-          budget: "",
-          skilledLabor: "",
-          unskilledLabor: "",
-          indirectLabor: "",
-          directLabor: "",
-          women: "",
-          men: ""
-        }}
-        onSubmit={values => {
-          // Maneja el submit final aquí
-          console.log(values);
-        }}
-      >
+      
         <Stepper config={stepperConfig}>
           <Stepper.Step>
             <BasicInformation />
@@ -76,7 +52,6 @@ export default function CreateProjectView() {
             <h1>{/** TODO - STEP 4 */}</h1>
           </Stepper.Step>
         </Stepper>
-      </Formik>
     </MainWrapper>
   );
 }

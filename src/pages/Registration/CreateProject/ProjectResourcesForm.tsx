@@ -1,4 +1,4 @@
-import { useFormikContext } from "formik";
+import { useFormik } from "formik";
 import { Grid, GridItem } from "../../../components/Layout/Grid";
 import { FormControl } from "../../../components/Ui/FormControl/FormControl";
 import { Input } from "../../../components/Ui/Input/Input";
@@ -7,9 +7,9 @@ import { Button } from "../../../components/Ui/Button/Button";
 import { Select } from "../../../components/Ui/Select/Select";
 import useStepper from "../../../components/Stepper/useStepper";
 import { useBudgetSourcesQuery } from "../../../hooks/queries/useBudgetSourcesQuery";
+import Card from "../../../components/Card/Card";
 
 const ProjectResourcesForm = () => {
-  const formik = useFormikContext<any>();
   const { previousStep, isFirstStep } = useStepper();
   const { data: sources = [], isLoading } = useBudgetSourcesQuery();
 
@@ -32,8 +32,26 @@ const ProjectResourcesForm = () => {
     return num.toLocaleString("es-VE", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   };
 
+
+  const formik = useFormik({
+    initialValues: {
+      fundSource: "",
+      budget: "",
+      skilledLabor: "",
+      unskilledLabor: "",
+      indirectLabor: "",
+      directLabor: "",
+      women: "",
+      men: "",
+    },
+    onSubmit: (values) => {
+      console.log(values)
+    }
+  })
+
   return (
     <form onSubmit={formik.handleSubmit}>
+      <Card $isSelectable={false} $padding="32px">
       <Grid $columns="repeat(24, 1fr)" $gap="12px" $width="100%">
         <GridItem $colSpan={24}>
           <FormControl label="Origen de los fondos" required>
@@ -136,6 +154,7 @@ const ProjectResourcesForm = () => {
           </Flex>
         </GridItem>
       </Grid>
+    </Card>
     </form>
   );
 };
