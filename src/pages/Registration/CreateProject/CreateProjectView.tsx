@@ -1,56 +1,60 @@
-import { useCreateProject } from "../../../hooks/mutations/useCreateProject";
+import { Formik } from "formik";
 import Header from "../../../components/Header/Header";
 import styled from "styled-components";
-import CreateProjectForm from "../../../components/Forms/CreateProjectForm";
-import Swal from "sweetalert2";
-import { useNavigate } from "react-router";
-import Card from "../../../components/Card/Card";
+import Stepper from "../../../components/Stepper/Stepper";
+import BasicInformation from "./BasicInformation";
+import UbicationForm from "./UbicationForm";
+import ProjectResourcesForm from "./ProjectResourcesForm";
+import { LuClipboardList, LuMapPin, LuPackage } from "react-icons/lu";
+import { FaBullseye } from "react-icons/fa6";
+
+const stepperConfig = [
+    {
+        icon: <LuClipboardList style={{ width: "1.5em", height: "1.5m" }} />,
+        title: "Información Básica",
+        done: false
+    },
+    {
+        icon: <LuMapPin style={{ width: "1.5em", height: "1.5m" }} />,
+        title: "Ubicación y Fechas",
+        done: false
+    },
+    {
+        icon: <LuPackage style={{ width: "1.5em", height: "1.5m" }} />,
+        title: "Recursos del Proyecto",
+        done: false
+    },
+    {
+        icon: <FaBullseye style={{ width: "1.5em", height: "1.5m" }} />,
+        title: "Metas del Proyecto",
+        done: false
+    }
+]
+
+
 
 export default function CreateProjectView() {
-
-    const { mutate: createProject, isPending } = useCreateProject()
-    const navigate = useNavigate()
-    return <MainWrapper>
-        <Header />
-        <Card $isSelectable={false} $padding="32px">
-            <CreateProjectForm onSubmit={(values) => {
-                createProject(values, {
-                    onSuccess: () => {
-                        Swal.fire({
-                            title: 'Su proyecto ha sido creado.',
-                            icon: 'success',
-                            position: 'center',
-                            timer: 1500
-                        })
-                        navigate('/indicadores')
-                    },
-                    onError: () => {
-                        Swal.fire({
-                            title: 'Ocurrió un error al crear el proyecto.',
-                            icon: 'error',
-                            position: 'center',
-                            timer: 1500
-                        })
-                    }
-                })
-            }}
-                initialValues={{
-                    name: '',
-                    secretaryId: '',
-                    programId: '',
-                    initialDate: '',
-                    finalDate: '',
-                    observations: '',
-                    municipalityId: '',
-                    parrishId: '',
-                    kpiInstances: [],
-                }}
-                isLoading={isPending}
-            />
-        </Card>
+  return (
+    <MainWrapper>
+      <Header />
+      
+        <Stepper config={stepperConfig}>
+          <Stepper.Step>
+            <BasicInformation />
+          </Stepper.Step>
+          <Stepper.Step>
+            <UbicationForm />
+          </Stepper.Step>
+          <Stepper.Step>
+            <ProjectResourcesForm />
+          </Stepper.Step>
+          <Stepper.Step>
+            <h1>{/** TODO - STEP 4 */}</h1>
+          </Stepper.Step>
+        </Stepper>
     </MainWrapper>
+  );
 }
-
 const MainWrapper = styled.div`
     display: flex;
     flex-direction: column;

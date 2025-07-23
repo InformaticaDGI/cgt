@@ -6,7 +6,7 @@ import { useAuthStorage } from "../../store/auth-storage";
 
 const NavItems = () => {
   const { logout, user } = useAuthStorage()
-  const menuItems = buildNavItems(user?.role || '*', logout);
+  const menuItems = buildNavItems(user?.role.name || '*', logout);
   const RenderMenuItems = menuItems.map((navItem, index) => <MenuItem item={navItem} key={index} />)
   return <Menu>{RenderMenuItems}</Menu>
 }
