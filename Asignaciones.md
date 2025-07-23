@@ -13,6 +13,7 @@
 ### José Segovia
 
 1. #### Ajustar Mapa del Formulario de Registro
+    - Agregar acercamiento por filtrado
 2. #### Ajustar Vista del Mapa Principal
     - Aplicar funcionamiento de filtrado a ubicaciones del mapa
     - Pintar areas de los municipios
