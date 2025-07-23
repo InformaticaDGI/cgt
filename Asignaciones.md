@@ -15,7 +15,7 @@
 1. #### Ajustar Mapa del Formulario de Registro
     - Agregar acercamiento por filtrado
 2. #### Ajustar Vista del Mapa Principal
-    - Aplicar funcionamiento de filtrado a ubicaciones del mapa
+    - Agregar funcionamiento de filtrado a ubicaciones del mapa
     - Pintar areas de los municipios
     - Anexar areas de las parroquias
 
@@ -30,5 +30,5 @@
 ### Jesús Medina
 
 1. #### Ajustar Modelo de Actividades
-    - Ajustar Rango de fecha de las actividades
+    - Modificar el Rango de fecha de las actividades
 2. #### Agregar comunidades a los proyectos
