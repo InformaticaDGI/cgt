@@ -21,7 +21,7 @@
 ---
 ### Erik Zerpa
 
-1. #### Cambiar entradas (Inputs) de tipo moneda a tipo numerica
+1. #### Cambiar entradas (Input) de tipo moneda a tipo numerica
 2. #### Agregar entrada (Input) de presupuesto en BS y en USD
 3. #### Cambiar distribución de las entradas
 4. #### Agregar entrada (Input) para las comunidades
