@@ -1,11 +1,12 @@
-import { CircularProgress, Flex, FlexProps } from "@chakra-ui/react"
+import { Flex } from "../Layout/Flex"
+import Text from "../Ui/Text/Text"
 
 export function LoaderSkeleton({ children, isLoaded }: { children: React.ReactNode, isLoaded: boolean }) {
 
 	function Loader() {
 		return (
-			<Flex bgColor='transparent' width='100%' height='100%' alignItems='center' justifyContent='center'>
-				<CircularProgress isIndeterminate color='green.300' />
+			<Flex color='transparent' $width='100%' $height='100%' $justify='center' $align='center'>
+				<Text>Loading...</Text>
 			</Flex>
 		)
 	}
