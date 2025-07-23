@@ -1,6 +1,6 @@
 import Header from "../../../components/Header/Header";
 import { Flex } from "../../../components/Layout/Flex"
-import MapViewer from "../../../components/MapViewer/MapViewer";
+import { GobMap } from "../../../components/Map/map.components";
 import FilterTool from "../../../components/Prebuilt/FilterTool";
 
 const MapView = () => {
@@ -10,7 +10,7 @@ const MapView = () => {
             <FilterTool />
         </Flex>
         <Flex style={{ flex: 2 }}>
-            <MapViewer />
+            <GobMap />
         </Flex>
     </Flex>
 
