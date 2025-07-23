@@ -9,8 +9,8 @@ import Card from "../../../components/Card/Card";
 import { BudgetSourceSelect } from "../../../components/Prebuilt/BudgetSourceSelect";
 import { useAppStore } from "../../../store/store";
 
-const ProjectResourcesForm = () => {
-  const { previousStep, isFirstStep } = useStepper();
+const ResourceStep = () => {
+  const { previousStep, isFirstStep, nextStep } = useStepper();
   const { formState, setFormState } = useAppStore();
 
 
@@ -67,7 +67,7 @@ const ProjectResourcesForm = () => {
         projectFemaleLabor: +values.femaleLabor,
         projectMaleLabor: +values.maleLabor,
        })
-       
+       nextStep()
        
     },
     validate
@@ -181,4 +181,4 @@ const ProjectResourcesForm = () => {
   );
 };
 
-export default ProjectResourcesForm;
+export default ResourceStep;

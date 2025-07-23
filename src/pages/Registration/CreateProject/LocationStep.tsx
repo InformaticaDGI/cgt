@@ -11,7 +11,7 @@ import { MunicipalitySelect } from "../../../components/Prebuilt/MunicipalitySel
 import { ParrishSelect } from "../../../components/Prebuilt/ParrishSelect";
 import { CommunityCircuitSelect } from "../../../components/Prebuilt/CommunityCircuit";
 
-const UbicationForm = () => {
+const LocationStep = () => {
   const { nextStep, isFirstStep, previousStep } = useStepper();
   const { formState, setFormState } = useAppStore();
 
@@ -98,4 +98,4 @@ const UbicationForm = () => {
   );
 };
 
-export default UbicationForm;
+export default LocationStep;

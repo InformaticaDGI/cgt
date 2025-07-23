@@ -1,6 +1,7 @@
 import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
 import type { Secretary } from '../hooks/useSecretary'
+import type { KpiInstance } from '../hooks/mutations/useKpiInstances';
 
 interface FormState {
   // Basic Information
@@ -28,7 +29,7 @@ interface FormState {
   projectMaleLabor: number
 
   // KPI
-  projectKpiInstances: { expected: number, baseKpiId: string }[]
+  projectKpiInstances: KpiInstance[]
   projectBenefitedPopulation: number
   projectBenefitedChildren: number
 }
@@ -80,6 +81,9 @@ export const useAppStore = create<AppState>()(
         projectUnqualifiedLabor: 0,
         projectFemaleLabor: 0,
         projectMaleLabor: 0,
+        projectKpiInstances: [],
+        projectBenefitedPopulation: 0,
+        projectBenefitedChildren: 0,
       },
       setFormState: (formState) => set({ formState }),
       // Setter Functions
