@@ -4,7 +4,6 @@ import { useSearchParams } from 'react-router';
 // import { useAppSelector } from '../../redux/redux-hooks';
 import CopyRight from '../Copyright/copyright.component';
 import { MapClickDisabler } from './click-disabler';
-import { MapShapes } from './map-draw/map-shapes/map-shapes.components';
 import { MapMarkers} from './map-draw/map-markers/map-markers.components'
 import { MapSelector } from './map-selector/map-selector.component';
 import { useState } from 'react';
@@ -45,7 +44,8 @@ export function GobMap() {
 				<CopyRight />
 				<GuaricoGeoJson
 					onChange={(geoJson: any) => {
-						setCurrentGeoJson(geoJson.features);
+						console.log(geoJson);
+						setCurrentGeoJson?.(geoJson?.features);
 					}}
 					lineWeight={1}
 					opacity={0.3} />
