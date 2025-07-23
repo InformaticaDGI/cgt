@@ -1,9 +1,13 @@
 import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
 import type { Secretary } from '../hooks/useSecretary'
+import type { KpiInstance } from '../hooks/mutations/useKpiInstances';
 
 interface FormState {
   // Basic Information
+  projectParentId: string;
+  projectSecretaryId: string;
+  projectProgramId: string;
   projectName: string;
   projectDescription: string;
   projectInitialDate: string;
@@ -19,19 +23,47 @@ interface FormState {
 
   // Budget
   projectBudgetSourceId: string
-  projectBudget: number
-  projectDirectLabor: number
-  projectIndirectLabor: number
-  projectQualifiedLabor: number
-  projectUnqualifiedLabor: number
-  projectFemaleLabor: number
-  projectMaleLabor: number
+  projectBudget: string
+  projectDirectLabor: string
+  projectIndirectLabor: string
+  projectQualifiedLabor: string
+  projectUnqualifiedLabor: string
+  projectFemaleLabor: string
+  projectMaleLabor: string
 
   // KPI
-  projectKpiInstances: { expected: number, baseKpiId: string }[]
+  projectKpiInstances: KpiInstance[]
   projectBenefitedPopulation: number
   projectBenefitedChildren: number
 }
+
+const initialFormState: FormState = {
+  projectParentId: '',
+  projectSecretaryId: '',
+  projectProgramId: '',
+  projectName: '',
+  projectDescription: '',
+  projectInitialDate: '',
+  projectFinalDate: '',
+  projectAreaId: '',
+  projectParrishId: '',
+  projectCommunityCircuitId: '',
+  projectLatitude: 9.9156947,
+  projectLongitude: -67.3601931,
+  projectBudgetSourceId: '',
+  projectBudget: '0,00',
+  projectDirectLabor: '0,00',
+  projectIndirectLabor: '0,00',
+  projectQualifiedLabor: '0,00',
+  projectUnqualifiedLabor: '0,00',
+  projectFemaleLabor: '0,00',
+  projectMaleLabor: '0,00',
+  projectKpiInstances: [],
+  projectBenefitedPopulation: 0,
+  projectBenefitedChildren: 0,
+  projectMunicipalityId: '',
+}
+
 
 interface AppState {
   secretaries: Secretary[]
@@ -41,6 +73,7 @@ interface AppState {
   municipalityId: string
   parrishId: string,
   formState: FormState,
+  resetFormState: () => void,
   setFormState: (formState: FormState) => void,
   setSecretaries: (secretaries: Secretary[]) => void,
   findSecretary: (id: string) => Secretary | undefined,
@@ -50,6 +83,7 @@ interface AppState {
   setMunicipalityId: (municipalityId: string) => void
   setParrishId: (parrishId: string) => void,
 }
+
 
 
 export const useAppStore = create<AppState>()(
@@ -62,25 +96,8 @@ export const useAppStore = create<AppState>()(
       municipalityId: '',
       parrishId: '',
       secretaries: [],
-      formState: {
-        projectName: '',
-        projectDescription: '',
-        projectInitialDate: '',
-        projectFinalDate: '',
-        projectAreaId: '',
-        projectParrishId: '',
-        projectCommunityCircuitId: '',
-        projectLatitude: 0,
-        projectLongitude: 0,
-        projectBudgetSourceId: '',
-        projectBudget: 0,
-        projectDirectLabor: 0,
-        projectIndirectLabor: 0,
-        projectQualifiedLabor: 0,
-        projectUnqualifiedLabor: 0,
-        projectFemaleLabor: 0,
-        projectMaleLabor: 0,
-      },
+      formState: initialFormState,
+      resetFormState: () => set({ formState: initialFormState }),
       setFormState: (formState) => set({ formState }),
       // Setter Functions
       setSecretaries: (secretaries) => set({ secretaries }),

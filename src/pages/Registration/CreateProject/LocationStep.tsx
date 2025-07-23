@@ -11,8 +11,8 @@ import { MunicipalitySelect } from "../../../components/Prebuilt/MunicipalitySel
 import { ParrishSelect } from "../../../components/Prebuilt/ParrishSelect";
 import { CommunityCircuitSelect } from "../../../components/Prebuilt/CommunityCircuit";
 
-const UbicationForm = () => {
-  const { nextStep, isFirstStep, previousStep } = useStepper();
+const LocationStep = () => {
+  const { nextStep, previousStep } = useStepper();
   const { formState, setFormState } = useAppStore();
 
   const validate = (values: any) => {
@@ -85,9 +85,9 @@ const UbicationForm = () => {
             </FormControl>
           </GridItem>
         </Grid>
-        <Flex $direction="row" $justify="end" $gap="12px">
-          <Button $variant="primary" disabled={isFirstStep} onClick={previousStep} type="button">
-            Atrás
+        <Flex $direction="row" $justify="space-between" $gap="12px">
+          <Button $variant="primary" onClick={previousStep} type="button">
+            Anterior
           </Button>
           <Button $variant="primary" type="submit">
             Siguiente
@@ -98,4 +98,4 @@ const UbicationForm = () => {
   );
 };
 
-export default UbicationForm;
+export default LocationStep;

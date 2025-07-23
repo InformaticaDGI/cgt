@@ -9,17 +9,14 @@ import { $TextArea } from "../../../components/Ui/TextArea/TextArea"
 import { AreaSelect } from "../../../components/Prebuilt/AreaSelect"
 import { useFormik } from "formik"
 import { useAppStore } from "../../../store/store"
+import { SecretarySelect } from "../../../components/Prebuilt/SecretarySelect"
+import { ProgramSelect } from "../../../components/Prebuilt/ProgramSelect"
 
 const BasicInformation = () => {
 
-    const { nextStep, isFirstStep, previousStep, isLastStep } = useStepper()
+    const { nextStep } = useStepper()
     const { formState, setFormState } = useAppStore()
 
-
-    const handleBack = () => {
-        if (isFirstStep) return;
-        previousStep()
-    }
 
     const validate = (values: any) => {
         const errors: any = {};
@@ -28,6 +25,9 @@ const BasicInformation = () => {
         if (!values.finalDate) errors.finalDate = "La fecha de fin es requerida";
         if (!values.areaId) errors.areaId = "El área es requerida";
         if (!values.description) errors.description = "La descripción es requerida";
+        if (!values.parentId) errors.parentId = "La secretaría territorial es requerida";
+        if (!values.secretaryId) errors.secretaryId = "La secretaría es requerida";
+        if (!values.programId) errors.programId = "El programa es requerido";
         return errors;
     }
 
@@ -39,9 +39,11 @@ const BasicInformation = () => {
             finalDate: formState.projectFinalDate,
             areaId: formState.projectAreaId,
             description: formState.projectDescription,
+            parentId: formState.projectParentId,
+            secretaryId: formState.projectSecretaryId,
+            programId: formState.projectProgramId,
         },
         onSubmit: (values) => {
-            if (isLastStep) return;
             setFormState({
                 ...formState,
                 projectName: values.name,
@@ -49,6 +51,9 @@ const BasicInformation = () => {
                 projectFinalDate: values.finalDate,
                 projectAreaId: values.areaId,
                 projectDescription: values.description,
+                projectParentId: values.parentId,
+                projectSecretaryId: values.secretaryId,
+                projectProgramId: values.programId,
             })
             nextStep()
         },
@@ -61,6 +66,25 @@ const BasicInformation = () => {
                 <Grid $columns="repeat(24, 1fr)" $gap="12px" $width="100%">
                     <GridItem $colSpan={24}>
                         <h3 style={{ color: "var(--text-secondary)", marginBottom: "12px" }}>Información Básica</h3>
+                    </GridItem>
+
+                    <GridItem $colSpan={12}>
+                        <FormControl label="Secretaría territorial" required error={formik.errors.parentId && formik.touched.parentId ? formik.errors.parentId : undefined}>
+                            <SecretarySelect rootOnly value={formik.values.parentId} onChange={(value) => formik.setFieldValue('parentId', value)} />
+                        </FormControl>
+                    </GridItem>
+                    <GridItem $colSpan={12}>
+                        <FormControl label="Secretaría" required error={formik.errors.secretaryId && formik.touched.secretaryId ? formik.errors.secretaryId : undefined}>
+                            <SecretarySelect parentId={formik.values.parentId} value={formik.values.secretaryId} onChange={(value) => formik.setFieldValue('secretaryId', value)} />
+                        </FormControl>
+                    </GridItem>
+                    <GridItem $colSpan={24}>
+                        <FormControl label="Programa" required error={formik.errors.programId && formik.touched.programId ? formik.errors.programId : undefined}>
+                            <ProgramSelect
+                                secretaryId={formik.values.secretaryId}
+                                value={formik.values.programId}
+                                onChange={(value) => formik.setFieldValue('programId', value)} />
+                        </FormControl>
                     </GridItem>
 
                     <GridItem $colSpan={24}>
@@ -102,8 +126,7 @@ const BasicInformation = () => {
                     </GridItem>
                 </Grid>
                 <Flex $direction="row" $justify="end" $gap="12px">
-                    <Button $variant="primary" $disabled={isFirstStep} onClick={handleBack}>Atras</Button>
-                    <Button $variant="primary" $disabled={isLastStep} type="submit">Siguiente</Button>
+                    <Button $variant="primary" type="submit">Siguiente</Button>
                 </Flex>
             </Card>
         </form>
