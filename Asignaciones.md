@@ -1,6 +1,6 @@
 # `Asignaciones Pendientes `
 
-### Salvador Ron
+>### Salvador Ron
 
 ---
 
@@ -10,7 +10,7 @@
 
 ---
 
-### José Segovia
+>### José Segovia
 
 - #### Ajustar Mapa del Formulario de Registro
     - Agregar acercamiento por filtrado
@@ -21,14 +21,14 @@
 - #### Reparar iconos del marcador para los mapas
 
 ---
-### Erik Zerpa
+>### Erik Zerpa
 
 - #### Cambiar entradas (Input) de tipo moneda a tipo numerica
 - #### Agregar entrada (Input) de presupuesto en BS y en USD
 - #### Cambiar distribución de las entradas
 - #### Agregar entrada (Input) para las comunidades
 
-### Jesús Medina
+>### Jesús Medina
 
 - #### Ajustar Modelo de Actividades
     - Modificar el Rango de fecha de las actividades
