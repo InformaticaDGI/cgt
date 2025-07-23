@@ -32,6 +32,12 @@ const Stepper: StepperComponent = ({ children, config }: StepperProps) => {
     const isLastStep = currentStep === lastStep
     const isFirstStep = currentStep === firstStep
 
+
+    const resetStepper = () => {
+        setCurrentStep(0)
+        setStepperConfig(config)
+    }
+
     const nextStep = () => {
         if (isLastStep) return
         setStepperConfig(stepperConfig.map((step, index) => index === currentStep ? { ...step, done: true } : step))
@@ -52,7 +58,7 @@ const Stepper: StepperComponent = ({ children, config }: StepperProps) => {
     }
 
     return (
-        <StepperContext.Provider value={{ currentStep, setStep, isLastStep, isFirstStep, nextStep, previousStep, lastStep, firstStep }}>
+        <StepperContext.Provider value={{ currentStep, setStep, isLastStep, isFirstStep, nextStep, previousStep, lastStep, firstStep, resetStepper }}>
             <StepperContainer>
                 <StepperNavigation config={stepperConfig} />
                 <StepperMainView>

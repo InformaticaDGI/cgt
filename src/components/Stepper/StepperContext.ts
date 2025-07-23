@@ -9,6 +9,7 @@ interface StepperContextType {
     setStep: (step: number) => void;
     nextStep: () => void;
     previousStep: () => void;
+    resetStepper: () => void;
 }
 
 export const StepperContext = createContext<StepperContextType>({
@@ -19,5 +20,6 @@ export const StepperContext = createContext<StepperContextType>({
     nextStep: () => null,
     previousStep: () => null,
     lastStep: 0,
-    firstStep: 0
+    firstStep: 0,
+    resetStepper: () => null,
 })
