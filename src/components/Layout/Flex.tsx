@@ -11,10 +11,10 @@ interface $FlexProps {
     $margin?: string;
     $backgroundColor?: string;
     $position?: 'absolute' | 'relative' | 'fixed';
-    $top?: string;
-    $left?: string;
-    $right?: string;
-    $bottom?: string;
+    $top?: number | string;
+    $left?: number | string;
+    $right?: number | string;
+    $bottom?: number | string;
     $zIndex?: number;
 }
 
@@ -29,10 +29,10 @@ export const Flex = styled.div<$FlexProps>`
     padding: ${({ $padding }) => $padding || '0'};
     margin: ${({ $margin }) => $margin || '0'};
     background: ${({ $backgroundColor }) => $backgroundColor || 'transparent'};
-    position: ${({ $position }) => $position || 'relative'};
-    top: ${({ $top }) => $top || '0'};
-    left: ${({ $left }) => $left || '0'};
-    right: ${({ $right }) => $right || '0'};
-    bottom: ${({ $bottom }) => $bottom || '0'};
-    z-index: ${({ $zIndex }) => $zIndex || '0'};
+    ${({ $position }) => $position && `position: ${$position};`}
+    ${({ $top }) => $top && `top: ${$top};`}
+    ${({ $left }) => $left && `left: ${$left};`}
+    ${({ $right }) => $right && `right: ${$right};`}
+    ${({ $bottom }) => $bottom && `bottom: ${$bottom};`}
+    ${({ $zIndex }) => $zIndex !== undefined && `z-index: ${$zIndex};`}
 `;

@@ -11,7 +11,6 @@ export function MapClickDisabler({ children }: { children: React.ReactNode | Rea
     <div
       onMouseLeave={() => handleMapMouseClickState(false)}
       onMouseEnter={() => handleMapMouseClickState(true)}
-      className="click-disabler"
     >
       {children}
     </div>

@@ -10,10 +10,10 @@ interface $BoxProps {
     $margin?: string;
     $backgroundColor?: string;
     $position?: 'absolute' | 'relative' | 'fixed';
-    $top?: string;
-    $left?: string;
-    $right?: string;
-    $bottom?: string;
+    $top?: number | string;
+    $left?: number | string;
+    $right?: number | string;
+    $bottom?: number | string;
     $zIndex?: number;
 }
 
@@ -26,10 +26,10 @@ export const Box = styled.div<$BoxProps>`
     padding: ${({ $padding }) => $padding || '0'};
     margin: ${({ $margin }) => $margin || '0'};
     background-color: ${({ $backgroundColor }) => $backgroundColor || 'transparent'};
-    position: ${({ $position }) => $position || 'relative'};
-    top: ${({ $top }) => $top || '0'};
-    left: ${({ $left }) => $left || '0'};
-    right: ${({ $right }) => $right || '0'};
-    bottom: ${({ $bottom }) => $bottom || '0'};
-    z-index: ${({ $zIndex }) => $zIndex || '0'};
+    ${({ $position }) => $position!== undefined  && `position: ${$position};`};
+    ${({ $top }) => $top!== undefined  && `top: ${$top};`};
+    ${({ $left }) => $left!== undefined  && `left: ${$left};`};
+    ${({ $right }) => $right!== undefined  && `right: ${$right};`};
+    ${({ $bottom }) => $bottom!== undefined  && `bottom: ${$bottom};`};
+    ${({ $zIndex }) => $zIndex !== undefined && `z-index: ${$zIndex};`};
 `;

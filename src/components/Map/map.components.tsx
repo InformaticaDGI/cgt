@@ -1,9 +1,11 @@
-import { MapContainer, AttributionControl } from 'react-leaflet';
+import styled from "styled-components"
+import { MapContainer, TileLayer } from 'react-leaflet';
 import { useSearchParams } from 'react-router';
 // import { useAppSelector } from '../../redux/redux-hooks';
 import CopyRight from '../Copyright/copyright.component';
 import { MapClickDisabler } from './click-disabler';
 import { MapShapes } from './map-draw/map-shapes/map-shapes.components';
+import { MapMarkers} from './map-draw/map-markers/map-markers.components'
 import { MapSelector } from './map-selector/map-selector.component';
 import { useState } from 'react';
 import { GuaricoGeoJson } from './get-json';
@@ -18,34 +20,41 @@ export function GobMap() {
 	const [setCurrentGeoJson] = useState<any>(null);
 
 	const locate = {
-		getLat: () => lat ? Number(lat) : 9.9124,
-		getLng: () => lng ? Number(lng) : -67.3540,
-		getZoom: () => zoom ? Number(zoom) : 15
+		getLat: () => lat ? Number(lat) : 9.102146, 
+		getLng: () => lng ? Number(lng) : -66.544602,
+		getZoom: () => zoom ? Number(zoom) : 7
 	}
 
 
 	return (
-		<div className={'hide-cursor'}>
+		<CardMap >
 			<MapContainer
-				className={`map`} 
+				style={{ width: '100%', height: '100%' }}
 				center={[locate.getLat(), locate.getLng()]}
-				 zoom={locate.getZoom()} maxZoom={21} doubleClickZoom={false}
+				zoom={locate.getZoom()} maxZoom={21} doubleClickZoom={false}
 				zoomControl={false}
 				scrollWheelZoom={true}>
-				{/* {modal} */}
+				<TileLayer
+					attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+					url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+				/>
 				<MapClickDisabler>
 					<MapSelector />
-					<MapShapes />
+					<MapMarkers />
 				</MapClickDisabler>
 				<CopyRight />
 				<GuaricoGeoJson
 					onChange={(geoJson: any) => {
 						setCurrentGeoJson(geoJson.features);
 					}}
-					lineWeight={2}
+					lineWeight={1}
 					opacity={0.3} />
-					<AttributionControl position="bottomright" />
 			</MapContainer>
-		</div>
+		</CardMap>
 	);
 }
+
+const CardMap = styled.div`
+    width: 100%;
+    height: 100%;
+`;
