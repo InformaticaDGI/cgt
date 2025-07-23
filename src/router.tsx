@@ -12,6 +12,7 @@ import NotFoundView from './pages/NotFound/NotFoundView'
 import MapView from './pages/Management/Map/MapView'
 import Navigation from './components/Navigation/Navigation'
 import SecurityView from './pages/Security/SecurityView'
+import ProjectsListView from './pages/Management/ProjectListView'
 
 const router = createBrowserRouter([
 
@@ -60,6 +61,10 @@ const router = createBrowserRouter([
             {
                 path: 'crear-proyecto',
                 element: <CreateProjectView />
+            },
+            {
+                path: 'proyectos',
+                element: <ProjectsListView />
             },
             {
                 path: 'seguridad',

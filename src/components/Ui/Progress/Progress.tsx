@@ -1,12 +1,12 @@
 import styled from "styled-components"
 
 
-const StyledProgress = styled.div<{ $progress: number, $color: string,$backgroundColor: string }>`
+const StyledProgress = styled.div<{ $progress: number, maxWidth: string, $color: string,$backgroundColor: string }>`
     position: relative;
     height: 8px;
     background-color: ${({ $backgroundColor }) => $backgroundColor};
     border-radius: 4px;
-    width: 260px;
+    width: ${({ maxWidth }) => maxWidth || '260px'};
     &:after {
         content: '';
         position: absolute;
@@ -21,11 +21,11 @@ const StyledProgress = styled.div<{ $progress: number, $color: string,$backgroun
 
 
 
-const Progress = ({ value, max, color, backgroundColor }: { value: number, max: number, color: string, backgroundColor: string }) => {
+const Progress = ({ value, max, color, backgroundColor, maxWidth = '260px' }: { value: number, max: number, color: string, backgroundColor: string, maxWidth?: string }) => {
 
     const progress = (value / max) * 100
 
-    return <StyledProgress $progress={progress} $color={color} $backgroundColor={backgroundColor} />
+    return <StyledProgress $progress={progress} maxWidth={maxWidth} $color={color} $backgroundColor={backgroundColor} />
 }
 
 export default Progress;
