@@ -18,6 +18,7 @@
     - Agregar funcionamiento de filtrado a ubicaciones del mapa
     - Pintar areas de los municipios
     - Anexar areas de las parroquias
+3. #### Reparar iconos del marcador para los mapas
 
 ---
 ### Erik Zerpa
