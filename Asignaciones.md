@@ -6,7 +6,7 @@
 
 - #### Crear Lista de Programas
 - #### Crear Lista de Proyectos
-- #### Crear Lista de Actividades
+- #### Crear Planificacion de Actividades
 
 ---
 
