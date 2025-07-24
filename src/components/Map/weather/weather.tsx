@@ -1,10 +1,10 @@
-import moment, { Moment } from "moment";
+import type { Moment } from "moment";
+import moment from "moment";
 import { useEffect, useState } from "react";
-import { TileLayer, useMap } from "react-leaflet";
+import { TileLayer } from "react-leaflet";
 
 export default function WeatherLayer() {
   const [rain, setRain] = useState<string>('')
-  const map = useMap()
 
   const loadTile = (date: Moment) => {
     setRain('')

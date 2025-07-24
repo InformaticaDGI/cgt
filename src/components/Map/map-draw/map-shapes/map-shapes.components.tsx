@@ -140,7 +140,7 @@ export function MapShapes() {
 
 export function useShapeFactory() {
   const map = useMap()
-  const dispatch = () => {}
+  // const dispatch = () => {}
   // const dispatch = useDispatch()
 
   return (shape: any) => {
@@ -149,7 +149,7 @@ export function useShapeFactory() {
 
     const createCircle = (center: any, radius: any) => {
       let nCircle = circle(center, { radius, color })
-        .addEventListener('click', (e) => onShapeSelected && onShapeSelected(e, id, map, dispatch))
+        .addEventListener('click', (e) => onShapeSelected && onShapeSelected(e, map))
         .addTo(map)
       let tooltip = `<p style='font-weight: 600; color: ${color};'>${name} </p> ${description} <br /> Latitud: ${nCircle.getLatLng().lat} <br /> Longitud: ${nCircle.getLatLng().lng}`;
       nCircle.setStyle({ attribution: { id, tooltip } as any })
@@ -158,7 +158,7 @@ export function useShapeFactory() {
     }
     const createRectangle = (bounds: any) => {
       let nRectangle = rectangle(bounds, { color })
-        .addEventListener('click', (e) => onShapeSelected && onShapeSelected(e, id, map, dispatch))
+        .addEventListener('click', (e) => onShapeSelected && onShapeSelected(e, map))
         .addTo(map)
       let tooltip = `<p style='font-weight: 600; color: ${color};'>${name} </p> ${description} <br /> Latitud: ${nRectangle.getCenter().lat} <br /> Longitud: ${nRectangle.getCenter().lng}`;
       nRectangle.setStyle({ attribution: { id, tooltip } as any })
@@ -167,7 +167,7 @@ export function useShapeFactory() {
     }
     const createPolygon = (positions: any) => {
       let nPolygon = polygon(positions, { color })
-        .addEventListener('click', (e) => onShapeSelected && onShapeSelected(e, id, map, dispatch))
+        .addEventListener('click', (e) => onShapeSelected && onShapeSelected(e, map))
         .addTo(map)
       let tooltip = `<p style='font-weight: 600; color: ${color};'>${name} </p> ${description} <br /> Latitud: ${nPolygon.getCenter().lat} <br /> Longitud: ${nPolygon.getCenter().lng}`;
       nPolygon.setStyle({ attribution: { id, tooltip } as any })
@@ -175,7 +175,7 @@ export function useShapeFactory() {
     }
     const createLine = (positions: any) => {
       let nLine = polyline(positions, { color })
-        .addEventListener('click', (e) => onShapeSelected && onShapeSelected(e, id, map, dispatch))
+        .addEventListener('click', (e) => onShapeSelected && onShapeSelected(e, map))
         .addTo(map)
       let tooltip = `<p style='font-weight: 600; color: ${color};'>${name} </p> ${description} <br /> Latitud: ${nLine.getCenter().lat} <br /> Longitud: ${nLine.getCenter().lng}`;
       nLine.setStyle({ attribution: { id, tooltip } as any })

@@ -17,7 +17,7 @@ export function GuaricoGeoJson({
     const map = useMap();
     const [_opacity, setOpacity] = useState(opacity || 0.5);
     const [geoJson, setGeojson] = useState<any | null>(null);
-    const [ setParroquias] = useState<any | null>(null);
+    const [setParroquias] = useState<any | null>(null);
     const [municipios, setMunicipios] = useState<any | null>(null);
     const [currentGeoJson, setCurrentGeoJson] = useState<"municipio" | "parroquia">("municipio");
 
@@ -72,16 +72,12 @@ export function GuaricoGeoJson({
                 eventHandlers={{
                     dblclick: onDblClick,
                 }}
-                
+
                 pathOptions={{
-                    style:(feat: any) => {
-                    return {
-                        color: lineColor || feat.properties.COLOR,
-                        fillColor: feat.properties.COLOR,
-                        weight: lineWeight || 0.2,
-                        fillRule: "evenodd",
-                    };
-                },
+                    color: lineColor || "red",
+                    fillColor: "red",
+                    weight: lineWeight || 0.2,
+                    fillRule: "evenodd",
                     fillOpacity: _opacity,
                 }}
                 data={geoJson}
@@ -92,14 +88,10 @@ export function GuaricoGeoJson({
                     dblclick: onDblClick,
                 }}
                 pathOptions={{
-                    style: (feat: any) => { // 'style' dentro de 'pathOptions'
-                        return {
-                            color: lineColor || feat.properties.COLOR,
-                            fillColor: feat.properties.COLOR,
-                            weight: lineWeight || 0.2,
-                            fillRule: "evenodd",
-                        };
-                    },
+                    color: lineColor || "red",
+                    fillColor: "red",
+                    weight: lineWeight || 0.2,
+                    fillRule: "evenodd",
                     fillOpacity: _opacity,
                 }}
                 data={geoJson}

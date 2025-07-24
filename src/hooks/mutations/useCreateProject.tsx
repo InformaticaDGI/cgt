@@ -18,7 +18,20 @@ export const useCreateProject = () => {
                 initialDate: data.initialDate,
                 finalDate: data.finalDate,
                 observations: data.observations,
-                parishId: data.parrishId,
+                parishId: data.parishId,
+                communityCircuitId: data.communityCircuitId,
+                areaId: data.areaId,
+                directLabor: data.directLabor,
+                indirectLabor: data.indirectLabor,
+                qualifiedLabor: data.qualifiedLabor,
+                unqualifiedLabor: data.unqualifiedLabor,
+                femaleLabor: data.femaleLabor,
+                maleLabor: data.maleLabor,
+                benefitedPopulation: data.benefitedPopulation,
+                benefitedChildren: data.benefitedChildren,
+                initialBudget: data.initialBudget,
+                latitude: data.latitude,
+                longitude: data.longitude,
                 status: 'in_progress'
             })
             return response
@@ -27,17 +40,33 @@ export const useCreateProject = () => {
 }
 
 type CreateProjectFormValues = {
-    name: string
-    secretaryId: string
-    programId: string
-    kpiInstances: KpiInstance[],
-    initialDate: string,
-    finalDate: string,
-    observations: string,
-    parrishId: string,
+    name: string;
+    initialDate: string;
+    finalDate: string;
+    initialBudget: number;
+    latitude: number;
+    longitude: number;
+    observations: string;
+    kpiInstances: KpiInstance[];
+    parishId: string;
+    communityCircuitId: string;
+    secretaryId: string;
+    programId: string;
+    areaId: string;
+    directLabor: number;
+    indirectLabor: number;
+    qualifiedLabor: number;
+    unqualifiedLabor: number;
+    femaleLabor: number;
+    maleLabor: number;
+    benefitedPopulation: number;
+    benefitedChildren: number;
 }
 
 const createProject = async (data: any) => {
     const response = await axios.post(`${config.apiUrl}/projects`, data)
     return response.data
 }
+
+
+

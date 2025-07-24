@@ -31,7 +31,7 @@ export function MapShapesToolbar() {
 
 	const map = useMap()
 	
-	const dispatch = () => {}
+	// const dispatch = () => {}
 	// const dispatch = useDispatch()
 	map.pm.setGlobalOptions({snappable: false})
 	map.pm.setLang('es')
@@ -133,9 +133,9 @@ export function MapShapesToolbar() {
 		map.eachLayer((layer) => {
 
 			if (layer.options.attribution !== null) {
-				const { attribution: { tooltip, id } }: any = layer.options
+				const { attribution: { tooltip } }: any = layer.options
 				if (layer instanceof Circle) {
-					layer.addEventListener('click', (e) => onShapeSelected && onShapeSelected(e, id, map, dispatch))
+					layer.addEventListener('click', (e) => onShapeSelected && onShapeSelected(e, map))
 					marker(layer.getLatLng(), {icon: iconDefault, pmIgnore: true})
 						.addEventParent(layer)
 						.bindTooltip(tooltip)
@@ -144,7 +144,7 @@ export function MapShapesToolbar() {
 
 				}
 				else if (layer instanceof Rectangle || layer instanceof Polygon || layer instanceof Polyline) {
-					layer.addEventListener('click', (e) => onShapeSelected && onShapeSelected(e, id, map, dispatch))
+					layer.addEventListener('click', (e) => onShapeSelected && onShapeSelected(e, map))
 					marker(layer.getCenter(), {icon: iconDefault, pmIgnore: true})
 						.addEventParent(layer)
 						.bindTooltip(tooltip)
@@ -162,7 +162,7 @@ export function MapShapesToolbar() {
 	
 }
 
-export const onShapeSelected = ({ target }: any, id: string, map: Map, dispatch: any) => {
+export const onShapeSelected = ({ target }: any, map: Map) => {
 		
 	// dispatch(setShapeID(id))
 	// dispatch(setOpen(true))

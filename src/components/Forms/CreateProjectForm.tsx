@@ -3,7 +3,6 @@ import { Input } from "../Ui/Input/Input";
 import { Grid, GridItem } from "../Layout/Grid";
 import { SecretarySelect } from "../Prebuilt/SecretarySelect";
 import { FormControl } from "../Ui/FormControl/FormControl";
-import { Button } from "../Ui/Button/Button";
 import { ProgramSelect } from "../Prebuilt/ProgramSelect";
 import { $TextArea } from "../Ui/TextArea/TextArea";
 import { MunicipalitySelect } from "../Prebuilt/MunicipalitySelect";
@@ -11,7 +10,7 @@ import { ParrishSelect } from "../Prebuilt/ParrishSelect";
 import { KpiBaseInput } from "../Prebuilt/KpiBaseInput";
 import type { KpiInstance } from "../../hooks/mutations/useKpiInstances";
 
-export default function CreateProjectForm({ onSubmit, initialValues, isLoading }: CreateProjectFormProps) {
+export default function CreateProjectForm({ onSubmit, initialValues }: CreateProjectFormProps) {
 
     const formik = useFormik({
         initialValues,

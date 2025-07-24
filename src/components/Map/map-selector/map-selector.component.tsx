@@ -44,7 +44,7 @@ export const MapSelector = () => {
 					n={-1}
 					flag={<div>Mapas</div>}
 				/>
-				{openTiles && maps.map((m, i) => <MapBaseTileItem n={i} onClick={() => changeTile(i)} key={i} className="select-map--styles" />)}
+				{openTiles && maps.map((_, i) => <MapBaseTileItem n={i} onClick={() => changeTile(i)} key={i} className="select-map--styles" />)}
 			</div>
 			{/* </Tooltip> */}
 		</>

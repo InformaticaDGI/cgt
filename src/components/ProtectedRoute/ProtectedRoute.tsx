@@ -12,7 +12,7 @@ export const ProtectedRoute = ({ children, requiredRoles }: ProtectedRouteProps)
         return <Navigate to="/login" replace />
     }
 
-    if(requiredRoles && !requiredRoles.some((role) => user?.role.includes(role))) {
+    if(requiredRoles && !requiredRoles.some((role) => user?.role.name.includes(role))) {
         return <Navigate to="/unauthorized" replace />
     }
 
