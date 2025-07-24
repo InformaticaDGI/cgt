@@ -5,8 +5,7 @@
 ---
 - #### Crear Lista de Programas
 - #### Crear Lista de Proyectos
-- #### Crear Planificacion de Actividades
-
+    - Crear Modulo del Detalle de un Proyecto
 ---
 
 ## José Segovia
@@ -18,7 +17,6 @@
     - Pintar areas de los municipios
     - Anexar areas de las parroquias
 - #### Reparar iconos del marcador para los mapas
-
 ---
 ## Erik Zerpa
 
@@ -26,6 +24,7 @@
 - #### Agregar entrada (Input) de presupuesto en BS y en USD
 - #### Cambiar distribución de las entradas
 - #### Agregar entrada (Input) para las comunidades
+- #### Crear Planificacion de Actividades
 
 ## Jesús Medina
 
