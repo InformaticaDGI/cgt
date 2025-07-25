@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button } from "../Ui/Button/Button";
 import { Modal } from '../Ui/Modal/Modal';
 import { FaPlus } from 'react-icons/fa';
-import { useActivities, useCreateActivity } from '../../hooks/useActivities';
+import { useActivities, useCreateActivity, type Activity } from '../../hooks/useActivities';
 import { ActivityItem } from './ActivityItem';
 import { ActivityForm } from './ActivityForm';
 import type { ActivityFormData } from './ActivityForm';
@@ -32,6 +32,7 @@ const ProjectActivities: React.FC<ProjectActivitiesProps> = ({
   } = useActivities(projectId);
 
   const { mutateAsync: createActivity, isPending: isSubmitting } = useCreateActivity();
+  const [activityList, setActivityList] = useState<Activity[]>([]);
 
   const [modalOpen, setModalOpen] = useState(false);
   const [submitError, setSubmitError] = useState("");
@@ -114,6 +115,7 @@ const ProjectActivities: React.FC<ProjectActivitiesProps> = ({
 
     if (success) {
       setModalOpen(false);
+      setActivityList([...activityList, success]);
       // Limpiar el formulario
       setFormData({
         name: "",
@@ -148,7 +150,7 @@ const ProjectActivities: React.FC<ProjectActivitiesProps> = ({
           </div>
         ) : (
           <div>
-            {activities.map((activity, index) => (
+            {activityList.map((activity, index) => (
               <ActivityItem
                 key={activity.id}
                 activity={activity}
