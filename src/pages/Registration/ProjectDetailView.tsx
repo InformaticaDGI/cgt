@@ -2,11 +2,10 @@
 import { useParams } from "react-router";
 import useProject from "../../hooks/useProject";
 import { FaCalendarAlt, FaClock } from 'react-icons/fa';
-import ProjectActivities from "../../components/Project/ProjectActivities";
 
 export default function ProjectDetailView() {
   const { projectId } = useParams();
-  const { data: project, isLoading, error } = useProject(projectId || "");
+  const { data: project, isLoading, error } = useProject(projectId);
 
   // No state needed here anymore as it's all in the ProjectActivities component
 
