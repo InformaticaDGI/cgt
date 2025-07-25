@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button } from "../Ui/Button/Button";
 import { Modal } from '../Ui/Modal/Modal';
 import { FaPlus } from 'react-icons/fa';
-import { useActivities, useCreateActivity, type Activity } from '../../hooks/useActivities';
+import { useActivities, useCreateActivity } from '../../hooks/useActivities';
 import { ActivityItem } from './ActivityItem';
 import { ActivityForm } from './ActivityForm';
 import type { ActivityFormData } from './ActivityForm';
