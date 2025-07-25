@@ -4,7 +4,7 @@ import usePermisionTemp from "../../hooks/usePermisionTemp"
 
 export const SecretarySelect = ({ value, onChange, rootOnly = false, parentId }: SecretarySelectProps) => {
     const { data: secretaries } = useSecretary({ rootOnly, parentId })
-    const permissions = usePermisionTemp(rootOnly??false)
+    const permissions = usePermisionTemp(rootOnly)
     const options = secretaries.filter(secretary => permissions.includes(secretary.value))
     return <Select options={options} value={value} onChange={onChange} placeholder="Seleccione una secretaría" />
 }
