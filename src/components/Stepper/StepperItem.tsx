@@ -24,7 +24,7 @@ const StepperItemWrapper = styled.div`
     align-items: center;
     justify-content: center;
     gap: 10px;
-    font-size: 1.2em;
+    font-size: 0.9rem;
     font-weight: 500;
 `
 

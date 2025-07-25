@@ -1,16 +1,16 @@
 import Header from "../../../components/Header/Header";
 import CreateProgramForm from "../../../components/Forms/CreateProgramForm";
-import styled from "styled-components";
 import { useCreateProgram } from "../../../hooks/mutations/useCreateProgram";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router";
 import Card from "../../../components/Card/Card";
+import { Flex } from "../../../components/Layout/Flex";
 
 export default function CreateProgramView() {
 
     const { mutate: createProgram, isPending } = useCreateProgram()
     const navigate = useNavigate()
-    return <MainWrapper>
+    return <Flex $direction="column" $gap="12px" $padding="1rem" $align="stretch" style={{ width: '80vw', position: 'relative' }}>
         <Header />
         <Card $isSelectable={false} $padding="32px">
             <CreateProgramForm onSubmit={(values) => {
@@ -38,14 +38,5 @@ export default function CreateProgramView() {
                 isLoading={isPending}
             />
         </Card>
-    </MainWrapper>
+    </Flex>
 }
-
-const MainWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    width: 100%;
-    height: 100%;
-    padding: 16px;
-`;

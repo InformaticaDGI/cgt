@@ -20,7 +20,7 @@ import { Link } from "react-router";
 const HomeView = () => {
 
     const { data } = usePrograms()
-    return <Flex $direction="column" $gap="12px" $padding="16px" $align="stretch">
+    return <Flex $direction="column" $gap="12px" $padding="1rem" $align="stretch" style={{ width: '80vw', position: 'relative' }}>
         <Header />
         <FilterTool />
         <Tabs />

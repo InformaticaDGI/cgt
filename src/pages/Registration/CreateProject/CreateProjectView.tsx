@@ -1,5 +1,4 @@
 import Header from "../../../components/Header/Header";
-import styled from "styled-components";
 import Stepper from "../../../components/Stepper/Stepper";
 import BasicInformation from "./BasicInformationStep";
 import LocationStep from "./LocationStep";
@@ -7,6 +6,7 @@ import ResourceStep from "./ResourceStep";
 import { LuClipboardList, LuMapPin, LuPackage } from "react-icons/lu";
 import { FaBullseye } from "react-icons/fa6";
 import KpiStep from "./KpiStep";
+import { Flex } from "../../../components/Layout/Flex";
 
 const stepperConfig = [
   {
@@ -35,7 +35,7 @@ const stepperConfig = [
 
 export default function CreateProjectView() {
   return (
-    <MainWrapper>
+    <Flex $direction="column" $gap="12px" $padding="1rem" $align="stretch" $width='80vw' $position="relative">
       <Header />
       <Stepper config={stepperConfig}>
         <Stepper.Step>
@@ -51,14 +51,6 @@ export default function CreateProjectView() {
           <KpiStep />
         </Stepper.Step>
       </Stepper>
-    </MainWrapper>
+    </Flex>
   );
 }
-const MainWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    width: 100%;
-    height: 100%;
-    padding: 16px;
-`;

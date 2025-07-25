@@ -1,5 +1,5 @@
 import { BsBarChartFill } from "react-icons/bs";
-import { FaChartBar, FaHammer, FaUsersGear } from "react-icons/fa6";
+import { FaChartBar, FaHammer, FaUsersGear, FaList } from "react-icons/fa6";
 import { FaMapLocationDot } from "react-icons/fa6";
 import { MdShield } from "react-icons/md";
 import { IoIosExit } from "react-icons/io";
@@ -46,6 +46,14 @@ const createNavItems: (logout: () => void) => NavItems = (logout: () => void) =>
            roles: authRoles.Public
         },
 
+                {
+            id: 'projects',
+            to: '/proyectos',
+            label: 'Proyectos',
+            icon: FaList,
+            roles: authRoles.Public
+        },
+
         {
             id: 'paysheet',
             to: '/nomina',
@@ -53,6 +61,7 @@ const createNavItems: (logout: () => void) => NavItems = (logout: () => void) =>
             icon: FaUsersGear,
             roles: authRoles.Public
         },
+
 
 
         {

@@ -16,6 +16,7 @@ interface $FlexProps {
     $right?: number | string;
     $bottom?: number | string;
     $zIndex?: number;
+    $flex?: number;
 }
 
 export const Flex = styled.div<$FlexProps>`
@@ -35,4 +36,5 @@ export const Flex = styled.div<$FlexProps>`
     ${({ $right }) => $right && `right: ${$right};`}
     ${({ $bottom }) => $bottom && `bottom: ${$bottom};`}
     ${({ $zIndex }) => $zIndex !== undefined && `z-index: ${$zIndex};`}
+    ${({ $flex }) => $flex !== undefined && `flex: ${$flex};`}
 `;
