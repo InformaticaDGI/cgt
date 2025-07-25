@@ -11,4 +11,5 @@ type MunicipalitySelectProps = {
     value: string
     onChange: (value: string) => void
     territorialSecretaryId?: string
+    style?: React.CSSProperties
 }   

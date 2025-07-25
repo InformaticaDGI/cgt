@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
-export const FormControl = ({ children, label, required = false, error }: FormControlProps) => {
-    return <StyledFormControl>
+export const FormControl = ({ children, label, required = false, error, style }: FormControlProps) => {
+    return <StyledFormControl style={style}>
         <label>{label} {required && <span className="required">*</span>}</label>
         <div className="form-control-content">
             {children}
@@ -19,6 +19,7 @@ type FormControlProps = {
     label: string
     required?: boolean
     error?: string
+    style?: React.CSSProperties
 }
 
 const StyledFormControl = styled.div`

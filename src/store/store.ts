@@ -18,12 +18,15 @@ interface FormState {
   projectMunicipalityId: string;
   projectParrishId: string;
   projectCommunityCircuitId: string;
+  projectCommunityId: string;
   projectLatitude: number;
   projectLongitude: number;
 
   // Budget
   projectBudgetSourceId: string
   projectBudget: string
+  projectBudgetBs: string
+  projectBudgetUsd: string
   projectDirectLabor: string
   projectIndirectLabor: string
   projectQualifiedLabor: string
@@ -48,10 +51,13 @@ const initialFormState: FormState = {
   projectAreaId: '',
   projectParrishId: '',
   projectCommunityCircuitId: '',
+  projectCommunityId: '',
   projectLatitude: 9.9156947,
   projectLongitude: -67.3601931,
   projectBudgetSourceId: '',
   projectBudget: '0,00',
+  projectBudgetBs: '',
+  projectBudgetUsd: '',
   projectDirectLabor: '0,00',
   projectIndirectLabor: '0,00',
   projectQualifiedLabor: '0,00',

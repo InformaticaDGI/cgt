@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
-import data from '../utils/data.json';
+import { config } from '../config';
 
 const useProject = (projectId: string) => {
     return useQuery({
@@ -9,14 +9,10 @@ const useProject = (projectId: string) => {
     })
 }
 
-const fetchProjectById = (projectId: string) => {
-    const [matchProject] = data.evaluacionSistema.listado_programas[0].programas.map(program => {
-        const project = program.proyectos.find(project => project.idProyecto === projectId)
-        if(!project) throw new Error('Project not found')
-        return project
-    })
-
-    return matchProject
+const fetchProjectById = async (projectId: string) => {
+    const response = await fetch(`${config.apiUrl}/projects/${projectId}`);
+    if (!response.ok) throw new Error('Project not found');
+    return response.json();
 }
 
 export default useProject
