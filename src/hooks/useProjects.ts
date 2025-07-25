@@ -29,7 +29,7 @@ export const useProjectsInclude = () => {
 
 const getProjectsInclude = async (): Promise<Project[]> => {
   const { data } = await axios.get<{ data: Project[] }>(
-    `${config.apiUrl}/projects?include=parish,secretary`
+    `${config.apiUrl}/projects?include=parish,secretary&limit=100`
   );
   return data.data;
 };
