@@ -10,6 +10,7 @@ import Card from "../../../components/Card/Card";
 import { MunicipalitySelect } from "../../../components/Prebuilt/MunicipalitySelect";
 import { ParrishSelect } from "../../../components/Prebuilt/ParrishSelect";
 import { CommunityCircuitSelect } from "../../../components/Prebuilt/CommunityCircuit";
+import { CommunitySelect } from "../../../components/Prebuilt/CommunitySelect";
 
 const LocationStep = () => {
   const { nextStep, previousStep } = useStepper();
@@ -28,6 +29,7 @@ const LocationStep = () => {
       municipalityId: formState.projectMunicipalityId,
       parrishId: formState.projectParrishId,
       circuitId: formState.projectCommunityCircuitId,
+      communityId: formState.projectCommunityId || '',
       coords: { lat: formState.projectLatitude, lng: formState.projectLongitude }
     },
     onSubmit: (values) => {
@@ -36,6 +38,7 @@ const LocationStep = () => {
         projectMunicipalityId: values.municipalityId,
         projectParrishId: values.parrishId,
         projectCommunityCircuitId: values.circuitId,
+        projectCommunityId: values.communityId,
         projectLatitude: values.coords.lat,
         projectLongitude: values.coords.lng
       })
@@ -68,8 +71,20 @@ const LocationStep = () => {
             <FormControl label="Circuito Comunal" required error={formik.errors.circuitId && formik.touched.circuitId ? formik.errors.circuitId : undefined}>
               <CommunityCircuitSelect
                 value={formik.values.circuitId}
-                onChange={(value) => formik.setFieldValue('circuitId', value)}
+                onChange={(value) => {
+                  formik.setFieldValue('circuitId', value);
+                  formik.setFieldValue('communityId', ''); // Reset community when circuit changes
+                }}
                 parishId={formik.values.parrishId}
+              />
+            </FormControl>
+          </GridItem>
+          <GridItem $colSpan={24}>
+            <FormControl label="Comunidad" required={true}>
+              <CommunitySelect
+                value={formik.values.communityId}
+                onChange={(value) => formik.setFieldValue('communityId', value)}
+                circuitId={formik.values.circuitId}
               />
             </FormControl>
           </GridItem>

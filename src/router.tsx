@@ -6,6 +6,7 @@ import ActivityView from './pages/Home/[programId]/Program/[projectId]/Project/[
 import TaskView from './pages/Home/[programId]/Program/[projectId]/Project/[activityId]/Activity/[taskId]/Task/TaskView'
 import CreateProgramView from './pages/Registration/CreateProgram/CreateProgramView'
 import CreateProjectView from './pages/Registration/CreateProject/CreateProjectView'
+import ProjectDetailView from './pages/Registration/ProjectDetailView'
 import { LoginView } from './pages/Login/LoginView'
 import { ProtectedRoute } from './components/ProtectedRoute/ProtectedRoute'
 import NotFoundView from './pages/NotFound/NotFoundView'
@@ -64,7 +65,16 @@ const router = createBrowserRouter([
             },
             {
                 path: 'proyectos',
-                element: <ProjectsListView />
+                children: [
+                    {
+                        index: true,
+                        element: <ProjectsListView />
+                    },
+                    {
+                        path: ':projectId',
+                        element: <ProjectDetailView />
+                    }
+                ]
             },
             {
                 path: 'seguridad',

@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
-export const Select = ({ options, value, onChange, placeholder }: SelectProps) => {
-    return <$StyledSelect value={value} onChange={(evt: React.ChangeEvent<HTMLSelectElement>) => onChange?.(evt.target.value)}>
+export const Select = ({ options, value, onChange, placeholder, style }: SelectProps) => {
+    return <$StyledSelect value={value} onChange={(evt: React.ChangeEvent<HTMLSelectElement>) => onChange?.(evt.target.value)} style={style}>
         <option value="">{placeholder || 'Seleccione una opción'}</option>
         {options.map(option => <option value={option.value} key={option.value}>{option.label}</option>)}
     </$StyledSelect>
@@ -12,6 +12,7 @@ type SelectProps = {
     value?: string
     onChange?: (value: string) => void
     placeholder?: string
+    style?: React.CSSProperties
 }
 
 const $StyledSelect = styled.select`

@@ -10,9 +10,11 @@ import { useAppStore } from "../../../store/store"
 import { KpiBaseInput } from "../../../components/Prebuilt/KpiBaseInput"
 import { useCreateProject } from "../../../hooks/mutations/useCreateProject"
 import Swal from "sweetalert2"
+import { useNavigate } from "react-router-dom"
 import { getFloatValue } from "../../../components/Prebuilt/CurrencyInput"
 
 const KpiStep = () => {
+    const navigate = useNavigate();
 
     const { previousStep, resetStepper } = useStepper()
     const { formState, resetFormState } = useAppStore()
@@ -50,7 +52,7 @@ const KpiStep = () => {
 
             console.log(project)
 
-            await createProject({
+            const result = await createProject({
                 name: project.projectName,
                 initialDate: project.projectInitialDate,
                 finalDate: project.projectFinalDate,
@@ -81,7 +83,11 @@ const KpiStep = () => {
                 title: 'Proyecto creado',
                 text: 'El proyecto se ha creado correctamente',
                 icon: 'success',
-            })
+            }).then(() => {
+                // Navegar al detalle usando el id real si existe en result, si no simular con 1
+                const projectId = result?.id || 1;
+                navigate(`/registro/detalle-proyecto/${projectId}`);
+            });
 
         },
 

@@ -8,5 +8,15 @@ export default defineConfig({
     allowedHosts: [
       'cgt.guarico.gob.ve'
     ]
+  },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://api-cgt.guarico.gob.ve',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+        secure: false
+      }
+    }
   }
 })
