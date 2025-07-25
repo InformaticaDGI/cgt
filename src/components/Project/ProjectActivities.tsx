@@ -32,7 +32,7 @@ const ProjectActivities: React.FC<ProjectActivitiesProps> = ({
   } = useActivities(projectId);
 
   const { mutateAsync: createActivity, isPending: isSubmitting } = useCreateActivity();
-  const [activityList, setActivityList] = useState<Activity[]>([]);
+  const [activityList, setActivityList] = useState<Activity[]>(activities);
 
   const [modalOpen, setModalOpen] = useState(false);
   const [submitError, setSubmitError] = useState("");
