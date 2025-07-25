@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button } from "../Ui/Button/Button";
 import { Modal } from '../Ui/Modal/Modal';
 import { FaPlus } from 'react-icons/fa';
-import useActivities from '../../hooks/useActivities';
+import { useActivities, useCreateActivity } from '../../hooks/useActivities';
 import { ActivityItem } from './ActivityItem';
 import { ActivityForm } from './ActivityForm';
 import type { ActivityFormData } from './ActivityForm';
@@ -27,15 +27,14 @@ const ProjectActivities: React.FC<ProjectActivitiesProps> = ({
   projectCommunityId
 }) => {
   const {
-    activities,
+    data: activities,
     isLoading,
-    isSubmitting,
-    submitError,
-    saveActivity,
-    setSubmitError
   } = useActivities(projectId);
 
+  const { mutateAsync: createActivity, isPending: isSubmitting } = useCreateActivity();
+
   const [modalOpen, setModalOpen] = useState(false);
+  const [submitError, setSubmitError] = useState("");
   const [formData, setFormData] = useState<ActivityFormData>({
     name: "",
     startDate: "",
@@ -76,33 +75,43 @@ const ProjectActivities: React.FC<ProjectActivitiesProps> = ({
 
   const handleAddActivity = async () => {
     // Validar que todos los campos requeridos estén completos
-    if (!formData.name || !formData.startDate || !formData.endDate || 
-        !formData.municipalityId || !formData.parishId || !formData.circuitId || !formData.communityId) {
+    if (!formData.name || !formData.startDate || !formData.endDate ||
+      !formData.municipalityId || !formData.parishId || !formData.circuitId || !formData.communityId) {
       setSubmitError("Por favor complete todos los campos requeridos");
       return;
     }
-    
+
     // Validar que la fecha de inicio no sea mayor que la fecha de fin
     if (new Date(formData.startDate) > new Date(formData.endDate)) {
       setSubmitError("La fecha de inicio no puede ser mayor que la fecha de finalización");
       return;
     }
-    
+
     // Validar que las fechas de la actividad estén dentro del rango del proyecto
     if (projectStartDate && projectEndDate) {
       const activityStartDate = new Date(formData.startDate);
       const activityEndDate = new Date(formData.endDate);
       const projStartDate = new Date(projectStartDate);
       const projEndDate = new Date(projectEndDate);
-      
+
       if (activityStartDate < projStartDate || activityEndDate > projEndDate) {
         setSubmitError("Las fechas de la actividad deben estar dentro del rango del proyecto");
         return;
       }
     }
-    
+
     // Guardar la actividad
-    const success = await saveActivity(formData);
+    const success = await createActivity({
+      name: formData.name,
+      startDate: formData.startDate ? new Date(formData.startDate).toISOString() : null,
+      endDate: formData.endDate ? new Date(formData.endDate).toISOString() : null,
+      sectorId: formData.communityId,
+      parishId: formData.parishId,
+      communityCircuitId: formData.circuitId,
+      projectId: projectId
+    });
+
+
     if (success) {
       setModalOpen(false);
       // Limpiar el formulario
@@ -126,7 +135,7 @@ const ProjectActivities: React.FC<ProjectActivitiesProps> = ({
           <FaPlus size={12} /> Nueva Actividad
         </Button>
       </div>
-      
+
       {/* Contenido de actividades */}
       <div style={{ padding: "0" }}>
         {isLoading ? (
@@ -140,10 +149,10 @@ const ProjectActivities: React.FC<ProjectActivitiesProps> = ({
         ) : (
           <div>
             {activities.map((activity, index) => (
-              <ActivityItem 
-                key={activity.id} 
-                activity={activity} 
-                isLast={index === activities.length - 1} 
+              <ActivityItem
+                key={activity.id}
+                activity={activity}
+                isLast={index === activities.length - 1}
               />
             ))}
           </div>
