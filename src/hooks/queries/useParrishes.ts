@@ -18,9 +18,10 @@ export const getParrishes = async (municipalityId: string) => {
   return response.data;
 };
 
-type Parrish = {
+export type Parrish = {
   id: string;
   name: string;
   latitude: number | null;
   longitude: number | null;
+  municipalityId: string;
 };

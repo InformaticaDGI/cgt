@@ -1,7 +1,7 @@
 import { useEffect, useState, useMemo } from 'react';
 import { Marker, Popup, useMap } from 'react-leaflet';
 import L from 'leaflet';
-import usePrograms from "../../../../hooks/usePrograms";
+import {useProjectsInclude} from "../../../../hooks/useProjects";
 import { useAppStore } from '../../../../store/store';
 import markerIconPng from '../../../../assets/marker-icon.png'
 import markerShadowPng from '../../../../assets/marker-shadow.png'
@@ -27,47 +27,54 @@ const customIcon = L.icon({
 export function MapMarkers() {
     const [places, setPlaces] = useState<Place[]>([]);
     const map = useMap();
-    const {data} = usePrograms()
+    const {data} = useProjectsInclude()
     
-    const {secretaryParentId, parrishId} = useAppStore()
+    const {secretaryRootId, secretaryParentId, municipalityId, parrishId} = useAppStore()
 
-    const filteredPrograms = useMemo(() => {
+    const filteredProjects = useMemo(() => {
+    
         if (!data) return [];
 
-        // Si no hay filtros activos, no se muestra nada (mantiene la lógica original).
-        if (!secretaryParentId && !parrishId) {
-            return data;
+        // Si no hay filtros activos, muestra todo.
+        
+        if (!secretaryParentId && !parrishId && !municipalityId && !secretaryRootId) {
+            return data.filter(project => project.latitude !== null && project.longitude !== null);
         }
 
-        let programsToFilter = data;
+        let projectsToFilter = data;
 
-        // 1. Filtrar por secretaría si está seleccionada.
+        if(secretaryRootId) {
+            projectsToFilter = projectsToFilter.filter(p => p.secretary.parentId === secretaryRootId);
+        }
+
         if (secretaryParentId) {
-            programsToFilter = programsToFilter.filter(p => p.secretaryId === secretaryParentId);
+            projectsToFilter = projectsToFilter.filter(p => p.secretaryId === secretaryParentId);
         }
 
-        // 2. Filtrar adicionalmente por parroquia si está seleccionada (lógica AND).
+        // if(secretarialTerritoryId){
+        //     projectsToFilter = projectsToFilter.filter(p => p.areaId === secretarialTerritoryId);
+        // }
+
+        if(municipalityId){
+            projectsToFilter = projectsToFilter.filter(p => p.parish.municipalityId === municipalityId);
+        }
+        
         if (parrishId) {
-            programsToFilter = programsToFilter.filter(p => p.projects.some(proj => proj.parishId === parrishId));
+            projectsToFilter = projectsToFilter.filter(p => p.parishId === parrishId);
         }
 
-        return programsToFilter;
-    }, [data, secretaryParentId, parrishId]);
+        return projectsToFilter.filter(project => project.latitude !== null && project.longitude !== null);
+    }, [data, secretaryRootId, secretaryParentId, municipalityId, parrishId]);
 
 
     useEffect(() => {
       if(data){
-        const fetchedPlaces: Place[] = filteredPrograms.reduce((acc, program) => {
-                const projectsWithCoords = program.projects
-                    .filter(project => project.latitude !== null && project.longitude !== null)
-                    .map(project => ({
+        const fetchedPlaces: Place[] = filteredProjects.map(project => ({
                         id: project.id,
                         name: project.name,
                         lat: project.latitude as number, // Aseguramos el tipo
                         lng: project.longitude as number, // Aseguramos el tipo
-                    }));
-                return acc.concat(projectsWithCoords);
-            }, [] as Place[]);
+                    }))
 
         setPlaces(fetchedPlaces);
 
@@ -78,7 +85,7 @@ export function MapMarkers() {
         map.fitBounds(markerBounds, { padding: [50, 50] });
     }
 
-    }, [map, filteredPrograms]); // El hook se ejecuta cuando el mapa está listo.
+    }, [map, filteredProjects]); // El hook se ejecuta cuando el mapa está listo.
 
     // --- 3. RENDERIZAR MARCADORES ---
     return (
