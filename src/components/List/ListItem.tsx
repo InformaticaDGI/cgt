@@ -3,19 +3,19 @@ import { Flex } from "../Layout/Flex"
 import Progress from "../Ui/Progress/Progress"
 import Text from "../Ui/Text/Text"
 import StatusBadge from "../Prebuilt/StatusBadge"
-import { useTerritoryCatalog } from "../../hooks/mutations/useTerritoryCatalog"
-import useChildrenSecretary from "../../hooks/useChildrenSecretary"
 import type { Project } from "../../hooks/useProjects"
 import styled from "styled-components"
 import { Link } from "react-router"
+import useSecretaryById from "../../hooks/useSecretaryById"
+import useMunicipality from "../../hooks/useMunicipality"
 
 
 const ListItem = ({ project }: { project: Project }) => {
 
-    const { name, observations, status, initialDate, overallProjectProgress, finalDate, progressByTime, daysRemaining, benefitedPopulation, secretaryId, parishId } = project
+    const { name, observations, status, initialDate, overallProjectProgress, finalDate, progressByTime, daysRemaining, parish, benefitedPopulation, secretary, parishId } = project
 
-    const { data: secretaryChildren } = useChildrenSecretary(secretaryId)
-    const { data: territoryCatalog } = useTerritoryCatalog(parishId)
+    const { data: rootSecretary } = useSecretaryById(secretary.parentId)
+    const { data: municipality } = useMunicipality(parish.municipalityId)
 
 
 
@@ -33,9 +33,9 @@ const ListItem = ({ project }: { project: Project }) => {
             </GridItem>
 
             <GridItem $colSpan={6} style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem', justifyContent: 'start', alignItems: 'start' }}>
-                <Text $fontSize='14px' $fontWeight='500' $color='#2D3748' style={{ fontWeight: '600', fontSize: '12px' }}>{secretaryChildren?.parent.name}</Text>
-                <Text $fontSize='14px' $fontWeight='500' $color='var(--text-secondary)' style={{ fontWeight: '500', fontSize: '12px' }}>{secretaryChildren?.name}</Text>
-                <Text $fontSize='14px' $fontWeight='500' $color='var(--text-secondary)' style={{ fontWeight: '500', fontSize: '12px' }}>{territoryCatalog?.parish.municipality.name} · {territoryCatalog?.parish.name}</Text>
+                <Text $fontSize='14px' $fontWeight='500' $color='#2D3748' style={{ fontWeight: '600', fontSize: '12px' }}>{rootSecretary?.name}</Text>
+                <Text $fontSize='14px' $fontWeight='500' $color='var(--text-secondary)' style={{ fontWeight: '500', fontSize: '12px' }}>{secretary.name}</Text>
+                <Text $fontSize='14px' $fontWeight='500' $color='var(--text-secondary)' style={{ fontWeight: '500', fontSize: '12px' }}>{municipality?.name} · {parish.name}</Text>
             </GridItem>
 
             <GridItem $colSpan={6} style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', justifyContent: 'end', alignItems: 'end' }}>

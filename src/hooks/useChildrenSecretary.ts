@@ -12,7 +12,7 @@ const fetchChildrenSecretary = async (childrenId: string): Promise<any> => {
     // const response = await fetch(url)
     // const data = await response.json()
     // return data
-    return { id: childrenId, name: 'Nombre del secretario', parent: { id: '1', name: 'Nombre del secretario padre' } }
+    return { id: childrenId, name: 'CONSTRUGUARICO', parent: { id: '1', name: 'Nombre del secretario padre' } }
 }
 
 export default useChildrenSecretary

@@ -8,13 +8,23 @@ const useProjects = () => {
   return useQuery({
     queryKey: ["projects"],
     queryFn: getProjects,
-    initialData: [],
+    initialData: {
+      data: [],
+      pagination: {
+        total: 0,
+        page: 1,
+        limit: 10,
+        totalPages: 0,
+        hasNext: false,
+        hasPrev: false
+      }
+    },
   });
 };
 
-const getProjects = async (): Promise<Project[]> => {
-  const { data } = await axios.get<Project[]>(
-    `${config.apiUrl}/projects/with-kpi-instances/list`
+const getProjects = async (): Promise<ProjectMetadata> => {
+  const { data } = await axios.get<ProjectMetadata>(
+    `${config.apiUrl}/projects?include=parish,secretary`
   );
   return data;
 };
@@ -34,6 +44,18 @@ const getProjectsInclude = async (): Promise<Project[]> => {
   return data.data;
 };
 
+export type ProjectMetadata = {
+  data: Project[]
+  pagination: {
+    total: number
+    page: number
+    limit: number
+    totalPages: number
+    hasNext: boolean
+    hasPrev: boolean
+  }
+}
+
 export type Project = {
   id: string;
   name: string;
@@ -48,7 +70,6 @@ export type Project = {
   observations: string;
   parishId: string;
   parish: Parrish;
-  secretary: Secretary;
   secretaryId: string;
   programId: string;
   directLabor: number;
@@ -65,6 +86,7 @@ export type Project = {
   daysRemaining: number;
   areaId?: string;
   overallProjectProgress: number;
+  secretary: Secretary
 };
 
 export default useProjects;

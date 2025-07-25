@@ -11,7 +11,7 @@ import ProjectFilter from "../../components/Prebuilt/ProjectFilter";
 
 const ProjectsListView = () => {
 
-    const { data: projects } = useProjects();
+    const { data: { data: projects } } = useProjects();
 
     return (
         <Flex $height='100%' $direction="column" $width='85vw' $justify='center' $align='stretch' $padding='1rem' style={{ position: 'relative' }}>

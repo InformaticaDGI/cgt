@@ -1,20 +1,29 @@
 import { useQuery } from "@tanstack/react-query"
-import data from '../utils/data.json';
-const useMunicipality = (secretaryTerritoryId: string) => {
+import { config } from "../config";
+const useMunicipality = (parishId: string) => {
     return useQuery({
-        queryKey: ['municipality', secretaryTerritoryId],
-        queryFn: () => fetchMunicipality(secretaryTerritoryId),
-        initialData: []
+        queryKey: ['municipality', parishId],
+        queryFn: () => fetchMunicipality(parishId),
+        initialData: undefined
     })
 }
 
 
-const fetchMunicipality = (secretaryTerritoryId: string) => {
-    const values = data.evaluacionSistema.municipios
-        .filter(dep => dep.idSecretariaTerritorialAsociada === secretaryTerritoryId)
-        .map(dep => ({ label: dep.nombreMunicipio, value: dep.idMunicipio, parroquias: dep.parroquias }))
+const fetchMunicipality = async (parishId: string): Promise<Municipality> => {
+    const url = `${config.apiUrl}/municipalities/${parishId}`
+    const response = await fetch(url)
+    const data = await response.json()
+    return data
+}
 
-    return values;
+export type Municipality = {
+    id: string
+    name: string
+    territorialSecretaryId: string
+    latitude: number
+    longitude: number
+    createdAt: string
+    updatedAt: string
 }
 
 export default useMunicipality
