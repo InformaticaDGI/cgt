@@ -14,7 +14,7 @@ const ProjectsListView = () => {
     const { data: projects } = useProjects();
 
     return (
-        <Flex $height='100%' $direction="column" $width='80vw' $justify='center' $align='stretch' $padding='1rem' style={{ position: 'relative' }}>
+        <Flex $height='100%' $direction="column" $width='85vw' $justify='center' $align='stretch' $padding='1rem' style={{ position: 'relative' }}>
             <Header />
 
             <Card $isSelectable={false} $gap="0.7rem">

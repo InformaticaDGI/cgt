@@ -10,7 +10,7 @@ const SecurityView = () => {
 
 
     return (
-        <Flex $align="stretch" $direction="column" $gap={"16px"} $padding={"16px"}>
+        <Flex $align="stretch" $direction="column" $gap={"16px"} $padding={"16px"} $width='85vw' $position="relative">
             <Card $isSelectable={false} $padding={"24px"}>
                 <CardHeader>
                     <Text style={{ fontSize: '16px', fontWeight: '600', color: '#5A787A' }}>Accesos</Text>

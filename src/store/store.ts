@@ -36,8 +36,8 @@ interface FormState {
 
   // KPI
   projectKpiInstances: KpiInstance[]
-  projectBenefitedPopulation: number
-  projectBenefitedChildren: number
+  projectBenefitedPopulation: string
+  projectBenefitedChildren: string
 }
 
 const initialFormState: FormState = {
@@ -55,18 +55,18 @@ const initialFormState: FormState = {
   projectLatitude: 9.9156947,
   projectLongitude: -67.3601931,
   projectBudgetSourceId: '',
-  projectBudget: '0,00',
-  projectBudgetBs: '',
-  projectBudgetUsd: '',
-  projectDirectLabor: '0,00',
-  projectIndirectLabor: '0,00',
-  projectQualifiedLabor: '0,00',
-  projectUnqualifiedLabor: '0,00',
-  projectFemaleLabor: '0,00',
-  projectMaleLabor: '0,00',
+  projectBudget: '',
+  projectBudgetBs: '0,00',
+  projectBudgetUsd: '0,00',
+  projectDirectLabor: '',
+  projectIndirectLabor: '',
+  projectQualifiedLabor: '',
+  projectUnqualifiedLabor: '',
+  projectFemaleLabor: '',
+  projectMaleLabor: '',
   projectKpiInstances: [],
-  projectBenefitedPopulation: 0,
-  projectBenefitedChildren: 0,
+  projectBenefitedPopulation: '',
+  projectBenefitedChildren: '',
   projectMunicipalityId: '',
 }
 

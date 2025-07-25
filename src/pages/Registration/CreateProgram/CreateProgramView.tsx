@@ -10,7 +10,7 @@ export default function CreateProgramView() {
 
     const { mutate: createProgram, isPending } = useCreateProgram()
     const navigate = useNavigate()
-    return <Flex $direction="column" $gap="12px" $padding="1rem" $align="stretch" style={{ width: '80vw', position: 'relative' }}>
+    return <Flex $direction="column" $gap="12px" $padding="1rem" $align="stretch" style={{ width: '85vw', position: 'relative' }}>
         <Header />
         <Card $isSelectable={false} $padding="32px">
             <CreateProgramForm onSubmit={(values) => {

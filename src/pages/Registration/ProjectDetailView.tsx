@@ -1,5 +1,5 @@
 // React se usa implícitamente en el JSX
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router";
 import useProject from "../../hooks/useProject";
 import { FaCalendarAlt, FaClock } from 'react-icons/fa';
 import ProjectActivities from "../../components/Project/ProjectActivities";
@@ -14,7 +14,7 @@ export default function ProjectDetailView() {
   if (error || !project) return <div>Error al cargar el proyecto</div>;
 
   return (
-    <div style={{ width: "100%", padding: "32px 24px" }}>
+    <div style={{ width: "85vw", padding: "32px 24px" }}>
       {/* HEADER SIMPLIFICADO */}
       <div style={{
         background: "#fff",

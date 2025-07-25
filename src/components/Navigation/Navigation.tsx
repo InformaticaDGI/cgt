@@ -28,7 +28,7 @@ export default Navigation;
 
 
   const Drawer = styled.div`
-        width: 20vw;
+        width: 15vw;
         min-height: 100vh;
         background: linear-gradient(180deg, var(--primary) 0%, var(--secondary) 100%);
         flex-shrink: 0;

@@ -64,7 +64,7 @@ const MainWrapper = styled.div`
     display: flex;
     flex-direction: column;
     gap: 12px;
-    width: 100%;
+    width: 85vw;
     height: 100%;
     padding: 16px;
 `;

@@ -61,7 +61,7 @@ const ResourceStep = () => {
       maleLabor: formState.projectMaleLabor,
     },
     onSubmit: (values) => {
-      setFormState({ 
+      setFormState({
         ...formState,
         projectBudgetSourceId: values.budgetSourceId,
         projectBudgetBs: values.budgetBs,
@@ -72,9 +72,9 @@ const ResourceStep = () => {
         projectDirectLabor: values.directLabor,
         projectFemaleLabor: values.femaleLabor,
         projectMaleLabor: values.maleLabor,
-       })
-       nextStep()
-       
+      })
+      nextStep()
+
     },
     validate
   });
@@ -84,7 +84,7 @@ const ResourceStep = () => {
       <Card $isSelectable={false} $padding="32px">
         <Grid $columns="repeat(24, 1fr)" $gap="12px" $width="100%">
           <GridItem $colSpan={24}>
-            <h3 style={{marginBottom: 8, color:'#222E3A', fontWeight:600, fontSize:18}}>Fondos</h3>
+            <h3 style={{ marginBottom: 8, color: '#222E3A', fontWeight: 600, fontSize: 18 }}>Fondos</h3>
           </GridItem>
           <GridItem $colSpan={12}>
             <FormControl label="Origen de los fondos" required error={formik.errors.budgetSourceId && formik.touched.budgetSourceId ? formik.errors.budgetSourceId : undefined}>
@@ -117,69 +117,61 @@ const ResourceStep = () => {
             </FormControl>
           </GridItem>
           <GridItem $colSpan={24}>
-            <h3 style={{margin:'24px 0 8px 0', color:'#222E3A', fontWeight:600, fontSize:18}}>Montos de mano de obra</h3>
+            <h3 style={{ margin: '24px 0 8px 0', color: '#222E3A', fontWeight: 600, fontSize: 18 }}>Cantidad de mano de obra</h3>
           </GridItem>
           <GridItem $colSpan={6}>
             <FormControl label="Calificada" required error={formik.errors.qualifiedLabor && formik.touched.qualifiedLabor ? formik.errors.qualifiedLabor : undefined}>
               <Input
-                 type="number"
-                 min={0}
-                 name="qualifiedLabor"
-                 value={formik.values.qualifiedLabor}
-                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => formik.setFieldValue("qualifiedLabor", e.target.value.replace(/[^0-9]/g, ''))}
-                 placeholder="0"
-                 $size="medium"
-               />
+                name="qualifiedLabor"
+                value={formik.values.qualifiedLabor}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => formik.setFieldValue("qualifiedLabor", e.target.value.replace(/[^0-9]/g, ''))}
+                placeholder="0"
+                $size="medium"
+              />
             </FormControl>
           </GridItem>
           <GridItem $colSpan={6}>
             <FormControl label="No calificada" required error={formik.errors.unqualifiedLabor && formik.touched.unqualifiedLabor ? formik.errors.unqualifiedLabor : undefined}>
               <Input
-                 type="number"
-                 min={0}
-                 name="unqualifiedLabor"
-                 value={formik.values.unqualifiedLabor}
-                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => formik.setFieldValue("unqualifiedLabor", e.target.value.replace(/[^0-9]/g, ''))}
-                 placeholder="0"
-                 $size="medium"
-               />
+                name="unqualifiedLabor"
+                value={formik.values.unqualifiedLabor}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => formik.setFieldValue("unqualifiedLabor", e.target.value.replace(/[^0-9]/g, ''))}
+                placeholder="0"
+                $size="medium"
+              />
             </FormControl>
           </GridItem>
           <GridItem $colSpan={6}>
             <FormControl label="Indirecta" required error={formik.errors.indirectLabor && formik.touched.indirectLabor ? formik.errors.indirectLabor : undefined}>
               <Input
-                 type="number"
-                 min={0}
-                 name="indirectLabor"
-                 value={formik.values.indirectLabor}
-                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => formik.setFieldValue("indirectLabor", e.target.value.replace(/[^0-9]/g, ''))}
-                 placeholder="0"
-                 $size="medium"
-               />
+                name="indirectLabor"
+                value={formik.values.indirectLabor}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => formik.setFieldValue("indirectLabor", e.target.value.replace(/[^0-9]/g, ''))}
+                placeholder="0"
+                $size="medium"
+              />
             </FormControl>
           </GridItem>
           <GridItem $colSpan={6}>
             <FormControl label="Directa" required error={formik.errors.directLabor && formik.touched.directLabor ? formik.errors.directLabor : undefined}>
               <Input
-                 type="number"
-                 min={0}
-                 name="directLabor"
-                 value={formik.values.directLabor}
-                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => formik.setFieldValue("directLabor", e.target.value.replace(/[^0-9]/g, ''))}
-                 placeholder="0"
-                 $size="medium"
-               />
+                name="directLabor"
+                value={formik.values.directLabor}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => formik.setFieldValue("directLabor", e.target.value.replace(/[^0-9]/g, ''))}
+                placeholder="0"
+                $size="medium"
+              />
             </FormControl>
           </GridItem>
           <GridItem $colSpan={24}>
-            <h3 style={{margin:'24px 0 8px 0', color:'#222E3A', fontWeight:600, fontSize:18}}>Cantidad de personal</h3>
+            <h3 style={{ margin: '24px 0 8px 0', color: '#222E3A', fontWeight: 600, fontSize: 18 }}>Cantidad de personal</h3>
           </GridItem>
           <GridItem $colSpan={6}>
             <FormControl label="Mujeres" required error={formik.errors.femaleLabor && formik.touched.femaleLabor ? formik.errors.femaleLabor : undefined}>
-              <CurrencyInput
+              <Input
                 name="femaleLabor"
                 value={formik.values.femaleLabor}
-                onChange={value => formik.setFieldValue("femaleLabor", value.replace(/[^0-9]/g, ''))}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => formik.setFieldValue("femaleLabor", e.target.value.replace(/[^0-9]/g, ''))}
                 placeholder="0"
                 maxLength={6}
               />
@@ -187,10 +179,10 @@ const ResourceStep = () => {
           </GridItem>
           <GridItem $colSpan={6}>
             <FormControl label="Hombres" required error={formik.errors.maleLabor && formik.touched.maleLabor ? formik.errors.maleLabor : undefined}>
-              <CurrencyInput
+              <Input
                 name="maleLabor"
                 value={formik.values.maleLabor}
-                onChange={value => formik.setFieldValue("maleLabor", value.replace(/[^0-9]/g, ''))}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => formik.setFieldValue("maleLabor", e.target.value.replace(/[^0-9]/g, ''))}
                 placeholder="0"
                 maxLength={6}
               />

@@ -35,7 +35,7 @@ const stepperConfig = [
 
 export default function CreateProjectView() {
   return (
-    <Flex $direction="column" $gap="12px" $padding="1rem" $align="stretch" $width='80vw' $position="relative">
+    <Flex $direction="column" $gap="12px" $padding="1rem" $align="stretch" $width='85vw' $position="relative">
       <Header />
       <Stepper config={stepperConfig}>
         <Stepper.Step>

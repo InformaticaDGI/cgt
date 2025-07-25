@@ -10,7 +10,7 @@ import { useAppStore } from "../../../store/store"
 import { KpiBaseInput } from "../../../components/Prebuilt/KpiBaseInput"
 import { useCreateProject } from "../../../hooks/mutations/useCreateProject"
 import Swal from "sweetalert2"
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router"
 import { getFloatValue } from "../../../components/Prebuilt/CurrencyInput"
 
 const KpiStep = () => {
@@ -84,9 +84,7 @@ const KpiStep = () => {
                 text: 'El proyecto se ha creado correctamente',
                 icon: 'success',
             }).then(() => {
-                // Navegar al detalle usando el id real si existe en result, si no simular con 1
-                const projectId = result?.id || 1;
-                navigate(`/registro/detalle-proyecto/${projectId}`);
+                navigate(`/proyectos/${result?.id}`);
             });
 
         },
@@ -108,7 +106,7 @@ const KpiStep = () => {
                     <GridItem $colSpan={12}>
                         <FormControl label="Cantidad de beneficiarios" required error={formik.errors.benefitedPopulation && formik.touched.benefitedPopulation ? formik.errors.benefitedPopulation : undefined}>
                             <Input name="benefitedPopulation" placeholder="Cantidad de beneficiarios"
-                                value={formik.values.benefitedPopulation} onChange={(e) => formik.setFieldValue("benefitedPopulation", e.target.value)}
+                                value={formik.values.benefitedPopulation} onChange={(e) => formik.setFieldValue("benefitedPopulation", e.target.value.replace(/[^0-9]/g, ''))}
                                 onBlur={formik.handleBlur}
                             />
                         </FormControl>
@@ -116,7 +114,7 @@ const KpiStep = () => {
                     <GridItem $colSpan={12}>
                         <FormControl label="Cantidad de beneficiarios menores de 18 años" required error={formik.errors.benefitedChildren && formik.touched.benefitedChildren ? formik.errors.benefitedChildren : undefined}>
                             <Input name="benefitedChildren" placeholder="Cantidad de beneficiarios menores de 18 años"
-                                value={formik.values.benefitedChildren} onChange={(e) => formik.setFieldValue("benefitedChildren", e.target.value)}
+                                value={formik.values.benefitedChildren} onChange={(e) => formik.setFieldValue("benefitedChildren", e.target.value.replace(/[^0-9]/g, ''))}
                                 onBlur={formik.handleBlur}
                             />
                         </FormControl>
