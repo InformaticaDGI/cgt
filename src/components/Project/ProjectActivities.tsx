@@ -6,6 +6,7 @@ import { useActivities, useCreateActivity, type Activity } from '../../hooks/use
 import { ActivityItem } from './ActivityItem';
 import { ActivityForm } from './ActivityForm';
 import type { ActivityFormData } from './ActivityForm';
+import { useAppStore } from "../../store/store";
 
 interface ProjectActivitiesProps {
   projectId: string | undefined;
@@ -27,12 +28,10 @@ const ProjectActivities: React.FC<ProjectActivitiesProps> = ({
   projectCommunityId
 }) => {
   const {
-    data: activities,
     isLoading,
   } = useActivities(projectId);
-
+  const { activities } = useAppStore();
   const { mutateAsync: createActivity, isPending: isSubmitting } = useCreateActivity();
-  const [activityList, setActivityList] = useState<Activity[]>(activities);
 
   const [modalOpen, setModalOpen] = useState(false);
   const [submitError, setSubmitError] = useState("");
@@ -115,7 +114,6 @@ const ProjectActivities: React.FC<ProjectActivitiesProps> = ({
 
     if (success) {
       setModalOpen(false);
-      setActivityList([...activityList, success]);
       // Limpiar el formulario
       setFormData({
         name: "",
@@ -150,7 +148,7 @@ const ProjectActivities: React.FC<ProjectActivitiesProps> = ({
           </div>
         ) : (
           <div>
-            {activityList.map((activity, index) => (
+            {activities.map((activity, index) => (
               <ActivityItem
                 key={activity.id}
                 activity={activity}

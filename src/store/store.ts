@@ -2,6 +2,7 @@ import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
 import type { Secretary } from '../hooks/useSecretary'
 import type { KpiInstance } from '../hooks/mutations/useKpiInstances';
+import type { Activity } from '../hooks/useActivities';
 
 interface FormState {
   // Basic Information
@@ -72,6 +73,8 @@ const initialFormState: FormState = {
 
 
 interface AppState {
+  activities: Activity[]
+  setActivities: (activities: Activity[]) => void
   secretaries: Secretary[]
   secretaryRootId: string
   secretarialTerritoryId: string
@@ -102,7 +105,9 @@ export const useAppStore = create<AppState>()(
       municipalityId: '',
       parrishId: '',
       secretaries: [],
+      activities: [],
       formState: initialFormState,
+      setActivities: (activities) => set({ activities }),
       resetFormState: () => set({ formState: initialFormState }),
       setFormState: (formState) => set({ formState }),
       // Setter Functions
