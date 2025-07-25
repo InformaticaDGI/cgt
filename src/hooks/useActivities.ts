@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { config } from '../config';
 
-type Activity = {
+export type Activity = {
   id: number;
   name: string;
   description?: string;
