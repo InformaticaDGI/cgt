@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { config } from '../config';
