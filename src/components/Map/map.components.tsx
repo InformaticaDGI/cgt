@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { MapContainer, TileLayer } from 'react-leaflet';
+import { MapContainer } from 'react-leaflet';
 import { useSearchParams } from 'react-router';
 // import { useAppSelector } from '../../redux/redux-hooks';
 import CopyRight from '../Copyright/copyright.component';
