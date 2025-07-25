@@ -12,7 +12,7 @@ import useMunicipality from "../../hooks/useMunicipality"
 
 const ListItem = ({ project }: { project: Project }) => {
 
-    const { name, observations, status, initialDate, overallProjectProgress, finalDate, progressByTime, daysRemaining, parish, benefitedPopulation, secretary, parishId } = project
+    const { name, observations, status, initialDate, overallProjectProgress, finalDate, progressByTime, daysRemaining, parish, benefitedPopulation, secretary } = project
 
     const { data: rootSecretary } = useSecretaryById(secretary.parentId)
     const { data: municipality } = useMunicipality(parish.municipalityId)
