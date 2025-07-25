@@ -52,14 +52,14 @@ const LocationStep = () => {
         <Grid $columns="repeat(24, 1fr)" $gap="12px">
           <GridItem $colSpan={24}>
             <FormControl label="Municipio" required error={formik.errors.municipalityId && formik.touched.municipalityId ? formik.errors.municipalityId : undefined}>
-              <MunicipalitySelect value={formik.values.municipalityId} onChange={(value) => formik.setFieldValue('municipalityId', value)} />
+              <MunicipalitySelect value={formik.values.municipalityId} onChange={(value) => {formik.setFieldValue('municipalityId', value); formik.setFieldValue('parrishId', ''); formik.setFieldValue('circuitId', '');}} />
             </FormControl>
           </GridItem>
           <GridItem $colSpan={24}>
             <FormControl label="Parroquia" required error={formik.errors.parrishId && formik.touched.parrishId ? formik.errors.parrishId : undefined}>
               <ParrishSelect
                 value={formik.values.parrishId}
-                onChange={(value) => formik.setFieldValue('parrishId', value)}
+                onChange={(value) => {formik.setFieldValue('parrishId', value); formik.setFieldValue('circuitId', '');}}
                 municipalityId={formik.values.municipalityId}
               />
             </FormControl>
@@ -77,6 +77,9 @@ const LocationStep = () => {
             <FormControl label="Geolocalización" required error={formik.errors.coords && formik.touched.coords ? formik.errors.coords.lat || formik.errors.coords.lng ? "La geolocalización es requerida" : undefined : undefined}>
               <MapCoordinateSelector
                 value={formik.values.coords}
+                municipalityId={formik.values.municipalityId}
+                parrishId={formik.values.parrishId}
+                circuitId={formik.values.circuitId}
                 onChange={(value) => {
                   formik.setFieldValue("coords", value);
                 }}

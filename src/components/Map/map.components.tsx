@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { MapContainer, TileLayer } from 'react-leaflet';
+import { MapContainer } from 'react-leaflet';
 import { useSearchParams } from 'react-router';
 // import { useAppSelector } from '../../redux/redux-hooks';
 import CopyRight from '../Copyright/copyright.component';
@@ -33,10 +33,6 @@ export function GobMap() {
 				zoom={locate.getZoom()} maxZoom={21} doubleClickZoom={false}
 				zoomControl={false}
 				scrollWheelZoom={true}>
-				<TileLayer
-					attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-					url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-				/>
 				<MapClickDisabler>
 					<MapSelector />
 					<MapMarkers />
