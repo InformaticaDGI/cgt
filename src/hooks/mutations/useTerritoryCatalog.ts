@@ -13,10 +13,10 @@ const getTerritoryCatalog = async (parrishId: string) => {
     // return response.data
     return {
         parish: {
-            id: '1',
+            id: parrishId,
             name: 'San Juan de los morros',
             municipality: {
-                id: '1',
+                id: '123',
                 name: 'Juan German Roscio'
             }
         }
