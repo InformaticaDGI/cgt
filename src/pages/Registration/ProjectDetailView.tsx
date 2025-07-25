@@ -2,6 +2,7 @@
 import { useParams } from "react-router";
 import useProject from "../../hooks/useProject";
 import { FaCalendarAlt, FaClock } from 'react-icons/fa';
+import ProjectActivities from "../../components/Project/ProjectActivities";
 
 export default function ProjectDetailView() {
   const { projectId } = useParams();
@@ -45,7 +46,7 @@ export default function ProjectDetailView() {
         </div>
       </div>
 
-      {/* ACTIVIDADES
+      {/* ACTIVIDADES */}
       <ProjectActivities 
         projectId={projectId}
         projectStartDate={project.initialDate}
@@ -54,7 +55,7 @@ export default function ProjectDetailView() {
         projectParishId={project.parishId}
         projectCircuitId={project.circuitId}
         projectCommunityId={project.communityId}
-      /> */}
+      />
     </div>
   );
 }
