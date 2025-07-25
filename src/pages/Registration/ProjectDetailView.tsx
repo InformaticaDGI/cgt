@@ -1,4 +1,4 @@
-import React from "react";
+// React se usa implícitamente en el JSX
 import { useParams } from "react-router-dom";
 import useProject from "../../hooks/useProject";
 import { FaCalendarAlt, FaClock } from 'react-icons/fa';
