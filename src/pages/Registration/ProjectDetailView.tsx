@@ -46,7 +46,7 @@ export default function ProjectDetailView() {
         </div>
       </div>
 
-      {/* ACTIVIDADES */}
+      {/* ACTIVIDADES
       <ProjectActivities 
         projectId={projectId}
         projectStartDate={project.initialDate}
@@ -55,7 +55,7 @@ export default function ProjectDetailView() {
         projectParishId={project.parishId}
         projectCircuitId={project.circuitId}
         projectCommunityId={project.communityId}
-      />
+      /> */}
     </div>
   );
 }
