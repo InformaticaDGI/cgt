@@ -1,7 +1,8 @@
-import { create } from 'zustand'
-import { devtools } from 'zustand/middleware'
-import type { Secretary } from '../hooks/useSecretary'
-import type { KpiInstance } from '../hooks/mutations/useKpiInstances';
+import { create } from "zustand";
+import { devtools } from "zustand/middleware";
+import type { Secretary } from "../hooks/useSecretary";
+import type { KpiInstance } from "../hooks/mutations/useKpiInstances";
+import { m } from "framer-motion";
 import type { Activity } from '../hooks/useActivities';
 
 interface FormState {
@@ -24,21 +25,21 @@ interface FormState {
   projectLongitude: number;
 
   // Budget
-  projectBudgetSourceId: string
-  projectBudget: string
+  projectBudgetSourceId: string;
+  projectBudget: string;
   projectBudgetBs: string
   projectBudgetUsd: string
-  projectDirectLabor: string
-  projectIndirectLabor: string
-  projectQualifiedLabor: string
-  projectUnqualifiedLabor: string
-  projectFemaleLabor: string
-  projectMaleLabor: string
+  projectDirectLabor: string;
+  projectIndirectLabor: string;
+  projectQualifiedLabor: string;
+  projectUnqualifiedLabor: string;
+  projectFemaleLabor: string;
+  projectMaleLabor: string;
 
   // KPI
   projectKpiInstances: KpiInstance[]
-  projectBenefitedPopulation: string
-  projectBenefitedChildren: string
+  projectBenefitedPopulation: number
+  projectBenefitedChildren: number
 }
 
 const initialFormState: FormState = {
@@ -52,29 +53,24 @@ const initialFormState: FormState = {
   projectAreaId: '',
   projectParrishId: '',
   projectCommunityCircuitId: '',
-  projectCommunityId: '',
   projectLatitude: 9.9156947,
   projectLongitude: -67.3601931,
   projectBudgetSourceId: '',
-  projectBudget: '',
-  projectBudgetBs: '0,00',
-  projectBudgetUsd: '0,00',
-  projectDirectLabor: '',
-  projectIndirectLabor: '',
-  projectQualifiedLabor: '',
-  projectUnqualifiedLabor: '',
-  projectFemaleLabor: '',
-  projectMaleLabor: '',
+  projectBudget: '0,00',
+  projectDirectLabor: '0,00',
+  projectIndirectLabor: '0,00',
+  projectQualifiedLabor: '0,00',
+  projectUnqualifiedLabor: '0,00',
+  projectFemaleLabor: '0,00',
+  projectMaleLabor: '0,00',
   projectKpiInstances: [],
-  projectBenefitedPopulation: '',
-  projectBenefitedChildren: '',
+  projectBenefitedPopulation: 0,
+  projectBenefitedChildren: 0,
   projectMunicipalityId: '',
 }
 
 
 interface AppState {
-  activities: Activity[]
-  setActivities: (activities: Activity[]) => void
   secretaries: Secretary[]
   secretaryRootId: string
   secretarialTerritoryId: string
@@ -93,8 +89,6 @@ interface AppState {
   setParrishId: (parrishId: string) => void,
 }
 
-
-
 export const useAppStore = create<AppState>()(
   devtools(
     (set, get) => ({
@@ -105,9 +99,7 @@ export const useAppStore = create<AppState>()(
       municipalityId: '',
       parrishId: '',
       secretaries: [],
-      activities: [],
       formState: initialFormState,
-      setActivities: (activities) => set({ activities }),
       resetFormState: () => set({ formState: initialFormState }),
       setFormState: (formState) => set({ formState }),
       // Setter Functions

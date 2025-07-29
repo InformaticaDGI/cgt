@@ -1,12 +1,12 @@
 import styled from "styled-components"
 import { MapContainer } from 'react-leaflet';
+import type { PathOptions } from "leaflet";
+import type { Feature } from "geojson";
 import { useSearchParams } from 'react-router';
-// import { useAppSelector } from '../../redux/redux-hooks';
 import CopyRight from '../Copyright/copyright.component';
 import { MapClickDisabler } from './click-disabler';
 import { MapMarkers} from './map-draw/map-markers/map-markers.components'
 import { MapSelector } from './map-selector/map-selector.component';
-import { useState } from 'react';
 import { GuaricoGeoJson } from './get-json';
 
 export function GobMap() {
@@ -16,13 +16,23 @@ export function GobMap() {
 	const lng = searchParams.get('lng')
 	const lat = searchParams.get('lat')
 	const zoom = searchParams.get('zoom')
-	const [setCurrentGeoJson] = useState<any>(null);
 
 	const locate = {
 		getLat: () => lat ? Number(lat) : 9.102146, 
 		getLng: () => lng ? Number(lng) : -66.544602,
 		getZoom: () => zoom ? Number(zoom) : 7
 	}
+
+	// Función de estilo que usa el color de las propiedades del GeoJSON.
+	const styleMunicipality = (feature?: Feature): PathOptions => {
+		return {
+			fillColor: feature?.properties?.COLOR || '#CCCCCC',
+			weight: 1,
+			opacity: 1,
+			color: 'white',
+			fillOpacity: 0.7
+		};
+	};
 
 
 	return (
@@ -38,13 +48,10 @@ export function GobMap() {
 					<MapMarkers />
 				</MapClickDisabler>
 				<CopyRight />
-				<GuaricoGeoJson
-					onChange={(geoJson: any) => {
-						console.log(geoJson);
-						setCurrentGeoJson?.(geoJson?.features);
-					}}
-					lineWeight={1}
-					opacity={0.3} />
+				<GuaricoGeoJson	
+				onChange={() => {}}				
+					style={styleMunicipality}
+				/>
 			</MapContainer>
 		</CardMap>
 	);
