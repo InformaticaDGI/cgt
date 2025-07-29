@@ -9,7 +9,7 @@ export interface BudgetSource {
 
 const getBudgetSources = async (): Promise<BudgetSource[]> => {
   const response = await axios.get(`${config.apiUrl}/budget-sources`);
-  return response.data;
+  return [...response.data, { id: "without-budget", name: "Sin Fondos" }];
 };
 
 export const useBudgetSourcesQuery = () => {

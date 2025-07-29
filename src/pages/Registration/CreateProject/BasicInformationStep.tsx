@@ -23,6 +23,7 @@ const BasicInformation = () => {
         if (!values.name) errors.name = "El nombre es requerido";
         if (!values.initialDate) errors.initialDate = "La fecha de inicio es requerida";
         if (!values.finalDate) errors.finalDate = "La fecha de fin es requerida";
+        if (values.initialDate > values.finalDate) errors.finalDate = "La fecha de fin debe ser mayor o igual a la fecha de inicio";
         if (!values.areaId) errors.areaId = "El área es requerida";
         if (!values.description) errors.description = "La descripción es requerida";
         if (!values.parentId) errors.parentId = "La secretaría territorial es requerida";

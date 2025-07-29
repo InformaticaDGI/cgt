@@ -12,6 +12,7 @@ import { useCreateProject } from "../../../hooks/mutations/useCreateProject"
 import Swal from "sweetalert2"
 import { useNavigate } from "react-router"
 import { getFloatValue } from "../../../components/Prebuilt/CurrencyInput"
+import BudgetSourceList from "../../../domain/entities/BudgetSourceList"
 
 const KpiStep = () => {
     const navigate = useNavigate();
@@ -23,6 +24,7 @@ const KpiStep = () => {
     const validate = (values: any) => {
         const errors: any = {};
         if (!values.kpiInstances || values.kpiInstances.length === 0) errors.kpiInstances = "Debe agregar al menos una meta al proyecto";
+        if (values.kpiInstances.some((kpi: any) => kpi.expectedValue === 0)) errors.kpiInstances = "El valor esperado de las metas no puede ser 0";
         if (!values.benefitedPopulation) errors.benefitedPopulation = "La cantidad de beneficiarios es requerida";
         if (!values.benefitedChildren) errors.benefitedChildren = "La cantidad de beneficiarios menores de 18 años es requerida";
         return errors;
@@ -52,7 +54,15 @@ const KpiStep = () => {
                 projectBenefitedChildren: +values.benefitedChildren,
             }
 
-            console.log(project)
+            const budgetSourceList = BudgetSourceList.create();
+            budgetSourceList.add({
+                value: project.projectBudgetBs,
+                currency: 'VES',
+            });
+            budgetSourceList.add({
+                value: project.projectBudgetUsd,
+                currency: 'USD',
+            });
 
             const result = await createProject({
                 name: project.projectName,
@@ -73,7 +83,7 @@ const KpiStep = () => {
                 maleLabor: project.projectMaleLabor,
                 benefitedPopulation: project.projectBenefitedPopulation,
                 benefitedChildren: project.projectBenefitedChildren,
-                initialBudget: project.projectBudgetBs,
+                budgetSources: budgetSourceList.all,
                 latitude: project.projectLatitude,
                 longitude: project.projectLongitude,
             })
@@ -103,7 +113,7 @@ const KpiStep = () => {
                     </GridItem>
                     <GridItem $colSpan={24} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '12px' }}>
                         <KpiBaseInput value={formik.values.kpiInstances} onChange={(value) => formik.setFieldValue('kpiInstances', value)} />
-                        {formik.errors.kpiInstances && formik.touched.kpiInstances && typeof formik.errors.kpiInstances === 'string' && <p style={{ color: "red" }}>{formik.errors.kpiInstances}</p>}
+                        {formik.errors.kpiInstances && formik.touched.kpiInstances && typeof formik.errors.kpiInstances === 'string' && <p style={{ color: "var(--error)", fontSize: "12px" }}>{formik.errors.kpiInstances}</p>}
                     </GridItem>
                     <GridItem $colSpan={12}>
                         <FormControl label="Cantidad de beneficiarios" required error={formik.errors.benefitedPopulation && formik.touched.benefitedPopulation ? formik.errors.benefitedPopulation : undefined}>

@@ -7,6 +7,7 @@ type CurrencyInputProps = {
     placeholder?: string;
     name?: string;
     maxLength?: number;
+    disabled?: boolean;
 };
 
 function formatCurrencyBdv(rawValue: string) {
@@ -54,6 +55,7 @@ export const CurrencyInput: React.FC<CurrencyInputProps> = ({
     placeholder,
     name,
     maxLength,
+    disabled
 }) => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const rawValue = e.target.value;
@@ -71,6 +73,7 @@ export const CurrencyInput: React.FC<CurrencyInputProps> = ({
             placeholder={placeholder}
             maxLength={maxLength}
             autoComplete="off"
+            disabled={disabled}
         />
     );
 };

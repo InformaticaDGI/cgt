@@ -13,6 +13,8 @@ export const Input = styled.input<InputProps>`
     outline: none;
     transition: border-color 0.2s;
 
+    
+
     &:focus {
         border-color: var(--primary);
         background-color: var(--input-background-focus);
@@ -46,10 +48,13 @@ export const Input = styled.input<InputProps>`
         }
     }
 
-    ${({ $disabled }) => $disabled && css`
+
+
+    ${({ disabled }) => disabled && css`
         background-color: var(--input-background-disabled);
         cursor: not-allowed;
         opacity: 0.6;
+        border: 1px solid black;
     `}
 `
 

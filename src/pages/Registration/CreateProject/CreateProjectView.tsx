@@ -16,7 +16,7 @@ const stepperConfig = [
   },
   {
     icon: <LuMapPin style={{ width: "1.5em", height: "1.5m" }} />,
-    title: "Ubicación y Fechas",
+    title: "Ubicación",
     done: false
   },
   {

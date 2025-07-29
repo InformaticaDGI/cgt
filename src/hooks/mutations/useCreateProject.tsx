@@ -2,6 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { config } from "../../config";
 import axios from "axios";
 import type { KpiInstance } from "./useKpiInstances";
+import type { BudgetSourceDto } from "../../domain/types/budget-source";
 
 export const useCreateProject = () => {
     return useMutation({
@@ -29,7 +30,7 @@ export const useCreateProject = () => {
                 maleLabor: data.maleLabor,
                 benefitedPopulation: data.benefitedPopulation,
                 benefitedChildren: data.benefitedChildren,
-                initialBudget: data.initialBudget,
+                budgetSources: data.budgetSources,
                 latitude: data.latitude,
                 longitude: data.longitude,
                 status: 'in_progress'
@@ -43,7 +44,7 @@ type CreateProjectFormValues = {
     name: string;
     initialDate: string;
     finalDate: string;
-    initialBudget: number;
+    budgetSources: BudgetSourceDto[];
     latitude: number;
     longitude: number;
     observations: string;

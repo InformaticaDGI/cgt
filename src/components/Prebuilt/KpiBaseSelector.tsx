@@ -221,6 +221,7 @@ const KpiBaseSelectorItem = ({
                 onChange={(e) =>
                     onUpdateExpectedValue(kpiBase, Number(e.target.value))
                 }
+                
             />
         </Flex>
     );
