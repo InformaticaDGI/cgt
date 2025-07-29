@@ -8,15 +8,19 @@ import CardHeader from "../../components/Card/CardHeader";
 import CardBody from "../../components/Card/CardBody";
 import { Grid, GridItem } from "../../components/Layout/Grid";
 import ProjectFilter from "../../components/Prebuilt/ProjectFilter";
+import Pagination from "../../components/Prebuilt/Pagination";
+import { useSearchParams } from "react-router";
 
 const ProjectsListView = () => {
 
-    const { data: { data: projects } } = useProjects();
+    const [searchParams] = useSearchParams();
+    const page = searchParams.get('page') ? parseInt(searchParams.get('page') ?? '') : 1;
+    const limit = searchParams.get('limit') ? parseInt(searchParams.get('limit') ?? '') : 10;
+    const { data: { data: projects, pagination } } = useProjects({ page, limit });
 
     return (
         <Flex $height='100%' $direction="column" $width='85vw' $justify='center' $align='stretch' $padding='1rem' style={{ position: 'relative' }}>
             <Header />
-
             <Card $isSelectable={false} $gap="0.7rem">
                 <CardHeader>
                     <Flex $direction="column" $justify="start" $align="start" $gap="0.9rem">
@@ -46,6 +50,7 @@ const ProjectsListView = () => {
                 {projects.map((project) => (
                     <ListItem key={project.id} project={project} />
                 ))}
+                <Pagination currentPage={pagination.page} totalPages={pagination.totalPages} rowsPerPage={pagination.limit} />
             </Flex>
         </Flex>
     )

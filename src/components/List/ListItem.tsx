@@ -8,6 +8,7 @@ import styled from "styled-components"
 import { Link } from "react-router"
 import useSecretaryById from "../../hooks/useSecretaryById"
 import useMunicipality from "../../hooks/useMunicipality"
+import CircularProgress from "../Ui/CircularProgress/CircularProgress"
 
 
 const ListItem = ({ project }: { project: Project }) => {
@@ -22,9 +23,8 @@ const ListItem = ({ project }: { project: Project }) => {
     return <StyledListItem as={Link} to={`/proyectos/${project.id}`} style={{ textDecoration: 'none', userSelect: 'none' }}>
         <Grid $width='100%' $columns="repeat(20, 1fr)" $padding='0.9rem' $gap='1rem' style={{ borderRadius: '10px', boxShadow: '0px 0px 10px 0px rgba(0, 0, 0, 0.1)' }}>
             <GridItem $colSpan={3} style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem', justifyContent: 'center', alignItems: 'start' }}>
-                <Flex $width='100%' $justify='start' $align='start' $direction='column' $gap='0.2rem'>
-                    <Progress value={overallProjectProgress} maxWidth="100%" stroke={4} max={100} color="var(--primary)" backgroundColor="#F3F4F6" />
-                    <Text $fontSize='12px' $fontWeight='500' $color='var(--primary)'>{overallProjectProgress}% completado</Text>
+                <Flex $width='100%' $justify='center' $align='start' $direction='column' $gap='0.2rem' $paddingX='0.8rem'>
+                    <CircularProgress progress={overallProjectProgress} size={60} strokeWidth={3} color="var(--primary)" backgroundColor="#F3F4F6" />
                 </Flex>
             </GridItem>
             <GridItem $colSpan={5} style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem', justifyContent: 'start', alignItems: 'start' }}>

@@ -5,10 +5,10 @@ import type { Parrish } from "./queries/useParrishes";
 import type { Secretary } from "./useSecretary";
 import { useAppStore } from "../store/store";
 
-const useProjects = () => {
+const useProjects = (params: { page?: number, limit?: number } = {}) => {
   return useQuery({
-    queryKey: ["projects"],
-    queryFn: getProjects,
+    queryKey: ["projects", params.page, params.limit],
+    queryFn: () => getProjects(params),
     initialData: {
       data: [],
       pagination: {
@@ -23,9 +23,15 @@ const useProjects = () => {
   });
 };
 
-const getProjects = async (): Promise<ProjectMetadata> => {
+const getProjects = async (params: { page?: number, limit?: number } = {}): Promise<ProjectMetadata> => {
   const { data } = await axios.get<ProjectMetadata>(
-    `${config.apiUrl}/projects?include=parish,secretary`
+    `${config.apiUrl}/projects?include=parish,secretary`,
+    {
+      params: {
+        page: params.page || 1,
+        limit: params.limit || 10
+      }
+    }
   );
   return data;
 };

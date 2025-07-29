@@ -8,6 +8,12 @@ interface $FlexProps {
     $width?: string;
     $height?: string;
     $padding?: string;
+    $paddingX?: string;
+    $paddingY?: string;
+    $paddingLeft?: string;
+    $paddingRight?: string;
+    $paddingTop?: string;
+    $paddingBottom?: string;
     $margin?: string;
     $backgroundColor?: string;
     $position?: 'absolute' | 'relative' | 'fixed';
@@ -30,6 +36,12 @@ export const Flex = styled.div<$FlexProps>`
     padding: ${({ $padding }) => $padding || '0'};
     margin: ${({ $margin }) => $margin || '0'};
     background: ${({ $backgroundColor }) => $backgroundColor || 'transparent'};
+    ${({ $paddingX }) => $paddingX && `padding-left: ${$paddingX}; padding-right: ${$paddingX};`}
+    ${({ $paddingY }) => $paddingY && `padding-top: ${$paddingY}; padding-bottom: ${$paddingY};`}
+    ${({ $paddingLeft }) => $paddingLeft && `padding-left: ${$paddingLeft};`}
+    ${({ $paddingRight }) => $paddingRight && `padding-right: ${$paddingRight};`}
+    ${({ $paddingTop }) => $paddingTop && `padding-top: ${$paddingTop};`}
+    ${({ $paddingBottom }) => $paddingBottom && `padding-bottom: ${$paddingBottom};`}
     ${({ $position }) => $position && `position: ${$position};`}
     ${({ $top }) => $top && `top: ${$top};`}
     ${({ $left }) => $left && `left: ${$left};`}
