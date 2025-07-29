@@ -2,8 +2,6 @@ import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 import type { Secretary } from "../hooks/useSecretary";
 import type { KpiInstance } from "../hooks/mutations/useKpiInstances";
-import { m } from "framer-motion";
-import type { Activity } from '../hooks/useActivities';
 
 interface FormState {
   // Basic Information
@@ -67,6 +65,9 @@ const initialFormState: FormState = {
   projectBenefitedPopulation: 0,
   projectBenefitedChildren: 0,
   projectMunicipalityId: '',
+  projectCommunityId: '',
+  projectBudgetBs: '0,00',
+  projectBudgetUsd: '0,00',
 }
 
 
