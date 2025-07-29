@@ -29,7 +29,7 @@ export function MapMarkers() {
     const map = useMap();
     const {data} = useProjectsInclude()
     
-    const {secretaryRootId, secretaryParentId, municipalityId, parrishId} = useAppStore()
+    const {secretaryRootId, municipalityId} = useAppStore()
 
     const filteredProjects = useMemo(() => {
     
@@ -37,7 +37,7 @@ export function MapMarkers() {
 
         // Si no hay filtros activos, muestra todo.
         
-        if (!secretaryParentId && !parrishId && !municipalityId && !secretaryRootId) {
+        if (!municipalityId && !secretaryRootId) {
             return data.filter(project => project.latitude !== null && project.longitude !== null);
         }
 
@@ -47,24 +47,12 @@ export function MapMarkers() {
             projectsToFilter = projectsToFilter.filter(p => p.secretary.parentId === secretaryRootId);
         }
 
-        if (secretaryParentId) {
-            projectsToFilter = projectsToFilter.filter(p => p.secretaryId === secretaryParentId);
-        }
-
-        // if(secretarialTerritoryId){
-        //     projectsToFilter = projectsToFilter.filter(p => p.areaId === secretarialTerritoryId);
-        // }
-
         if(municipalityId){
             projectsToFilter = projectsToFilter.filter(p => p.parish.municipalityId === municipalityId);
         }
-        
-        if (parrishId) {
-            projectsToFilter = projectsToFilter.filter(p => p.parishId === parrishId);
-        }
 
         return projectsToFilter.filter(project => project.latitude !== null && project.longitude !== null);
-    }, [data, secretaryRootId, secretaryParentId, municipalityId, parrishId]);
+    }, [data, secretaryRootId, municipalityId]);
 
 
     useEffect(() => {
