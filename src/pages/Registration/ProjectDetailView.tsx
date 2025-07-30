@@ -85,7 +85,7 @@ export default function ProjectDetailView() {
         </GridItem>
         <GridItem $colSpan={12} style={{ height: '300px' }}>
           <Card $isSelectable={false}>
-          <Text $fontSize="16px" $fontWeight="500">Listado de Actividades</Text>
+          
               <ProjectActivities
                 projectId={projectId}
                 projectCircuitId={project.circuitId}

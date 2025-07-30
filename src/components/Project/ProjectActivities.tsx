@@ -8,6 +8,7 @@ import { ActivityForm } from './ActivityForm';
 import type { ActivityFormData } from './ActivityForm';
 import { useAppStore } from "../../store/store";
 import Text from "../Ui/Text/Text";
+import { Flex } from "../Layout/Flex";
 
 interface ProjectActivitiesProps {
   projectId: string | undefined;
@@ -129,8 +130,13 @@ const ProjectActivities: React.FC<ProjectActivitiesProps> = ({
   };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "16px", height: "100%"}}  >
-      
+    <div style={{ display: "flex", flexDirection: "column", gap: "16px", height: "100%" }}  >
+      <Flex $direction="row" $justify="space-between" $align="center" $gap="24px" $height="auto">
+        <Text $fontSize="16px" $fontWeight="500">Listado de Actividades</Text>
+        <Button $variant="primary" $size="small" onClick={() => setModalOpen(true)} style={{ display: "flex", alignItems: "center", gap: "5px" }}>
+          <FaPlus size={12} /> Nueva Actividad
+        </Button>
+      </Flex>
       {/* Contenido de actividades */}
       <div style={{ padding: "0" }}>
         {isLoading ? (
