@@ -15,6 +15,8 @@ const ListItem = ({ project }: { project: Project }) => {
 
     const { name, observations, status, initialDate, overallProjectProgress, finalDate, progressByTime, daysRemaining, parish, benefitedPopulation, secretary } = project
 
+    console.log(overallProjectProgress)
+
     const { data: rootSecretary } = useSecretaryById(secretary.parentId)
     const { data: municipality } = useMunicipality(parish.municipalityId)
 

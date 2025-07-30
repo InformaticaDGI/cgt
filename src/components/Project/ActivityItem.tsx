@@ -1,6 +1,7 @@
 import React from 'react';
 import { FaCalendarAlt, FaClock, FaCheckCircle, FaHourglassHalf } from 'react-icons/fa';
 import type { Activity } from '../../hooks/useActivities';
+import Text from '../Ui/Text/Text';
 
 interface ActivityItemProps {
   activity: Activity;
@@ -17,7 +18,7 @@ export const ActivityItem: React.FC<ActivityItemProps> = ({ activity, isLast }) 
 
   return (
     <div style={{ 
-      padding: "16px 24px", 
+      padding: "16px 8px", 
       borderBottom: isLast ? "none" : "1px solid #eee",
       transition: "background 0.2s",
       cursor: "pointer",
@@ -25,9 +26,9 @@ export const ActivityItem: React.FC<ActivityItemProps> = ({ activity, isLast }) 
     }}>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <div>
-          <h3 style={{ margin: "0 0 8px 0", fontSize: "16px", fontWeight: "600" }}>
+          <Text $fontSize="14px" $fontWeight="500">
             {activity.name}
-          </h3>
+          </Text>
           <div style={{ display: "flex", gap: "30px", fontSize: "14px", color: "#666" }}>
             <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
               <FaCalendarAlt size={12} color="#16a085" />

@@ -22,7 +22,7 @@ const Card = styled.div<$CardProps>`
     width: ${props => props.$width || "100%"};
     height: ${props => props.$height || "100%"};
     border-radius: 12px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: var(--shadow-sm);
     cursor: ${props => props.$isSelectable === false ? "default" : "pointer"};
     transition: all 0.2s ease-in-out;
     &:hover {

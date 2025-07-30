@@ -27,6 +27,11 @@
   --gradient-tertiary: linear-gradient(180deg, #D3CCFF 0%, #483D8B 100%);
   --gradient-quaternary: linear-gradient(180deg, #87CEEB 0%, #1E90FF 100%);
 
+  /* Shadows */
+  --shadow-sm: 0px 4px 4px #0001;
+  --shadow-md: 0px 8px 8px #0001;
+  --shadow-lg: 0px 16px 16px #0001;
+
 }
 
 .swal2-popup {

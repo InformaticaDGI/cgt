@@ -9,6 +9,12 @@ interface $GridProps {
     $padding?: string;
     $margin?: string;
     $backgroundColor?: string;
+    $paddingX?: string;
+    $paddingY?: string;
+    $paddingTop?: string;
+    $paddingBottom?: string;
+    $paddingLeft?: string;
+    $paddingRight?: string;
     children: React.ReactNode;
 }
 
@@ -22,6 +28,12 @@ export const Grid = styled.div<$GridProps>`
     padding: ${({ $padding }) => $padding || '0'};
     margin: ${({ $margin }) => $margin || '0'};
     background-color: ${({ $backgroundColor }) => $backgroundColor || 'transparent'};
+    ${({ $paddingX }) => $paddingX && `padding-left: ${$paddingX}; padding-right: ${$paddingX};`}
+    ${({ $paddingY }) => $paddingY && `padding-top: ${$paddingY}; padding-bottom: ${$paddingY};`}
+    ${({ $paddingTop }) => $paddingTop && `padding-top: ${$paddingTop};`}
+    ${({ $paddingBottom }) => $paddingBottom && `padding-bottom: ${$paddingBottom};`}
+    ${({ $paddingLeft }) => $paddingLeft && `padding-left: ${$paddingLeft};`}
+    ${({ $paddingRight }) => $paddingRight && `padding-right: ${$paddingRight};`}
 `;
 
 type $GridItemProps = {

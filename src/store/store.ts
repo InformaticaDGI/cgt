@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 import type { Secretary } from "../hooks/useSecretary";
 import type { KpiInstance } from "../hooks/mutations/useKpiInstances";
+import type { Activity } from "../hooks/useActivities";
 
 interface FormState {
   // Basic Information
@@ -79,6 +80,7 @@ interface AppState {
   municipalityId: string
   parrishId: string,
   formState: FormState,
+  activities: Activity[]
   resetFormState: () => void,
   setFormState: (formState: FormState) => void,
   setSecretaries: (secretaries: Secretary[]) => void,
@@ -88,6 +90,7 @@ interface AppState {
   setSecretaryParentId: (secretaryParentId: string) => void
   setMunicipalityId: (municipalityId: string) => void
   setParrishId: (parrishId: string) => void,
+  setActivities: (activities: Activity[]) => void,
 }
 
 export const useAppStore = create<AppState>()(
@@ -95,6 +98,7 @@ export const useAppStore = create<AppState>()(
     (set, get) => ({
       // Initial State
       secretaryRootId: '',
+      activities: [],
       secretarialTerritoryId: '',
       secretaryParentId: '',
       municipalityId: '',
@@ -103,6 +107,7 @@ export const useAppStore = create<AppState>()(
       formState: initialFormState,
       resetFormState: () => set({ formState: initialFormState }),
       setFormState: (formState) => set({ formState }),
+      setActivities: (activities) => set({ activities }),
       // Setter Functions
       setSecretaries: (secretaries) => set({ secretaries }),
       findSecretary: (id) => get().secretaries.find((secretary) => secretary.id === id),
