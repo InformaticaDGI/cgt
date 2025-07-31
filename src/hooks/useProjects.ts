@@ -25,7 +25,7 @@ const useProjects = (params: { page?: number, limit?: number } = {}) => {
 
 const getProjects = async (params: { page?: number, limit?: number } = {}): Promise<ProjectMetadata> => {
   const { data } = await axios.get<ProjectMetadata>(
-    `${config.apiUrl}/projects?include=parish,secretary`,
+    `${config.apiUrl}/projects?include=parish.municipality,secretary`,
     {
       params: {
         page: params.page || 1,
