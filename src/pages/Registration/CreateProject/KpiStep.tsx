@@ -12,7 +12,6 @@ import { useCreateProject } from "../../../hooks/mutations/useCreateProject"
 import Swal from "sweetalert2"
 import { useNavigate } from "react-router"
 import { getFloatValue } from "../../../components/Prebuilt/CurrencyInput"
-import BudgetSourceList from "../../../domain/entities/BudgetSourceList"
 
 const KpiStep = () => {
     const navigate = useNavigate();
@@ -38,6 +37,7 @@ const KpiStep = () => {
             benefitedChildren: formState.projectBenefitedChildren,
         },
         onSubmit: async (values) => {
+            console.log(values)
             const project = {
                 ...formState,
                 projectBudgetBs: getFloatValue(formState.projectBudgetBs),
@@ -54,15 +54,16 @@ const KpiStep = () => {
                 projectBenefitedChildren: +values.benefitedChildren,
             }
 
-            const budgetSourceList = BudgetSourceList.create();
-            budgetSourceList.add({
-                value: project.projectBudgetBs,
-                currency: 'VES',
-            });
-            budgetSourceList.add({
-                value: project.projectBudgetUsd,
-                currency: 'USD',
-            });
+            // const budgetSourceList = BudgetSourceList.create();
+            // budgetSourceList.add({
+            //     value: project.projectBudgetBs,
+            //     currency: 'VES',
+            // });
+            // budgetSourceList.add({
+            //     value: project.projectBudgetUsd,
+            //     currency: 'USD',
+            // });
+
 
             const result = await createProject({
                 name: project.projectName,
