@@ -83,7 +83,8 @@ const KpiStep = () => {
                 maleLabor: project.projectMaleLabor,
                 benefitedPopulation: project.projectBenefitedPopulation,
                 benefitedChildren: project.projectBenefitedChildren,
-                budgetSources: budgetSourceList.all,
+                // budgetSources: budgetSourceList.all,
+                initialBudget: project.projectBudgetBs,
                 latitude: project.projectLatitude,
                 longitude: project.projectLongitude,
             })
