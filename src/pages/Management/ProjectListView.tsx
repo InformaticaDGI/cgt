@@ -4,7 +4,6 @@ import ListItem from "../../components/List/ListItem";
 import Text from "../../components/Ui/Text/Text";
 import useProjects from "../../hooks/useProjects";
 import Card from "../../components/Card/Card";
-import CardHeader from "../../components/Card/CardHeader";
 import CardBody from "../../components/Card/CardBody";
 import { Grid, GridItem } from "../../components/Layout/Grid";
 import ProjectFilter from "../../components/Prebuilt/ProjectFilter";
@@ -22,12 +21,6 @@ const ProjectsListView = () => {
         <Flex $height='100%' $direction="column" $width='85vw' $justify='center' $align='stretch' $padding='1rem' style={{ position: 'relative' }}>
             <Header />
             <Card $isSelectable={false} $gap="0.7rem">
-                <CardHeader>
-                    <Flex $direction="column" $justify="start" $align="start" $gap="0.9rem">
-                        <Text $fontSize='24px' $fontWeight='600' $color='var(--text-tertiary)'>Proyectos</Text>
-                        <Text $fontSize='16px' $fontWeight='500' $color='var(--text-secondary)'>Gestiona y supervisa todos los proyectos</Text>
-                    </Flex>
-                </CardHeader>
                 <CardBody>
                     <ProjectFilter />
                 </CardBody>
@@ -50,7 +43,7 @@ const ProjectsListView = () => {
                 {projects.map((project) => (
                     <ListItem key={project.id} project={project} />
                 ))}
-                <Pagination currentPage={pagination.page} totalPages={pagination.totalPages} rowsPerPage={pagination.limit} />
+                <Pagination hasNext={pagination.hasNext} hasPrev={pagination.hasPrev} currentPage={pagination.page} totalPages={pagination.totalPages} rowsPerPage={pagination.limit} />
             </Flex>
         </Flex>
     )

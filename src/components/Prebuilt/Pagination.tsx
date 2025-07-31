@@ -9,9 +9,11 @@ type PaginationProps = {
     currentPage: number;
     totalPages: number;
     rowsPerPage: number;
+    hasNext: boolean;
+    hasPrev: boolean;
 }
 
-const Pagination = ({ currentPage, totalPages, rowsPerPage }: PaginationProps) => {
+const Pagination = ({ currentPage, totalPages, rowsPerPage, hasNext, hasPrev }: PaginationProps) => {
     const [searchParams, setSearchParams] = useSearchParams();
 
     const handlePageChange = (page: number) => {
@@ -30,16 +32,16 @@ const Pagination = ({ currentPage, totalPages, rowsPerPage }: PaginationProps) =
                 <Text $fontSize="12px" $fontWeight="500" $color="var(--text-secondary)">Filas por página</Text>
                 <Select onChange={(value) => handleRowsPerPageChange(value)} options={[{ label: '10', value: '10' }, { label: '20', value: '20' }]} value={rowsPerPage.toString()} style={{ width: '70px' }} />
                 <Text $fontSize="12px" $fontWeight="500" $color="var(--text-secondary)">{currentPage} - {rowsPerPage} de {totalPages}</Text>
-                <Button $size="small" $variant="primary" onClick={() => handlePageChange(1)}>
+                <Button disabled={currentPage === 1} $size="small" $variant="primary" onClick={() => handlePageChange(1)}>
                     <ChevronsLeft />
                 </Button>
-                <Button $size="small" $variant="primary" onClick={() => handlePageChange(currentPage - 1)}>
+                <Button disabled={!hasPrev} $size="small" $variant="primary" onClick={() => handlePageChange(currentPage - 1)}>
                     <ChevronLeft />
                 </Button>
-                <Button $size="small" $variant="primary" onClick={() => handlePageChange(currentPage + 1)}>
+                <Button disabled={!hasNext} $size="small" $variant="primary" onClick={() => handlePageChange(currentPage + 1)}>
                     <ChevronRight />
                 </Button>
-                <Button $size="small" $variant="primary" onClick={() => handlePageChange(totalPages)}>
+                <Button disabled={currentPage === totalPages} $size="small" $variant="primary" onClick={() => handlePageChange(totalPages)}>
                     <ChevronsRight />
                 </Button>
             </Flex>
