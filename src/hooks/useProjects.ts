@@ -80,7 +80,7 @@ const getProjectsInclude = async (params: {
     parrishId,
   } = params;
 
-  let paramsInclude = "include=parish,secretary";
+  let paramsInclude = "include=parish.municipality,secretary";
 
   // if (secretaryRootId) {
   //   paramsInclude += `&territorialSecretaryId=${secretaryRootId}`;
