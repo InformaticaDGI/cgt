@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useMap, useMapEvents, GeoJSON } from "react-leaflet";
-import type { PathOptions, GeoJSON as LeafletGeoJSON } from "leaflet";
+import type { PathOptions } from "leaflet";
 import type { Feature, GeoJsonObject } from "geojson";
 
 interface GuaricoGeoJsonProps {
