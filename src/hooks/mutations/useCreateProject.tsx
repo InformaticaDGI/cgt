@@ -19,7 +19,7 @@ export const useCreateProject = () => {
                 finalDate: data.finalDate,
                 observations: data.observations,
                 parishId: data.parishId,
-                communityCircuitId: data.communityCircuitId,
+                communityCircuitCode: data.communityCircuitCode,
                 areaId: data.areaId,
                 directLabor: data.directLabor,
                 indirectLabor: data.indirectLabor,
@@ -51,7 +51,7 @@ type CreateProjectFormValues = {
     observations: string;
     kpiInstances: KpiInstance[];
     parishId: string;
-    communityCircuitId: string;
+    communityCircuitCode: string;
     secretaryId: string;
     programId: string;
     areaId: string;

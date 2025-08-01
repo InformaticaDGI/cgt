@@ -105,7 +105,7 @@ export default function ProjectDetailView() {
           <Card $isSelectable={false}>
             <ProjectActivities
               projectId={projectId}
-              projectCircuitId={project.circuitId}
+              projectCircuitCode={project.circuitCode}
               projectCommunityId={project.communityId}
               projectStartDate={project.initialDate}
               projectEndDate={project.finalDate}

@@ -22,7 +22,7 @@ type ActivityPayload = {
   endDate: string | null;
   sectorId: string;
   parishId: string;
-  communityCircuitId: string;
+  communityCircuitCode: string;
   projectId: string | undefined;
 };
 

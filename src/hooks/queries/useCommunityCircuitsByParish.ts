@@ -22,6 +22,7 @@ export const getCommunityCircuitsByParish = async (parishId: string) => {
 export type CommunityCircuit = {
   id: string;
   name: string;
+  code: string;
   latitude: number | null;
   longitude: number | null;
 };

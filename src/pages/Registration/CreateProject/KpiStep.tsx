@@ -74,7 +74,7 @@ const KpiStep = () => {
                 kpiInstances: project.projectKpiInstances,
                 secretaryId: project.projectSecretaryId,
                 programId: project.projectProgramId,
-                communityCircuitId: project.projectCommunityCircuitId,
+                communityCircuitCode: project.projectCommunityCircuitCode,
                 areaId: project.projectAreaId,
                 directLabor: project.projectDirectLabor,
                 indirectLabor: project.projectIndirectLabor,

@@ -16,7 +16,7 @@ interface ProjectActivitiesProps {
   projectEndDate?: string;
   projectMunicipalityId?: string;
   projectParishId?: string;
-  projectCircuitId?: string;
+  projectCircuitCode?: string;
   projectCommunityId?: string;
 }
 
@@ -26,7 +26,7 @@ const ProjectActivities: React.FC<ProjectActivitiesProps> = ({
   projectEndDate,
   projectMunicipalityId,
   projectParishId,
-  projectCircuitId,
+  projectCircuitCode,
   projectCommunityId
 }) => {
   const {
@@ -43,22 +43,22 @@ const ProjectActivities: React.FC<ProjectActivitiesProps> = ({
     endDate: "",
     municipalityId: "",
     parishId: "",
-    circuitId: "",
+    circuitCode: "",
     communityId: ""
   });
 
   // Precarga selects de ubicación con la info del proyecto
   useEffect(() => {
-    if (projectMunicipalityId || projectParishId || projectCircuitId || projectCommunityId) {
+    if (projectMunicipalityId || projectParishId || projectCircuitCode || projectCommunityId) {
       setFormData(prev => ({
         ...prev,
         municipalityId: projectMunicipalityId || "",
         parishId: projectParishId || "",
-        circuitId: projectCircuitId || "",
+        circuitCode: projectCircuitCode || "",
         communityId: projectCommunityId || ""
       }));
     }
-  }, [projectMunicipalityId, projectParishId, projectCircuitId, projectCommunityId]);
+  }, [projectMunicipalityId, projectParishId, projectCircuitCode, projectCommunityId]);
 
   // Efecto para precargar los selects cuando se abre el modal
   useEffect(() => {
@@ -67,18 +67,18 @@ const ProjectActivities: React.FC<ProjectActivitiesProps> = ({
         ...prev,
         municipalityId: projectMunicipalityId || "",
         parishId: projectParishId || "",
-        circuitId: projectCircuitId || "",
+        circuitCode: projectCircuitCode || "",
         communityId: projectCommunityId || ""
       }));
       // Limpiar cualquier error anterior
       setSubmitError("");
     }
-  }, [modalOpen, projectMunicipalityId, projectParishId, projectCircuitId, projectCommunityId, setSubmitError]);
+  }, [modalOpen, projectMunicipalityId, projectParishId, projectCircuitCode, projectCommunityId, setSubmitError]);
 
   const handleAddActivity = async () => {
     // Validar que todos los campos requeridos estén completos
     if (!formData.name || !formData.startDate || !formData.endDate ||
-      !formData.municipalityId || !formData.parishId || !formData.circuitId || !formData.communityId) {
+      !formData.municipalityId || !formData.parishId || !formData.circuitCode || !formData.communityId) {
       setSubmitError("Por favor complete todos los campos requeridos");
       return;
     }
@@ -109,7 +109,7 @@ const ProjectActivities: React.FC<ProjectActivitiesProps> = ({
       endDate: formData.endDate ? new Date(formData.endDate).toISOString() : null,
       sectorId: formData.communityId,
       parishId: formData.parishId,
-      communityCircuitId: formData.circuitId,
+      communityCircuitCode: formData.circuitCode,
       projectId: projectId
     });
 
@@ -123,7 +123,7 @@ const ProjectActivities: React.FC<ProjectActivitiesProps> = ({
         endDate: "",
         municipalityId: projectMunicipalityId || "",
         parishId: projectParishId || "",
-        circuitId: projectCircuitId || "",
+        circuitCode: projectCircuitCode || "",
         communityId: projectCommunityId || ""
       });
     }

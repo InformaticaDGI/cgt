@@ -3,7 +3,7 @@ import { useCommunityCircuitsByParish } from "../../hooks/queries/useCommunityCi
 
 export const CommunityCircuitSelect = ({ value, onChange, parishId, style }: CommunityCircuitSelectProps) => {
     const { data: circuits } = useCommunityCircuitsByParish(parishId)
-    return <Select options={circuits?.map(circuit => ({ label: circuit.name, value: circuit.id })) || []} value={value} onChange={onChange} 
+    return <Select options={circuits?.map(circuit => ({ label: circuit.name, value: circuit.code })) || []} value={value} onChange={onChange} 
     placeholder="Seleccione un circuito comunal" style={style} />
 }
 
