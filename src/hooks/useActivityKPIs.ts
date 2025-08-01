@@ -31,7 +31,7 @@ export interface KPIInstance {
 
 export interface KPIResult {
   kpiInstanceId: string;
-  value: string;
+  value: number;
 }
 
 interface CompleteActivityPayload {

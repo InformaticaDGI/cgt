@@ -185,7 +185,7 @@ export const ActivityUpdateModal: React.FC<ActivityUpdateModalProps> = ({
         .filter(kpi => kpi.id) // Asegurarse de que id no sea undefined
         .map(kpi => ({
           kpiInstanceId: kpi.id as string, // Forzar tipo string
-          value: unformatNumber(kpi.value)
+          value: +unformatNumber(kpi.value)
         }));
       
       console.log('Guardando datos:', {
