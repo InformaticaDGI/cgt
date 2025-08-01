@@ -154,6 +154,7 @@ const ProjectActivities: React.FC<ProjectActivitiesProps> = ({
                 key={activity.id}
                 activity={activity}
                 isLast={index === activities.length - 1}
+                projectId={projectId}
               />
             ))}
           </div>
