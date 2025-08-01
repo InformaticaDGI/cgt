@@ -1,0 +1,7 @@
+.activity-item {
+  transition: background-color 0.2s ease;
+}
+
+.activity-item:hover {
+  background-color: #f9f9f9;
+}
