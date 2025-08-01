@@ -18,7 +18,7 @@ interface FormState {
   // Geolocation
   projectMunicipalityId: string;
   projectParrishId: string;
-  projectCommunityCircuitId: string;
+  projectCommunityCircuitCode: string;
   projectCommunityId: string;
   projectLatitude: number;
   projectLongitude: number;
@@ -51,7 +51,7 @@ const initialFormState: FormState = {
   projectFinalDate: '',
   projectAreaId: '',
   projectParrishId: '',
-  projectCommunityCircuitId: '',
+  projectCommunityCircuitCode: '',
   projectLatitude: 9.9156947,
   projectLongitude: -67.3601931,
   projectBudgetSourceId: '',

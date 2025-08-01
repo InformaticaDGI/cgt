@@ -32,7 +32,7 @@ interface MapCoordinateSelectorProps {
   height?: number;
   municipalityId?: string;
   parrishId?: string;
-  circuitId?: string;
+  circuitCode?: string;
 }
 
 function LocationMarker({
@@ -40,7 +40,7 @@ function LocationMarker({
   onChange,
   municipalityId,
   parrishId,
-  circuitId,
+  circuitCode,
 }: MapCoordinateSelectorProps) {
   const markerRef = useRef<any>(null);
   const map = useMap();
@@ -59,8 +59,8 @@ function LocationMarker({
   });
 
   useMemo(() => {
-    if (circuits && circuitId !== "") {
-      const circuit = circuits.find((m) => m.id === circuitId);
+    if (circuits && circuitCode !== "") {
+      const circuit = circuits.find((m) => m.code === circuitCode);
       if (!circuit) return;
 
       if (circuit.latitude && circuit.longitude) {
@@ -95,7 +95,7 @@ function LocationMarker({
         return;
       }
     }
-  }, [municipalityId, parrishId, circuitId]);
+  }, [municipalityId, parrishId, circuitCode]);
 
   return value ? <Marker position={value} ref={markerRef} icon={customIcon} /> : null;
 }
@@ -105,7 +105,7 @@ export default function MapCoordinateSelector({
   onChange,
   municipalityId,
   parrishId,
-  circuitId,
+  circuitCode,
 }: MapCoordinateSelectorProps) {
   return (
     <div style={{ width: "100%", height: "300px" }}>
@@ -123,7 +123,7 @@ export default function MapCoordinateSelector({
           onChange={onChange}
           municipalityId={municipalityId}
           parrishId={parrishId}
-          circuitId={circuitId}
+          circuitCode={circuitCode}
         />
       </MapContainer>
     </div>

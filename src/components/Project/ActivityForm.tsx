@@ -13,7 +13,7 @@ interface ActivityFormData {
   endDate: string;
   municipalityId: string;
   parishId: string;
-  circuitId: string;
+  circuitCode: string;
   communityId: string;
 }
 
@@ -43,16 +43,16 @@ export const ActivityForm: React.FC<ActivityFormProps> = ({
       updatedData = {
         ...updatedData,
         parishId: '',
-        circuitId: '',
+        circuitCode: '',
         communityId: ''
       };
     } else if (field === 'parishId') {
       updatedData = {
         ...updatedData,
-        circuitId: '',
+        circuitCode: '',
         communityId: ''
       };
-    } else if (field === 'circuitId') {
+    } else if (field === 'circuitCode') {
       updatedData = {
         ...updatedData,
         communityId: ''
@@ -127,14 +127,14 @@ export const ActivityForm: React.FC<ActivityFormProps> = ({
         <FormControl label="Circuito" required style={{ flex: 1 }}>
           <CommunityCircuitSelect
             parishId={formData.parishId}
-            value={formData.circuitId}
-            onChange={(value) => handleInputChange('circuitId', value)}
+            value={formData.circuitCode}
+            onChange={(value) => handleInputChange('circuitCode', value)}
           />
         </FormControl>
         
         <FormControl label="Comunidad" required style={{ flex: 1 }}>
           <CommunitySelect
-            circuitId={formData.circuitId}
+            circuitCode={formData.circuitCode}
             value={formData.communityId}
             onChange={(value) => handleInputChange('communityId', value)}
           />

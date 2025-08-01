@@ -20,7 +20,7 @@ const LocationStep = () => {
     const errors: any = {};
     if (!values.municipalityId) errors.municipalityId = "El municipio es requerido";
     if (!values.parrishId) errors.parrishId = "La parroquia es requerida";
-    if (!values.circuitId) errors.circuitId = "El circuito comunal es requerido";
+    if (!values.circuitCode) errors.circuitCode = "El circuito comunal es requerido";
     return errors;
   }
 
@@ -28,7 +28,7 @@ const LocationStep = () => {
     initialValues: {
       municipalityId: formState.projectMunicipalityId,
       parrishId: formState.projectParrishId,
-      circuitId: formState.projectCommunityCircuitId,
+      circuitCode: formState.projectCommunityCircuitCode,
       communityId: formState.projectCommunityId || '',
       coords: { lat: formState.projectLatitude, lng: formState.projectLongitude }
     },
@@ -37,7 +37,7 @@ const LocationStep = () => {
         ...formState,
         projectMunicipalityId: values.municipalityId,
         projectParrishId: values.parrishId,
-        projectCommunityCircuitId: values.circuitId,
+        projectCommunityCircuitCode: values.circuitCode,
         projectCommunityId: values.communityId,
         projectLatitude: values.coords.lat,
         projectLongitude: values.coords.lng
@@ -68,11 +68,11 @@ const LocationStep = () => {
             </FormControl>
           </GridItem>
           <GridItem $colSpan={24}>
-            <FormControl label="Circuito Comunal" required error={formik.errors.circuitId && formik.touched.circuitId ? formik.errors.circuitId : undefined}>
+            <FormControl label="Circuito Comunal" required error={formik.errors.circuitCode && formik.touched.circuitCode ? formik.errors.circuitCode : undefined}>
               <CommunityCircuitSelect
-                value={formik.values.circuitId}
+                value={formik.values.circuitCode}
                 onChange={(value) => {
-                  formik.setFieldValue('circuitId', value);
+                  formik.setFieldValue('circuitCode', value);
                   formik.setFieldValue('communityId', ''); // Reset community when circuit changes
                 }}
                 parishId={formik.values.parrishId}
@@ -84,7 +84,7 @@ const LocationStep = () => {
               <CommunitySelect
                 value={formik.values.communityId}
                 onChange={(value) => formik.setFieldValue('communityId', value)}
-                circuitId={formik.values.circuitId}
+                circuitCode={formik.values.circuitCode}
               />
             </FormControl>
           </GridItem>
@@ -94,7 +94,7 @@ const LocationStep = () => {
                 value={formik.values.coords}
                 municipalityId={formik.values.municipalityId}
                 parrishId={formik.values.parrishId}
-                circuitId={formik.values.circuitId}
+                circuitCode={formik.values.circuitCode}
                 onChange={(value) => {
                   formik.setFieldValue("coords", value);
                 }}

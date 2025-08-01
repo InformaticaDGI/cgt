@@ -3,11 +3,10 @@ import axios from "axios";
 import { config } from "../config";
 import type { Parrish } from "./queries/useParrishes";
 import type { Secretary } from "./useSecretary";
-import { useAppStore } from "../store/store";
 
-const useProjects = (params: { page?: number, limit?: number } = {}) => {
+const useProjects = (params: ProjectQueryParams = {}) => {
   return useQuery({
-    queryKey: ["projects", params.page, params.limit],
+    queryKey: ["projects", params],
     queryFn: () => getProjects(params),
     initialData: {
       data: [],
@@ -23,91 +22,51 @@ const useProjects = (params: { page?: number, limit?: number } = {}) => {
   });
 };
 
-const getProjects = async (params: { page?: number, limit?: number } = {}): Promise<ProjectMetadata> => {
-  const { data } = await axios.get<ProjectMetadata>(
-    `${config.apiUrl}/projects?include=parish.municipality,secretary`,
-    {
-      params: {
-        page: params.page || 1,
-        limit: params.limit || 10
-      }
-    }
-  );
-  return data;
-};
+const getProjects = async ({ include, limit, page, /*municipalityId,*/ parishId, territorialSecretaryId, secretaryId }: ProjectQueryParams = {}): Promise<ProjectMetadata> => {
 
-export const useProjectsInclude = () => {
-  const {
-    secretarialTerritoryId,
-    secretaryParentId,
-    secretaryRootId,
-    municipalityId,
-    parrishId,
-  } = useAppStore();
+  const queryParams: ProjectQueryParams = {
+    include: include,
+    page: page || 1,
+    limit: limit || 10,
+    territorialSecretaryId,
+    secretaryId,
+    // municipalityId, //TODO falta este where en el back
+    parishId
+  }
 
-  return useQuery({
-    queryKey: [
-      "projects-include",
-      secretarialTerritoryId,
-      secretaryParentId,
-      secretaryRootId,
-      municipalityId,
-      parrishId,
-    ],
-    queryFn: () =>
-      getProjectsInclude({
-        secretarialTerritoryId,
-        secretaryParentId,
-        secretaryRootId,
-        municipalityId,
-        parrishId,
-      }),
-    initialData: [],
-  });
-};
-
-const getProjectsInclude = async (params: {
-  secretarialTerritoryId: string;
-  secretaryParentId: string;
-  secretaryRootId: string;
-  municipalityId: string;
-  parrishId: string;
-}): Promise<Project[]> => {
-  const {
-    secretaryParentId,
-    secretarialTerritoryId,
-    municipalityId,
-    parrishId,
-  } = params;
-
-  let paramsInclude = "include=parish.municipality,secretary";
+  // let paramsInclude = "include=parish.municipality,secretary";
 
   // if (secretaryRootId) {
   //   paramsInclude += `&territorialSecretaryId=${secretaryRootId}`;
   // }
 
-  if (secretaryParentId) {
-    paramsInclude += `&secretaryId=${secretaryParentId}`;
-  }
+  // if (secretaryId) {
+  //   paramsInclude += `&secretaryId=${secretaryId}`;
+  // }
 
-  if (municipalityId) {
-    //TODO falta este where en el back
-    console.log("falta en el end point", municipalityId);
-    // paramsInclude += `&municipalityId=${municipalityId}`;
-  }
+  // if (municipalityId) {
+  //   //TODO falta este where en el back
+  //   console.log("falta en el end point", municipalityId);
+  //   // paramsInclude += `&municipalityId=${municipalityId}`;
+  // }
 
-  if (parrishId) {
-    paramsInclude += `&parishId=${parrishId}`;
-  }
+  // if (parishId) {
+  //   paramsInclude += `&parishId=${parishId}`;
+  // }
 
-  if (secretarialTerritoryId) {
-    paramsInclude += `&territorialSecretaryId=${secretarialTerritoryId}`;
-  }
-  console.log(`${config.apiUrl}/projects?${paramsInclude}&limit=100`);
-  const { data } = await axios.get<{ data: Project[] }>(
-    `${config.apiUrl}/projects?${paramsInclude}&limit=100`
+  // if (secretarialTerritoryId) {
+  //   paramsInclude += `&territorialSecretaryId=${secretarialTerritoryId}`;
+  // }
+
+  const { data } = await axios.get<ProjectMetadata>(
+    `${config.apiUrl}/projects`,
+    {
+      params: queryParams
+    }
   );
-  return data.data;
+
+
+  return data;
 };
 
 export type ProjectMetadata = {
@@ -156,3 +115,14 @@ export type Project = {
 };
 
 export default useProjects;
+
+
+type ProjectQueryParams = {
+  include?: string;
+  page?: number;
+  limit?: number;
+  territorialSecretaryId?: string;
+  secretaryId?: string;
+  municipalityId?: string;
+  parishId?: string;
+}

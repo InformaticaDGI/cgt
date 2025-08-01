@@ -7,6 +7,9 @@ import { Grid, GridItem } from "../../components/Layout/Grid";
 import Text from "../../components/Ui/Text/Text";
 import { Flex } from "../../components/Layout/Flex";
 import Card from "../../components/Card/Card";
+import CardHeader from "../../components/Card/CardHeader";
+import CardBody from "../../components/Card/CardBody";
+import IndicatorProgress from "../../components/Indicator/IndicatorProgress";
 
 export default function ProjectDetailView() {
   const { projectId } = useParams();
@@ -63,46 +66,60 @@ export default function ProjectDetailView() {
         flexDirection: "row",
       }}>
         <Flex $direction="row" $gap="40px" $justify="start">
-            <Text $fontSize="12px" $fontWeight="500">Actividades</Text>
-            <Text $fontSize="12px" $fontWeight="500">Punto y Circulo</Text>
+          <Text $fontSize="12px" $fontWeight="500">Actividades</Text>
+          <Text $fontSize="12px" $fontWeight="500">Punto y Circulo</Text>
         </Flex>
       </div>
       <Grid $columns="repeat(30, 1fr)">
-        <GridItem $colSpan={10} style={{ height: '300px' }}>
+        <GridItem $colSpan={10} style={{ height: '250px' }}>
           <Card $isSelectable={false}>
-            <Text $fontSize="16px" $fontWeight="500">Indicador de Metas</Text>
+            <CardHeader>
+              <Text style={{ fontSize: '14px',  fontWeight: 'normal', textWrap: 'nowrap', textAlign: 'justify' }}>Indicador de Meta</Text>
+            </CardHeader>
+            <CardBody style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+              <IndicatorProgress value={0} strokeWidth={8} size={160} textSize={14} />
+            </CardBody>
           </Card>
         </GridItem>
-        <GridItem $colSpan={10} style={{ height: '300px' }}>
+        <GridItem $colSpan={10} style={{ height: '250px' }}>
           <Card $isSelectable={false}>
-            <Text $fontSize="16px" $fontWeight="500">Indicador de Eficiencia</Text>
+            <CardHeader>
+              <Text style={{ fontSize: '14px',  fontWeight: 'normal', textWrap: 'nowrap', textAlign: 'justify' }}>Indicador de Eficiencia</Text>
+            </CardHeader>
+            <CardBody style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+              <IndicatorProgress value={0} strokeWidth={8} size={160} textSize={14} />
+            </CardBody>
           </Card>
         </GridItem>
-        <GridItem $colSpan={10} style={{ height: '300px' }}>
+        <GridItem $colSpan={10} style={{ height: '250px' }}>
           <Card $isSelectable={false}>
-            <Text $fontSize="16px" $fontWeight="500">Indicador de Eficacia</Text>
+            <CardHeader>
+              <Text style={{ fontSize: '14px',  fontWeight: 'normal', textWrap: 'nowrap', textAlign: 'justify' }}>Indicador de Eficacia</Text>
+            </CardHeader>
+            <CardBody style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+              <IndicatorProgress value={0} strokeWidth={8} size={160} textSize={14} />
+            </CardBody>
           </Card>
         </GridItem>
-        <GridItem $colSpan={12} style={{ height: '300px' }}>
+        <GridItem $colSpan={12}>
           <Card $isSelectable={false}>
-          
-              <ProjectActivities
-                projectId={projectId}
-                projectCircuitId={project.circuitId}
-                projectCommunityId={project.communityId}
-                projectStartDate={project.initialDate}
-                projectEndDate={project.finalDate}
-                projectMunicipalityId={project.municipalityId}
-                projectParishId={project.parishId}
-              />
+            <ProjectActivities
+              projectId={projectId}
+              projectCircuitCode={project.circuitCode}
+              projectCommunityId={project.communityId}
+              projectStartDate={project.initialDate}
+              projectEndDate={project.finalDate}
+              projectMunicipalityId={project.municipalityId}
+              projectParishId={project.parishId}
+            />
           </Card>
         </GridItem>
         <GridItem $colSpan={18} style={{ height: '300px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <Card $isSelectable={false}>
-            <Text $fontSize="16px" $fontWeight="500">Diagrama de Gantt</Text>
+            <Text style={{ fontSize: '14px', fontWeight: 'normal', textWrap: 'nowrap', textAlign: 'justify' }}>Diagrama de Gantt</Text>
           </Card>
           <Card $isSelectable={false}>
-            <Text $fontSize="16px" $fontWeight="500">Mapa con las ubicaciónes de las actividades/proyecto</Text>
+            <Text style={{ fontSize: '14px', fontWeight: 'normal', textWrap: 'nowrap', textAlign: 'justify' }}>Mapa con las ubicaciónes de las actividades/proyecto</Text>
           </Card>
         </GridItem>
       </Grid>

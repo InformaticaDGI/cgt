@@ -1,7 +1,7 @@
 import { useEffect, useState, useMemo } from 'react';
 import { Marker, Popup, useMap } from 'react-leaflet';
 import L from 'leaflet';
-import {useProjectsInclude} from "../../../../hooks/useProjects";
+import useProjects from "../../../../hooks/useProjects";
 import { useAppStore } from '../../../../store/store';
 import markerIconPng from '../../../../assets/marker-icon.png'
 import markerShadowPng from '../../../../assets/marker-shadow.png'
@@ -27,51 +27,52 @@ const customIcon = L.icon({
 export function MapMarkers() {
     const [places, setPlaces] = useState<Place[]>([]);
     const map = useMap();
-    const {data} = useProjectsInclude()
-    
-    const {secretaryRootId, municipalityId} = useAppStore()
+    const { secretaryRootId, municipalityId, parrishId, secretaryParentId, secretarialTerritoryId,  } = useAppStore()
+
+    const { data: { data: projects} } = useProjects({ include: 'parish.municipality,secretary', limit: 100, parishId: parrishId || undefined, municipalityId: municipalityId || undefined, secretaryId: secretaryParentId || undefined, territorialSecretaryId: secretarialTerritoryId || undefined })
+
 
     const filteredProjects = useMemo(() => {
-    
-        if (!data) return [];
+
+        if (!projects) return [];
 
         // Si no hay filtros activos, muestra todo.
-        
+
         if (!municipalityId && !secretaryRootId) {
-            return data.filter(project => project.latitude !== null && project.longitude !== null);
+            return projects.filter(project => project.latitude !== null && project.longitude !== null);
         }
 
-        let projectsToFilter = data;
+        let projectsToFilter = projects;
 
-        if(secretaryRootId) {
+        if (secretaryRootId) {
             projectsToFilter = projectsToFilter.filter(p => p.secretary.parentId === secretaryRootId);
         }
 
-        if(municipalityId){
+        if (municipalityId) {
             projectsToFilter = projectsToFilter.filter(p => p.parish.municipalityId === municipalityId);
         }
 
         return projectsToFilter.filter(project => project.latitude !== null && project.longitude !== null);
-    }, [data, secretaryRootId, municipalityId]);
+    }, [projects, secretaryRootId, municipalityId]);
 
 
     useEffect(() => {
-      if(data){
-        const fetchedPlaces: Place[] = filteredProjects.map(project => ({
-                        id: project.id,
-                        name: project.name,
-                        lat: project.latitude as number, // Aseguramos el tipo
-                        lng: project.longitude as number, // Aseguramos el tipo
-                    }))
+        if (projects) {
+            const fetchedPlaces: Place[] = filteredProjects.map(project => ({
+                id: project.id,
+                name: project.name,
+                lat: project.latitude as number, // Aseguramos el tipo
+                lng: project.longitude as number, // Aseguramos el tipo
+            }))
 
-        setPlaces(fetchedPlaces);
+            setPlaces(fetchedPlaces);
 
-        // --- 2. CENTRAR EL MAPA AUTOMÁTICAMENTE ---
-        if (fetchedPlaces.length === 0) return;
+            // --- 2. CENTRAR EL MAPA AUTOMÁTICAMENTE ---
+            if (fetchedPlaces.length === 0) return;
 
-        const markerBounds = L.latLngBounds(fetchedPlaces.map(p => [p.lat, p.lng]));
-        map.fitBounds(markerBounds, { padding: [50, 50] });
-    }
+            const markerBounds = L.latLngBounds(fetchedPlaces.map(p => [p.lat, p.lng]));
+            map.fitBounds(markerBounds, { padding: [50, 50] });
+        }
 
     }, [map, filteredProjects]); // El hook se ejecuta cuando el mapa está listo.
 
