@@ -1,33 +1,29 @@
 # `Asignaciones Pendientes `
 
-## Salvador Ron
+### Salvador Ron
 
 ---
-- #### Crear Lista de Programas
-- #### Crear Lista de Proyectos
-    - Crear Modulo del Detalle de un Proyecto
+> Generación de Reporte del Proyecto ( PDF )
 ---
 
-## José Segovia
+### José Segovia
 
-- #### Ajustar Mapa del Formulario de Registro
-    - Agregar acercamiento por filtrado
-- #### Ajustar Vista del Mapa Principal
-    - Agregar funcionamiento de filtrado a ubicaciones del mapa
-    - Pintar areas de los municipios
-    - Anexar areas de las parroquias
-- #### Reparar iconos del marcador para los mapas
+> Incluir filtros al proyecto por:
+>1. Comunidades
+>2. Circuitos
 ---
-## Erik Zerpa
+### Erik Zerpa
 
-- #### Cambiar entradas (Input) de tipo moneda a tipo numerica
-- #### Agregar entrada (Input) de presupuesto en BS y en USD
-- #### Cambiar distribución de las entradas
-- #### Agregar entrada (Input) para las comunidades
-- #### Crear Planificacion de Actividades
+> Agregar MediaQuerys para pantallas pequeñas (Dispositivos Móviles) en todos los modulos del sistema.
 
-## Jesús Medina
+### Jesús Medina
 
-- #### Ajustar Modelo de Actividades
-    - Modificar el Rango de fecha de las actividades
-- #### Agregar comunidades a los proyectos
+>Arreglar Fallo que impide que se actualize el valor actual de la meta en las actividades
+
+>Ajustar Vista del Panel para el proyecto:
+ >- Planificación
+ >- Actividades
+ >- Diagrama de Gantt
+ >- Indicadores
+ >- Ubicación
+ >- Punto y Circulo   
