@@ -1,10 +1,15 @@
 import styled from "styled-components"
 
 export const Select = ({ options, value, onChange, placeholder, style }: SelectProps) => {
-    return <$StyledSelect value={value} onChange={(evt: React.ChangeEvent<HTMLSelectElement>) => onChange?.(evt.target.value)} style={style}>
-        {placeholder && <option value="">{placeholder}</option>}
-        {options.map(option => <option value={option.value} key={option.value}>{option.label}</option>)}
-    </$StyledSelect>
+    return (
+        <$Container style={style}>
+            <$StyledSelect value={value} onChange={(evt: React.ChangeEvent<HTMLSelectElement>) => onChange?.(evt.target.value)}>
+                {placeholder && <option value="">{placeholder}</option>}
+                {options.map(option => <option value={option.value} key={option.value}>{option.label}</option>)}
+            </$StyledSelect>
+            <$ArrowIcon />
+        </$Container>
+    );
 }
 
 type SelectProps = {
@@ -29,11 +34,7 @@ const $StyledSelect = styled.select`
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-    background-image: url("data:image/svg+xml;utf8,<svg fill='gray' height='16' viewBox='0 0 20 20' width='16' xmlns='http://www.w3.org/2000/svg'><path d='M5.516 7.548a1 1 0 0 1 1.415-.032L10 10.293l3.07-2.777a1 1 0 1 1 1.383 1.447l-3.777 3.414a1 1 0 0 1-1.32 0L5.548 8.963a1 1 0 0 1-.032-1.415z'/></svg>");
-    background-repeat: no-repeat;
-    background-position: right 12px center;
-    background-size: 20px 20px;
-    padding-right: 36px;
+    padding-right: 36px; /* Space for the custom arrow */
     cursor: pointer;
 
     &:focus {
@@ -41,3 +42,20 @@ const $StyledSelect = styled.select`
         background-color: var(--input-background-focus);
     }
 `
+
+const $Container = styled.div`
+    position: relative;
+    width: 100%;
+`;
+
+const $ArrowIcon = styled.div`
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid var(--text-secondary);
+`;
