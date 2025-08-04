@@ -1,6 +1,6 @@
 services:
   app:
-    image: docker-registry.guarico.gob.ve/cgt:latest
+    image: docker-registry.guarico.gob.ve/cgt:develop
     container_name: cgt
     restart: unless-stopped
     env_file:
