@@ -2,6 +2,7 @@ import { Page, Text, View, Document, StyleSheet, Image, Svg, G, Defs, Polygon, P
 import type { ReactNode } from 'react';
 import gobLogo from '../../assets/por-amor-a-guarico.png';
 import type { KpiInstance } from '../../hooks/mutations/useKpiInstances';
+import type { Stage } from '../Prebuilt/StatusBadge';
 
 // Constante para la altura del header (calculada: SVG height + logo height + padding)
 const HEADER_HEIGHT = 145; // 79.114 + 33.84 + 32
@@ -22,7 +23,7 @@ const body = StyleSheet.create({
         color: "#058473",
     },
     projectNumber: {
-        fontSize: '12px',
+        fontSize: '10px',
         color: "#058473",
         fontFamily: 'CanvaSansBold'
     },
@@ -165,7 +166,7 @@ const activityTable = StyleSheet.create({
 
 type PDFModelProps = {
     projectToken: string,
-    status: string,
+    status: Stage,
     projectName: string
     projectDescription: string,
     startDate: string,
@@ -231,8 +232,8 @@ const PDFModel = ({
                     <View style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                         <Title>FECHA DEL PROYECTO</Title>
                         <View style={{ display: 'flex', flexDirection: 'row', gap: '2px', width: '100%' }}>
-                            <Article title='FECHA DE INICIO' content={startDate} />
-                            <Article title='FECHA DE CULMINACIÓN' content={endDate} />
+                            <Article title='FECHA DE INICIO' content={new Date(startDate).toLocaleDateString("es-VE")} />
+                            <Article title='FECHA DE CULMINACIÓN' content={new Date(endDate).toLocaleDateString("es-VE")} />
                         </View>
                     </View>
                     <View style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
@@ -358,17 +359,23 @@ const PDFModel = ({
     </Document >
 );
 
-const Status = ({ status }: { status: string }) => {
+const Status = ({ status }: { status: Stage }) => {
+    const values: Record<Stage, { color: string, tag: string }> = {
+        pending: { color: "#9f9f9f", tag: "Pendiente" },
+        in_progress: { color: "#FF7F00", tag: "En progreso" },
+        completed: { color: "var(--primary)", tag: "Completado" },
+        cancelled: { color: "#DC2626", tag: "Cancelado" }
+    }
     return <View style={{
         color: "#ffffff",
         fontSize: '8px',
         fontFamily: 'CanvaSansBold',
         borderRadius: "6px",
-        backgroundColor: '#00b59e',
+        backgroundColor: values[status].color,
         padding: '4px'
     }}>
         <Text >
-            {status}
+            {values[status].tag}
         </Text>
     </View>
 }
@@ -388,14 +395,14 @@ const Article = ({ title, content, minHeight = '30px' }: { title: string, conten
 }
 
 const ArticleHeader = ({ title }: { title: string }) => {
-    return <View style={{ backgroundColor: '#00b59e', color: '#ffffff', padding: '10px', width: '100%', borderRadius: '4px' }}>
+    return <View style={{ backgroundColor: '#00b59e', color: '#ffffff', padding: '6px 10px', width: '100%', borderRadius: '4px' }}>
         <Text style={{ fontSize: '8px', fontFamily: 'CanvaSansBold' }}>{title}</Text>
     </View>
 }
 
 const Title = ({ children }: { children: ReactNode }) => {
     return <Text style={{
-        fontSize: '14px',
+        fontSize: '10px',
         color: '#058473',
         fontFamily: 'CanvaSansBold'
     }}>

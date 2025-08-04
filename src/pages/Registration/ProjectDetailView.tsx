@@ -10,6 +10,10 @@ import Card from "../../components/Card/Card";
 import CardHeader from "../../components/Card/CardHeader";
 import CardBody from "../../components/Card/CardBody";
 import IndicatorProgress from "../../components/Indicator/IndicatorProgress";
+import "../../styles/project-detail-mobile.css";
+import { Button } from "../../components/Ui/Button/Button";
+import PDFModel from "../../components/PDFModel/PDFModel";
+import { BlobProvider } from "@react-pdf/renderer";
 
 export default function ProjectDetailView() {
   const { projectId } = useParams();
@@ -20,8 +24,20 @@ export default function ProjectDetailView() {
   if (isLoading) return <div>Cargando...</div>;
   if (error || !project) return <div>Error al cargar el proyecto</div>;
 
+  const projectToken = (projectId?.slice(0,6) || "").toUpperCase()
+
+  const downloadPDF = async (blob: Blob | null) => {
+    if(!blob) return;
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement("a");
+    anchor.href = url;
+    anchor.download = `ficha_${projectToken}.pdf`;
+    anchor.click();
+    window.URL.revokeObjectURL(url);
+  }
+
   return (
-    <Flex $direction="column" $gap="16px" $padding="32px 24px">
+    <Flex $direction="column" $gap="16px" $padding="32px 24px" className="project-detail-container">
       {/* HEADER SIMPLIFICADO */}
       <div style={{
         background: "#fff",
@@ -33,10 +49,10 @@ export default function ProjectDetailView() {
         flexDirection: "row",
         alignItems: "center",
         gap: 40
-      }}>
-        <Text $fontSize="20px" $fontWeight="500">{project.name}</Text>
-        <div style={{ display: "flex", flexDirection: "row", gap: 40 }}>
-          <div style={{ display: "flex", alignItems: "center" }}>
+      }} className="project-header">
+        <Text $fontSize="20px" $fontWeight="500" className="project-header-title">{project.name}</Text>
+        <div style={{ display: "flex", flexDirection: "row", gap: 40 }} className="project-header-dates">
+          <div style={{ display: "flex", alignItems: "center" }} className="project-header-date">
             <FaCalendarAlt size={18} style={{ color: "#16a085", marginRight: 12 }} />
             <div>
               <Text $fontSize="12px" $fontWeight="500">Fecha de inicio</Text>
@@ -45,7 +61,7 @@ export default function ProjectDetailView() {
               </Text>
             </div>
           </div>
-          <div style={{ display: "flex", alignItems: "center" }}>
+          <div style={{ display: "flex", alignItems: "center" }} className="project-header-date">
             <FaClock size={18} style={{ color: "#16a085", marginRight: 12 }} />
             <div>
               <Text $fontSize="12px" $fontWeight="500">Fecha de finalización</Text>
@@ -64,44 +80,72 @@ export default function ProjectDetailView() {
         width: "100%",
         display: "flex",
         flexDirection: "row",
-      }}>
+      }} className="project-tabs">
         <Flex $direction="row" $gap="40px" $justify="start">
           <Text $fontSize="12px" $fontWeight="500">Actividades</Text>
           <Text $fontSize="12px" $fontWeight="500">Punto y Circulo</Text>
+          <BlobProvider document={<PDFModel 
+          projectName={project.name} 
+          projectDescription={project.observations} 
+          status={project.status} 
+          parish={"San Juan de los Morros"} 
+          municipality={"Juan German Roscio"} 
+          startDate={project.initialDate} 
+          endDate={project.finalDate} 
+          territorialSecretary={"Eje 1"} 
+          community="23 DE ENERO" 
+          circuit="CIRCUITO 14 DE MARZO" 
+          kpiInstances={project.kpiInstances} 
+          beneficitPopulation={project.benefitedPopulation} 
+          beneficitChildren={project.benefitedChildren} 
+          budgetSource="Recursos Ordinarios" 
+          budgetInVES="0,00" 
+          budgetInUSD="0,00" 
+          coordinate="Latitud: 0, Longitud: 0" 
+          directLabor={project.directLabor} 
+          indirectLabor={project.indirectLabor} 
+          maleLabor={project.maleLabor} 
+          femaleLabor={project.femaleLabor} 
+          qualifiedLabor={project.qualifiedLabor} 
+          unqualifiedLabor={project.unqualifiedLabor} 
+          projectToken={projectToken} />}
+          >
+            {({ blob }) => <Button $variant="primary" $size="small" onClick={() => downloadPDF(blob)}>Descargar PDF</Button>}
+          </BlobProvider>
         </Flex>
       </div>
-      <Grid $columns="repeat(30, 1fr)">
-        <GridItem $colSpan={10} style={{ height: '250px' }}>
+      <Grid $columns="repeat(30, 1fr)" className="project-indicators-grid">
+        <GridItem $colSpan={10} style={{ height: '250px' }} className="indicator-card">
           <Card $isSelectable={false}>
             <CardHeader>
-              <Text style={{ fontSize: '14px',  fontWeight: 'normal', textWrap: 'nowrap', textAlign: 'justify' }}>Indicador de Meta</Text>
+              <Text style={{ fontSize: '14px', fontWeight: 'normal', textWrap: 'nowrap', textAlign: 'justify' }}>Indicador de Meta</Text>
             </CardHeader>
             <CardBody style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
               <IndicatorProgress value={0} strokeWidth={8} size={160} textSize={14} />
             </CardBody>
           </Card>
         </GridItem>
-        <GridItem $colSpan={10} style={{ height: '250px' }}>
+        <GridItem $colSpan={10} style={{ height: '250px' }} className="indicator-card">
           <Card $isSelectable={false}>
             <CardHeader>
-              <Text style={{ fontSize: '14px',  fontWeight: 'normal', textWrap: 'nowrap', textAlign: 'justify' }}>Indicador de Eficiencia</Text>
+              <Text style={{ fontSize: '14px', fontWeight: 'normal', textWrap: 'nowrap', textAlign: 'justify' }}>Indicador de Eficiencia</Text>
             </CardHeader>
             <CardBody style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
               <IndicatorProgress value={0} strokeWidth={8} size={160} textSize={14} />
             </CardBody>
           </Card>
         </GridItem>
-        <GridItem $colSpan={10} style={{ height: '250px' }}>
+        <GridItem $colSpan={10} style={{ height: '250px' }} className="indicator-card">
           <Card $isSelectable={false}>
             <CardHeader>
-              <Text style={{ fontSize: '14px',  fontWeight: 'normal', textWrap: 'nowrap', textAlign: 'justify' }}>Indicador de Eficacia</Text>
+              <Text style={{ fontSize: '14px', fontWeight: 'normal', textWrap: 'nowrap', textAlign: 'justify' }}>Indicador de Eficacia</Text>
             </CardHeader>
             <CardBody style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
               <IndicatorProgress value={0} strokeWidth={8} size={160} textSize={14} />
             </CardBody>
           </Card>
         </GridItem>
-        <GridItem $colSpan={12}>
+        <GridItem $colSpan={12} className="activities-container">
           <Card $isSelectable={false}>
             <ProjectActivities
               projectId={projectId}
@@ -114,7 +158,7 @@ export default function ProjectDetailView() {
             />
           </Card>
         </GridItem>
-        <GridItem $colSpan={18} style={{ height: '300px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        <GridItem $colSpan={18} style={{ height: '300px', display: 'flex', flexDirection: 'column', gap: '16px' }} className="diagram-map-container">
           <Card $isSelectable={false}>
             <Text style={{ fontSize: '14px', fontWeight: 'normal', textWrap: 'nowrap', textAlign: 'justify' }}>Diagrama de Gantt</Text>
           </Card>
