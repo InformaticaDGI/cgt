@@ -1,9 +1,9 @@
-import { Select } from "../Ui/Select/Select"
+import { SearchableSelect } from "../Ui/Select/SearchableSelect"
 import { useParrishes } from "../../hooks/queries/useParrishes"
 
 export const ParrishSelect = ({ value, onChange, municipalityId, style }: ParrishSelectProps) => {
     const { data: parrishes } = useParrishes(municipalityId)
-    return <Select options={parrishes?.map(parrish => ({ label: parrish.name, value: parrish.id })) || []} value={value} onChange={onChange} 
+    return <SearchableSelect options={parrishes?.map(parrish => ({ label: parrish.name, value: parrish.id })) || []} value={value} onChange={onChange} 
     placeholder="Seleccione una parroquia" style={style} />
 }
 
