@@ -9,10 +9,13 @@ import Card from "../../../components/Card/Card";
 import { BudgetSourceSelect } from "../../../components/Prebuilt/BudgetSourceSelect";
 import { useAppStore } from "../../../store/store";
 import { CurrencyInput } from "../../../components/Prebuilt/CurrencyInput";
+import { useDollarRate } from "../../../hooks/useDollarRate";
+import { useEffect } from "react";
 
 const ResourceStep = () => {
   const { previousStep, nextStep } = useStepper();
   const { formState, setFormState } = useAppStore();
+  const { rate: dollarRate, loading: loadingRate } = useDollarRate();
 
 
   const validate = (values: any) => {
@@ -70,6 +73,10 @@ const ResourceStep = () => {
     return errors;
   }
 
+  const handleChangeBs = (value: string) => {
+    formik.setFieldValue("budgetBs", value)
+  }
+
   const formik = useFormik({
     initialValues: {
       budgetSourceId: formState.projectBudgetSourceId,
@@ -102,6 +109,16 @@ const ResourceStep = () => {
     validate
   });
 
+  useEffect(() => {
+    if (dollarRate && formik.values.budgetBs) {
+      const budgetBs = parseFloat(formik.values.budgetBs.replace(/\./g, '').replace(',', '.'));
+      if (!isNaN(budgetBs)) {
+        const usdAmount = (budgetBs / dollarRate).toFixed(2);
+        formik.setFieldValue('budgetUsd', usdAmount.replace('.', ','));
+      }
+    }
+  }, [formik.values.budgetBs, dollarRate]);
+
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -123,7 +140,7 @@ const ResourceStep = () => {
               <CurrencyInput
                 name="budgetBs"
                 value={formik.values.budgetBs}
-                onChange={(value) => formik.setFieldValue("budgetBs", value)}
+                onChange={handleChangeBs}
                 placeholder="0,00"
                 maxLength={20}
                 disabled={formik.values.budgetSourceId === "without-budget"}
@@ -138,7 +155,6 @@ const ResourceStep = () => {
                 onChange={(value) => formik.setFieldValue("budgetUsd", value)}
                 placeholder="0,00"
                 maxLength={20}
-                disabled={formik.values.budgetSourceId === "without-budget"}
               />
             </FormControl>
           </GridItem>
