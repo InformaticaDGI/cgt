@@ -15,7 +15,7 @@ import { useEffect } from "react";
 const ResourceStep = () => {
   const { previousStep, nextStep } = useStepper();
   const { formState, setFormState } = useAppStore();
-  const { rate: dollarRate, loading: loadingRate } = useDollarRate();
+  const { rate: dollarRate } = useDollarRate();
 
 
   const validate = (values: any) => {
