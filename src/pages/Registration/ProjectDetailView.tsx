@@ -23,10 +23,10 @@ export default function ProjectDetailView() {
   if (isLoading) return <div>Cargando...</div>;
   if (error || !project) return <div>Error al cargar el proyecto</div>;
 
-  const projectToken = (projectId?.slice(0,6) || "").toUpperCase()
+  const projectToken = (projectId?.slice(0, 6) || "").toUpperCase()
 
   const downloadPDF = async (blob: Blob | null) => {
-    if(!blob) return;
+    if (!blob) return;
     const url = URL.createObjectURL(blob);
     const anchor = document.createElement("a");
     anchor.href = url;
@@ -83,31 +83,31 @@ export default function ProjectDetailView() {
         <Flex $direction="row" $gap="40px" $justify="start">
           <Text $fontSize="12px" $fontWeight="500">Actividades</Text>
           <Text $fontSize="12px" $fontWeight="500">Punto y Circulo</Text>
-          <BlobProvider document={<PDFModel 
-          projectName={project.name} 
-          projectDescription={project.observations} 
-          status={project.status} 
-          parish={"San Juan de los Morros"} 
-          municipality={"Juan German Roscio"} 
-          startDate={project.initialDate} 
-          endDate={project.finalDate} 
-          territorialSecretary={"Eje 1"} 
-          community="23 DE ENERO" 
-          circuit="CIRCUITO 14 DE MARZO" 
-          kpiInstances={project.kpiInstances} 
-          beneficitPopulation={project.benefitedPopulation} 
-          beneficitChildren={project.benefitedChildren} 
-          budgetSource="Recursos Ordinarios" 
-          budgetInVES="0,00" 
-          budgetInUSD="0,00" 
-          coordinate="Latitud: 0, Longitud: 0" 
-          directLabor={project.directLabor} 
-          indirectLabor={project.indirectLabor} 
-          maleLabor={project.maleLabor} 
-          femaleLabor={project.femaleLabor} 
-          qualifiedLabor={project.qualifiedLabor} 
-          unqualifiedLabor={project.unqualifiedLabor} 
-          projectToken={projectToken} />}
+          <BlobProvider document={<PDFModel
+            projectName={project.name}
+            projectDescription={project.observations}
+            status={project.status}
+            parish={project.parish.name}
+            municipality={project.parish.municipality.name}
+            startDate={project.initialDate}
+            endDate={project.finalDate}
+            territorialSecretary={"Eje 1"}
+            community="23 DE ENERO"
+            circuit="CIRCUITO 14 DE MARZO"
+            kpiInstances={project.kpiInstances}
+            beneficitPopulation={project.benefitedPopulation}
+            beneficitChildren={project.benefitedChildren}
+            budgetSource="Recursos Ordinarios"
+            budgetInVES="0,00"
+            budgetInUSD="0,00"
+            coordinate={`Latitud: ${project.latitude}, Longitud: ${project.longitude}`}
+            directLabor={project.directLabor}
+            indirectLabor={project.indirectLabor}
+            maleLabor={project.maleLabor}
+            femaleLabor={project.femaleLabor}
+            qualifiedLabor={project.qualifiedLabor}
+            unqualifiedLabor={project.unqualifiedLabor}
+            projectToken={projectToken} />}
           >
             {({ blob }) => <Button $variant="primary" $size="small" onClick={() => downloadPDF(blob)}>Descargar PDF</Button>}
           </BlobProvider>
