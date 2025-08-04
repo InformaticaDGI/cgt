@@ -156,10 +156,13 @@ interface CurrentDayLineProps {
 const CurrentDayLine = styled.div<CurrentDayLineProps>`
   position: absolute;
   top: 0;
+  top: -45px;
   left: ${props => props.$left}px;
-  height: ${props => props.$height}px;
-  width: 2px; /* Thickness of the line */
-  background-color: #ef4444; /* Red color */
+  height: ${props => props.$height + 70}px;
+  width: 24px; /* Thickness of the line */
+  opacity: 0.5;
+  border-radius: 4px;
+  background-color: orange; /* Red color */
   z-index: 20; /* Ensure it's above task bars */
 `;
 
@@ -208,7 +211,7 @@ const GanttChart: React.FC = () => {
   const today = new Date();
   today.setHours(0, 0, 0, 0); // Normalize to start of day
   const currentDayOffsetDays = getDaysBetween(minDate, today);
-  const currentDayLineLeft = currentDayOffsetDays * 29; // 29px is dayWidth
+  const currentDayLineLeft = currentDayOffsetDays * 26; // 29px is dayWidth
 
   // Calculate the height of the current day line to span the entire chart area
   const chartHeight = tasks.length * 40; // 40px is the vertical spacing between tasks
