@@ -20,4 +20,4 @@ jobs:
         # Usa curl para llamar al webhook de Portainer
         run: |
           # Importante: Guarda el webhook como un 'secret' en GitHub para mayor seguridad.
-          curl -X POST ${{ secrets.PORTAINER_PRODUCTION_WEBHOOK_URL }}
+          curl -X POST https://portainer.guarico.gob.ve/api/webhooks/e19ce850-b154-418b-8dd1-691668fda062
