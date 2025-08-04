@@ -1,6 +1,7 @@
 name: Build Develop and Publish image to Docker Hub
 on:
   [workflow_dispatch]
+    
 
   
 jobs:
@@ -9,6 +10,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with: 
+          ref: 'develop'
       - name: Build image
         run: docker build . -t --build-arg VITE_ENV=develop --build-arg VITE_APP_ID=db701dae-f19d-484d-909c-ea0d0a5e02dc docker-registry.guarico.gob.ve/cgt:develop
       - name: push image to Docker Registry
