@@ -10,7 +10,6 @@ import Card from "../../components/Card/Card";
 import CardHeader from "../../components/Card/CardHeader";
 import CardBody from "../../components/Card/CardBody";
 import IndicatorProgress from "../../components/Indicator/IndicatorProgress";
-import "../../styles/project-detail-mobile.css";
 import { Button } from "../../components/Ui/Button/Button";
 import PDFModel from "../../components/PDFModel/PDFModel";
 import { BlobProvider } from "@react-pdf/renderer";
