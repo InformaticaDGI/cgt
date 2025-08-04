@@ -10,6 +10,7 @@ import Card from "../../components/Card/Card";
 import CardHeader from "../../components/Card/CardHeader";
 import CardBody from "../../components/Card/CardBody";
 import IndicatorProgress from "../../components/Indicator/IndicatorProgress";
+import GanttChart from "../../components/GanttChart/GanttChart";
 
 export default function ProjectDetailView() {
   const { projectId } = useParams();
@@ -114,9 +115,10 @@ export default function ProjectDetailView() {
             />
           </Card>
         </GridItem>
-        <GridItem $colSpan={18} style={{ height: '300px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        <GridItem $colSpan={32} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <Card $isSelectable={false}>
             <Text style={{ fontSize: '14px', fontWeight: 'normal', textWrap: 'nowrap', textAlign: 'justify' }}>Diagrama de Gantt</Text>
+            <GanttChart />
           </Card>
           <Card $isSelectable={false}>
             <Text style={{ fontSize: '14px', fontWeight: 'normal', textWrap: 'nowrap', textAlign: 'justify' }}>Mapa con las ubicaciónes de las actividades/proyecto</Text>
