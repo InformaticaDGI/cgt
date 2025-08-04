@@ -1,7 +1,7 @@
 services:
   app:
     image: docker-registry.guarico.gob.ve/cgt:${TAGNAME}
-    container_name: cgt
+    container_name: cgt-${TAGNAME}
     restart: unless-stopped
     ports:
       - '${PORT}:80'
