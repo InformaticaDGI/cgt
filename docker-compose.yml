@@ -3,5 +3,7 @@ services:
     image: docker-registry.guarico.gob.ve/cgt:latest
     container_name: cgt
     restart: unless-stopped
+    env_file:
+     - .env
     ports:
       - '5002:80'
