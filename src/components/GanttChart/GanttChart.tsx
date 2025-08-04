@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { Flex } from '../Layout/Flex';
+import Text from '../Ui/Text/Text';
 
 
 interface Task {
@@ -57,7 +59,7 @@ const TaskListSection = styled.div`
 `;
 
 const SectionTitle = styled.h2`
-  font-size: 1.25rem; /* text-xl */
+  font-size: 1rem; /* text-xl */
   font-weight: 600; /* font-semibold */
   color: #374151; /* gray-700 */
   margin-bottom: 1rem;
@@ -162,7 +164,7 @@ const CurrentDayLine = styled.div<CurrentDayLineProps>`
   width: 24px; /* Thickness of the line */
   opacity: 0.5;
   border-radius: 4px;
-  background-color: orange; /* Red color */
+  background-color: red; /* Red color */
   z-index: 20; /* Ensure it's above task bars */
 `;
 
@@ -227,7 +229,10 @@ const GanttChart: React.FC = () => {
             <TaskListSpace>
               {tasks.map((task: Task) => (
                 <TaskListItem key={task.id}>
-                  {task.name}
+                  <Flex $direction='column' $gap='1px' $justify='start' $align='start'>
+                    {task.name}
+                    <Text $fontSize='10px'>{task.startDate} / {task.endDate}</Text>
+                  </Flex>
                 </TaskListItem>
               ))}
             </TaskListSpace>

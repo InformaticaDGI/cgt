@@ -57,7 +57,7 @@ export default function ProjectDetailView() {
           </div>
         </div>
       </div>
-      <div style={{
+      {/*   <div style={{
         background: "#fff",
         borderRadius: 12,
         boxShadow: "var(--shadow-sm)",
@@ -70,39 +70,45 @@ export default function ProjectDetailView() {
           <Text $fontSize="12px" $fontWeight="500">Actividades</Text>
           <Text $fontSize="12px" $fontWeight="500">Punto y Circulo</Text>
         </Flex>
-      </div>
+      </div> */}
       <Grid $columns="repeat(30, 1fr)">
         <GridItem $colSpan={10} style={{ height: '250px' }}>
           <Card $isSelectable={false}>
             <CardHeader>
-              <Text style={{ fontSize: '14px',  fontWeight: 'normal', textWrap: 'nowrap', textAlign: 'justify' }}>Indicador de Meta</Text>
+              <Text style={{ fontSize: '14px', fontWeight: 'normal', textWrap: 'nowrap', textAlign: 'justify' }}>Metas cumplida</Text>
             </CardHeader>
             <CardBody style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-              <IndicatorProgress value={0} strokeWidth={8} size={160} textSize={14} />
+              <IndicatorProgress value={30} strokeWidth={14} size={160} textSize={18} />
             </CardBody>
           </Card>
         </GridItem>
         <GridItem $colSpan={10} style={{ height: '250px' }}>
           <Card $isSelectable={false}>
             <CardHeader>
-              <Text style={{ fontSize: '14px',  fontWeight: 'normal', textWrap: 'nowrap', textAlign: 'justify' }}>Indicador de Eficiencia</Text>
+              <Text style={{ fontSize: '14px', fontWeight: 'normal', textWrap: 'nowrap', textAlign: 'justify' }}>Eficiencia</Text>
             </CardHeader>
             <CardBody style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-              <IndicatorProgress value={0} strokeWidth={8} size={160} textSize={14} />
+              <IndicatorProgress value={60} strokeWidth={14} size={160} textSize={18} />
             </CardBody>
           </Card>
         </GridItem>
         <GridItem $colSpan={10} style={{ height: '250px' }}>
           <Card $isSelectable={false}>
             <CardHeader>
-              <Text style={{ fontSize: '14px',  fontWeight: 'normal', textWrap: 'nowrap', textAlign: 'justify' }}>Indicador de Eficacia</Text>
+              <Text style={{ fontSize: '14px', fontWeight: 'normal', textWrap: 'nowrap', textAlign: 'justify' }}>Eficacia</Text>
             </CardHeader>
             <CardBody style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-              <IndicatorProgress value={0} strokeWidth={8} size={160} textSize={14} />
+              <IndicatorProgress value={74} strokeWidth={14} size={160} textSize={18} />
             </CardBody>
           </Card>
         </GridItem>
-        <GridItem $colSpan={12}>
+        <GridItem $colSpan={32} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <Card $isSelectable={false}>
+            <Text style={{ fontSize: '14px', fontWeight: 'normal', textWrap: 'nowrap', textAlign: 'justify' }}>Diagrama de Gantt</Text>
+            <GanttChart />
+          </Card>
+        </GridItem>
+        <GridItem $colSpan={16}>
           <Card $isSelectable={false}>
             <ProjectActivities
               projectId={projectId}
@@ -115,11 +121,7 @@ export default function ProjectDetailView() {
             />
           </Card>
         </GridItem>
-        <GridItem $colSpan={32} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-          <Card $isSelectable={false}>
-            <Text style={{ fontSize: '14px', fontWeight: 'normal', textWrap: 'nowrap', textAlign: 'justify' }}>Diagrama de Gantt</Text>
-            <GanttChart />
-          </Card>
+        <GridItem $colSpan={16}>
           <Card $isSelectable={false}>
             <Text style={{ fontSize: '14px', fontWeight: 'normal', textWrap: 'nowrap', textAlign: 'justify' }}>Mapa con las ubicaciónes de las actividades/proyecto</Text>
           </Card>
