@@ -16,8 +16,3 @@ jobs:
       - name: push image to Docker Registry
         run: |
           docker push docker-registry.guarico.gob.ve/cgt:develop
-      - name: Notify Portainer to pull the new image
-        # Usa curl para llamar al webhook de Portainer
-        run: |
-          # Importante: Guarda el webhook como un 'secret' en GitHub para mayor seguridad.
-          curl -X POST ${{ secrets.PORTAINER_DEVELOP_WEBHOOK_URL }}
