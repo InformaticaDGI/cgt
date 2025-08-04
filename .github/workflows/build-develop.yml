@@ -1,28 +1,18 @@
 name: Build Demo and Publish image to Docker Hub
 on:
-  workflow_dispatch:
-    
+  push:
+    branches:
+      - develop
 
   
 jobs:
   publish_images:
     runs-on: ubuntu-latest
-    # Variables de entorno a nivel de job
-    env:
-      DOCKER_REGISTRY: docker-registry.guarico.gob.ve
-      IMAGE_NAME: cgt
-      IMAGE_TAG: develop
-      VITE_ENV: develop
-      VITE_APP_ID: db701dae-f19d-484d-909c-ea0d0a5e02dc
-    
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Build image
-        # Variables de entorno a nivel de step
-        env:
-          BUILD_ARGS: --build-arg VITE_ENV=$VITE_ENV --build-arg VITE_APP_ID=$VITE_APP_ID
-        run: docker build . -t $BUILD_ARGS $DOCKER_REGISTRY/$IMAGE_NAME:$IMAGE_TAG
+        run: docker build . -t --build-arg VITE_ENV=develop --build-arg VITE_APP_ID=db701dae-f19d-484d-909c-ea0d0a5e02dc docker-registry.guarico.gob.ve/cgt:develop
       - name: push image to Docker Registry
         run: |
-          docker push $DOCKER_REGISTRY/$IMAGE_NAME:$IMAGE_TAG
+          docker push docker-registry.guarico.gob.ve/cgt:develop

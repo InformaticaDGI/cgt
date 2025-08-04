@@ -94,7 +94,7 @@ export default function ProjectDetailView() {
             territorialSecretary={"Eje 1"}
             community="23 DE ENERO"
             circuit="CIRCUITO 14 DE MARZO"
-            kpiInstances={project.kpiInstances}
+            kpiInstances={[]}
             beneficitPopulation={project.benefitedPopulation}
             beneficitChildren={project.benefitedChildren}
             budgetSource="Recursos Ordinarios"
@@ -108,6 +108,7 @@ export default function ProjectDetailView() {
             qualifiedLabor={project.qualifiedLabor}
             unqualifiedLabor={project.unqualifiedLabor}
             projectToken={projectToken} />}
+
           >
             {({ blob }) => <Button $variant="primary" $size="small" onClick={() => downloadPDF(blob)}>Descargar PDF</Button>}
           </BlobProvider>
