@@ -149,12 +149,12 @@ export default function ProjectDetailView() {
           <Card $isSelectable={false}>
             <ProjectActivities
               projectId={projectId}
-              projectCircuitCode={project.circuitCode}
+              projectCircuitCode={project.communityCircuitCode}
               projectCommunityId={project.communityId}
               projectStartDate={project.initialDate}
               projectEndDate={project.finalDate}
-              projectMunicipalityId={project.municipalityId}
-              projectParishId={project.parishId}
+              projectMunicipalityId={project.parish.municipality.id}
+              projectParishId={project.parish.id}
             />
           </Card>
         </GridItem>

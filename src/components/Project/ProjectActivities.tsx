@@ -35,16 +35,18 @@ const ProjectActivities: React.FC<ProjectActivitiesProps> = ({
   const { activities } = useAppStore();
   const { mutateAsync: createActivity, isPending: isSubmitting } = useCreateActivity();
 
+
+  console.log(projectMunicipalityId, projectParishId, projectCircuitCode, projectCommunityId)
   const [modalOpen, setModalOpen] = useState(false);
   const [submitError, setSubmitError] = useState("");
   const [formData, setFormData] = useState<ActivityFormData>({
     name: "",
     startDate: "",
     endDate: "",
-    municipalityId: "",
-    parishId: "",
-    circuitCode: "",
-    communityId: ""
+    municipalityId: projectMunicipalityId || "",
+    parishId: projectParishId || "",
+    circuitCode: projectCircuitCode || "",
+    communityId: projectCommunityId || ""
   });
 
   // Precarga selects de ubicación con la info del proyecto
