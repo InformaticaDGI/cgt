@@ -33,7 +33,8 @@ export const useCreateProject = () => {
                 initialBudget: data.initialBudget,
                 latitude: data.latitude,
                 longitude: data.longitude,
-                status: 'in_progress'
+                status: 'in_progress',
+ 		sectorId: data.sectorId
             })
             return response
         }
@@ -63,6 +64,7 @@ type CreateProjectFormValues = {
     maleLabor: number;
     benefitedPopulation: number;
     benefitedChildren: number;
+    sectorId: string;
 }
 
 const createProject = async (data: any) => {

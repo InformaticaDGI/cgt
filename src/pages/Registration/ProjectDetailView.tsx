@@ -150,7 +150,7 @@ export default function ProjectDetailView() {
             <ProjectActivities
               projectId={projectId}
               projectCircuitCode={project.communityCircuitCode}
-              projectCommunityId={project.communityId}
+              projectCommunityId={project.sectorId}
               projectStartDate={project.initialDate}
               projectEndDate={project.finalDate}
               projectMunicipalityId={project.parish.municipality.id}
