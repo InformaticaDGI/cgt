@@ -54,7 +54,7 @@ type CreateProjectFormValues = {
     communityCircuitCode: string;
     secretaryId: string;
     programId: string;
-    areaId: string;
+    areaId: string[];
     directLabor: number;
     indirectLabor: number;
     qualifiedLabor: number;

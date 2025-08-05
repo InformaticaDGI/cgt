@@ -3,6 +3,7 @@ import { Grid, GridItem } from "../../../components/Layout/Grid";
 import { FormControl } from "../../../components/Ui/FormControl/FormControl";
 import { Flex } from "../../../components/Layout/Flex";
 import { Button } from "../../../components/Ui/Button/Button";
+import { Input } from "../../../components/Ui/Input/Input"
 import { useAppStore } from "../../../store/store";
 import MapCoordinateSelector from "../../../components/Prebuilt/MapCoordinateSelector";
 import useStepper from "../../../components/Stepper/useStepper";
@@ -21,6 +22,8 @@ const LocationStep = () => {
     if (!values.municipalityId) errors.municipalityId = "El municipio es requerido";
     if (!values.parrishId) errors.parrishId = "La parroquia es requerida";
     if (!values.circuitCode) errors.circuitCode = "El circuito comunal es requerido";
+    if (!values.coords.lat) errors.coords.lat = "La latitud es requerida";
+    if (!values.coords.lng) errors.coords.lng = "La longitud es requerida";
     return errors;
   }
 
@@ -88,6 +91,22 @@ const LocationStep = () => {
               />
             </FormControl>
           </GridItem>
+          <GridItem $colSpan={12}>
+                        <FormControl label="Latitud" required error={formik.errors.coords?.lat && formik.touched.coords?.lat ? formik.errors.coords.lat : undefined}>
+                            <Input name="name" placeholder="Latitud"
+                                value={formik.values.coords.lat} onChange={(e) => formik.setFieldValue("coords.lat", e.target.value)}
+                                onBlur={formik.handleBlur}
+                            />
+                        </FormControl>
+                    </GridItem>
+                    <GridItem $colSpan={12}>
+                        <FormControl label="Longitud" required error={formik.errors.coords?.lng && formik.touched.coords?.lng ? formik.errors.coords?.lng : undefined}>
+                            <Input name="name" placeholder="Longitud"
+                                value={formik.values.coords.lng} onChange={(e) => formik.setFieldValue("coords.lng", e.target.value)}
+                                onBlur={formik.handleBlur}
+                            />
+                        </FormControl>
+                    </GridItem>
           <GridItem $colSpan={24}>
             <FormControl label="Geolocalización" required error={formik.errors.coords && formik.touched.coords ? formik.errors.coords.lat || formik.errors.coords.lng ? "La geolocalización es requerida" : undefined : undefined}>
               <MapCoordinateSelector
