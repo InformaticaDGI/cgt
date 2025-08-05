@@ -1,0 +1,17 @@
+services:
+  app:
+    image: docker-registry.guarico.gob.ve/cgt:latest
+    container_name: cgt-production
+    restart: unless-stopped
+    ports:
+      - '5002:80'
+    environment:
+      - VITE_ENV=production
+      - VITE_APP_ID=db701dae-f19d-484d-909c-ea0d0a5e02dc
+    networks:
+      - cgt-network-production
+
+networks:
+  cgt-network-production:
+    name: cgt-network-production
+    driver: bridge
