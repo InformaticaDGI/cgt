@@ -36,9 +36,9 @@ interface FormState {
   projectMaleLabor: string;
 
   // KPI
-  projectKpiInstances: KpiInstance[];
-  projectBenefitedPopulation: number;
-  projectBenefitedChildren: number;
+  projectKpiInstances: KpiInstance[]
+  projectBenefitedPopulation: string
+  projectBenefitedChildren: string
 }
 
 const initialFormState: FormState = {
@@ -54,22 +54,23 @@ const initialFormState: FormState = {
   projectCommunityCircuitCode: "",
   projectLatitude: 9.9156947,
   projectLongitude: -67.3601931,
-  projectBudgetSourceId: "",
-  projectBudget: "0,00",
-  projectDirectLabor: "0,00",
-  projectIndirectLabor: "0,00",
-  projectQualifiedLabor: "0,00",
-  projectUnqualifiedLabor: "0,00",
-  projectFemaleLabor: "0,00",
-  projectMaleLabor: "0,00",
+  projectBudgetSourceId: '',
+  projectBudget: '',
+  projectDirectLabor: '',
+  projectIndirectLabor: '',
+  projectQualifiedLabor: '',
+  projectUnqualifiedLabor: '',
+  projectFemaleLabor: '',
+  projectMaleLabor: '',
   projectKpiInstances: [],
-  projectBenefitedPopulation: 0,
-  projectBenefitedChildren: 0,
-  projectMunicipalityId: "",
-  projectCommunityId: "",
-  projectBudgetBs: "0,00",
-  projectBudgetUsd: "0,00",
-};
+  projectBenefitedPopulation: '',
+  projectBenefitedChildren: '',
+  projectMunicipalityId: '',
+  projectCommunityId: '',
+  projectBudgetBs: '',
+  projectBudgetUsd: '',
+}
+
 
 interface AppState {
   secretaries: Secretary[];
