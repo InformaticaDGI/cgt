@@ -37,8 +37,8 @@ interface FormState {
 
   // KPI
   projectKpiInstances: KpiInstance[]
-  projectBenefitedPopulation: number
-  projectBenefitedChildren: number
+  projectBenefitedPopulation: string
+  projectBenefitedChildren: string
 }
 
 const initialFormState: FormState = {
