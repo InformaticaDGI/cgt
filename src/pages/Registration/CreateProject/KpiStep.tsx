@@ -26,7 +26,7 @@ const KpiStep = () => {
         if (values.kpiInstances.some((kpi: any) => kpi.expectedValue === 0)) errors.kpiInstances = "El valor esperado de las metas no puede ser 0";
         if (!values.benefitedPopulation) errors.benefitedPopulation = "La cantidad de beneficiarios es requerida";
         if (!values.benefitedChildren) errors.benefitedChildren = "La cantidad de beneficiarios menores de 18 años es requerida";
-        if (values.benefitedChildren < values.benefitedPopulation) errors.benefitedChildren = "La cantidad de beneficiarios menores de 18 años no puede ser mayor a la cantidad de beneficiarios";
+        if (+values.benefitedChildren >= +values.benefitedPopulation) errors.benefitedChildren = "La cantidad de beneficiarios menores de 18 años no puede ser mayor o igual a la cantidad de beneficiarios";
         return errors;
     }
 
