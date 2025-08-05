@@ -5,3 +5,15 @@ services:
     restart: unless-stopped
     ports:
       - '${PORT}:80'
+    environment:
+      - VITE_ENV=${VITE_ENV}
+      - VITE_APP_ID=${VITE_APP_ID}
+      - PORT=${PORT}
+      - TAGNAME=${TAGNAME}
+    networks:
+      - cgt-network-${TAGNAME}
+
+networks:
+  cgt-network-${TAGNAME}:
+    name: cgt-network-${TAGNAME}
+    driver: bridge
