@@ -12,7 +12,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Build image
-        run: docker build --build-arg VITE_ENV=develop --build-arg PORT=5102 --build-arg TAGNAME=develop --build-arg VITE_APP_ID=db701dae-f19d-484d-909c-ea0d0a5e02dc . -t docker-registry.guarico.gob.ve/cgt:develop
+        run: docker build . -t docker-registry.guarico.gob.ve/cgt:develop
       - name: push image to Docker Registry
         run: |
           docker push docker-registry.guarico.gob.ve/cgt:develop
