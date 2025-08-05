@@ -5,9 +5,6 @@ services:
     restart: unless-stopped
     ports:
       - '5102:80'
-    environment:
-      - VITE_ENV=develop
-      - VITE_APP_ID=db701dae-f19d-484d-909c-ea0d0a5e02dc
     networks:
       - cgt-network-develop
 
