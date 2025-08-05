@@ -6,6 +6,11 @@ COPY package*.json yarn.lock* ./
 RUN yarn --frozen-lockfile
 COPY . .
 
+ARG VITE_APP_ID
+ARG VITE_ENV
+
+RUN echo "VITE_APP_ID=${VITE_APP_ID}" > .env \
+    && echo "VITE_ENV=${VITE_ENV}" >> .env
 
 RUN yarn build
 
