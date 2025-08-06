@@ -37,6 +37,8 @@ export default function ProjectDetailView() {
     window.URL.revokeObjectURL(url);
   }
 
+  const projectBudget = project.projectBudget[0] || { budgetSource: { name: 'SIN FONDOS' } }
+
   return (
     <Flex $direction="column" $gap="16px" $padding="32px 24px" className="project-detail-container">
       {/* HEADER SIMPLIFICADO */}
@@ -99,9 +101,9 @@ export default function ProjectDetailView() {
             kpiInstances={project.kpiInstances}
             beneficitPopulation={project.benefitedPopulation}
             beneficitChildren={project.benefitedChildren}
-            budgetSource={project.projectBudget[0].budgetSource.name}
-            budgetInVES={project.initialBudget}
-            budgetInUSD={project.initialBudgetUsd}
+            budgetSource={projectBudget.budgetSource.name}
+            budgetInVES={project.initialBudget.toString()}
+            budgetInUSD={project.initialBudgetUsd.toString()}
             coordinate={`Latitud: ${project.latitude}, Longitud: ${project.longitude}`}
             directLabor={project.directLabor}
             indirectLabor={project.indirectLabor}
@@ -109,9 +111,9 @@ export default function ProjectDetailView() {
             femaleLabor={project.femaleLabor}
             qualifiedLabor={project.qualifiedLabor}
             unqualifiedLabor={project.unqualifiedLabor}
-            projectToken={projectToken} 
+            projectToken={projectToken}
             scheduledActivities={project.scheduledActivities}
-            />}
+          />}
           >
             {({ blob }) => <Button $variant="primary" $size="small" onClick={() => downloadPDF(blob)}>Descargar PDF</Button>}
           </BlobProvider>
