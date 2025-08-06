@@ -107,6 +107,7 @@ const ResultBox = styled.div`
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
   max-height: 200px;
   overflow-y: auto;
+  z-index: 10;
 `
 
 const ResultItem = styled.div`
