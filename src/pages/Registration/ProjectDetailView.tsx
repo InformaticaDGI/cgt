@@ -13,6 +13,7 @@ import IndicatorProgress from "../../components/Indicator/IndicatorProgress";
 import { Button } from "../../components/Ui/Button/Button";
 import PDFModel from "../../components/PDFModel/PDFModel";
 import { BlobProvider } from "@react-pdf/renderer";
+import { FaFilePdf, FaRegFilePdf } from "react-icons/fa6";
 
 export default function ProjectDetailView() {
   const { projectId } = useParams();
@@ -115,7 +116,9 @@ export default function ProjectDetailView() {
             scheduledActivities={project.scheduledActivities}
           />}
           >
-            {({ blob }) => <Button $variant="primary" $size="small" onClick={() => downloadPDF(blob)}>Descargar PDF</Button>}
+            {({ blob }) => <Button style={{ width: '80px', backgroundColor: '#ffffff' }} $size="small" onClick={() => downloadPDF(blob)}>
+              <FaFilePdf fill="red" size={20} />
+            </Button>}
           </BlobProvider>
         </Flex>
       </div>
