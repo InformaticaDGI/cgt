@@ -6,12 +6,13 @@ import { IoIosExit } from "react-icons/io";
 import authRoles from "./authRoles.ts"
 
 
- createNavItems: (logout: () => void)  NavItems = (logout: () => void) => [
+const createNavItems: (logout: () => void) => NavItems = (logout: () => void) => [
         {
             id: 'map',
             to: '/mapa',
             label: 'Mapa',
             icon: FaMapLocationDot,
+            roles: authRoles.Public
         },
         {
             id: 'dashboard',
