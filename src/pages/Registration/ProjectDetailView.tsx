@@ -18,6 +18,8 @@ export default function ProjectDetailView() {
   const { projectId } = useParams();
   const { data: project, isLoading, error } = useProject(projectId);
 
+
+
   // No state needed here anymore as it's all in the ProjectActivities component
 
   if (isLoading) return <div>Cargando...</div>;
@@ -91,15 +93,15 @@ export default function ProjectDetailView() {
             municipality={project.parish.municipality.name}
             startDate={project.initialDate}
             endDate={project.finalDate}
-            territorialSecretary={"Eje 1"}
-            community="23 DE ENERO"
-            circuit="CIRCUITO 14 DE MARZO"
-            kpiInstances={[]}
+            territorialSecretary={project.parish.municipality.territorialSecretary.name}
+            community={project.sector.name}
+            circuit={project.sector.communityCircuit.name}
+            kpiInstances={project.kpiInstances}
             beneficitPopulation={project.benefitedPopulation}
             beneficitChildren={project.benefitedChildren}
-            budgetSource="Recursos Ordinarios"
-            budgetInVES="0,00"
-            budgetInUSD="0,00"
+            budgetSource={project.projectBudget[0].budgetSource.name}
+            budgetInVES={project.initialBudget}
+            budgetInUSD={project.initialBudgetUsd}
             coordinate={`Latitud: ${project.latitude}, Longitud: ${project.longitude}`}
             directLabor={project.directLabor}
             indirectLabor={project.indirectLabor}
@@ -108,6 +110,7 @@ export default function ProjectDetailView() {
             qualifiedLabor={project.qualifiedLabor}
             unqualifiedLabor={project.unqualifiedLabor}
             projectToken={projectToken} />}
+            scheduledActivities={project.scheduledActivities}
 
           >
             {({ blob }) => <Button $variant="primary" $size="small" onClick={() => downloadPDF(blob)}>Descargar PDF</Button>}

@@ -189,10 +189,14 @@ type PDFModelProps = {
     beneficitPopulation: string,
     beneficitChildren: string,
     kpiInstances: KpiInstance[],
+    scheduledActivities: any[]
 }
 
 // Create Document Component
-const PDFModel = ({
+const PDFModel = (props: PDFModelProps) => {
+
+    const {
+    scheduledActivities,
     beneficitChildren,
     beneficitPopulation,
     budgetInUSD,
@@ -216,8 +220,11 @@ const PDFModel = ({
     startDate,
     status,
     territorialSecretary,
-    unqualifiedLabor }: PDFModelProps) => (
-    <Document>
+    unqualifiedLabor } = props;
+
+    console.log(props)
+
+    return <Document>
         <Page size="A4" style={body.page}>
             <Header />
             <View style={body.content}>
@@ -296,15 +303,15 @@ const PDFModel = ({
 
                                     {/* Filas de datos */}
                                     {kpiInstances.map((item, index) => (
-                                        <View style={kpiTable.tableRow} key={index}>
+                                        <View style={kpiTable.tableRow} key={item.id}>
                                             <View style={kpiTable.tableCol}>
-                                                <Text style={kpiTable.tableCell}>{item.id}</Text>
+                                                <Text style={kpiTable.tableCell}>{item.kpi.name}</Text>
                                             </View>
                                             <View style={kpiTable.tableCol}>
-                                                <Text style={kpiTable.tableCell}>{item.kpiBase?.measurement.name} ({item.kpiBase?.measurement.symbol})</Text>
+                                                <Text style={kpiTable.tableCell}>{item.kpi.measurement.name} ({item.kpi.measurement.symbol})</Text>
                                             </View>
                                             <View style={kpiTable.tableCol}>
-                                                <Text style={kpiTable.tableCell}>{item.expectedValue}</Text>
+                                                <Text style={kpiTable.tableCell}>{item.expected}</Text>
                                             </View>
 
                                         </View>
@@ -337,13 +344,13 @@ const PDFModel = ({
                                     </View>
 
                                     {/* Filas de datos */}
-                                    {kpiInstances.map((item, index) => (
-                                        <View style={activityTable.tableRow} key={index}>
+                                    {scheduledActivities?.map((item, index) => (
+                                        <View style={activityTable.tableRow} key={item.id}>
                                             <View style={activityTable.tableCol}>
-                                                <Text style={activityTable.tableCell}>{item.id}</Text>
+                                                <Text style={activityTable.tableCell}>{item.name}</Text>
                                             </View>
                                             <View style={activityTable.tableCol}>
-                                                <Text style={activityTable.tableCell}>{index}</Text>
+                                                <Text style={activityTable.tableCell}>0</Text>
                                             </View>
 
                                         </View>
@@ -357,7 +364,7 @@ const PDFModel = ({
             <Footer />
         </Page>
     </Document >
-);
+};
 
 const Status = ({ status }: { status: Stage }) => {
     const values: Record<Stage, { color: string, tag: string }> = {

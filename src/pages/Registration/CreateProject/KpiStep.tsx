@@ -38,12 +38,11 @@ const KpiStep = () => {
             benefitedChildren: formState.projectBenefitedChildren,
         },
         onSubmit: async (values) => {
-            console.log(values)
             const project = {
                 ...formState,
-                projectBudgetBs: getFloatValue(formState.projectBudgetBs),
-                projectBudgetUsd: getFloatValue(formState.projectBudgetUsd),
-                projectBudget: formState.projectBudget,
+                projectInitialBudget: getFloatValue(formState.projectInitialBudget),
+                projectInitialBudgetUsd: getFloatValue(formState.projectInitialBudgetUsd),
+                projectBudgetSourceId: formState.projectBudgetSourceId,
                 projectDirectLabor: +formState.projectDirectLabor,
                 projectIndirectLabor: +formState.projectIndirectLabor,
                 projectQualifiedLabor: +formState.projectQualifiedLabor,
@@ -55,15 +54,6 @@ const KpiStep = () => {
                 projectBenefitedChildren: +values.benefitedChildren,
             }
 
-            // const budgetSourceList = BudgetSourceList.create();
-            // budgetSourceList.add({
-            //     value: project.projectBudgetBs,
-            //     currency: 'VES',
-            // });
-            // budgetSourceList.add({
-            //     value: project.projectBudgetUsd,
-            //     currency: 'USD',
-            // });
 
 
             const result = await createProject({
@@ -86,10 +76,11 @@ const KpiStep = () => {
                 maleLabor: project.projectMaleLabor,
                 benefitedPopulation: project.projectBenefitedPopulation,
                 benefitedChildren: project.projectBenefitedChildren,
-                // budgetSources: budgetSourceList.all,
-                initialBudget: project.projectBudgetBs,
+                initialBudget: project.projectInitialBudget,
+                initialBudgetUsd: project.projectInitialBudgetUsd,
                 latitude: project.projectLatitude,
                 longitude: project.projectLongitude,
+                budgetSourceId: project.projectBudgetSourceId
             })
 
             resetFormState()
