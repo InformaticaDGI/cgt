@@ -12,7 +12,6 @@ const createNavItems: (logout: () => void) => NavItems = (logout: () => void) =>
             to: '/mapa',
             label: 'Mapa',
             icon: FaMapLocationDot,
-            roles: authRoles.Public
         },
         {
             id: 'dashboard',
