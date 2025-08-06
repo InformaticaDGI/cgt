@@ -11,6 +11,7 @@ import CardHeader from "../../components/Card/CardHeader";
 import CardBody from "../../components/Card/CardBody";
 import IndicatorProgress from "../../components/Indicator/IndicatorProgress";
 import GanttChart from "../../components/GanttChart/GanttChart";
+import { GobMap } from "../../components/Map/map.components";
 
 export default function ProjectDetailView() {
   const { projectId } = useParams();
@@ -88,7 +89,7 @@ export default function ProjectDetailView() {
               <Text style={{ fontSize: '14px', fontWeight: 'normal', textWrap: 'nowrap', textAlign: 'justify' }}>Eficiencia</Text>
             </CardHeader>
             <CardBody style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-              <IndicatorProgress value={60} strokeWidth={14} size={160} textSize={18} />
+              <IndicatorProgress value={100} strokeWidth={14} size={160} textSize={18} />
             </CardBody>
           </Card>
         </GridItem>
@@ -105,7 +106,7 @@ export default function ProjectDetailView() {
         <GridItem $colSpan={32} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <Card $isSelectable={false}>
             <Text style={{ fontSize: '14px', fontWeight: 'normal', textWrap: 'nowrap', textAlign: 'justify' }}>Diagrama de Gantt</Text>
-            <GanttChart />
+            <GanttChart activities={project.scheduledActivities} />
           </Card>
         </GridItem>
         <GridItem $colSpan={16}>
@@ -122,8 +123,11 @@ export default function ProjectDetailView() {
           </Card>
         </GridItem>
         <GridItem $colSpan={16}>
-          <Card $isSelectable={false}>
-            <Text style={{ fontSize: '14px', fontWeight: 'normal', textWrap: 'nowrap', textAlign: 'justify' }}>Mapa con las ubicaciónes de las actividades/proyecto</Text>
+          <Card $isSelectable={false} $height="300px">
+            <CardHeader>
+              <Text style={{ fontSize: '14px', fontWeight: 'normal', textWrap: 'nowrap', textAlign: 'justify' }}>Ubicaciónes del proyecto</Text>
+            </CardHeader>
+            <GobMap />
           </Card>
         </GridItem>
       </Grid>

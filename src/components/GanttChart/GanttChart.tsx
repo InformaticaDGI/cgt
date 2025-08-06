@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Flex } from '../Layout/Flex';
 import Text from '../Ui/Text/Text';
+import type { Activity } from '../../hooks/useActivities';
 
 
 interface Task {
@@ -103,7 +104,11 @@ const TimelineHeader = styled.div`
   z-index: 10;
 `;
 
-const TimelineDate = styled.div`
+type TimelineDateProps = {
+  width: number;
+}
+
+const TimelineDate = styled.div<TimelineDateProps>`
   flex-shrink: 0;
   background-color: var(--secondary-background);
   padding: 2px;
@@ -111,7 +116,7 @@ const TimelineDate = styled.div`
   font-size: 0.55rem; /* text-xs */
   color: #4b5563; /* gray-600 */
   text-align: center;
-  width: 24px; /* Match dayWidth */
+  width: ${(props) => props.width || 2}%; /* Match dayWidth */
 `;
 
 const TaskBarsContainer = styled.div`
@@ -140,9 +145,15 @@ const TaskBar = styled.div<TaskBarProps>`
   white-space: nowrap;
   min-width: 24px; /* Ensure minimum width for very short tasks */
 
-  left: ${props => props.$left}px;
-  width: ${props => props.$width}px;
+  left: ${props => props.$left}%;
+  width: ${props => props.$width}%;
   top: ${props => props.$top}px;
+
+  transition: all 1s;
+  &:hover {
+    width: 100%;
+    left: 0;
+  }
 `;
 
 const TaskBarText = styled.span`
@@ -168,16 +179,14 @@ const CurrentDayLine = styled.div<CurrentDayLineProps>`
   z-index: 20; /* Ensure it's above task bars */
 `;
 
-const GanttChart: React.FC = () => {
+const GanttChart: React.FC<{ activities: Activity[] }> = ({ activities }: { activities: Activity[] }) => {
 
-  const [tasks, setTasks] = useState<Task[]>([
-    { id: 2, name: 'Inicio de actividades', startDate: '2025-08-01', endDate: '2025-08-05' },
-    { id: 3, name: 'Remocion de pavimento', startDate: '2025-08-05', endDate: '2025-08-15' },
-    { id: 4, name: 'Escarificación', startDate: '2025-08-10', endDate: '2025-08-25' },
-    { id: 5, name: 'Limpieza de la superficie', startDate: '2025-08-20', endDate: '2025-09-10' },
-    { id: 6, name: 'Aplicacion y compactación', startDate: '2025-09-05', endDate: '2025-09-20' },
-    { id: 7, name: 'Entrega de la obra', startDate: '2025-09-18', endDate: '2025-09-25' },
-  ]);
+  const [tasks, setTasks] = useState<Task[]>(activities.map(a => ({
+    id: a.id,
+    endDate: a.endDate,
+    startDate: a.startDate,
+    name: a.name
+  })));
 
 
   const allDates: Date[] = tasks.flatMap(task => [new Date(task.startDate), new Date(task.endDate)]);
@@ -196,15 +205,12 @@ const GanttChart: React.FC = () => {
   }
 
 
-  const calculateTaskBarProps = (task: Task) => {
+  const calculateTaskBarProps = (task: Task, dayWidth: number) => {
     const startOffsetDays = getDaysBetween(minDate, task.startDate);
     const durationDays = getDaysBetween(task.startDate, task.endDate) + 1;
 
-
-    const dayWidth = 24 + 2;
-
     const left = startOffsetDays * dayWidth;
-    const width = durationDays * dayWidth;
+    const width = dayWidth * durationDays;
 
     return { left, width };
   };
@@ -213,7 +219,7 @@ const GanttChart: React.FC = () => {
   const today = new Date();
   today.setHours(0, 0, 0, 0); // Normalize to start of day
   const currentDayOffsetDays = getDaysBetween(minDate, today);
-  const currentDayLineLeft = currentDayOffsetDays * 26; // 29px is dayWidth
+  const currentDayLineLeft = currentDayOffsetDays * (100 / timelineDates.length); // 29px is dayWidth
 
   // Calculate the height of the current day line to span the entire chart area
   const chartHeight = tasks.length * 40; // 40px is the vertical spacing between tasks
@@ -231,7 +237,7 @@ const GanttChart: React.FC = () => {
                 <TaskListItem key={task.id}>
                   <Flex $direction='column' $gap='1px' $justify='start' $align='start'>
                     {task.name}
-                    <Text $fontSize='10px'>{task.startDate} / {task.endDate}</Text>
+                    <Text $fontSize='10px'>{formatDate(new Date(task.startDate))} / {formatDate(new Date(task.endDate))}</Text>
                   </Flex>
                 </TaskListItem>
               ))}
@@ -245,7 +251,7 @@ const GanttChart: React.FC = () => {
             {/* Timeline Header (Dates) */}
             <TimelineHeader>
               {timelineDates.map((date: Date, index: number) => (
-                <TimelineDate key={index}>
+                <TimelineDate width={100 / timelineDates.length} key={index}>
                   {formatDate(date).split(' ')[0]} {/* Month */}
                   <br />
                   {formatDate(date).split(' ')[1]} {/* Day */}
@@ -258,19 +264,23 @@ const GanttChart: React.FC = () => {
               {currentDayOffsetDays >= 0 && currentDayOffsetDays < totalDays && (
                 <CurrentDayLine $left={currentDayLineLeft} $height={chartHeight} />
               )}
-              {tasks.map((task: Task) => {
-                const { left, width } = calculateTaskBarProps(task);
-                return (
-                  <TaskBar
-                    key={task.id}
-                    $left={left}
-                    $width={width}
-                    $top={(task.id - 1) * 40}
-                  >
-                    <TaskBarText>{task.name}</TaskBarText>
-                  </TaskBar>
-                );
-              })}
+              {tasks
+                .sort((a: Task, b: Task) => {
+                  return new Date(a.startDate).getDay() - new Date(b.startDate).getDay()
+                })
+                .map((task: Task, i: number) => {
+                  const { left, width } = calculateTaskBarProps(task, (100 / timelineDates.length));
+                  return (
+                    <TaskBar
+                      key={task.id}
+                      $left={left}
+                      $width={width}
+                      $top={(i) * 40}
+                    >
+                      <TaskBarText>{task.name}</TaskBarText>
+                    </TaskBar>
+                  );
+                })}
               {/* This div helps to set the total height of the relative container */}
               <div style={{ height: `${tasks.length * 40}px` }}></div>
             </TaskBarsContainer>
