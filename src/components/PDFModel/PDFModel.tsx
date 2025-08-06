@@ -3,7 +3,7 @@ import type { ReactNode } from 'react';
 import gobLogo from '../../assets/por-amor-a-guarico.png';
 import type { KpiInstance } from '../../hooks/mutations/useKpiInstances';
 import type { Stage } from '../Prebuilt/StatusBadge';
-
+import { formatCurrencyBdv } from '../Prebuild/CurrencyInput';
 // Constante para la altura del header (calculada: SVG height + logo height + padding)
 const HEADER_HEIGHT = 145; // 79.114 + 33.84 + 32
 
@@ -262,8 +262,8 @@ const PDFModel = (props: PDFModelProps) => {
                         <Title>RECURSOS DEL PROYECTO</Title>
                         <View style={{ display: 'flex', flexDirection: 'row', gap: '2px', width: '100%' }}>
                             <Article title='TIPO DE RECURSO' content={budgetSource} />
-                            <Article title='MONTO (VES)' content={budgetInVES} />
-                            <Article title='MONTO (USD)' content={budgetInUSD} />
+                            <Article title='MONTO (VES)' content={formatCurrencyBdv(budgetInVES)} Bs. />
+                            <Article title='MONTO (USD)' content={formatCurrencyBdv(budgetInUSD)} $ />
                         </View>
                     </View>
                     <View style={{ display: 'flex', flexDirection: 'column', gap: '16px' }} >
