@@ -263,7 +263,7 @@ const PDFModel = (props: PDFModelProps) => {
                         <View style={{ display: 'flex', flexDirection: 'row', gap: '2px', width: '100%' }}>
                             <Article title='TIPO DE RECURSO' content={budgetSource} />
                             <Article title='MONTO (VES)' content={`${formatCurrencyBdv(budgetInVES)} Bs.`} />
-                            <Article title='MONTO (USD)' content={`${formatCurrencyBdv(budgetInUSD) $}`} />
+                            <Article title='MONTO (USD)' content={`${formatCurrencyBdv(budgetInUSD)} $`} />
                         </View>
                     </View>
                     <View style={{ display: 'flex', flexDirection: 'column', gap: '16px' }} >
