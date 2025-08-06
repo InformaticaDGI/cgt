@@ -1,9 +1,8 @@
 import { Page, Text, View, Document, StyleSheet, Image, Svg, G, Defs, Polygon, Path, Font } from '@react-pdf/renderer';
 import type { ReactNode } from 'react';
 import gobLogo from '../../assets/por-amor-a-guarico.png';
-import type { KpiInstance } from '../../hooks/mutations/useKpiInstances';
 import type { Stage } from '../Prebuilt/StatusBadge';
-import { formatCurrencyBdv } from '../Prebuild/CurrencyInput';
+import { formatCurrencyBdv } from '../Prebuilt/CurrencyInput';
 // Constante para la altura del header (calculada: SVG height + logo height + padding)
 const HEADER_HEIGHT = 145; // 79.114 + 33.84 + 32
 
@@ -188,7 +187,7 @@ type PDFModelProps = {
     femaleLabor: string,
     beneficitPopulation: string,
     beneficitChildren: string,
-    kpiInstances: KpiInstance[],
+    kpiInstances: any[],
     scheduledActivities: any[]
 }
 
@@ -196,31 +195,31 @@ type PDFModelProps = {
 const PDFModel = (props: PDFModelProps) => {
 
     const {
-    scheduledActivities,
-    beneficitChildren,
-    beneficitPopulation,
-    budgetInUSD,
-    budgetInVES,
-    budgetSource,
-    circuit,
-    community,
-    coordinate,
-    directLabor,
-    endDate,
-    femaleLabor,
-    indirectLabor,
-    kpiInstances,
-    maleLabor,
-    municipality,
-    parish,
-    projectDescription,
-    projectName,
-    projectToken,
-    qualifiedLabor,
-    startDate,
-    status,
-    territorialSecretary,
-    unqualifiedLabor } = props;
+        scheduledActivities,
+        beneficitChildren,
+        beneficitPopulation,
+        budgetInUSD,
+        budgetInVES,
+        budgetSource,
+        circuit,
+        community,
+        coordinate,
+        directLabor,
+        endDate,
+        femaleLabor,
+        indirectLabor,
+        kpiInstances,
+        maleLabor,
+        municipality,
+        parish,
+        projectDescription,
+        projectName,
+        projectToken,
+        qualifiedLabor,
+        startDate,
+        status,
+        territorialSecretary,
+        unqualifiedLabor } = props;
 
     console.log(props)
 
@@ -302,7 +301,7 @@ const PDFModel = (props: PDFModelProps) => {
                                     </View>
 
                                     {/* Filas de datos */}
-                                    {kpiInstances.map((item, index) => (
+                                    {kpiInstances?.map((item) => (
                                         <View style={kpiTable.tableRow} key={item.id}>
                                             <View style={kpiTable.tableCol}>
                                                 <Text style={kpiTable.tableCell}>{item.kpi.name}</Text>
@@ -344,7 +343,7 @@ const PDFModel = (props: PDFModelProps) => {
                                     </View>
 
                                     {/* Filas de datos */}
-                                    {scheduledActivities?.map((item, index) => (
+                                    {scheduledActivities?.map((item) => (
                                         <View style={activityTable.tableRow} key={item.id}>
                                             <View style={activityTable.tableCol}>
                                                 <Text style={activityTable.tableCell}>{item.name}</Text>

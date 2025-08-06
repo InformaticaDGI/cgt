@@ -109,9 +109,9 @@ export default function ProjectDetailView() {
             femaleLabor={project.femaleLabor}
             qualifiedLabor={project.qualifiedLabor}
             unqualifiedLabor={project.unqualifiedLabor}
-            projectToken={projectToken} />}
+            projectToken={projectToken} 
             scheduledActivities={project.scheduledActivities}
-
+            />}
           >
             {({ blob }) => <Button $variant="primary" $size="small" onClick={() => downloadPDF(blob)}>Descargar PDF</Button>}
           </BlobProvider>
