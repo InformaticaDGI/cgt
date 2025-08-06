@@ -3,7 +3,7 @@ import { FaChartBar, FaHammer, /*FaUsersGear, */ FaList } from "react-icons/fa6"
 import { FaMapLocationDot } from "react-icons/fa6";
 import { MdShield } from "react-icons/md";
 import { IoIosExit } from "react-icons/io";
-import authRoles from "../authRoles.cssx"
+import authRoles from "./authRoles.ts"
 
 
 const createNavItems: (logout: () => void) => NavItems = (logout: () => void) => [
@@ -73,7 +73,7 @@ const createNavItems: (logout: () => void) => NavItems = (logout: () => void) =>
             to: '/seguridad',
             label: 'Seguridad',
             icon: MdShield,
-            roles: authRole.Admin
+            roles: authRoles.Admin
         },
         {
             id: 'exit',
