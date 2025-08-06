@@ -6,7 +6,7 @@ import { IoIosExit } from "react-icons/io";
 import authRoles from "./authRoles.ts"
 
 
-const createNavItems: (logout: () => void) => NavItems = (logout: () => void) => [
+ createNavItems: (logout: () => void)  NavItems = (logout: () => void) => [
         {
             id: 'map',
             to: '/mapa',
