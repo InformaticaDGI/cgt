@@ -288,79 +288,79 @@ const LIST_DEP = [
     name: 'SECRETARIA DE FINANZAS ',
     parentId: "b91b2c80-b50a-4378-afa3-3f9f8953a593",
     cod_dep: null
-},
-{
+  },
+  {
     id: "d5c0071c-461b-405f-9d34-1f1bfa601aa6",
     name: 'SECRETARIA DE PLANIFICACIÓN Y PRESUPUESTO ',
     parentId: "b91b2c80-b50a-4378-afa3-3f9f8953a593",
     cod_dep: null
-},
-{
+  },
+  {
     id: "b351672c-4983-4b28-9569-cc103e216d06",
     name: 'SECRETARIA DE INSPECCIÓN Y CONTROL',
     parentId: "b91b2c80-b50a-4378-afa3-3f9f8953a593",
     cod_dep: null
-},
-{
+  },
+  {
     id: "e9712ad1-6e9d-44ea-aecb-59495ef7b8c2",
     name: 'SECRETARIA DE COMUNICACIÓN E INFORMACIÓN ',
     parentId: "b91b2c80-b50a-4378-afa3-3f9f8953a593",
     cod_dep: null
-},
-{
+  },
+  {
     id: "08063971-7669-4ffa-a76a-8383b7adf33c",
     name: 'DIRECCIÓN GENERAL DE AUDITORÍA INTERNA ',
     parentId: "b91b2c80-b50a-4378-afa3-3f9f8953a593",
     cod_dep: null
-},
-{
+  },
+  {
     id: "18d1adb9-c4b2-4d5f-a231-8032583f01ff",
     name: 'DIRECCIÓN GENERAL DE INFORMÁTICA ',
     parentId: "b91b2c80-b50a-4378-afa3-3f9f8953a593",
     cod_dep: null
-},
-{
+  },
+  {
     id: "78bdbb3b-be7d-4567-82e2-f7d4c2249d5f",
     name: 'DIRECCIÓN GENERAL DE TALENTO HUMANO ',
     parentId: "b91b2c80-b50a-4378-afa3-3f9f8953a593",
     cod_dep: null
-},
-{
+  },
+  {
     id: "afe58d93-54cd-4cef-9c15-18d73ae4d97b",
     name: 'CONSULTORÍA JURÍDICA ',
     parentId: "b91b2c80-b50a-4378-afa3-3f9f8953a593",
     cod_dep: null
-},
-{
+  },
+  {
     id: "16370576-f743-4a84-b6af-ebad03904370",
     name: 'FONDEFIBG',
     parentId: "b91b2c80-b50a-4378-afa3-3f9f8953a593",
     cod_dep: null
-},
-{
+  },
+  {
     id: "27d27a8a-a816-4141-af00-80a7bbc1db3e",
     name: 'COPLAN',
     parentId: "b91b2c80-b50a-4378-afa3-3f9f8953a593",
     cod_dep: null
-},
-{
+  },
+  {
     id: "22782a3a-dbcd-49d3-975f-7ae249477add",
     name: 'SUATEBG',
     parentId: "b91b2c80-b50a-4378-afa3-3f9f8953a593",
     cod_dep: null
-},
-{
+  },
+  {
     id: "fff59f2b-a6b1-45ac-b950-9453240366ce",
     name: 'SIBCIGUARICO ',
     parentId: "b91b2c80-b50a-4378-afa3-3f9f8953a593",
     cod_dep: null
-},
-{
+  },
+  {
     id: "7b984653-fb58-4489-bc61-6cb2569b203b",
     name: 'PROCURADURÍA',
     parentId: "b91b2c80-b50a-4378-afa3-3f9f8953a593",
     cod_dep: null
-}
+  }
 ];
 
 const usePermision = (rootOnly = false) => {
