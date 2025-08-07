@@ -13,7 +13,7 @@ import IndicatorProgress from "../../components/Indicator/IndicatorProgress";
 import { Button } from "../../components/Ui/Button/Button";
 import PDFModel from "../../components/PDFModel/PDFModel";
 import { BlobProvider } from "@react-pdf/renderer";
-import { FaFilePdf, FaRegFilePdf } from "react-icons/fa6";
+import { FaFilePdf } from "react-icons/fa6";
 
 export default function ProjectDetailView() {
   const { projectId } = useParams();

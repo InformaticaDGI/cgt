@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { Filter, FilterContainer } from "../Filter/Filter";
 import FilterHeader from "../Filter/FilterHeader";
-import { Search, Map, MapPin, MapPinned, Building, Network, Layers } from "lucide-react";
+import { Search, Map, MapPin, MapPinned, Building, Layers } from "lucide-react";
 import { useAppStore } from "../../store/store";
 import { SecretarySelect } from "./SecretarySelect";
 import { TerritorialSecreatarySelect } from "./TerritorialSecretarySelect";
