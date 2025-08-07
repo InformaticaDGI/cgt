@@ -24,10 +24,10 @@
 - Actividades
     - Actualizar Asignación de valores
         - Eliminar titulo del nombre
-        - Actualizar el selector de kpi -> listar todos los kpi (metas)
+        - Actualizar el selector de kpi -> listar todos los kpi (metas) en tabla con scroll automatico
         - Actualizar kpi por meta
-        >[!Note]
-        >Enviar y/o actulizar solo aquellas metas que sean diferentes a cero.
+>[!Important]
+>Enviar y/o actulizar solo aquellas metas que sean diferentes a cero.
         
 
 ### Jesús Medina
