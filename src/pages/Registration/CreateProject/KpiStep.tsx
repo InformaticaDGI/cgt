@@ -103,9 +103,7 @@ const KpiStep = () => {
         <form onSubmit={formik.handleSubmit}>
             <Card $isSelectable={false} $padding="32px">
                 <Grid $columns="repeat(24, 1fr)" $gap="12px" $width="100%">
-                    <GridItem $colSpan={24}>
-                        <h3 style={{ color: "var(--text-secondary)", marginBottom: "12px" }}>Metas del Proyecto</h3>
-                    </GridItem>
+
                     <GridItem $colSpan={24} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '12px' }}>
                         <KpiBaseInput value={formik.values.kpiInstances} onChange={(value) => formik.setFieldValue('kpiInstances', value)} />
                         {formik.errors.kpiInstances && formik.touched.kpiInstances && typeof formik.errors.kpiInstances === 'string' && <p style={{ color: "var(--error)", fontSize: "12px" }}>{formik.errors.kpiInstances}</p>}

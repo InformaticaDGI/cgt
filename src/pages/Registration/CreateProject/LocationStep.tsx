@@ -12,6 +12,7 @@ import { MunicipalitySelect } from "../../../components/Prebuilt/MunicipalitySel
 import { ParrishSelect } from "../../../components/Prebuilt/ParrishSelect";
 import { CommunityCircuitSelect } from "../../../components/Prebuilt/CommunityCircuit";
 import { CommunitySelect } from "../../../components/Prebuilt/CommunitySelect";
+import Text from "../../../components/Ui/Text/Text";
 
 const LocationStep = () => {
   const { nextStep, previousStep } = useStepper();
@@ -56,6 +57,9 @@ const LocationStep = () => {
     >
       <Card $isSelectable={false} $padding="32px">
         <Grid $columns="repeat(24, 1fr)" $gap="12px">
+          <GridItem $colSpan={24}>
+            <Text $fontSize="14px" $color="#2d2d2d">Ubicación del Proyecto</Text>
+          </GridItem>
           <GridItem $colSpan={24}>
             <FormControl label="Municipio" required error={formik.errors.municipalityId && formik.touched.municipalityId ? formik.errors.municipalityId : undefined}>
               <MunicipalitySelect value={formik.values.municipalityId} onChange={(value) => {formik.setFieldValue('municipalityId', value); formik.setFieldValue('parrishId', ''); formik.setFieldValue('circuitId', '');}} />

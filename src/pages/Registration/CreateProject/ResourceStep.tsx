@@ -11,6 +11,7 @@ import { useAppStore } from "../../../store/store";
 import { CurrencyInput } from "../../../components/Prebuilt/CurrencyInput";
 import { useDollarRate } from "../../../hooks/useDollarRate";
 import { useEffect } from "react";
+import Text from "../../../components/Ui/Text/Text";
 
 const ResourceStep = () => {
   const { previousStep, nextStep } = useStepper();
@@ -110,7 +111,7 @@ const ResourceStep = () => {
       <Card $isSelectable={false} $padding="32px">
         <Grid $columns="repeat(24, 1fr)" $gap="12px" $width="100%">
           <GridItem $colSpan={24}>
-            <h3 style={{ marginBottom: 8, color: '#222E3A', fontWeight: 600, fontSize: 18 }}>Fondos</h3>
+            <Text $fontSize="14px" $color="#2d2d2d">Fondos</Text>
           </GridItem>
           <GridItem $colSpan={12}>
             <FormControl label="Origen de los fondos" required error={formik.errors.budgetSourceId && formik.touched.budgetSourceId ? formik.errors.budgetSourceId : undefined}>
@@ -145,7 +146,7 @@ const ResourceStep = () => {
             </FormControl>
           </GridItem>
           <GridItem $colSpan={24}>
-            <h3 style={{ margin: '24px 0 8px 0', color: '#222E3A', fontWeight: 600, fontSize: 18 }}>Cantidad de mano de obra</h3>
+            <Text $fontSize="14px" $color="#2d2d2d">Cantidad de mano de obra</Text>
           </GridItem>
           <GridItem $colSpan={6}>
             <FormControl label="Calificada" required error={formik.errors.qualifiedLabor && formik.touched.qualifiedLabor ? formik.errors.qualifiedLabor : undefined}>
@@ -194,7 +195,7 @@ const ResourceStep = () => {
             </FormControl>
           </GridItem>
           <GridItem $colSpan={24}>
-            <h3 style={{ margin: '24px 0 8px 0', color: '#222E3A', fontWeight: 600, fontSize: 18 }}>Cantidad de personal</h3>
+            <Text $fontSize="14px" $color="#2d2d2d">Cantidad de personal</Text>
           </GridItem>
           <GridItem $colSpan={6}>
             <FormControl label="Mujeres" required error={formik.errors.femaleLabor && formik.touched.femaleLabor ? formik.errors.femaleLabor : undefined}>
