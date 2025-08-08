@@ -4,6 +4,7 @@ export function MapClickDisabler({ children }: { children: React.ReactNode | Rea
 
   const handleMapMouseClickState = (state: boolean) => {
     // EventEmitter.dispatch(Events.MAP_MOUSE_CLICK_STATE, { disabled: state })
+    console.log('MapClickDisabler', state);
   };
 
   return (
