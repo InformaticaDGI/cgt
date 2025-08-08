@@ -36,7 +36,6 @@ const ProjectActivities: React.FC<ProjectActivitiesProps> = ({
   const { mutateAsync: createActivity, isPending: isSubmitting } = useCreateActivity();
 
 
-  console.log(projectMunicipalityId, projectParishId, projectCircuitCode, projectCommunityId)
   const [modalOpen, setModalOpen] = useState(false);
   const [submitError, setSubmitError] = useState("");
   const [formData, setFormData] = useState<ActivityFormData>({

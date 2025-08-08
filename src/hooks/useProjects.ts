@@ -3,6 +3,9 @@ import axios from "axios";
 import { config } from "../config";
 import type { Parrish } from "./queries/useParrishes";
 import type { Secretary } from "./useSecretary";
+import type { CommunityCircuit } from "./queries/useCommunityCircuitsByParish";
+import type { Municipality } from "./useMunicipality";
+import type { TerritorialSecretary } from "./useTerritorialSecretaries";
 
 const useProjects = (params: ProjectQueryParams = {}) => {
   return useQuery({
@@ -69,6 +72,19 @@ const getProjects = async ({ include, limit, page, /*municipalityId,*/ parishId,
   return data;
 };
 
+export default useProjects;
+
+
+type ProjectQueryParams = {
+  include?: string;
+  page?: number;
+  limit?: number;
+  territorialSecretaryId?: string;
+  secretaryId?: string;
+  municipalityId?: string;
+  parishId?: string;
+}
+
 export type ProjectMetadata = {
   data: Project[]
   pagination: {
@@ -81,6 +97,21 @@ export type ProjectMetadata = {
   }
 }
 
+export type ProjectBudget = {
+  id: string;
+  projectId: string;
+  budgetSourceId: string;
+  value: string;
+  currency: string;
+  createdAt: string;
+  budgetSource: ProjectBudgetSource;
+}
+
+export type ProjectBudgetSource = {
+  id: string;
+  name: string;
+}
+
 export type Project = {
   id: string;
   name: string;
@@ -89,6 +120,8 @@ export type Project = {
   actualEndDate: string;
   initialBudget: number;
   actualBudget: number;
+  initialBudgetUsd: number;
+  actualBudgetUsd: number;
   latitude?: number;
   longitude?: number;
   status: "completed" | "in_progress" | "pending";
@@ -114,15 +147,22 @@ export type Project = {
   secretary: Secretary
 };
 
-export default useProjects;
-
-
-type ProjectQueryParams = {
-  include?: string;
-  page?: number;
-  limit?: number;
-  territorialSecretaryId?: string;
-  secretaryId?: string;
-  municipalityId?: string;
-  parishId?: string;
+export type Sector = {
+  id: string;
+  name: string;
+  communityCircuitId: string;
+  communityCircuit: CommunityCircuit;
 }
+
+export type ProjectPayloadExtension = {
+  projectBudget: ProjectBudget[]
+  scheduledActivities: any[]
+  kpiInstances: any[]
+  sector: Sector
+  parish: Parrish & { municipality: Municipality & { territorialSecretary: TerritorialSecretary } }
+}
+
+export type ProjectPayload<T, Extensions extends keyof ProjectPayloadExtension> =
+  T &
+  Pick<ProjectPayloadExtension, Extensions>
+

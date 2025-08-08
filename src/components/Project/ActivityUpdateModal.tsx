@@ -9,6 +9,7 @@ import { FaPlus, FaTrash } from 'react-icons/fa';
 import type { Activity } from '../../hooks/useActivities';
 import { $TextArea } from '../Ui/TextArea/TextArea';
 import { useProjectKPIs, useUpdateActivityKPIs, type KPI, type KPIInstance, type KPIResult } from '../../hooks/useActivityKPIs';
+import { FaPaperclip } from 'react-icons/fa6';
 
 interface ActivityUpdateModalProps {
   isOpen: boolean;
@@ -163,6 +164,17 @@ export const ActivityUpdateModal: React.FC<ActivityUpdateModalProps> = ({
     setSelectedKPIs(newSelectedKPIs);
   };
 
+  const handleAttachFile = () => {
+    const inputFile = document.createElement('input');
+    inputFile.type = 'file';
+    inputFile.accept = 'image/*';
+    inputFile.onchange = (e) => {
+      const file = (e.target as HTMLInputElement).files?.[0];
+      console.log('Archivo seleccionado:', file);
+    };
+    inputFile.click();
+  };
+
   // Actualizar valor de un KPI
   const handleUpdateKPIValue = (kpiId: string, value: string) => {
     setSelectedKPIs(
@@ -306,6 +318,7 @@ export const ActivityUpdateModal: React.FC<ActivityUpdateModalProps> = ({
                       <th style={{ textAlign: "left", padding: "8px", fontSize: "14px", fontWeight: "500" }}>KPI</th>
                       <th style={{ textAlign: "center", padding: "8px", fontSize: "14px", fontWeight: "500", width: "120px" }}>Valor</th>
                       <th style={{ textAlign: "center", padding: "8px", width: "50px" }}></th>
+                      <th style={{ textAlign: "center", padding: "8px", width: "50px" }}></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -331,6 +344,25 @@ export const ActivityUpdateModal: React.FC<ActivityUpdateModalProps> = ({
                         </td>
                         <td style={{ padding: "6px 8px", textAlign: "center" }}>
                           <button
+                            onClick={handleAttachFile}
+                            style={{ 
+                              background: "none", 
+                              border: "none", 
+                              cursor: "pointer", 
+                              color: "#007bff",
+                              padding: "5px",
+                              borderRadius: "3px",
+                              display: "inline-flex",
+                              alignItems: "center",
+                              justifyContent: "center"
+                            }}
+                            title="Adjuntar archivo"
+                          >
+                            <FaPaperclip size={14} />
+                          </button>
+                        </td>
+                        <td style={{ padding: "6px 8px", textAlign: "center" }}>
+                          <button
                             onClick={() => handleRemoveKPI(index)}
                             style={{ 
                               background: "none", 
@@ -348,6 +380,7 @@ export const ActivityUpdateModal: React.FC<ActivityUpdateModalProps> = ({
                             <FaTrash size={14} />
                           </button>
                         </td>
+
                       </tr>
                     ))}
                   </tbody>

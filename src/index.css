@@ -26,7 +26,10 @@
   --gradient-secondary: linear-gradient(180deg, #FFA500 0%, #FF4500 100%);
   --gradient-tertiary: linear-gradient(180deg, #D3CCFF 0%, #483D8B 100%);
   --gradient-quaternary: linear-gradient(180deg, #87CEEB 0%, #1E90FF 100%);
+  --gradient-quinary: linear-gradient(180deg, #F44336 0%, #D32F2F 100%);
 
+
+  
   /* Shadows */
   --shadow-sm: 0px 4px 4px #0001;
   --shadow-md: 0px 8px 8px #0001;

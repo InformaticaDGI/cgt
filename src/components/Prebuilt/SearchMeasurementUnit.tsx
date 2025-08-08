@@ -19,7 +19,6 @@ export const SearchMeasurementUnit = ({ onChange }: { onChange: (value: string) 
 
     return <InputSearch searchFunction={getMeasurementUnits}
         onChange={(value) => {
-            console.log(value)
             onChange(value)
         }} value={''} />
 }
