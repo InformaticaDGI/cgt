@@ -143,8 +143,11 @@ const LocationStep = () => {
                 onChange={(value) =>
                   formik.setFieldValue("acaProjectId", value)
                 }
+                areaId={formState.projectAreaId}
                 municipalityId={formik.values.municipalityId}
-                comunityId={formik.values.communityId}
+                communityCircuitId={formik.values.circuitCode}
+                sectorId={formik.values.communityId}
+                parrishId={formik.values.parrishId}
               />
             </FormControl>
           </GridItem>

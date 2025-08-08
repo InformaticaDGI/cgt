@@ -4,75 +4,73 @@ import axios from "axios";
 import type { KpiInstance } from "./useKpiInstances";
 
 export const useCreateProject = () => {
-    return useMutation({
-        mutationFn: async (data: CreateProjectFormValues) => {
-            const response = await createProject({
-                name: data.name,
-                secretaryId: data.secretaryId,
-                programId: data.programId,
-                kpiInstances: data.kpiInstances
-                    .map(kpi => ({
-                        expected: kpi.expectedValue,
-                        baseKpiId: kpi.kpiBaseId,
-                    })),
-                initialDate: data.initialDate,
-                finalDate: data.finalDate,
-                observations: data.observations,
-                parishId: data.parishId,
-                communityCircuitCode: data.communityCircuitCode,
-                areaId: data.areaId,
-                directLabor: data.directLabor,
-                indirectLabor: data.indirectLabor,
-                qualifiedLabor: data.qualifiedLabor,
-                unqualifiedLabor: data.unqualifiedLabor,
-                femaleLabor: data.femaleLabor,
-                maleLabor: data.maleLabor,
-                benefitedPopulation: data.benefitedPopulation,
-                benefitedChildren: data.benefitedChildren,
-                initialBudget: data.initialBudget,
-                initialBudgetUsd: data.initialBudgetUsd,
-                latitude: data.latitude,
-                longitude: data.longitude,
-                status: 'in_progress',
- 		        sectorId: data.sectorId,
-                budgetSourceId: data.budgetSourceId
-            })
-            return response
-        }
-    })
-}
+  return useMutation({
+    mutationFn: async (data: CreateProjectFormValues) => {
+      const response = await createProject({
+        name: data.name,
+        secretaryId: data.secretaryId,
+        programId: data.programId,
+        kpiInstances: data.kpiInstances.map((kpi) => ({
+          expected: kpi.expectedValue,
+          baseKpiId: kpi.kpiBaseId,
+        })),
+        initialDate: data.initialDate,
+        finalDate: data.finalDate,
+        observations: data.observations,
+        parishId: data.parishId,
+        communityCircuitCode: data.communityCircuitCode,
+        areaId: data.areaId,
+        acaProjectId: data.acaProjectId,
+        directLabor: data.directLabor,
+        indirectLabor: data.indirectLabor,
+        qualifiedLabor: data.qualifiedLabor,
+        unqualifiedLabor: data.unqualifiedLabor,
+        femaleLabor: data.femaleLabor,
+        maleLabor: data.maleLabor,
+        benefitedPopulation: data.benefitedPopulation,
+        benefitedChildren: data.benefitedChildren,
+        initialBudget: data.initialBudget,
+        initialBudgetUsd: data.initialBudgetUsd,
+        latitude: data.latitude,
+        longitude: data.longitude,
+        status: "in_progress",
+        sectorId: data.sectorId,
+        budgetSourceId: data.budgetSourceId,
+      });
+      return response;
+    },
+  });
+};
 
 type CreateProjectFormValues = {
-    name: string;
-    initialDate: string;
-    finalDate: string;
-    initialBudget: number;
-    initialBudgetUsd: number;
-    latitude: number;
-    longitude: number;
-    observations: string;
-    kpiInstances: KpiInstance[];
-    parishId: string;
-    communityCircuitCode: string;
-    secretaryId: string;
-    programId: string;
-    areaId: string[];
-    directLabor: number;
-    indirectLabor: number;
-    qualifiedLabor: number;
-    unqualifiedLabor: number;
-    femaleLabor: number;
-    maleLabor: number;
-    benefitedPopulation: number;
-    benefitedChildren: number;
-    sectorId: string;
-    budgetSourceId: string;
-}
+  name: string;
+  initialDate: string;
+  finalDate: string;
+  initialBudget: number;
+  initialBudgetUsd: number;
+  latitude: number;
+  longitude: number;
+  observations: string;
+  kpiInstances: KpiInstance[];
+  parishId: string;
+  communityCircuitCode: string;
+  secretaryId: string;
+  programId: string;
+  areaId: string[];
+  acaProjectId: string;
+  directLabor: number;
+  indirectLabor: number;
+  qualifiedLabor: number;
+  unqualifiedLabor: number;
+  femaleLabor: number;
+  maleLabor: number;
+  benefitedPopulation: number;
+  benefitedChildren: number;
+  sectorId: string;
+  budgetSourceId: string;
+};
 
 const createProject = async (data: any) => {
-    const response = await axios.post(`${config.apiUrl}/projects`, data)
-    return response.data
-}
-
-
-
+  const response = await axios.post(`${config.apiUrl}/projects`, data);
+  return response.data;
+};

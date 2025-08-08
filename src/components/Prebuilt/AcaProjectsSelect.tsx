@@ -1,27 +1,48 @@
 import { SearchableSelect } from "../Ui/Select/SearchableSelect";
 import { useAcaProjectsByFilter } from "../../hooks/queries/useAcaProjectsByFilter";
+import { useMemo, useState } from "react";
 
 export const AcaProjectsSelect = ({
   value,
   onChange,
-  comunityId,
+  areaId,
   municipalityId,
+  communityCircuitId,
+  sectorId,
   style,
 }: AcaProjectsSelectProps) => {
   const { data: acaProjects } = useAcaProjectsByFilter({
-    comunityId,
     municipalityId,
+    communityCircuitId,
+    sectorId,
   });
 
-  console.log("acaProjects", acaProjects?.data);
+  const [options, setOptions] = useState<{ label: string; value: string }[]>(
+    []
+  );
+
+  const setListOptionsFilter = () => {
+    const list = acaProjects?.data || [];
+    console.log("Areas", areaId);
+    const listOptions = list
+      .filter((item) => {
+        return areaId.includes(item.areaId) && municipalityId !== "";
+      })
+      .map((item) => ({
+        label: item.name,
+        value: item.id,
+      }));
+
+    setOptions(listOptions);
+  };
+
+  useMemo(() => {
+    setListOptionsFilter();
+  }, [acaProjects]);
+
   return (
     <SearchableSelect
-      options={
-        acaProjects?.data?.map((acaProject) => ({
-          label: acaProject.name,
-          value: acaProject.id,
-        })) || []
-      }
+      options={options}
       value={value}
       onChange={onChange}
       placeholder="Seleccione una comunidad"
@@ -33,7 +54,10 @@ export const AcaProjectsSelect = ({
 type AcaProjectsSelectProps = {
   value: string;
   onChange: (value: string) => void;
-  comunityId: string;
+  areaId: string[];
+  parrishId: string;
   municipalityId: string;
+  communityCircuitId: string;
+  sectorId: string;
   style?: React.CSSProperties;
 };

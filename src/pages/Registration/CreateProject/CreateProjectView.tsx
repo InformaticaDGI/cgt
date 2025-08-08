@@ -12,30 +12,35 @@ const stepperConfig = [
   {
     icon: <LuClipboardList style={{ width: "1.5em", height: "1.5m" }} />,
     title: "Información Básica",
-    done: false
+    done: false,
   },
   {
     icon: <LuMapPin style={{ width: "1.5em", height: "1.5m" }} />,
     title: "Ubicación Geográfica",
-    done: false
+    done: false,
   },
   {
     icon: <LuPackage style={{ width: "1.5em", height: "1.5m" }} />,
     title: "Recursos del Proyecto",
-    done: false
+    done: false,
   },
   {
     icon: <FaBullseye style={{ width: "1.5em", height: "1.5m" }} />,
     title: "Metas del Proyecto",
-    done: false
-  }
-]
-
-
+    done: false,
+  },
+];
 
 export default function CreateProjectView() {
   return (
-    <Flex $direction="column" $gap="12px" $padding="1rem" $align="stretch" $width='85vw' $position="relative">
+    <Flex
+      $direction="column"
+      $gap="12px"
+      $padding="1rem"
+      $align="stretch"
+      $width="85vw"
+      $position="relative"
+    >
       <Header />
       <Stepper config={stepperConfig}>
         <Stepper.Step>
