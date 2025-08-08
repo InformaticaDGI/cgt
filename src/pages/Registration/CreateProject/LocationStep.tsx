@@ -137,7 +137,7 @@ const LocationStep = () => {
             </FormControl>
           </GridItem>
           <GridItem $colSpan={24}>
-            <FormControl label="Projecto ACA">
+            <FormControl label="Proyecto ACA">
               <AcaProjectsSelect
                 value={formik.values.acaProjectId}
                 onChange={(value) =>
