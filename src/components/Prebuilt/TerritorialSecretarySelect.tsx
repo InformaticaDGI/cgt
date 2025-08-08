@@ -1,10 +1,10 @@
 import useTerritorialSecretaries from "../../hooks/useTerritorialSecretaries"
-import { Select } from "../Ui/Select/Select"
+import { SearchableSelect } from "../Ui/Select/SearchableSelect"
 
 
 export const TerritorialSecreatarySelect = ({ value, onChange }: TerritorialSecretarySelectProps) => {
     const { data: territorialSecretaries } = useTerritorialSecretaries()
-    return <Select options={territorialSecretaries} value={value} onChange={onChange} placeholder="Seleccione una secretaría" />
+    return <SearchableSelect options={territorialSecretaries} value={value} onChange={onChange} placeholder="Seleccione una secretaría" />
 }
 
 type TerritorialSecretarySelectProps = {

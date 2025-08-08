@@ -33,7 +33,8 @@ export const useCreateProject = () => {
                 initialBudget: data.initialBudget,
                 latitude: data.latitude,
                 longitude: data.longitude,
-                status: 'in_progress'
+                status: 'in_progress',
+ 		sectorId: data.sectorId
             })
             return response
         }
@@ -54,7 +55,7 @@ type CreateProjectFormValues = {
     communityCircuitCode: string;
     secretaryId: string;
     programId: string;
-    areaId: string;
+    areaId: string[];
     directLabor: number;
     indirectLabor: number;
     qualifiedLabor: number;
@@ -63,6 +64,7 @@ type CreateProjectFormValues = {
     maleLabor: number;
     benefitedPopulation: number;
     benefitedChildren: number;
+    sectorId: string;
 }
 
 const createProject = async (data: any) => {

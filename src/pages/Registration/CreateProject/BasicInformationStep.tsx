@@ -6,7 +6,7 @@ import { Grid, GridItem } from "../../../components/Layout/Grid"
 import { FormControl } from "../../../components/Ui/FormControl/FormControl"
 import { Input } from "../../../components/Ui/Input/Input"
 import { $TextArea } from "../../../components/Ui/TextArea/TextArea"
-import { AreaSelect } from "../../../components/Prebuilt/AreaSelect"
+import { AreaMultiSelect } from "../../../components/Prebuilt/AreaMultiSelect"
 import { useFormik } from "formik"
 import { useAppStore } from "../../../store/store"
 import { SecretarySelect } from "../../../components/Prebuilt/SecretarySelect"
@@ -24,7 +24,7 @@ const BasicInformation = () => {
         if (!values.initialDate) errors.initialDate = "La fecha de inicio es requerida";
         if (!values.finalDate) errors.finalDate = "La fecha de fin es requerida";
         if (values.initialDate > values.finalDate) errors.finalDate = "La fecha de fin debe ser mayor o igual a la fecha de inicio";
-        if (!values.areaId) errors.areaId = "El área es requerida";
+        if (!values.areaId || values.areaId.length === 0) errors.areaId = "El área es requerida";
         if (!values.description) errors.description = "La descripción es requerida";
         if (!values.parentId) errors.parentId = "La secretaría territorial es requerida";
         if (!values.secretaryId) errors.secretaryId = "La secretaría es requerida";
@@ -38,7 +38,7 @@ const BasicInformation = () => {
             name: formState.projectName,
             initialDate: formState.projectInitialDate,
             finalDate: formState.projectFinalDate,
-            areaId: formState.projectAreaId,
+            areaId: formState.projectAreaId || [],
             description: formState.projectDescription,
             parentId: formState.projectParentId,
             secretaryId: formState.projectSecretaryId,
@@ -113,8 +113,8 @@ const BasicInformation = () => {
                         </FormControl>
                     </GridItem>
                     <GridItem $colSpan={24} style={{ display: 'flex', justifyContent: 'center' }}>
-                        <FormControl label="Area" error={formik.errors.areaId && formik.touched.areaId ? formik.errors.areaId : undefined}>
-                            <AreaSelect value={formik.values.areaId} onChange={(value) => formik.setFieldValue("areaId", value)} />
+                        <FormControl label="Area" error={formik.errors.areaId && formik.touched.areaId ? formik.errors.areaId as string : undefined}>
+                            <AreaMultiSelect value={formik.values.areaId} onChange={(value) => formik.setFieldValue("areaId", value)} />
                         </FormControl>
                     </GridItem>
                     <GridItem $colSpan={24}>

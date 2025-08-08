@@ -1,0 +1,14 @@
+services:
+  app:
+    image: docker-registry.guarico.gob.ve/cgt:latest
+    container_name: cgt-production
+    restart: unless-stopped
+    ports:
+      - '5002:80'
+    networks:
+      - cgt-network-production
+
+networks:
+  cgt-network-production:
+    name: cgt-network-production
+    driver: bridge

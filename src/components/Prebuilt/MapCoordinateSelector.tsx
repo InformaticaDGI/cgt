@@ -1,4 +1,4 @@
-import { useRef, useMemo } from "react";
+import { useRef, useMemo, useEffect } from "react";
 import {
   MapContainer,
   TileLayer,
@@ -51,10 +51,15 @@ function LocationMarker({
   const { data: parrishes } = useParrishes(municipalityId ?? "");
   const { data: circuits } = useCommunityCircuitsByParish(parrishId ?? "");
 
+  useEffect(() => {
+    if (value) {
+      map.setView(value, 15, { animate: true });
+    }
+  }, [value, map]);
+
   useMapEvents({
     click(e) {
       onChange(e.latlng);
-      map.setView(e.latlng, 15);
     },
   });
 

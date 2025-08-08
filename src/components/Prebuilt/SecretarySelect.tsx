@@ -1,4 +1,4 @@
-import { Select } from "../Ui/Select/Select"
+import { SearchableSelect } from "../Ui/Select/SearchableSelect"
 import useSecretary from "../../hooks/useSecretary"
 import usePermisionTemp from "../../hooks/usePermisionTemp"
 
@@ -6,7 +6,7 @@ export const SecretarySelect = ({ value, onChange, rootOnly = false, parentId }:
     const { data: secretaries } = useSecretary({ rootOnly, parentId })
     const permissions = usePermisionTemp(rootOnly)
     const options = secretaries.filter(secretary => permissions.includes(secretary.value))
-    return <Select options={options} value={value} onChange={onChange} placeholder="Seleccione una secretaría" />
+    return <SearchableSelect options={options} value={value} onChange={onChange} placeholder="Seleccione una secretaría" />
 }
 
 type SecretarySelectProps = {

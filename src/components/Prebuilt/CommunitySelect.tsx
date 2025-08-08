@@ -1,9 +1,9 @@
-import { Select } from "../Ui/Select/Select";
+import { SearchableSelect } from "../Ui/Select/SearchableSelect"
 import { useCommunitiesByCircuit } from "../../hooks/queries/useCommunitiesByCircuit";
 
 export const CommunitySelect = ({ value, onChange, circuitCode, style }: CommunitySelectProps) => {
     const { data: communities } = useCommunitiesByCircuit(circuitCode);
-    return <Select options={communities?.map(community => ({ label: community.name, value: community.id })) || []} value={value} onChange={onChange} 
+    return <SearchableSelect options={communities?.map(community => ({ label: community.name, value: community.id })) || []} value={value} onChange={onChange} 
     placeholder="Seleccione una comunidad" style={style} />
 }
 
