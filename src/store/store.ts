@@ -25,9 +25,8 @@ interface FormState {
 
   // Budget
   projectBudgetSourceId: string;
-  projectBudget: string;
-  projectBudgetBs: string;
-  projectBudgetUsd: string;
+  projectInitialBudget: string;
+  projectInitialBudgetUsd: string;
   projectDirectLabor: string;
   projectIndirectLabor: string;
   projectQualifiedLabor: string;
@@ -55,7 +54,6 @@ const initialFormState: FormState = {
   projectLatitude: 9.9156947,
   projectLongitude: -67.3601931,
   projectBudgetSourceId: '',
-  projectBudget: '',
   projectDirectLabor: '',
   projectIndirectLabor: '',
   projectQualifiedLabor: '',
@@ -67,8 +65,8 @@ const initialFormState: FormState = {
   projectBenefitedChildren: '',
   projectMunicipalityId: '',
   projectCommunityId: '',
-  projectBudgetBs: '',
-  projectBudgetUsd: '',
+  projectInitialBudget: '',
+  projectInitialBudgetUsd: '',
 }
 
 

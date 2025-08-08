@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { Filter, FilterContainer } from "../Filter/Filter";
 import FilterHeader from "../Filter/FilterHeader";
-import { Search, Map, MapPin, MapPinned, Building, Network } from "lucide-react";
+import { Search, Map, MapPin, MapPinned, Building, Layers } from "lucide-react";
 import { useAppStore } from "../../store/store";
 import { SecretarySelect } from "./SecretarySelect";
 import { TerritorialSecreatarySelect } from "./TerritorialSecretarySelect";
@@ -26,7 +26,7 @@ const FilterTool = () => {
             <Container>
                 <Filter style={{ gridColumn: 'span 3' }}>
                     <FilterContainer>
-                        <FilterHeader icon={<Network color="white" height={"16px"} width={"16px"} />} fill="linear-gradient(180deg, #FFDEAD 0%, #A0522D 100%)">Secretaria Ejecutiva</FilterHeader>
+                        <FilterHeader icon={<Layers color="white" height={"16px"} width={"16px"} />} fill="linear-gradient(180deg,  #e94c6f 0%, #a72d73 100%)">Transformaciones</FilterHeader>
                         <SecretarySelect rootOnly onChange={(secretaryRootId) => store.setSecretaryRootId(secretaryRootId)} value={store.secretaryRootId} />
                     </FilterContainer>
                 </Filter>

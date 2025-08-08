@@ -29,12 +29,13 @@ export const useCreateProject = () => {
                 maleLabor: data.maleLabor,
                 benefitedPopulation: data.benefitedPopulation,
                 benefitedChildren: data.benefitedChildren,
-                // budgetSources: data.budgetSources,
                 initialBudget: data.initialBudget,
+                initialBudgetUsd: data.initialBudgetUsd,
                 latitude: data.latitude,
                 longitude: data.longitude,
                 status: 'in_progress',
- 		sectorId: data.sectorId
+ 		        sectorId: data.sectorId,
+                budgetSourceId: data.budgetSourceId
             })
             return response
         }
@@ -45,8 +46,8 @@ type CreateProjectFormValues = {
     name: string;
     initialDate: string;
     finalDate: string;
-    // budgetSources: BudgetSourceDto[];
     initialBudget: number;
+    initialBudgetUsd: number;
     latitude: number;
     longitude: number;
     observations: string;
@@ -65,6 +66,7 @@ type CreateProjectFormValues = {
     benefitedPopulation: number;
     benefitedChildren: number;
     sectorId: string;
+    budgetSourceId: string;
 }
 
 const createProject = async (data: any) => {

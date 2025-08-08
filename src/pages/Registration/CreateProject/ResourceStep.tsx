@@ -11,6 +11,7 @@ import { useAppStore } from "../../../store/store";
 import { CurrencyInput } from "../../../components/Prebuilt/CurrencyInput";
 import { useDollarRate } from "../../../hooks/useDollarRate";
 import { useEffect } from "react";
+import Text from "../../../components/Ui/Text/Text";
 
 const ResourceStep = () => {
   const { previousStep, nextStep } = useStepper();
@@ -25,12 +26,12 @@ const ResourceStep = () => {
     }
     
 
-    if(!values.budgetBs && values.budgetSourceId !== 'without-budget') {
-       errors.budgetBs = "Este campo es requerido";
+    if(!values.initialBudget && values.budgetSourceId !== 'without-budget') {
+       errors.initialBudget = "Este campo es requerido";
     }
 
-    if(!values.budgetUsd && values.budgetSourceId !== 'without-budget') {
-       errors.budgetUsd = "Este campo es requerido";
+    if(!values.initialBudgetUsd && values.budgetSourceId !== 'without-budget') {
+       errors.initialBudgetUsd = "Este campo es requerido";
     }
     
 
@@ -58,15 +59,15 @@ const ResourceStep = () => {
     return errors;
   }
 
-  const handleChangeBs = (value: string) => {
-    formik.setFieldValue("budgetBs", value)
+  const handleChangeSource = (value: string) => {
+    formik.setFieldValue("initialBudget", value)
   }
 
   const formik = useFormik({
     initialValues: {
       budgetSourceId: formState.projectBudgetSourceId,
-      budgetBs: formState.projectBudgetBs,
-      budgetUsd: formState.projectBudgetUsd,
+      initialBudget: formState.projectInitialBudget || '',
+      initialBudgetUsd: formState.projectInitialBudgetUsd || '',
       qualifiedLabor: formState.projectQualifiedLabor,
       unqualifiedLabor: formState.projectUnqualifiedLabor,
       indirectLabor: formState.projectIndirectLabor,
@@ -79,8 +80,8 @@ const ResourceStep = () => {
       setFormState({
         ...formState,
         projectBudgetSourceId: values.budgetSourceId,
-        projectBudgetBs: values.budgetBs,
-        projectBudgetUsd: values.budgetUsd,
+        projectInitialBudget: values.initialBudget,
+        projectInitialBudgetUsd: values.initialBudgetUsd,
         projectQualifiedLabor: values.qualifiedLabor,
         projectUnqualifiedLabor: values.unqualifiedLabor,
         projectIndirectLabor: values.indirectLabor,
@@ -95,14 +96,14 @@ const ResourceStep = () => {
   });
 
   useEffect(() => {
-    if (dollarRate && formik.values.budgetBs) {
-      const budgetBs = parseFloat(formik.values.budgetBs.replace(/\./g, '').replace(',', '.'));
+    if (dollarRate && formik.values.initialBudget) {
+      const budgetBs = parseFloat(formik.values.initialBudget.replace(/\./g, '').replace(',', '.'));
       if (!isNaN(budgetBs)) {
         const usdAmount = (budgetBs / dollarRate).toFixed(2);
-        formik.setFieldValue('budgetUsd', usdAmount.replace('.', ','));
+        formik.setFieldValue('initialBudgetUsd', usdAmount.replace('.', ','));
       }
     }
-  }, [formik.values.budgetBs, dollarRate]);
+  }, [formik.values.initialBudget, dollarRate]);
 
 
   return (
@@ -110,7 +111,7 @@ const ResourceStep = () => {
       <Card $isSelectable={false} $padding="32px">
         <Grid $columns="repeat(24, 1fr)" $gap="12px" $width="100%">
           <GridItem $colSpan={24}>
-            <h3 style={{ marginBottom: 8, color: '#222E3A', fontWeight: 600, fontSize: 18 }}>Fondos</h3>
+            <Text $fontSize="14px" $color="#2d2d2d">Fondos</Text>
           </GridItem>
           <GridItem $colSpan={12}>
             <FormControl label="Origen de los fondos" required error={formik.errors.budgetSourceId && formik.touched.budgetSourceId ? formik.errors.budgetSourceId : undefined}>
@@ -121,11 +122,11 @@ const ResourceStep = () => {
             </FormControl>
           </GridItem>
           <GridItem $colSpan={6}>
-            <FormControl label="Presupuesto (Bs)" required={formik.values.budgetSourceId !== "without-budget"} error={formik.errors.budgetBs && formik.touched.budgetBs ? formik.errors.budgetBs : undefined}>
+            <FormControl label="Presupuesto (Bs)" required={formik.values.budgetSourceId !== "without-budget"} error={formik.errors.initialBudget && formik.touched.initialBudget ? formik.errors.initialBudget : undefined}>
               <CurrencyInput
-                name="budgetBs"
-                value={formik.values.budgetBs}
-                onChange={handleChangeBs}
+                name="initialBudget"
+                value={formik.values.initialBudget}
+                onChange={handleChangeSource}
                 placeholder="0,00"
                 maxLength={20}
                 disabled={formik.values.budgetSourceId === "without-budget"}
@@ -133,11 +134,11 @@ const ResourceStep = () => {
             </FormControl>
           </GridItem>
           <GridItem $colSpan={6}>
-            <FormControl label="Presupuesto (USD)" required={formik.values.budgetSourceId !== "without-budget"} error={formik.errors.budgetUsd && formik.touched.budgetUsd ? formik.errors.budgetUsd : undefined}>
+            <FormControl label="Presupuesto (USD)" required={formik.values.budgetSourceId !== "without-budget"} error={formik.errors.initialBudgetUsd && formik.touched.initialBudgetUsd ? formik.errors.initialBudgetUsd : undefined}>
               <CurrencyInput
-                name="budgetUsd"
-                value={formik.values.budgetUsd}
-                onChange={(value) => formik.setFieldValue("budgetUsd", value)}
+                name="initialBudgetUsd"
+                value={formik.values.initialBudgetUsd}
+                onChange={(value) => formik.setFieldValue("initialBudgetUsd", value)}
                 placeholder="0,00"
                 maxLength={20}
 		disabled={formik.values.budgetSourceId === "without-budget"}
@@ -145,7 +146,7 @@ const ResourceStep = () => {
             </FormControl>
           </GridItem>
           <GridItem $colSpan={24}>
-            <h3 style={{ margin: '24px 0 8px 0', color: '#222E3A', fontWeight: 600, fontSize: 18 }}>Cantidad de mano de obra</h3>
+            <Text $fontSize="14px" $color="#2d2d2d">Cantidad de mano de obra</Text>
           </GridItem>
           <GridItem $colSpan={6}>
             <FormControl label="Calificada" required error={formik.errors.qualifiedLabor && formik.touched.qualifiedLabor ? formik.errors.qualifiedLabor : undefined}>
@@ -194,7 +195,7 @@ const ResourceStep = () => {
             </FormControl>
           </GridItem>
           <GridItem $colSpan={24}>
-            <h3 style={{ margin: '24px 0 8px 0', color: '#222E3A', fontWeight: 600, fontSize: 18 }}>Cantidad de personal</h3>
+            <Text $fontSize="14px" $color="#2d2d2d">Cantidad de personal</Text>
           </GridItem>
           <GridItem $colSpan={6}>
             <FormControl label="Mujeres" required error={formik.errors.femaleLabor && formik.touched.femaleLabor ? formik.errors.femaleLabor : undefined}>

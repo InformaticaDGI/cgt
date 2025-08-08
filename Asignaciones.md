@@ -3,27 +3,39 @@
 ### Salvador Ron
 
 ---
-> Generación de Reporte del Proyecto ( PDF )
+- Actividades:
+    - Frontend: 
+        - Agregar entrada para adjuntar imagenes por cada actividad (2 Inicio | 2 Durante | 2 Después)
+        - Actualizar el botón de la ficha en PDF
+        - Agregar unidad de medida en la ficha 
+    - Backend: Agregar acción para subir imagenes 
 ---
 
 ### José Segovia
 
-> Incluir filtros al proyecto por:
->1. Comunidades
->2. Circuitos
+- ACA:
+    - Frontend: 
+        - Agregar indicadores para los ACA (Transformaciones -> ACA -> Comunidad)
+        - Reparar permisos de los filtros
+        - Actualizar metas del proyecto para que se puedan actualizar y/o eliminar si se ha creado recientemente (sin uso *)
+
 ---
 ### Erik Zerpa
-
-> Agregar MediaQuerys para pantallas pequeñas (Dispositivos Móviles) en todos los modulos del sistema.
+- Actividades
+    - Actualizar Asignación de valores
+        - Eliminar titulo del nombre
+        - Actualizar el selector de kpi -> listar todos los kpi (metas) en tabla con scroll automatico
+        - Actualizar kpi por meta
+>[!Important]
+>Enviar y/o actulizar solo aquellas metas que sean diferentes a cero.
+        
 
 ### Jesús Medina
 
->Arreglar Fallo que impide que se actualize el valor actual de la meta en las actividades
+- ACA:
+    - Backend: Agregar Modelado y Consultas
+    - Frontend: 
+        - Crear Registro de autogestión para el ACA
+        - Agregar Buscador de ACA en registro del proyecto
+        - Agregar Contacto en ACA, Proyecto, listar contactos
 
->Ajustar Vista del Panel para el proyecto:
- >- Planificación
- >- Actividades
- >- Diagrama de Gantt
- >- Indicadores
- >- Ubicación
- >- Punto y Circulo   

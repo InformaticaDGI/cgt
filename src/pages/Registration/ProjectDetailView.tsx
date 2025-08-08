@@ -15,10 +15,13 @@ import { GobMap } from "../../components/Map/map.components";
 import { Button } from "../../components/Ui/Button/Button";
 import PDFModel from "../../components/PDFModel/PDFModel";
 import { BlobProvider } from "@react-pdf/renderer";
+import { FaFilePdf } from "react-icons/fa6";
 
 export default function ProjectDetailView() {
   const { projectId } = useParams();
   const { data: project, isLoading, error } = useProject(projectId);
+
+
 
   // No state needed here anymore as it's all in the ProjectActivities component
 
@@ -36,6 +39,8 @@ export default function ProjectDetailView() {
     anchor.click();
     window.URL.revokeObjectURL(url);
   }
+
+  const projectBudget = project.projectBudget[0] || { budgetSource: { name: 'SIN FONDOS' } }
 
   return (
     <Flex $direction="column" $gap="16px" $padding="32px 24px" className="project-detail-container">
@@ -93,15 +98,15 @@ export default function ProjectDetailView() {
             municipality={project.parish.municipality.name}
             startDate={project.initialDate}
             endDate={project.finalDate}
-            territorialSecretary={"Eje 1"}
-            community="23 DE ENERO"
-            circuit="CIRCUITO 14 DE MARZO"
-            kpiInstances={[]}
+            territorialSecretary={project.parish.municipality.territorialSecretary.name}
+            community={project.sector.name}
+            circuit={project.sector.communityCircuit.name}
+            kpiInstances={project.kpiInstances}
             beneficitPopulation={project.benefitedPopulation}
             beneficitChildren={project.benefitedChildren}
-            budgetSource="Recursos Ordinarios"
-            budgetInVES="0,00"
-            budgetInUSD="0,00"
+            budgetSource={projectBudget.budgetSource.name}
+            budgetInVES={project.initialBudget.toString()}
+            budgetInUSD={project.initialBudgetUsd.toString()}
             coordinate={`Latitud: ${project.latitude}, Longitud: ${project.longitude}`}
             directLabor={project.directLabor}
             indirectLabor={project.indirectLabor}
@@ -109,10 +114,13 @@ export default function ProjectDetailView() {
             femaleLabor={project.femaleLabor}
             qualifiedLabor={project.qualifiedLabor}
             unqualifiedLabor={project.unqualifiedLabor}
-            projectToken={projectToken} />}
-
+            projectToken={projectToken}
+            scheduledActivities={project.scheduledActivities}
+          />}
           >
-            {({ blob }) => <Button $variant="primary" $size="small" onClick={() => downloadPDF(blob)}>Descargar PDF</Button>}
+            {({ blob }) => <Button style={{ width: '80px', backgroundColor: '#ffffff' }} $size="small" onClick={() => downloadPDF(blob)}>
+              <FaFilePdf fill="red" size={20} />
+            </Button>}
           </BlobProvider>
         </Flex>
       </div>

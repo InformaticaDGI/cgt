@@ -11,6 +11,7 @@ import { useFormik } from "formik"
 import { useAppStore } from "../../../store/store"
 import { SecretarySelect } from "../../../components/Prebuilt/SecretarySelect"
 import { ProgramSelect } from "../../../components/Prebuilt/ProgramSelect"
+import Text from "../../../components/Ui/Text/Text"
 
 const BasicInformation = () => {
 
@@ -66,11 +67,11 @@ const BasicInformation = () => {
             <Card $isSelectable={false} $padding="32px">
                 <Grid $columns="repeat(24, 1fr)" $gap="12px" $width="100%">
                     <GridItem $colSpan={24}>
-                        <h3 style={{ color: "var(--text-secondary)", marginBottom: "12px" }}>Información Básica</h3>
+                    <Text $fontSize="14px" $color="#2d2d2d">Información del Proyecto</Text>
                     </GridItem>
 
                     <GridItem $colSpan={12}>
-                        <FormControl label="Secretaría territorial" required error={formik.errors.parentId && formik.touched.parentId ? formik.errors.parentId : undefined}>
+                        <FormControl label="Transformación" required error={formik.errors.parentId && formik.touched.parentId ? formik.errors.parentId : undefined}>
                             <SecretarySelect rootOnly value={formik.values.parentId} onChange={(value) => formik.setFieldValue('parentId', value)} />
                         </FormControl>
                     </GridItem>

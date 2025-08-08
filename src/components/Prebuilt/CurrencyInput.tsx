@@ -10,7 +10,7 @@ type CurrencyInputProps = {
     disabled?: boolean;
 };
 
-function formatCurrencyBdv(rawValue: string) {
+export function formatCurrencyBdv(rawValue: string) {
     // Elimina todo lo que no sea número
     let clean = rawValue.replace(/\D/g, "");
 
