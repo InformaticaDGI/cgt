@@ -88,8 +88,6 @@ export default function ProjectDetailView() {
         flexDirection: "row",
       }} className="project-tabs">
         <Flex $direction="row" $gap="40px" $justify="start">
-          <Text $fontSize="12px" $fontWeight="500">Actividades</Text>
-          <Text $fontSize="12px" $fontWeight="500">Punto y Circulo</Text>
           <BlobProvider document={<PDFModel
             projectName={project.name}
             projectDescription={project.observations}
@@ -124,34 +122,34 @@ export default function ProjectDetailView() {
           </BlobProvider>
         </Flex>
       </div>
-      <Grid $columns="repeat(30, 1fr)" className="project-indicators-grid">
-        <GridItem $colSpan={10} style={{ height: '250px' }} className="indicator-card">
+      <Grid $columns="repeat(30, 1fr)" $justify="space-between" className="project-indicators-grid">
+        <GridItem $colSpan={10} $colSpanSm={30} $colSpanXs={30} style={{ height: '250px' }} className="indicator-card">
           <Card $isSelectable={false}>
             <CardHeader>
-              <Text style={{ fontSize: '14px', fontWeight: 'normal', textWrap: 'nowrap', textAlign: 'justify' }}>Indicador de Meta</Text>
+              <Text $fontSize="14px" $color="var(--primary)">Metas</Text>
             </CardHeader>
             <CardBody style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-              <IndicatorProgress value={30} strokeWidth={14} size={160} textSize={18} />
+              <IndicatorProgress overrideProgressColor="var(--primary)" value={30} strokeWidth={14} size={160} textSize={18} />
             </CardBody>
           </Card>
         </GridItem>
-        <GridItem $colSpan={10} style={{ height: '250px' }} className="indicator-card">
+        <GridItem $colSpan={10} $colSpanSm={30} $colSpanXs={30} style={{ height: '250px' }} className="indicator-card">
           <Card $isSelectable={false}>
             <CardHeader>
-              <Text style={{ fontSize: '14px', fontWeight: 'normal', textWrap: 'nowrap', textAlign: 'justify' }}>Indicador de Eficiencia</Text>
+              <Text $fontSize="14px" $color="var(--primary)">Eficiencia</Text>
             </CardHeader>
             <CardBody style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-              <IndicatorProgress value={100} strokeWidth={14} size={160} textSize={18} />
+              <IndicatorProgress overrideProgressColor="var(--primary)" value={100} strokeWidth={14} size={160} textSize={18} />
             </CardBody>
           </Card>
         </GridItem>
-        <GridItem $colSpan={10} style={{ height: '250px' }} className="indicator-card">
+        <GridItem $colSpan={10} $colSpanSm={30} $colSpanXs={30} style={{ height: '250px' }} className="indicator-card">
           <Card $isSelectable={false}>
             <CardHeader>
-              <Text style={{ fontSize: '14px', fontWeight: 'normal', textWrap: 'nowrap', textAlign: 'justify' }}>Eficacia</Text>
+              <Text $fontSize="14px" $fontWeight="500" $color="var(--primary)">Eficacia</Text>
             </CardHeader>
             <CardBody style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-              <IndicatorProgress value={74} strokeWidth={14} size={160} textSize={18} />
+              <IndicatorProgress overrideProgressColor="var(--primary)" value={74} strokeWidth={14} size={160} textSize={18} />
             </CardBody>
           </Card>
         </GridItem>
@@ -161,7 +159,7 @@ export default function ProjectDetailView() {
             <GanttChart activities={project.scheduledActivities} />
           </Card>
         </GridItem>
-        <GridItem $colSpan={16}>
+        <GridItem $colSpan={16} $colSpanSm={30} $colSpanXs={30}>
           <Card $isSelectable={false}>
             <ProjectActivities
               projectId={projectId}
@@ -174,7 +172,7 @@ export default function ProjectDetailView() {
             />
           </Card>
         </GridItem>
-        <GridItem $colSpan={16}>
+        <GridItem $colSpan={16} $colSpanSm={30} $colSpanXs={30}>
           <Card $isSelectable={false} $height="300px">
             <CardHeader>
               <Text style={{ fontSize: '14px', fontWeight: 'normal', textWrap: 'nowrap', textAlign: 'justify' }}>Ubicaciónes del proyecto</Text>

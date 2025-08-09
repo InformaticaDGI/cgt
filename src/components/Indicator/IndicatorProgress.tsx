@@ -2,7 +2,16 @@ import styled from "styled-components";
 import CircularProgress from "../Ui/CircularProgress/CircularProgress"
 import { toHexColor, type Color } from "../../utils/libs";
 
-const IndicatorProgress = ({ value, size = 180, strokeWidth = 10, textSize = 20, backgroundColor = "#F3F4F6" }: { value: number, size?: number, strokeWidth?: number, textSize?: number, backgroundColor?: string }) => {
+type IndicatorProgressProps = {
+  value: number,
+  size?: number,
+  strokeWidth?: number,
+  textSize?: number,
+  backgroundColor?: string
+  overrideProgressColor?: string
+}
+
+const IndicatorProgress = ({ value, size = 180, strokeWidth = 10, textSize = 20, backgroundColor = "#F3F4F6", overrideProgressColor }: IndicatorProgressProps) => {
 
   const colors: Array<Color> = [
     { min: 0, max: 59, color: "#DC2626" },
@@ -10,7 +19,7 @@ const IndicatorProgress = ({ value, size = 180, strokeWidth = 10, textSize = 20,
     { min: 100, max: 100, color: "#14AE5C" }
   ]
 
-  const progressColor = toHexColor(colors, value);
+  const progressColor = overrideProgressColor || toHexColor(colors, value);
 
   return (
     <StyledProgressIndicator>

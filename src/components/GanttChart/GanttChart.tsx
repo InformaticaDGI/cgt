@@ -153,6 +153,7 @@ const TaskBar = styled.div<TaskBarProps>`
   &:hover {
     width: 100%;
     left: 0;
+    z-index: 100;
   }
 `;
 
@@ -215,14 +216,12 @@ const GanttChart: React.FC<{ activities: Activity[] }> = ({ activities }: { acti
     return { left, width };
   };
 
-  // Calculate the position of the current day line
   const today = new Date();
-  today.setHours(0, 0, 0, 0); // Normalize to start of day
+  today.setHours(0, 0, 0, 0);
   const currentDayOffsetDays = getDaysBetween(minDate, today);
-  const currentDayLineLeft = currentDayOffsetDays * (100 / timelineDates.length); // 29px is dayWidth
+  const currentDayLineLeft = (currentDayOffsetDays + 2) * (100 / timelineDates.length);
 
-  // Calculate the height of the current day line to span the entire chart area
-  const chartHeight = tasks.length * 40; // 40px is the vertical spacing between tasks
+  const chartHeight = tasks.length * 40;
 
 
   return (
@@ -266,7 +265,7 @@ const GanttChart: React.FC<{ activities: Activity[] }> = ({ activities }: { acti
               )}
               {tasks
                 .sort((a: Task, b: Task) => {
-                  return new Date(a.startDate).getDay() - new Date(b.startDate).getDay()
+                  return new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
                 })
                 .map((task: Task, i: number) => {
                   const { left, width } = calculateTaskBarProps(task, (100 / timelineDates.length));

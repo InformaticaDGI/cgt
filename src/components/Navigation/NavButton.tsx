@@ -2,11 +2,11 @@ import styled from "styled-components"
 import type { NavButtonProps } from "./config"
 
 const NavButton = ({ item }: { item: NavButtonProps }) => {
-    const Icon = item.icon; 
+    const Icon = item.icon;
     return (
         <StyledNavLink onClick={item.onClick}>
             <IconWrapper >
-                <Icon />
+                {Icon && <Icon />}
             </IconWrapper>
             <StyledLink>{item.label}</StyledLink>
         </StyledNavLink>
