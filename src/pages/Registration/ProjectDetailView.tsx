@@ -11,6 +11,8 @@ import CardHeader from "../../components/Card/CardHeader";
 import CardBody from "../../components/Card/CardBody";
 import IndicatorProgress from "../../components/Indicator/IndicatorProgress";
 import DownloadPDF from "../../components/DownloadPDF/DownloadPDF";
+import GanttChart from "../../components/GanttChart/GanttChart";
+import { GobMap } from "../../components/Map/map.components";
 
 export default function ProjectDetailView() {
   const { projectId } = useParams();
@@ -38,7 +40,7 @@ export default function ProjectDetailView() {
         gap: 40
       }} className="project-header">
         <Text $fontSize="20px" $fontWeight="500" className="project-header-title">{project.name}</Text>
-        <div style={{ display: "flex", flexDirection: "row", gap: 40 }} className="project-header-dates">
+        <div style={{ display: "flex", flexDirection: "row", gap: 40, flex: 1 }} className="project-header-dates">
           <div style={{ display: "flex", alignItems: "center" }} className="project-header-date">
             <FaCalendarAlt size={18} style={{ color: "#16a085", marginRight: 12 }} />
             <div>
@@ -55,20 +57,12 @@ export default function ProjectDetailView() {
               <Text $fontSize="12px" $fontWeight="600">
                 {project.finalDate ? new Date(project.finalDate).toISOString().split('T')[0] : ''}
               </Text>
+
             </div>
           </div>
+
         </div>
-      </div>
-      <div style={{
-        background: "#fff",
-        borderRadius: 12,
-        boxShadow: "var(--shadow-sm)",
-        padding: 16,
-        width: "100%",
-        display: "flex",
-        flexDirection: "row",
-      }} className="project-tabs">
-        <Flex $direction="row" $gap="40px" $justify="end" $align="center">
+        <Flex $direction="row" $justify="end" $align="center" style={{ flex: 1 }}>
           <DownloadPDF project={project} />
         </Flex>
       </div>
@@ -103,13 +97,13 @@ export default function ProjectDetailView() {
             </CardBody>
           </Card>
         </GridItem>
-        <GridItem $colSpan={32} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        <GridItem $colSpan={30} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <Card $isSelectable={false}>
             <Text style={{ fontSize: '14px', fontWeight: 'normal', textWrap: 'nowrap', textAlign: 'justify' }}>Diagrama de Gantt</Text>
             <GanttChart activities={project.scheduledActivities} />
           </Card>
         </GridItem>
-        <GridItem $colSpan={16} $colSpanSm={30} $colSpanXs={30}>
+        <GridItem $colSpan={15} $colSpanSm={30} $colSpanXs={30}>
           <Card $isSelectable={false}>
             <ProjectActivities
               projectId={projectId}
@@ -122,7 +116,7 @@ export default function ProjectDetailView() {
             />
           </Card>
         </GridItem>
-        <GridItem $colSpan={16} $colSpanSm={30} $colSpanXs={30}>
+        <GridItem $colSpan={15} $colSpanSm={30} $colSpanXs={30}>
           <Card $isSelectable={false} $height="300px">
             <CardHeader>
               <Text style={{ fontSize: '14px', fontWeight: 'normal', textWrap: 'nowrap', textAlign: 'justify' }}>Ubicaciónes del proyecto</Text>

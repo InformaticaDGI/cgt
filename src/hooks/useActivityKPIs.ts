@@ -7,6 +7,16 @@ export interface KPI {
   name: string;
   measurementId: string;
   areaId: string;
+  measurement: Measurement;
+}
+
+export interface Measurement {
+  id: string;
+  name: string;
+  symbol: string;
+  description: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface KPIInstanceWithKPI {
@@ -50,7 +60,7 @@ export const useProjectKPIs = (projectId: string | undefined) => {
       if (!projectId) return { kpis: [], instances: [] };
       
       // Consultar KPIs disponibles y sus instancias usando el endpoint proporcionado
-      const response = await axios.get(`${config.apiUrl}/projects/${projectId}?include=kpiinstances.kpi`);
+      const response = await axios.get(`${config.apiUrl}/projects/${projectId}?include=kpiinstances.kpi.measurement`);
       console.log('Respuesta de KPIs:', response.data);
       
       // Extraer las instancias de KPI con su información de KPI asociada
@@ -62,7 +72,15 @@ export const useProjectKPIs = (projectId: string | undefined) => {
         kpiId: instance.kpiId,
         name: instance.kpi?.name || 'KPI sin nombre',
         value: instance.value || '0',
-        expected: instance.expected || '100'
+        expected: instance.expected || '100',
+        measurement: instance.kpi?.measurement || {
+          id: '',
+          name: '',
+          symbol: '',
+          description: '',
+          createdAt: '',
+          updatedAt: ''
+        }
       }));
       
       console.log('KPIs disponibles mapeados:', availableKPIs);

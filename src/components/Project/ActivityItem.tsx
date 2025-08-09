@@ -58,7 +58,7 @@ export const ActivityItem: React.FC<ActivityItemProps> = ({ activity, isLast, pr
           <Text $fontSize="14px" $fontWeight="500">
             {activity.name}
           </Text>
-          <Grid $columns="repeat(3, 1fr)" $gap="5px" $columnsXs="repeat(1, 1fr)" $columnsSm="repeat(1, 1fr)" $columnsMd="repeat(1, 1fr)" $columnsLg="repeat(1, 1fr)" $columnsXl="repeat(1, 1fr)">
+          <Grid $columns="repeat(3, 1fr)" $paddingBottom="10px" $gap="5px" $columnsXs="repeat(1, 1fr)" $columnsSm="repeat(1, 1fr)" $columnsMd="repeat(1, 1fr)" $columnsLg="repeat(1, 1fr)" $columnsXl="repeat(1, 1fr)">
             <GridItem style={{ display: "flex", alignItems: "center", gap: "5px" }}>
               <FaCalendarAlt size={12} color="#16a085" />
               <span>Inicio: {formatDate(activity.startDate)}</span>
