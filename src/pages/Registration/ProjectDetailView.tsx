@@ -10,12 +10,7 @@ import Card from "../../components/Card/Card";
 import CardHeader from "../../components/Card/CardHeader";
 import CardBody from "../../components/Card/CardBody";
 import IndicatorProgress from "../../components/Indicator/IndicatorProgress";
-import GanttChart from "../../components/GanttChart/GanttChart";
-import { GobMap } from "../../components/Map/map.components";
-import { Button } from "../../components/Ui/Button/Button";
-import PDFModel from "../../components/PDFModel/PDFModel";
-import { BlobProvider } from "@react-pdf/renderer";
-import { FaFilePdf } from "react-icons/fa6";
+import DownloadPDF from "../../components/DownloadPDF/DownloadPDF";
 
 export default function ProjectDetailView() {
   const { projectId } = useParams();
@@ -27,20 +22,6 @@ export default function ProjectDetailView() {
 
   if (isLoading) return <div>Cargando...</div>;
   if (error || !project) return <div>Error al cargar el proyecto</div>;
-
-  const projectToken = (projectId?.slice(0, 6) || "").toUpperCase()
-
-  const downloadPDF = async (blob: Blob | null) => {
-    if (!blob) return;
-    const url = URL.createObjectURL(blob);
-    const anchor = document.createElement("a");
-    anchor.href = url;
-    anchor.download = `ficha_${projectToken}.pdf`;
-    anchor.click();
-    window.URL.revokeObjectURL(url);
-  }
-
-  const projectBudget = project.projectBudget[0] || { budgetSource: { name: 'SIN FONDOS' } }
 
   return (
     <Flex $direction="column" $gap="16px" $padding="32px 24px" className="project-detail-container">
@@ -87,39 +68,8 @@ export default function ProjectDetailView() {
         display: "flex",
         flexDirection: "row",
       }} className="project-tabs">
-        <Flex $direction="row" $gap="40px" $justify="start">
-          <BlobProvider document={<PDFModel
-            projectName={project.name}
-            projectDescription={project.observations}
-            status={project.status}
-            parish={project.parish.name}
-            municipality={project.parish.municipality.name}
-            startDate={project.initialDate}
-            endDate={project.finalDate}
-            territorialSecretary={project.parish.municipality.territorialSecretary.name}
-            community={project.sector.name}
-            circuit={project.sector.communityCircuit.name}
-            kpiInstances={project.kpiInstances}
-            beneficitPopulation={project.benefitedPopulation}
-            beneficitChildren={project.benefitedChildren}
-            budgetSource={projectBudget.budgetSource.name}
-            budgetInVES={project.initialBudget.toString()}
-            budgetInUSD={project.initialBudgetUsd.toString()}
-            coordinate={`Latitud: ${project.latitude}, Longitud: ${project.longitude}`}
-            directLabor={project.directLabor}
-            indirectLabor={project.indirectLabor}
-            maleLabor={project.maleLabor}
-            femaleLabor={project.femaleLabor}
-            qualifiedLabor={project.qualifiedLabor}
-            unqualifiedLabor={project.unqualifiedLabor}
-            projectToken={projectToken}
-            scheduledActivities={project.scheduledActivities}
-          />}
-          >
-            {({ blob }) => <Button style={{ width: '80px', backgroundColor: '#ffffff' }} $size="small" onClick={() => downloadPDF(blob)}>
-              <FaFilePdf fill="red" size={20} />
-            </Button>}
-          </BlobProvider>
+        <Flex $direction="row" $gap="40px" $justify="end" $align="center">
+          <DownloadPDF project={project} />
         </Flex>
       </div>
       <Grid $columns="repeat(30, 1fr)" $justify="space-between" className="project-indicators-grid">

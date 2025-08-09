@@ -9,6 +9,10 @@ import { FaPlus, FaTrash } from 'react-icons/fa';
 import type { Activity } from '../../hooks/useActivities';
 import { $TextArea } from '../Ui/TextArea/TextArea';
 import { useProjectKPIs, useUpdateActivityKPIs, type KPI, type KPIInstance, type KPIResult } from '../../hooks/useActivityKPIs';
+import { FaPaperclip } from 'react-icons/fa6';
+import ImageSelector from '../ImageSelector/ImageSelector';
+import { useUploadFiles } from '../../hooks/mutations/useUploadFiles';
+import ProgressBar from '../Ui/ProgressBar/ProgressBar';
 
 interface ActivityUpdateModalProps {
   isOpen: boolean;
@@ -30,7 +34,7 @@ export const ActivityUpdateModal: React.FC<ActivityUpdateModalProps> = ({
     setKpiValues({});
     setObservations('');
     setError('');
-    
+
     // Llamar a la función onClose proporcionada por el componente padre
     // Usamos setTimeout para asegurar que se ejecute después del ciclo de renderizado actual
     setTimeout(() => {
@@ -38,14 +42,21 @@ export const ActivityUpdateModal: React.FC<ActivityUpdateModalProps> = ({
       onClose();
     }, 0);
   };
+  const [startFiles, setStartFiles] = useState<File[]>([]);
+  const [middleFiles, setMiddleFiles] = useState<File[]>([]);
+  const [endFiles, setEndFiles] = useState<File[]>([]);
 
   // Estado para manejar los valores de todos los KPIs
   const [kpiValues, setKpiValues] = useState<Record<string, string>>({});
   const [observations, setObservations] = useState<string>('');
   const [error, setError] = useState<string>('');
+  const [uploadProgress, setUploadProgress] = useState<number>(0);
 
   // Consultar KPIs disponibles y las instancias existentes
   const { data: kpiData } = useProjectKPIs(isOpen ? projectId : undefined);
+  const { mutateAsync: uploadFiles, isPending: isUploading } = useUploadFiles((progress) => {
+    setUploadProgress(progress);
+  });
 
   // Mutación para guardar las actualizaciones
   const { mutateAsync: updateActivity, isPending: isSubmitting } = useUpdateActivityKPIs();
@@ -88,11 +99,86 @@ export const ActivityUpdateModal: React.FC<ActivityUpdateModalProps> = ({
     return value.replace(/\./g, '');
   };
 
+  // Agregar un KPI a la lista seleccionada
+  const handleAddKPI = () => {
+    if (!currentKPI || !currentValue) return;
+    
+    const kpi = availableKPIs.find(k => k.id === currentKPI);
+    if (!kpi) return;
+    
+    // Verificar si ya existe este KPI en la lista seleccionada
+    if (selectedKPIs.some(k => k.id === currentKPI)) {
+      setError('Este KPI ya está en la lista');
+      return;
+    }
+    
+    // Crear una nueva instancia de KPI con los datos seleccionados
+    const newKPI: KPIInstance = {
+      id: kpi.id,
+      kpiId: kpi.id, // Usar el id como kpiId
+      value: currentValue,
+      expected: '100',
+      kpi: {
+        id: kpi.id,
+        name: kpi.name,
+        measurementId: '',
+        areaId: ''
+      }
+    };
+    
+    setSelectedKPIs([...selectedKPIs, newKPI]);
+    
+    // Actualizar la lista de KPIs disponibles
+    setAvailableKPIs(availableKPIs.filter(k => k.id !== currentKPI));
+    
+    setCurrentKPI('');
+    setCurrentValue('');
+    setError('');
+  };
+
+  // Eliminar un KPI de la lista seleccionada
+  const handleRemoveKPI = (index: number) => {
+    const kpiToRemove = selectedKPIs[index];
+    
+    // Si el KPI eliminado tiene un kpi asociado, devolverlo a la lista de disponibles
+    if (kpiToRemove.kpi) {
+      setAvailableKPIs([...availableKPIs, kpiToRemove.kpi]);
+    }
+    
+    const newSelectedKPIs = [...selectedKPIs];
+    newSelectedKPIs.splice(index, 1);
+    setSelectedKPIs(newSelectedKPIs);
+  };
+
+  // Actualizar valor de un KPI
+  const handleUpdateKPIValue = (kpiId: string, value: string) => {
+    setSelectedKPIs(
+      selectedKPIs.map(kpi => {
+        if (kpi.kpiId === kpiId) {
+          return { ...kpi, value: unformatNumber(value) };
+        }
+        return kpi;
+      })
+    );
+  };
+
   // Guardar cambios
   const handleSave = async () => {
     if (!activity) return;
-    
+
     try {
+      setUploadProgress(0);
+      const formData = new FormData();
+      startFiles.forEach(file => {
+        formData.append('startFiles', file);
+      });
+      middleFiles.forEach(file => {
+        formData.append('middleFiles', file);
+      });
+      endFiles.forEach(file => {
+        formData.append('endFiles', file);
+      });
+
       // Filtrar KPIs con valor distinto de 0 y convertir al formato esperado
       const kpiResults: KPIResult[] = Object.entries(kpiValues)
         .filter(([_, value]) => value && value !== '0' && value !== '')
@@ -100,19 +186,23 @@ export const ActivityUpdateModal: React.FC<ActivityUpdateModalProps> = ({
           kpiInstanceId: kpiId,
           value: +unformatNumber(value)
         }));
-      
+
       console.log('Guardando datos:', {
         scheduledActivityId: activity.id,
         kpiResults,
         observations
       });
-      
-      await updateActivity({
+
+      const updateActivityResponse = await updateActivity({
         scheduledActivityId: activity.id,
         kpiResults,
         observations
       });
       
+      await uploadFiles({
+        activityId: updateActivityResponse.id,
+        formData
+      });
       handleClose();
     } catch (err) {
       console.error('Error al guardar los cambios:', err);
@@ -179,6 +269,61 @@ export const ActivityUpdateModal: React.FC<ActivityUpdateModalProps> = ({
               <Text $color="gray" $fontSize="14px" style={{ textAlign: 'center', padding: '20px' }}>
                 No hay Metas disponibles para este proyecto
               </Text>
+            ) : (
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <table style={{ width: "100%", borderCollapse: "collapse" }}>
+                  <thead>
+                    <tr style={{ borderBottom: "2px solid #eee" }}>
+                      <th style={{ textAlign: "left", padding: "8px", fontSize: "14px", fontWeight: "500" }}>KPI</th>
+                      <th style={{ textAlign: "center", padding: "8px", fontSize: "14px", fontWeight: "500", width: "120px" }}>Valor</th>
+                      <th style={{ textAlign: "center", padding: "8px", width: "50px" }}></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {selectedKPIs.map((kpi, index) => (
+                      <tr 
+                        key={kpi.kpiId}
+                        style={{
+                          borderBottom: "1px solid #f0f0f0",
+                          backgroundColor: index % 2 === 0 ? "#fafafa" : "white"
+                        }}
+                      >
+                        <td style={{ padding: "10px 8px", fontSize: "14px" }}>
+                          {kpi.kpi?.name}
+                        </td>
+                        <td style={{ padding: "6px 8px" }}>
+                          <Input
+                            type="text"
+                            value={formatNumber(kpi.value)}
+                            onChange={(e) => handleUpdateKPIValue(kpi.kpiId, e.target.value)}
+                            placeholder="0"
+                            style={{ height: "36px", fontSize: "14px", width: "100%" }}
+                          />
+                        </td>
+                        <td style={{ padding: "6px 8px", textAlign: "center" }}>
+                          <button
+                            onClick={() => handleRemoveKPI(index)}
+                            style={{ 
+                              background: "none", 
+                              border: "none", 
+                              cursor: "pointer", 
+                              color: "#dc3545",
+                              padding: "5px",
+                              borderRadius: "3px",
+                              display: "inline-flex",
+                              alignItems: "center",
+                              justifyContent: "center"
+                            }}
+                            title="Eliminar"
+                          >
+                            <FaTrash size={14} />
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             )}
           </div>
           
@@ -212,6 +357,21 @@ export const ActivityUpdateModal: React.FC<ActivityUpdateModalProps> = ({
             {error}
           </div>
         )}
+
+          {/* Barra de progreso de subida */}
+          {isUploading && uploadProgress > 0 && (
+            <Flex $direction="column" $gap="8px">
+              <Text $fontSize="14px" $fontWeight="500">
+                Subiendo imágenes...
+              </Text>
+              <ProgressBar 
+                progress={uploadProgress} 
+                height="12px"
+                color="#10b981"
+                animated={true}
+              />
+            </Flex>
+          )}
 
         {/* Botones de acción */}
         <Flex $justify="flex-end" $gap="10px">
