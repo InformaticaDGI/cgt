@@ -130,7 +130,7 @@ const activityTable = StyleSheet.create({
         flexDirection: 'row',
     },
     tableColHeader: {
-        width: '50%', // Define el ancho de la columna (20% para 5 columnas iguales)
+        width: '33.33%', // Define el ancho de la columna (20% para 5 columnas iguales)
         borderStyle: 'solid',
         borderColor: '#bfbfbf',
         borderBottomColor: '#000',
@@ -142,7 +142,7 @@ const activityTable = StyleSheet.create({
         textAlign: 'center',
     },
     tableCol: {
-        width: '50%', // Mismo ancho para las celdas de datos
+        width: '33.33%', // Mismo ancho para las celdas de datos
         borderStyle: 'solid',
         borderColor: '#bfbfbf',
         borderWidth: 1,
@@ -221,7 +221,6 @@ const PDFModel = (props: PDFModelProps) => {
         territorialSecretary,
         unqualifiedLabor } = props;
 
-    console.log(props)
 
     return <Document>
         <Page size="A4" style={body.page}>
@@ -337,6 +336,9 @@ const PDFModel = (props: PDFModelProps) => {
                                             <Text style={activityTable.tableCellHeader}>ACTIVIDAD</Text>
                                         </View>
                                         <View style={activityTable.tableColHeader}>
+                                            <Text style={activityTable.tableCellHeader}>UNIDAD DE MEDIDA</Text>
+                                        </View>
+                                        <View style={activityTable.tableColHeader}>
                                             <Text style={activityTable.tableCellHeader}>CANTIDAD</Text>
                                         </View>
 
@@ -347,6 +349,9 @@ const PDFModel = (props: PDFModelProps) => {
                                         <View style={activityTable.tableRow} key={item.id}>
                                             <View style={activityTable.tableCol}>
                                                 <Text style={activityTable.tableCell}>{item.name}</Text>
+                                            </View>
+                                            <View style={activityTable.tableCol}>
+                                                <Text style={activityTable.tableCell}>%</Text>
                                             </View>
                                             <View style={activityTable.tableCol}>
                                                 <Text style={activityTable.tableCell}>0</Text>

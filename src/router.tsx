@@ -14,6 +14,9 @@ import MapView from './pages/Management/Map/MapView'
 import Navigation from './components/Navigation/Navigation'
 import SecurityView from './pages/Security/SecurityView'
 import ProjectsListView from './pages/Management/ProjectListView'
+import ContactsView from './pages/Contacts/ContactsView'
+import CreateContactView from './pages/Contacts/CreateContactView'
+import ContactView from './pages/Contacts/ContactView'
 
 const router = createBrowserRouter([
 
@@ -21,7 +24,6 @@ const router = createBrowserRouter([
         path: '/',
         element: <ProtectedRoute><Navigation /></ProtectedRoute>,
         children: [
-            
             {
                 index: true,
                 element: <Navigate to={'/mapa'} replace />
@@ -52,6 +54,23 @@ const router = createBrowserRouter([
                     {
                         path: ':programId/:projectId/:activityId/:taskId',
                         element: <TaskView />
+                    }
+                ]
+            },
+            {
+                path: 'contactos',
+                children: [
+                    {
+                        index: true,
+                        element: <ContactsView />
+                    },
+                    {
+                        path: 'crear',
+                        element: <CreateContactView />
+                    },
+                    {
+                        path: ':contactId',
+                        element: <ContactView />
                     }
                 ]
             },

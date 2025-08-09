@@ -10,10 +10,9 @@ import Card from "../../components/Card/Card";
 import CardHeader from "../../components/Card/CardHeader";
 import CardBody from "../../components/Card/CardBody";
 import IndicatorProgress from "../../components/Indicator/IndicatorProgress";
-import { Button } from "../../components/Ui/Button/Button";
-import PDFModel from "../../components/PDFModel/PDFModel";
-import { BlobProvider } from "@react-pdf/renderer";
-import { FaFilePdf } from "react-icons/fa6";
+import DownloadPDF from "../../components/DownloadPDF/DownloadPDF";
+import GanttChart from "../../components/GanttChart/GanttChart";
+import { GobMap } from "../../components/Map/map.components";
 
 export default function ProjectDetailView() {
   const { projectId } = useParams();
@@ -25,20 +24,6 @@ export default function ProjectDetailView() {
 
   if (isLoading) return <div>Cargando...</div>;
   if (error || !project) return <div>Error al cargar el proyecto</div>;
-
-  const projectToken = (projectId?.slice(0, 6) || "").toUpperCase()
-
-  const downloadPDF = async (blob: Blob | null) => {
-    if (!blob) return;
-    const url = URL.createObjectURL(blob);
-    const anchor = document.createElement("a");
-    anchor.href = url;
-    anchor.download = `ficha_${projectToken}.pdf`;
-    anchor.click();
-    window.URL.revokeObjectURL(url);
-  }
-
-  const projectBudget = project.projectBudget[0] || { budgetSource: { name: 'SIN FONDOS' } }
 
   return (
     <Flex $direction="column" $gap="16px" $padding="32px 24px" className="project-detail-container">
@@ -55,7 +40,7 @@ export default function ProjectDetailView() {
         gap: 40
       }} className="project-header">
         <Text $fontSize="20px" $fontWeight="500" className="project-header-title">{project.name}</Text>
-        <div style={{ display: "flex", flexDirection: "row", gap: 40 }} className="project-header-dates">
+        <div style={{ display: "flex", flexDirection: "row", gap: 40, flex: 1 }} className="project-header-dates">
           <div style={{ display: "flex", alignItems: "center" }} className="project-header-date">
             <FaCalendarAlt size={18} style={{ color: "#16a085", marginRight: 12 }} />
             <div>
@@ -72,88 +57,53 @@ export default function ProjectDetailView() {
               <Text $fontSize="12px" $fontWeight="600">
                 {project.finalDate ? new Date(project.finalDate).toISOString().split('T')[0] : ''}
               </Text>
+
             </div>
           </div>
+
         </div>
-      </div>
-      <div style={{
-        background: "#fff",
-        borderRadius: 12,
-        boxShadow: "var(--shadow-sm)",
-        padding: 16,
-        width: "100%",
-        display: "flex",
-        flexDirection: "row",
-      }} className="project-tabs">
-        <Flex $direction="row" $gap="40px" $justify="start">
-          <Text $fontSize="12px" $fontWeight="500">Actividades</Text>
-          <Text $fontSize="12px" $fontWeight="500">Punto y Circulo</Text>
-          <BlobProvider document={<PDFModel
-            projectName={project.name}
-            projectDescription={project.observations}
-            status={project.status}
-            parish={project.parish.name}
-            municipality={project.parish.municipality.name}
-            startDate={project.initialDate}
-            endDate={project.finalDate}
-            territorialSecretary={project.parish.municipality.territorialSecretary.name}
-            community={project.sector.name}
-            circuit={project.sector.communityCircuit.name}
-            kpiInstances={project.kpiInstances}
-            beneficitPopulation={project.benefitedPopulation}
-            beneficitChildren={project.benefitedChildren}
-            budgetSource={projectBudget.budgetSource.name}
-            budgetInVES={project.initialBudget.toString()}
-            budgetInUSD={project.initialBudgetUsd.toString()}
-            coordinate={`Latitud: ${project.latitude}, Longitud: ${project.longitude}`}
-            directLabor={project.directLabor}
-            indirectLabor={project.indirectLabor}
-            maleLabor={project.maleLabor}
-            femaleLabor={project.femaleLabor}
-            qualifiedLabor={project.qualifiedLabor}
-            unqualifiedLabor={project.unqualifiedLabor}
-            projectToken={projectToken}
-            scheduledActivities={project.scheduledActivities}
-          />}
-          >
-            {({ blob }) => <Button style={{ width: '80px', backgroundColor: '#ffffff' }} $size="small" onClick={() => downloadPDF(blob)}>
-              <FaFilePdf fill="red" size={20} />
-            </Button>}
-          </BlobProvider>
+        <Flex $direction="row" $justify="end" $align="center" style={{ flex: 1 }}>
+          <DownloadPDF project={project} />
         </Flex>
       </div>
-      <Grid $columns="repeat(30, 1fr)" className="project-indicators-grid">
-        <GridItem $colSpan={10} style={{ height: '250px' }} className="indicator-card">
+      <Grid $columns="repeat(30, 1fr)" $justify="space-between" className="project-indicators-grid">
+        <GridItem $colSpan={10} $colSpanSm={30} $colSpanXs={30} style={{ height: '250px' }} className="indicator-card">
           <Card $isSelectable={false}>
             <CardHeader>
-              <Text style={{ fontSize: '14px', fontWeight: 'normal', textWrap: 'nowrap', textAlign: 'justify' }}>Indicador de Meta</Text>
+              <Text $fontSize="14px" $color="var(--primary)">Metas</Text>
             </CardHeader>
             <CardBody style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-              <IndicatorProgress value={0} strokeWidth={8} size={160} textSize={14} />
+              <IndicatorProgress overrideProgressColor="var(--primary)" value={30} strokeWidth={14} size={160} textSize={18} />
             </CardBody>
           </Card>
         </GridItem>
-        <GridItem $colSpan={10} style={{ height: '250px' }} className="indicator-card">
+        <GridItem $colSpan={10} $colSpanSm={30} $colSpanXs={30} style={{ height: '250px' }} className="indicator-card">
           <Card $isSelectable={false}>
             <CardHeader>
-              <Text style={{ fontSize: '14px', fontWeight: 'normal', textWrap: 'nowrap', textAlign: 'justify' }}>Indicador de Eficiencia</Text>
+              <Text $fontSize="14px" $color="var(--primary)">Eficiencia</Text>
             </CardHeader>
             <CardBody style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-              <IndicatorProgress value={0} strokeWidth={8} size={160} textSize={14} />
+              <IndicatorProgress overrideProgressColor="var(--primary)" value={100} strokeWidth={14} size={160} textSize={18} />
             </CardBody>
           </Card>
         </GridItem>
-        <GridItem $colSpan={10} style={{ height: '250px' }} className="indicator-card">
+        <GridItem $colSpan={10} $colSpanSm={30} $colSpanXs={30} style={{ height: '250px' }} className="indicator-card">
           <Card $isSelectable={false}>
             <CardHeader>
-              <Text style={{ fontSize: '14px', fontWeight: 'normal', textWrap: 'nowrap', textAlign: 'justify' }}>Indicador de Eficacia</Text>
+              <Text $fontSize="14px" $fontWeight="500" $color="var(--primary)">Eficacia</Text>
             </CardHeader>
             <CardBody style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-              <IndicatorProgress value={0} strokeWidth={8} size={160} textSize={14} />
+              <IndicatorProgress overrideProgressColor="var(--primary)" value={74} strokeWidth={14} size={160} textSize={18} />
             </CardBody>
           </Card>
         </GridItem>
-        <GridItem $colSpan={12} className="activities-container">
+        <GridItem $colSpan={30} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <Card $isSelectable={false}>
+            <Text style={{ fontSize: '14px', fontWeight: 'normal', textWrap: 'nowrap', textAlign: 'justify' }}>Diagrama de Gantt</Text>
+            <GanttChart activities={project.scheduledActivities} />
+          </Card>
+        </GridItem>
+        <GridItem $colSpan={15} $colSpanSm={30} $colSpanXs={30}>
           <Card $isSelectable={false}>
             <ProjectActivities
               projectId={projectId}
@@ -166,12 +116,12 @@ export default function ProjectDetailView() {
             />
           </Card>
         </GridItem>
-        <GridItem $colSpan={18} style={{ height: '300px', display: 'flex', flexDirection: 'column', gap: '16px' }} className="diagram-map-container">
-          <Card $isSelectable={false}>
-            <Text style={{ fontSize: '14px', fontWeight: 'normal', textWrap: 'nowrap', textAlign: 'justify' }}>Diagrama de Gantt</Text>
-          </Card>
-          <Card $isSelectable={false}>
-            <Text style={{ fontSize: '14px', fontWeight: 'normal', textWrap: 'nowrap', textAlign: 'justify' }}>Mapa con las ubicaciónes de las actividades/proyecto</Text>
+        <GridItem $colSpan={15} $colSpanSm={30} $colSpanXs={30}>
+          <Card $isSelectable={false} $height="300px">
+            <CardHeader>
+              <Text style={{ fontSize: '14px', fontWeight: 'normal', textWrap: 'nowrap', textAlign: 'justify' }}>Ubicaciónes del proyecto</Text>
+            </CardHeader>
+            <GobMap />
           </Card>
         </GridItem>
       </Grid>

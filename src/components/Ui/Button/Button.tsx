@@ -6,7 +6,12 @@ export const Button = styled.button<ButtonProps>`
             ? "var(--gradient-primary)"
             : $variant === "secondary"
             ? "var(--gradient-secondary)"
-            : "var(--gradient-tertiary)"};
+            : $variant === "tertiary"
+            ? "var(--gradient-tertiary)"
+            : "var(--gradient-primary)"};
+    ${({ $backgroundColor }) => $backgroundColor && css`
+        background: ${$backgroundColor};
+    `}
     color: ${({ $variant }) =>
         $variant === "primary" || $variant === "secondary" || $variant === "tertiary"
             ? "var(--text_foreground)"
@@ -74,4 +79,5 @@ type ButtonProps = {
     $variant?: "primary" | "secondary" | "tertiary"
     $disabled?: boolean
     $size?: "small" | "medium" | "large"
+    $backgroundColor?: string
 }

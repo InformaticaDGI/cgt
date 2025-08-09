@@ -14,10 +14,16 @@ import { CommunityCircuitSelect } from "../../../components/Prebuilt/CommunityCi
 import { CommunitySelect } from "../../../components/Prebuilt/CommunitySelect";
 import { AcaProjectsSelect } from "../../../components/Prebuilt/AcaProjectsSelect";
 import Text from "../../../components/Ui/Text/Text";
+import Switch from "../../../components/Ui/Switch/Switch";
+import { useState, useEffect } from "react";
+import * as utm from "utm";
 
 const LocationStep = () => {
   const { nextStep, previousStep } = useStepper();
   const { formState, setFormState } = useAppStore();
+  const [isUtm, setIsUtm] = useState(false);
+  const [north, setNorth] = useState<number | string>("");
+  const [east, setEast] = useState<number | string>("");
 
   const validate = (values: any) => {
     const errors: any = {};
@@ -57,6 +63,47 @@ const LocationStep = () => {
     },
     validate,
   });
+
+  useEffect(() => {
+    if (formik.values.coords.lat && formik.values.coords.lng) {
+      const { easting, northing } = utm.fromLatLon(
+        formik.values.coords.lat,
+        formik.values.coords.lng
+      );
+      setEast(easting);
+      setNorth(northing);
+    }
+  }, [formik.values.coords.lat, formik.values.coords.lng]);
+
+  const handleNorthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const northValue = e.target.value;
+    setNorth(northValue);
+    if (east) {
+      const { latitude, longitude } = utm.toLatLon(
+        Number(east),
+        Number(northValue),
+        19,
+        "N"
+      );
+      formik.setFieldValue("coords.lat", latitude);
+      formik.setFieldValue("coords.lng", longitude);
+    }
+  };
+
+  const handleEastChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const eastValue = e.target.value;
+    setEast(eastValue);
+    if (north) {
+      const { latitude, longitude } = utm.toLatLon(
+        Number(eastValue),
+        Number(north),
+        19,
+        "N"
+      );
+      formik.setFieldValue("coords.lat", latitude);
+      formik.setFieldValue("coords.lng", longitude);
+    }
+  };
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -151,48 +198,82 @@ const LocationStep = () => {
               />
             </FormControl>
           </GridItem>
-          <GridItem $colSpan={12}>
-            <FormControl
-              label="Latitud"
-              required
-              error={
-                formik.errors.coords?.lat && formik.touched.coords?.lat
-                  ? formik.errors.coords.lat
-                  : undefined
-              }
-            >
-              <Input
-                name="name"
-                placeholder="Latitud"
-                value={formik.values.coords.lat}
-                onChange={(e) =>
-                  formik.setFieldValue("coords.lat", e.target.value)
-                }
-                onBlur={formik.handleBlur}
-              />
-            </FormControl>
+          <GridItem $colSpan={24}>
+            <Switch
+              checked={isUtm}
+              onChange={() => setIsUtm(!isUtm)}
+              label="Usar coordenadas UTM"
+            />
           </GridItem>
-          <GridItem $colSpan={12}>
-            <FormControl
-              label="Longitud"
-              required
-              error={
-                formik.errors.coords?.lng && formik.touched.coords?.lng
-                  ? formik.errors.coords?.lng
-                  : undefined
-              }
-            >
-              <Input
-                name="name"
-                placeholder="Longitud"
-                value={formik.values.coords.lng}
-                onChange={(e) =>
-                  formik.setFieldValue("coords.lng", e.target.value)
-                }
-                onBlur={formik.handleBlur}
-              />
-            </FormControl>
-          </GridItem>
+          {isUtm ? (
+            <>
+              <GridItem $colSpan={12}>
+                <FormControl label="Norte" required>
+                  <Input
+                    name="norte"
+                    placeholder="Norte"
+                    value={north}
+                    onChange={handleNorthChange}
+                  />
+                </FormControl>
+              </GridItem>
+              <GridItem $colSpan={12}>
+                <FormControl label="Este" required>
+                  <Input
+                    name="este"
+                    placeholder="Este"
+                    value={east}
+                    onChange={handleEastChange}
+                  />
+                </FormControl>
+              </GridItem>
+            </>
+          ) : (
+            <>
+              <GridItem $colSpan={12}>
+                <FormControl
+                  label="Latitud"
+                  required
+                  error={
+                    formik.errors.coords?.lat && formik.touched.coords?.lat
+                      ? formik.errors.coords.lat
+                      : undefined
+                  }
+                >
+                  <Input
+                    name="name"
+                    placeholder="Latitud"
+                    value={formik.values.coords.lat}
+                    onChange={(e) =>
+                      formik.setFieldValue("coords.lat", e.target.value)
+                    }
+                    onBlur={formik.handleBlur}
+                  />
+                </FormControl>
+              </GridItem>
+              <GridItem $colSpan={12}>
+                <FormControl
+                  label="Longitud"
+                  required
+                  error={
+                    formik.errors.coords?.lng && formik.touched.coords?.lng
+                      ? formik.errors.coords?.lng
+                      : undefined
+                  }
+                >
+                  <Input
+                    name="name"
+                    placeholder="Longitud"
+                    value={formik.values.coords.lng}
+                    onChange={(e) =>
+                      formik.setFieldValue("coords.lng", e.target.value)
+                    }
+                    onBlur={formik.handleBlur}
+                  />
+                </FormControl>
+              </GridItem>
+            </>
+          )}
           <GridItem $colSpan={24}>
             <FormControl
               label="Geolocalización"

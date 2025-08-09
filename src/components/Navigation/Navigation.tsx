@@ -22,19 +22,20 @@ const Navigation = () => {
 
 export default Navigation;
 
-  const DrawerWrapper = styled.div`
+const DrawerWrapper = styled.div`
     display: flex;
+    background: rgba(244,245,251,1);
   `;
 
 
-  const Drawer = styled.div`
+const Drawer = styled.div`
         width: 15vw;
         min-height: 100vh;
         background: linear-gradient(180deg, var(--primary) 0%, var(--secondary) 100%);
         flex-shrink: 0;
   `;
 
-  const Nav = styled.div`
+const Nav = styled.div`
       display: flex;
       gap: 1.4em;
       flex-direction: column;
@@ -43,7 +44,7 @@ export default Navigation;
       padding-top: 1.4em;
   `;
 
-  const Spacer = styled.div`
+const Spacer = styled.div`
         border: 1px solid transparent;
         border-image: linear-gradient(to right, rgba(255, 225, 255, 0) 0%, rgba(255, 255, 255, 1) 50%, rgba(255, 225, 255, 0.16) 100%) 1;
         max-width: 95%;
