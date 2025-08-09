@@ -12,19 +12,6 @@ export default function CopyRight() {
     $justify={'center'}
     $align={'center'}
   >
-    {/* <Stack direction='row' justify="center" align="center" spacing={2}> */}
-    <img
-      src='/images/logo-guarico.png'
-      alt={'Login'}
-    />
-    <a target='_blank' href='http://informatica.guarico.gob.ve/' style={{
-      textDecoration: 'none',
-      fontWeight: '600',
-      color: 'lightgray',
-      textShadow: '5px 5px 10px #000',
-      fontSize:'1rem'
-    }}
-    >Dirección General de Informática @ {new Date().getFullYear()}</a>
-    {/* </Stack> */}
+
   </Box>
 }

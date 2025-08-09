@@ -1,95 +1,113 @@
 import { BsBarChartFill } from "react-icons/bs";
-import { FaChartBar, FaHammer, /*FaUsersGear, */ FaList } from "react-icons/fa6";
+import { FaChartBar, FaHammer, /*FaUsersGear, */ FaList, FaUsers } from "react-icons/fa6";
 import { FaMapLocationDot } from "react-icons/fa6";
 import { MdShield } from "react-icons/md";
 import { IoIosExit } from "react-icons/io";
 import authRoles from "./authRoles.ts"
 
+const createNavItems = (logout: () => void): NavItems => [
+    {
+        id: 'map',
+        to: '/mapa',
+        label: 'Mapa',
+        icon: FaMapLocationDot,
+        roles: authRoles.Public
+    },
+    {
+        id: 'dashboard',
+        to: '/indicadores',
+        label: 'Indicadores',
+        icon: BsBarChartFill,
+        roles: authRoles.Public
+    },
 
-const createNavItems: (logout: () => void) => NavItems = (logout: () => void) => [
-        {
-            id: 'map',
-            to: '/mapa',
-            label: 'Mapa',
-            icon: FaMapLocationDot,
-            roles: authRoles.Public
-        },
-        {
-            id: 'dashboard',
-            to: '/indicadores',
-            label: 'Indicadores',
-            icon: BsBarChartFill,
-            roles: authRoles.Public
-        },
+    {
+        sectionTitle: 'Registro',
+        roles: authRoles.Usuario
+    },
+    {
+        id: 'create-program',
+        to: '/crear-programa',
+        label: 'Crear Programa',
+        icon: FaChartBar,
+        roles: authRoles.Usuario
+    },
+    {
+        id: 'create-project',
+        to: '/crear-proyecto',
+        label: 'Crear Proyecto',
+        icon: FaHammer,
+        roles: authRoles.Usuario
+    },
 
-        {
-            sectionTitle: 'Registro',
-            roles: authRoles.Usuario
-        },
-        {
-            id: 'create-program',
-            to: '/crear-programa',
-            label: 'Crear Programa',
-            icon: FaChartBar,
-            roles: authRoles.Usuario
-        },
-        {
-            id: 'create-project',
-            to: '/crear-proyecto',
-            label: 'Crear Proyecto',
-            icon: FaHammer,
-            roles: authRoles.Usuario
-        },
+    {
+        sectionTitle: 'Gestión',
+        roles: authRoles.Public
+    },
 
-        {
-           sectionTitle: 'Gestión',
-           roles: authRoles.Public
-        },
+    {
+        id: 'projects',
+        to: '/proyectos',
+        label: 'Proyectos',
+        icon: FaList,
+        roles: authRoles.Public
+    },
 
-                {
-            id: 'projects',
-            to: '/proyectos',
-            label: 'Proyectos',
-            icon: FaList,
-            roles: authRoles.Public
-        },
-
-        // {
-        //     id: 'paysheet',
-        //     to: '/nomina',
-        //     label: 'Nomina',
-        //     icon: FaUsersGear,
-        //     roles: authRoles.Public
-        // },
-
+    // {
+    //     id: 'paysheet',
+    //     to: '/nomina',
+    //     label: 'Nomina',
+    //     icon: FaUsersGear,
+    //     roles: authRoles.Public
+    // },
 
 
-        {
-            sectionTitle: 'Cuenta',
-            roles: authRoles.Public
+
+    {
+        sectionTitle: 'Cuenta',
+        roles: authRoles.Public
+    },
+    {
+        id: 'security',
+        to: '/seguridad',
+        label: 'Seguridad',
+        icon: MdShield,
+        roles: authRoles.Admin
+    },
+    {
+        sectionTitle: 'Contactos',
+        roles: authRoles.Public,
+        icon: FaUsers,
+    },
+    {
+        id: 'list-contacts',
+        to: '/contactos',
+        label: 'Ver contactos',
+        icon: null,
+        roles: authRoles.Public
+    },
+    {
+        id: 'create-contact',
+        to: '/contactos/crear',
+        label: 'Crear contacto',
+        icon: null,
+        roles: authRoles.Public
+    },
+    {
+        id: 'exit',
+        label: 'Salir',
+        icon: IoIosExit,
+        button: true,
+        onClick: () => {
+            logout()
         },
-        {
-            id: 'security',
-            to: '/seguridad',
-            label: 'Seguridad',
-            icon: MdShield,
-            roles: authRoles.Admin
-        },
-        {
-            id: 'exit',
-            label: 'Salir',
-            icon: IoIosExit,
-            button: true,
-            onClick: () => {
-                logout()
-            },
-            roles: authRoles.Public
-        }
-    ]
+        roles: authRoles.Public
+    }
+]
 const resolveRoles = (currentRole: string, navItems: NavItems) => {
 
     const NavItemsResult = navItems.filter(navItem => {
-        if(navItem.roles.includes('*')) return true;
+        if (navItem.roles.includes('*')) return true;
         return navItem.roles.includes(currentRole);
     })
 
@@ -116,7 +134,7 @@ export type NavLinkProps = {
     id: string;
     to: string;
     label: string;
-    icon: React.ElementType;
+    icon: React.ElementType | null;
     button?: never;
     onClick?: never;
     roles: string[]
@@ -125,7 +143,7 @@ export type NavLinkProps = {
 export type NavButtonProps = {
     id: string;
     label: string;
-    icon: React.ElementType;
+    icon: React.ElementType | null;
     button: true;
     onClick: () => void;
     roles: string[]
@@ -135,7 +153,7 @@ export type NavGroupProps = {
     id: string;
     to: string;
     label: string;
-    icon: React.ElementType;
+    icon: React.ElementType | null;
     roles: string[]
     button?: never;
     onClick?: never;
