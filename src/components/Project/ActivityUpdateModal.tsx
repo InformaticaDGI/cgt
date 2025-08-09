@@ -10,6 +10,9 @@ import type { Activity } from '../../hooks/useActivities';
 import { $TextArea } from '../Ui/TextArea/TextArea';
 import { useProjectKPIs, useUpdateActivityKPIs, type KPI, type KPIInstance, type KPIResult } from '../../hooks/useActivityKPIs';
 import { FaPaperclip } from 'react-icons/fa6';
+import ImageSelector from '../ImageSelector/ImageSelector';
+import { useUploadFiles } from '../../hooks/mutations/useUploadFiles';
+import ProgressBar from '../Ui/ProgressBar/ProgressBar';
 
 interface ActivityUpdateModalProps {
   isOpen: boolean;
@@ -34,7 +37,7 @@ export const ActivityUpdateModal: React.FC<ActivityUpdateModalProps> = ({
     setCurrentValue('');
     setObservations('');
     setError('');
-    
+
     // Llamar a la función onClose proporcionada por el componente padre
     // Usamos setTimeout para asegurar que se ejecute después del ciclo de renderizado actual
     setTimeout(() => {
@@ -42,15 +45,22 @@ export const ActivityUpdateModal: React.FC<ActivityUpdateModalProps> = ({
       onClose();
     }, 0);
   };
+  const [startFiles, setStartFiles] = useState<File[]>([]);
+  const [middleFiles, setMiddleFiles] = useState<File[]>([]);
+  const [endFiles, setEndFiles] = useState<File[]>([]);
   const [selectedKPIs, setSelectedKPIs] = useState<KPIInstance[]>([]);
   const [availableKPIs, setAvailableKPIs] = useState<KPI[]>([]);
   const [currentKPI, setCurrentKPI] = useState<string>('');
   const [currentValue, setCurrentValue] = useState<string>('');
   const [observations, setObservations] = useState<string>('');
   const [error, setError] = useState<string>('');
+  const [uploadProgress, setUploadProgress] = useState<number>(0);
 
   // Consultar KPIs disponibles y las instancias existentes
   const { data: kpiData } = useProjectKPIs(isOpen ? projectId : undefined);
+  const { mutateAsync: uploadFiles, isPending: isUploading } = useUploadFiles((progress) => {
+    setUploadProgress(progress);
+  });
 
   // Mutación para guardar las actualizaciones
   const { mutateAsync: updateActivity, isPending: isSubmitting } = useUpdateActivityKPIs();
@@ -61,15 +71,15 @@ export const ActivityUpdateModal: React.FC<ActivityUpdateModalProps> = ({
       // Asegurarse de que kpiData.kpis sea un array
       const availableKPIsData = Array.isArray(kpiData.kpis) ? kpiData.kpis : [];
       console.log('KPIs disponibles:', availableKPIsData);
-      
+
       // Si hay instancias existentes para esta actividad, cargarlas
       if (activity && kpiData.instances) {
-        const activityInstances = Array.isArray(kpiData.instances) 
+        const activityInstances = Array.isArray(kpiData.instances)
           ? kpiData.instances.filter((instance: any) => instance.activityId === activity.id)
           : [];
-        
+
         console.log('Instancias de actividad:', activityInstances);
-        
+
         if (activityInstances.length > 0) {
           const selectedKPIsData = activityInstances.map((instance: any) => ({
             id: instance.id,
@@ -78,14 +88,14 @@ export const ActivityUpdateModal: React.FC<ActivityUpdateModalProps> = ({
             expected: instance.expected || '100',
             kpi: instance.kpi
           }));
-          
+
           setSelectedKPIs(selectedKPIsData);
-          
+
           // Filtrar los KPIs que ya están seleccionados
           const selectedIds = selectedKPIsData.map(kpi => kpi.id);
           const filteredKPIs = availableKPIsData.filter(kpi => !selectedIds.includes(kpi.id));
           setAvailableKPIs(filteredKPIs);
-          
+
           setObservations(activity.description || '');
         } else {
           setAvailableKPIs(availableKPIsData);
@@ -95,7 +105,7 @@ export const ActivityUpdateModal: React.FC<ActivityUpdateModalProps> = ({
         setAvailableKPIs(availableKPIsData);
         setSelectedKPIs([]);
       }
-      
+
       setCurrentKPI('');
       setCurrentValue('');
       setError('');
@@ -116,16 +126,16 @@ export const ActivityUpdateModal: React.FC<ActivityUpdateModalProps> = ({
   // Agregar un KPI a la lista seleccionada
   const handleAddKPI = () => {
     if (!currentKPI || !currentValue) return;
-    
+
     const kpi = availableKPIs.find(k => k.id === currentKPI);
     if (!kpi) return;
-    
+
     // Verificar si ya existe este KPI en la lista seleccionada
     if (selectedKPIs.some(k => k.id === currentKPI)) {
       setError('Este KPI ya está en la lista');
       return;
     }
-    
+
     // Crear una nueva instancia de KPI con los datos seleccionados
     const newKPI: KPIInstance = {
       id: kpi.id,
@@ -139,12 +149,12 @@ export const ActivityUpdateModal: React.FC<ActivityUpdateModalProps> = ({
         areaId: ''
       }
     };
-    
+
     setSelectedKPIs([...selectedKPIs, newKPI]);
-    
+
     // Actualizar la lista de KPIs disponibles
     setAvailableKPIs(availableKPIs.filter(k => k.id !== currentKPI));
-    
+
     setCurrentKPI('');
     setCurrentValue('');
     setError('');
@@ -153,12 +163,12 @@ export const ActivityUpdateModal: React.FC<ActivityUpdateModalProps> = ({
   // Eliminar un KPI de la lista seleccionada
   const handleRemoveKPI = (index: number) => {
     const kpiToRemove = selectedKPIs[index];
-    
+
     // Si el KPI eliminado tiene un kpi asociado, devolverlo a la lista de disponibles
     if (kpiToRemove.kpi) {
       setAvailableKPIs([...availableKPIs, kpiToRemove.kpi]);
     }
-    
+
     const newSelectedKPIs = [...selectedKPIs];
     newSelectedKPIs.splice(index, 1);
     setSelectedKPIs(newSelectedKPIs);
@@ -190,8 +200,20 @@ export const ActivityUpdateModal: React.FC<ActivityUpdateModalProps> = ({
   // Guardar cambios
   const handleSave = async () => {
     if (!activity) return;
-    
+
     try {
+      setUploadProgress(0);
+      const formData = new FormData();
+      startFiles.forEach(file => {
+        formData.append('startFiles', file);
+      });
+      middleFiles.forEach(file => {
+        formData.append('middleFiles', file);
+      });
+      endFiles.forEach(file => {
+        formData.append('endFiles', file);
+      });
+
       // Convertir los KPIs seleccionados al formato esperado por el backend
       const kpiResults: KPIResult[] = selectedKPIs
         .filter(kpi => kpi.id) // Asegurarse de que id no sea undefined
@@ -199,17 +221,21 @@ export const ActivityUpdateModal: React.FC<ActivityUpdateModalProps> = ({
           kpiInstanceId: kpi.id as string, // Forzar tipo string
           value: +unformatNumber(kpi.value)
         }));
-      
+
       console.log('Guardando datos:', {
         scheduledActivityId: activity.id,
         kpiResults,
         observations
       });
-      
-      await updateActivity({
+
+      const updateActivityResponse = await updateActivity({
         scheduledActivityId: activity.id,
         kpiResults,
         observations
+      });
+      await uploadFiles({
+        activityId: updateActivityResponse.id,
+        formData
       });
       handleClose();
     } catch (err) {
@@ -236,12 +262,12 @@ export const ActivityUpdateModal: React.FC<ActivityUpdateModalProps> = ({
     >
       <div style={{ padding: "20px" }}>
         {error && (
-          <div style={{ 
-            backgroundColor: "#f8d7da", 
-            color: "#721c24", 
-            padding: "10px 15px", 
-            borderRadius: "4px", 
-            marginBottom: "20px" 
+          <div style={{
+            backgroundColor: "#f8d7da",
+            color: "#721c24",
+            padding: "10px 15px",
+            borderRadius: "4px",
+            marginBottom: "20px"
           }}>
             {error}
           </div>
@@ -249,6 +275,20 @@ export const ActivityUpdateModal: React.FC<ActivityUpdateModalProps> = ({
 
         <Flex $direction="column" $gap="24px">
           {/* Selector de KPI e input de valor */}
+          <Flex $direction="row" $gap="16px">
+            <Flex $direction="column" $gap="16px">
+              <Text $fontSize="16px" $fontWeight="500">Inicio</Text>
+              <ImageSelector onImageSelect={(files) => setStartFiles(files)} compressImages={true} maxCompressedSize={0.35} />
+            </Flex>
+            <Flex $direction="column" $gap="16px">
+              <Text $fontSize="16px" $fontWeight="500">Durante</Text>
+              <ImageSelector onImageSelect={(files) => setMiddleFiles(files)} compressImages={true} maxCompressedSize={0.35} />
+            </Flex>
+            <Flex $direction="column" $gap="16px">
+              <Text $fontSize="16px" $fontWeight="500">Después</Text>
+              <ImageSelector onImageSelect={(files) => setEndFiles(files)} compressImages={true} maxCompressedSize={0.35} />
+            </Flex>
+          </Flex>
           <Flex $direction="row" $gap="16px" $align="end">
             <FormControl label="Seleccionar KPI" style={{ flex: 2 }}>
               <select
@@ -273,7 +313,7 @@ export const ActivityUpdateModal: React.FC<ActivityUpdateModalProps> = ({
                 )}
               </select>
             </FormControl>
-            
+
             <FormControl label="Valor" style={{ flex: 1 }}>
               <Input
                 type="text"
@@ -283,7 +323,7 @@ export const ActivityUpdateModal: React.FC<ActivityUpdateModalProps> = ({
                 style={{ height: "40px", fontSize: "16px" }}
               />
             </FormControl>
-            
+
             <Button
               $variant="primary"
               $size="small"
@@ -295,9 +335,9 @@ export const ActivityUpdateModal: React.FC<ActivityUpdateModalProps> = ({
           </Flex>
 
           {/* Lista de KPIs seleccionados */}
-          <div style={{ 
-            border: "1px solid #eee", 
-            borderRadius: "4px", 
+          <div style={{
+            border: "1px solid #eee",
+            borderRadius: "4px",
             padding: "16px",
             maxHeight: "300px",
             overflowY: "auto"
@@ -305,7 +345,7 @@ export const ActivityUpdateModal: React.FC<ActivityUpdateModalProps> = ({
             <Text $fontSize="16px" $fontWeight="500" style={{ marginBottom: "16px" }}>
               KPIs Seleccionados
             </Text>
-            
+
             {selectedKPIs.length === 0 ? (
               <Text $fontSize="14px" style={{ color: "#777" }}>
                 No hay KPIs seleccionados
@@ -323,7 +363,7 @@ export const ActivityUpdateModal: React.FC<ActivityUpdateModalProps> = ({
                   </thead>
                   <tbody>
                     {selectedKPIs.map((kpi, index) => (
-                      <tr 
+                      <tr
                         key={kpi.kpiId}
                         style={{
                           borderBottom: "1px solid #f0f0f0",
@@ -345,10 +385,10 @@ export const ActivityUpdateModal: React.FC<ActivityUpdateModalProps> = ({
                         <td style={{ padding: "6px 8px", textAlign: "center" }}>
                           <button
                             onClick={handleAttachFile}
-                            style={{ 
-                              background: "none", 
-                              border: "none", 
-                              cursor: "pointer", 
+                            style={{
+                              background: "none",
+                              border: "none",
+                              cursor: "pointer",
                               color: "#007bff",
                               padding: "5px",
                               borderRadius: "3px",
@@ -364,10 +404,10 @@ export const ActivityUpdateModal: React.FC<ActivityUpdateModalProps> = ({
                         <td style={{ padding: "6px 8px", textAlign: "center" }}>
                           <button
                             onClick={() => handleRemoveKPI(index)}
-                            style={{ 
-                              background: "none", 
-                              border: "none", 
-                              cursor: "pointer", 
+                            style={{
+                              background: "none",
+                              border: "none",
+                              cursor: "pointer",
                               color: "#dc3545",
                               padding: "5px",
                               borderRadius: "3px",
@@ -399,15 +439,30 @@ export const ActivityUpdateModal: React.FC<ActivityUpdateModalProps> = ({
             />
           </FormControl>
 
+          {/* Barra de progreso de subida */}
+          {isUploading && uploadProgress > 0 && (
+            <Flex $direction="column" $gap="8px">
+              <Text $fontSize="14px" $fontWeight="500">
+                Subiendo imágenes...
+              </Text>
+              <ProgressBar 
+                progress={uploadProgress} 
+                height="12px"
+                color="#10b981"
+                animated={true}
+              />
+            </Flex>
+          )}
+
           {/* Botones de acción */}
           <Flex $direction="row" $justify="center" $gap="16px">
             <Button
               $variant="primary"
               onClick={handleSave}
-              disabled={isSubmitting}
+              disabled={(isSubmitting || isUploading)}
               style={{ padding: "10px 20px", minWidth: "150px" }}
             >
-              {isSubmitting ? "Guardando..." : "Guardar Cambios"}
+              {(isSubmitting || isUploading) ? "Guardando..." : "Guardar Cambios"}
             </Button>
           </Flex>
         </Flex>
