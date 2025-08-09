@@ -182,7 +182,7 @@ const CurrentDayLine = styled.div<CurrentDayLineProps>`
 
 const GanttChart: React.FC<{ activities: Activity[] }> = ({ activities }: { activities: Activity[] }) => {
 
-  const [tasks, setTasks] = useState<Task[]>(activities.map(a => ({
+  const [tasks] = useState<Task[]>(activities.map(a => ({
     id: a.id,
     endDate: a.endDate,
     startDate: a.startDate,
