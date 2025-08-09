@@ -20,6 +20,7 @@ interface FormState {
   projectParrishId: string;
   projectCommunityCircuitCode: string;
   projectCommunityId: string;
+  projectAcaProjectId: string;
   projectLatitude: number;
   projectLongitude: number;
 
@@ -35,9 +36,9 @@ interface FormState {
   projectMaleLabor: string;
 
   // KPI
-  projectKpiInstances: KpiInstance[]
-  projectBenefitedPopulation: string
-  projectBenefitedChildren: string
+  projectKpiInstances: KpiInstance[];
+  projectBenefitedPopulation: string;
+  projectBenefitedChildren: string;
 }
 
 const initialFormState: FormState = {
@@ -51,24 +52,24 @@ const initialFormState: FormState = {
   projectAreaId: [],
   projectParrishId: "",
   projectCommunityCircuitCode: "",
+  projectAcaProjectId: "",
   projectLatitude: 9.9156947,
   projectLongitude: -67.3601931,
-  projectBudgetSourceId: '',
-  projectDirectLabor: '',
-  projectIndirectLabor: '',
-  projectQualifiedLabor: '',
-  projectUnqualifiedLabor: '',
-  projectFemaleLabor: '',
-  projectMaleLabor: '',
+  projectBudgetSourceId: "",
+  projectDirectLabor: "",
+  projectIndirectLabor: "",
+  projectQualifiedLabor: "",
+  projectUnqualifiedLabor: "",
+  projectFemaleLabor: "",
+  projectMaleLabor: "",
   projectKpiInstances: [],
-  projectBenefitedPopulation: '',
-  projectBenefitedChildren: '',
-  projectMunicipalityId: '',
-  projectCommunityId: '',
-  projectInitialBudget: '',
-  projectInitialBudgetUsd: '',
-}
-
+  projectBenefitedPopulation: "",
+  projectBenefitedChildren: "",
+  projectMunicipalityId: "",
+  projectCommunityId: "",
+  projectInitialBudget: "",
+  projectInitialBudgetUsd: "",
+};
 
 interface AppState {
   secretaries: Secretary[];
