@@ -3,15 +3,15 @@ import { Link, useLocation } from "react-router";
 import type { NavLinkProps } from "./config"
 
 const NavLink = ({ item }: { item: NavLinkProps }) => {
-    const location = useLocation().pathname.split('/');
+    const location = useLocation().pathname;
     const Icon = item.icon;
 
     return (
-        <StyledNavLink $currentPage={location.includes(item.to)} to={item.to}>
-            {Icon && <IconWrapper $currentPage={location.includes(item.to)}>
+        <StyledNavLink $currentPage={location === item.to} to={item.to}>
+            {Icon && <IconWrapper $currentPage={location === item.to}>
                 <Icon size={14} />
             </IconWrapper>}
-            <StyledLink $currentPage={location.includes(item.to)}>{item.label}</StyledLink>
+            <StyledLink $currentPage={location === item.to}>{item.label}</StyledLink>
         </StyledNavLink>
     )
 }

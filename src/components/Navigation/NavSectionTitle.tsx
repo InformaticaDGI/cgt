@@ -6,7 +6,7 @@ import { Link, useLocation } from "react-router-dom"
 
 const NavSectionTitle = ({ item }: { item: NavSectionTitleProps }) => {
     const Icon = item.icon || FaList
-    const location = useLocation().pathname.split('/');
+    const location = window.location.pathname;
 
     if (item.to) {
         return <StyledNavLink $currentPage={location.includes(item.to)} to={item.to}>

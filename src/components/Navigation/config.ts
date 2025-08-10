@@ -9,7 +9,7 @@ import { TbActivity } from "react-icons/tb";
 const createNavItems = (logout: () => void): NavItems => [
     {
         id: 'home',
-        to: '/',
+        to: '/mapa',
         label: 'Inicio',
         icon: FaHome,
         roles: authRoles.Public
