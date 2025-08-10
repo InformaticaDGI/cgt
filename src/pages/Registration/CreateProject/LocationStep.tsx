@@ -10,13 +10,13 @@ import useStepper from "../../../components/Stepper/useStepper";
 import Card from "../../../components/Card/Card";
 import { MunicipalitySelect } from "../../../components/Prebuilt/MunicipalitySelect";
 import { ParrishSelect } from "../../../components/Prebuilt/ParrishSelect";
-import { CommunityCircuitSelect } from "../../../components/Prebuilt/CommunityCircuit";
 import { CommunitySelect } from "../../../components/Prebuilt/CommunitySelect";
 import { AcaProjectsSelect } from "../../../components/Prebuilt/AcaProjectsSelect";
 import Text from "../../../components/Ui/Text/Text";
 import Switch from "../../../components/Ui/Switch/Switch";
 import { useState, useEffect } from "react";
 import * as utm from "utm";
+import { CommunityCircuitSelect } from "../../../components/Prebuilt/CommunityCircuit";
 
 const LocationStep = () => {
   const { nextStep, previousStep } = useStepper();
@@ -165,7 +165,7 @@ const LocationStep = () => {
               }
             >
               <CommunityCircuitSelect
-                value={formik.values.circuitId}
+                value={formik.values.circuitCode}
                 onChange={(value) => {
                   formik.setFieldValue("circuitId", value.id);
                   formik.setFieldValue("circuitCode", value.code);

@@ -9,7 +9,7 @@ const MapView = () => {
             <Header />
             <FilterTool />
         </Flex>
-        <Flex style={{ flex: 2 }}>
+        <Flex>
             <GobMap />
         </Flex>
     </Flex>

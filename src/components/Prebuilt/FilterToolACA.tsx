@@ -1,29 +1,16 @@
 import styled from "styled-components";
 import { Filter, FilterContainer } from "../Filter/Filter";
 import FilterHeader from "../Filter/FilterHeader";
-import {
-  FunnelPlus,
-  Map,
-  MapPin,
-  MapPinned,
-  Building,
-  Layers,
-  Users,
-} from "lucide-react";
+import { FunnelPlus, Map, MapPin, MapPinned, Users } from "lucide-react";
 import { useAppStore } from "../../store/store";
-import { SecretarySelect } from "./SecretarySelect";
 import { TerritorialSecreatarySelect } from "./TerritorialSecretarySelect";
 import { MunicipalitySelect } from "./MunicipalitySelect";
 import { ParrishSelect } from "./ParrishSelect";
-import { Flex } from "../Layout/Flex";
-import LocateToMap from "./LocateToMap";
-import { useLocation } from "react-router";
 import { CommunityCircuitSelect } from "./CommunityCircuitSelect";
+import { Flex } from "../Layout/Flex";
 
-const FilterTool = () => {
+const FilterToolACA = () => {
   const store = useAppStore();
-
-  const pathname = useLocation();
 
   return (
     <FilterToolCard>
@@ -40,44 +27,9 @@ const FilterTool = () => {
         >
           Filtrar:
         </FilterHeader>
-        {!pathname.pathname.includes("mapa") && <LocateToMap />}
       </Flex>
       <Container isOpen={store.openFilter}>
-        <Filter style={{ gridColumn: "span 3" }}>
-          <FilterContainer>
-            <FilterHeader
-              icon={<Layers color="white" height={"16px"} width={"16px"} />}
-              fill="linear-gradient(180deg,  #e94c6f 0%, #a72d73 100%)"
-            >
-              Transformaciones
-            </FilterHeader>
-            <SecretarySelect
-              rootOnly
-              onChange={(secretaryRootId) =>
-                store.setSecretaryRootId(secretaryRootId)
-              }
-              value={store.secretaryRootId}
-            />
-          </FilterContainer>
-        </Filter>
-        <Filter style={{ gridColumn: "span 3" }}>
-          <FilterContainer>
-            <FilterHeader
-              icon={<Building color="white" height={"16px"} width={"16px"} />}
-              fill="linear-gradient(180deg, #D3CCFF 0%, #483D8B 100%)"
-            >
-              Dependencia
-            </FilterHeader>
-            <SecretarySelect
-              parentId={store.secretaryRootId}
-              onChange={(secretaryParentId) =>
-                store.setSecretaryParentId(secretaryParentId)
-              }
-              value={store.secretaryParentId}
-            />
-          </FilterContainer>
-        </Filter>
-        <Filter style={{ gridColumn: "span 2" }}>
+        <Filter style={{ gridColumn: "span 4" }}>
           <FilterContainer>
             <FilterHeader
               icon={<Map color="white" height={"16px"} width={"16px"} />}
@@ -93,7 +45,7 @@ const FilterTool = () => {
             />
           </FilterContainer>
         </Filter>
-        <Filter style={{ gridColumn: "span 2" }}>
+        <Filter style={{ gridColumn: "span 4" }}>
           <FilterContainer>
             <FilterHeader
               icon={<MapPinned color="white" height={"16px"} width={"16px"} />}
@@ -110,7 +62,7 @@ const FilterTool = () => {
             />
           </FilterContainer>
         </Filter>
-        <Filter style={{ gridColumn: "span 2" }}>
+        <Filter style={{ gridColumn: "span 4" }}>
           <FilterContainer>
             <FilterHeader
               icon={<MapPin color="white" height={"16px"} width={"16px"} />}
@@ -145,7 +97,7 @@ const FilterTool = () => {
   );
 };
 
-export default FilterTool;
+export default FilterToolACA;
 
 const FilterToolCard = styled.div`
   background: #ffffff;
@@ -165,10 +117,8 @@ const Container = styled.div<{ isOpen: boolean }>`
   grid-template-columns: repeat(8, 1fr);
   gap: 4px;
   width: 100%;
-  transition: transform 0.3s ease-in-out, opa;
+  transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
   max-height: ${({ isOpen }) => (isOpen ? "1000px" : "0")};
   opacity: ${({ isOpen }) => (isOpen ? "1" : "0")};
-  visibility: ${({ isOpen }) => (isOpen ? "visible" : "hidden")};
-  
+  overflow: ${({ isOpen }) => (isOpen ? "visible" : "hidden")};
 `;
-
