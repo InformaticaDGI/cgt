@@ -1,56 +1,73 @@
 import { BsBarChartFill } from "react-icons/bs";
-import { FaChartBar, FaHammer, /*FaUsersGear, */ FaList, FaUsers } from "react-icons/fa6";
-import { FaMapLocationDot } from "react-icons/fa6";
-import { MdShield } from "react-icons/md";
+import { FaFolderOpen, FaFolderPlus, /*FaUsersGear, */ FaUserPlus, FaUsers } from "react-icons/fa6";
 import { IoIosExit } from "react-icons/io";
 import authRoles from "./authRoles.ts"
+import { FaClipboardList, FaCogs, FaHome } from "react-icons/fa";
+import { BsFillClipboard2PlusFill } from "react-icons/bs";
+import { TbActivity } from "react-icons/tb";
 
 const createNavItems = (logout: () => void): NavItems => [
     {
-        id: 'map',
-        to: '/mapa',
-        label: 'Mapa',
-        icon: FaMapLocationDot,
+        id: 'home',
+        to: '/',
+        label: 'Inicio',
+        icon: FaHome,
         roles: authRoles.Public
     },
     {
-        id: 'dashboard',
+        id: 'indicators',
         to: '/indicadores',
         label: 'Indicadores',
         icon: BsBarChartFill,
         roles: authRoles.Public
     },
+    // {
+    //     id: 'map',
+    //     to: '/mapa',
+    //     label: 'Inicio',
+    //     icon: FaHome,
+    //     roles: authRoles.Public
+    // },
+    // {
+    //     id: 'dashboard',
+    //     to: '/indicadores',
+    //     label: 'Indicadores',
+    //     icon: BsBarChartFill,
+    //     roles: authRoles.Public
+    // },
 
     {
-        sectionTitle: 'Registro',
-        roles: authRoles.Usuario
+        sectionTitle: 'Programas',
+        roles: authRoles.Usuario,
+        icon: FaClipboardList
     },
     {
         id: 'create-program',
         to: '/crear-programa',
         label: 'Crear Programa',
-        icon: FaChartBar,
-        roles: authRoles.Usuario
-    },
-    {
-        id: 'create-project',
-        to: '/crear-proyecto',
-        label: 'Crear Proyecto',
-        icon: FaHammer,
+        icon: BsFillClipboard2PlusFill,
         roles: authRoles.Usuario
     },
 
     {
-        sectionTitle: 'Gestión',
-        roles: authRoles.Public
+        sectionTitle: 'Proyectos',
+        roles: authRoles.Public,
+        icon: FaFolderOpen
     },
 
     {
         id: 'projects',
         to: '/proyectos',
-        label: 'Proyectos',
-        icon: FaList,
+        label: 'Ver Proyectos',
+        icon: FaFolderOpen,
         roles: authRoles.Public
+    },
+    {
+        id: 'create-project',
+        to: '/crear-proyecto',
+        label: 'Crear Proyecto',
+        icon: FaFolderPlus,
+        roles: authRoles.Usuario
     },
 
     // {
@@ -61,19 +78,6 @@ const createNavItems = (logout: () => void): NavItems => [
     //     roles: authRoles.Public
     // },
 
-
-
-    {
-        sectionTitle: 'Cuenta',
-        roles: authRoles.Public
-    },
-    {
-        id: 'security',
-        to: '/seguridad',
-        label: 'Seguridad',
-        icon: MdShield,
-        roles: authRoles.Admin
-    },
     {
         sectionTitle: 'Contactos',
         roles: authRoles.Public,
@@ -82,17 +86,33 @@ const createNavItems = (logout: () => void): NavItems => [
     {
         id: 'list-contacts',
         to: '/contactos',
-        label: 'Ver contactos',
-        icon: null,
+        label: 'Ver Contactos',
+        icon: FaUsers,
         roles: authRoles.Public
     },
     {
         id: 'create-contact',
         to: '/contactos/crear',
-        label: 'Crear contacto',
-        icon: null,
+        label: 'Crear Contacto',
+        icon: FaUserPlus,
         roles: authRoles.Public
     },
+
+
+
+    {
+        sectionTitle: 'Opciones',
+        roles: authRoles.Public,
+        icon: FaCogs
+    },
+    {
+        id: 'logs',
+        to: '/registro-actividad',
+        label: 'Registro de Actividad',
+        icon: TbActivity,
+        roles: authRoles.Admin
+    },
+    
     {
         id: 'exit',
         label: 'Salir',
@@ -126,7 +146,9 @@ export default buildNavItems
 
 export type NavSectionTitleProps = {
     sectionTitle: string,
-    roles: string[]
+    roles: string[],
+    icon: React.ElementType | null,
+    to?: string
 }
 
 // Base type for navigation items

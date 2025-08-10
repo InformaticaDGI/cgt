@@ -18,7 +18,7 @@ const ListItem = ({ project }: { project: Project }) => {
 
 
 
-    return <StyledListItem as={Link} to={`/proyectos/${project.id}`} style={{ textDecoration: 'none', userSelect: 'none' }}>
+    return <StyledListItem to={`/proyectos/${project.id}`} style={{ textDecoration: 'none', userSelect: 'none' }}>
         <Grid $width='100%' $columns="repeat(20, 1fr)" $padding='0.9rem' $gap='1rem' style={{ borderRadius: '10px', boxShadow: '0px 0px 10px 0px rgba(0, 0, 0, 0.1)' }}>
             <GridItem $colSpan={3} style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem', justifyContent: 'center', alignItems: 'start' }}>
                 <Flex $width='100%' $justify='center' $align='start' $direction='column' $gap='0.2rem' $paddingX='0.8rem'>
@@ -65,8 +65,9 @@ const ListItem = ({ project }: { project: Project }) => {
 
 }
 
-const StyledListItem = styled.div`
+const StyledListItem = styled(Link)`
     width: 100%;
+    background-color: #ffffff;
     &:hover {
         cursor: pointer;
         transform: scale(1.01);

@@ -63,6 +63,7 @@ const FilterTool = () => {
 export default FilterTool
 
 const FilterToolCard = styled.div`
+    background: #ffffff;
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -71,7 +72,7 @@ const FilterToolCard = styled.div`
     width: 100%;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
     border-radius: 12px;
-    border: 1px solid #98F4E3;
+    // border: 1px solid #98F4E3;
 `;
 
 const Container = styled.div`
