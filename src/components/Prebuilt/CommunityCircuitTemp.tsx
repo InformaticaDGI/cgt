@@ -1,15 +1,12 @@
 import { useCommunityCircuits } from "../../hooks/queries/useCommunityCircuits"
 import { SearchableSelect } from "../Ui/Select/SearchableSelect"
 
-export const CommunityCircuitSelect = ({ value, onChange, municipalityId, parishId, style }: CommunityCircuitSelectProps) => {
+export const CommunityCircuitSelectTemp = ({ value, onChange, municipalityId, parishId, style }: CommunityCircuitSelectProps) => {
 
     const { data: circuits } = useCommunityCircuits({ municipalityId, parishId })
-    const options = circuits?.map(circuit => ({ label: circuit.name, value: circuit.id, code: circuit.code })) || []
+    const options = circuits?.map(circuit => ({ label: circuit.name, value: circuit.code })) || []
     
-    const handleChange = (selectedValue: string) => {
-        const code = options.find(option => option.value === selectedValue)?.code || ''
-        onChange({ id: selectedValue, code })
-    }
+    const handleChange = (selectedValue: string) => onChange(selectedValue)
     
     return <SearchableSelect 
     options={options} 
@@ -20,7 +17,7 @@ export const CommunityCircuitSelect = ({ value, onChange, municipalityId, parish
 
 type CommunityCircuitSelectProps = {
     value: string
-    onChange: (value: { id: string, code: string }) => void
+    onChange: (value: string) => void
     parishId?: string
     municipalityId?: string[]
     style?: React.CSSProperties

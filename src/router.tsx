@@ -17,6 +17,8 @@ import ProjectsListView from './pages/Management/ProjectListView'
 import ContactsView from './pages/Contacts/ContactsView'
 import CreateContactView from './pages/Contacts/CreateContactView'
 import ContactView from './pages/Contacts/ContactView'
+// import ACASView from './pages/ACAS/ACASView'
+import CreateACAView from './pages/ACA/CreateACAView'
 
 const router = createBrowserRouter([
 
@@ -31,6 +33,19 @@ const router = createBrowserRouter([
             {
                 path: 'mapa',
                 element: <MapView />
+            },
+            {
+                path: 'acas',
+                children: [
+                    // {
+                    //     index: true,
+                    //     element: <ACASView />
+                    // },
+                    {
+                        path: 'crear',
+                        element: <CreateACAView />
+                    }
+                ]
             },
             {
                 path: 'indicadores',
