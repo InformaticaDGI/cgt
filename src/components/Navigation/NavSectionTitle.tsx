@@ -2,7 +2,7 @@ import styled from "styled-components"
 import type { NavSectionTitleProps } from "./config"
 import { FaList } from "react-icons/fa"
 import { Flex } from "../Layout/Flex"
-import { Link, useLocation } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 const NavSectionTitle = ({ item }: { item: NavSectionTitleProps }) => {
     const Icon = item.icon || FaList
