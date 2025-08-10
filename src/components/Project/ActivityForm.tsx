@@ -4,7 +4,6 @@ import { FormControl } from '../Ui/FormControl/FormControl';
 import { Button } from '../Ui/Button/Button';
 import { MunicipalitySelect } from "../Prebuilt/MunicipalitySelect";
 import { ParrishSelect } from "../Prebuilt/ParrishSelect";
-import { CommunityCircuitSelect } from "../Prebuilt/CommunityCircuit";
 import { CommunitySelect } from "../Prebuilt/CommunitySelect";
 import { CommunityCircuitSelectTemp } from '../Prebuilt/CommunityCircuitTemp';
 
