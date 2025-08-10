@@ -69,7 +69,7 @@ const NavItems = () => {
       
       {/* Secciones agrupadas */}
       {groupedItems.map((group, index) => {
-        const isCollapsed = collapsedSections.has(group.section.sectionTitle);
+        const isCollapsed = !collapsedSections.has(group.section.sectionTitle);
         
         return (
           <SectionGroup key={index}>
