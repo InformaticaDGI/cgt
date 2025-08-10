@@ -1,9 +1,9 @@
 import type { ReactNode } from "react";
 import styled from "styled-components"
 
-const FilterHeader = ({ icon, fill, children }: { icon?: ReactNode, fill?: string, children: string }) => {
+const FilterHeader = ({ icon, fill, children, onClick }: { icon?: ReactNode, fill?: string, children: string, onClick?: () => void }) => {
 
-    return <HeaderWrapper>
+    return <HeaderWrapper onClick={onClick}>
         <Header>
             <IconWrapper $fill={fill}>
                 {icon}
@@ -18,6 +18,7 @@ const HeaderWrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: start;
+    cursor: pointer;
 `;
 
 const Header = styled.div`

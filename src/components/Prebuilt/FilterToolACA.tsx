@@ -1,27 +1,16 @@
 import styled from "styled-components";
 import { Filter, FilterContainer } from "../Filter/Filter";
 import FilterHeader from "../Filter/FilterHeader";
-import {
-  FunnelPlus,
-  Map,
-  MapPin,
-  MapPinned,
-  Building,
-  Layers,
-} from "lucide-react";
+import { FunnelPlus, Map, MapPin, MapPinned, Users } from "lucide-react";
 import { useAppStore } from "../../store/store";
-import { SecretarySelect } from "./SecretarySelect";
 import { TerritorialSecreatarySelect } from "./TerritorialSecretarySelect";
 import { MunicipalitySelect } from "./MunicipalitySelect";
 import { ParrishSelect } from "./ParrishSelect";
+import { CommunityCircuitSelect } from "./CommunityCircuitSelect";
 import { Flex } from "../Layout/Flex";
-import LocateToMap from "./LocateToMap";
-import { useLocation } from "react-router";
 
-const FilterTool = () => {
+const FilterToolACA = () => {
   const store = useAppStore();
-
-  const pathname = useLocation();
 
   return (
     <FilterToolCard>
@@ -38,44 +27,9 @@ const FilterTool = () => {
         >
           Filtrar:
         </FilterHeader>
-        {!pathname.pathname.includes("mapa") && <LocateToMap />}
       </Flex>
       <Container isOpen={store.openFilter}>
-        <Filter style={{ gridColumn: "span 3" }}>
-          <FilterContainer>
-            <FilterHeader
-              icon={<Layers color="white" height={"16px"} width={"16px"} />}
-              fill="linear-gradient(180deg,  #e94c6f 0%, #a72d73 100%)"
-            >
-              Transformaciones
-            </FilterHeader>
-            <SecretarySelect
-              rootOnly
-              onChange={(secretaryRootId) =>
-                store.setSecretaryRootId(secretaryRootId)
-              }
-              value={store.secretaryRootId}
-            />
-          </FilterContainer>
-        </Filter>
-        <Filter style={{ gridColumn: "span 3" }}>
-          <FilterContainer>
-            <FilterHeader
-              icon={<Building color="white" height={"16px"} width={"16px"} />}
-              fill="linear-gradient(180deg, #D3CCFF 0%, #483D8B 100%)"
-            >
-              Dependencia
-            </FilterHeader>
-            <SecretarySelect
-              parentId={store.secretaryRootId}
-              onChange={(secretaryParentId) =>
-                store.setSecretaryParentId(secretaryParentId)
-              }
-              value={store.secretaryParentId}
-            />
-          </FilterContainer>
-        </Filter>
-        <Filter style={{ gridColumn: "span 2" }}>
+        <Filter style={{ gridColumn: "span 4" }}>
           <FilterContainer>
             <FilterHeader
               icon={<Map color="white" height={"16px"} width={"16px"} />}
@@ -91,7 +45,7 @@ const FilterTool = () => {
             />
           </FilterContainer>
         </Filter>
-        <Filter style={{ gridColumn: "span 2" }}>
+        <Filter style={{ gridColumn: "span 4" }}>
           <FilterContainer>
             <FilterHeader
               icon={<MapPinned color="white" height={"16px"} width={"16px"} />}
@@ -108,7 +62,7 @@ const FilterTool = () => {
             />
           </FilterContainer>
         </Filter>
-        <Filter style={{ gridColumn: "span 2" }}>
+        <Filter style={{ gridColumn: "span 4" }}>
           <FilterContainer>
             <FilterHeader
               icon={<MapPin color="white" height={"16px"} width={"16px"} />}
@@ -123,12 +77,27 @@ const FilterTool = () => {
             />
           </FilterContainer>
         </Filter>
+        <Filter style={{ gridColumn: "span 4" }}>
+          <FilterContainer>
+            <FilterHeader
+              icon={<Users color="white" height={"16px"} width={"16px"} />}
+              fill="linear-gradient(180deg,rgb(46, 167, 136) 0%, #008000 100%)"
+            >
+              Circuito comunal
+            </FilterHeader>
+            <CommunityCircuitSelect
+              onChange={(circuitId) => store.setCircuitId(circuitId)}
+              value={store.circuitId}
+              parishId={store.parrishId}
+            />
+          </FilterContainer>
+        </Filter>
       </Container>
     </FilterToolCard>
   );
 };
 
-export default FilterTool;
+export default FilterToolACA;
 
 const FilterToolCard = styled.div`
   background: #ffffff;

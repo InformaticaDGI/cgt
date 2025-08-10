@@ -23,28 +23,25 @@ export const useAcaProjectsByFilter = (params: AcaProjectsQueryParams = {}) => {
 };
 
 export const getAcaProjectsByFilter = async ({
-  sectorId,
-  municipalityId,
   territorialSecretaryId,
+  municipalityId,
+  sectorId,
   name,
+  all,
 }: AcaProjectsQueryParams) => {
-  ///aca-projects?
-  //territorialSecretaryId={{territorialSecretaryId}}&
-  // municipalityId={{municipalityId}}&
-  // communityCircuitId={{communityCircuitId}}&
-  // sectorId={{sectorId}}&name={{projectName}}&page=1&pageSize=10",
+  if (
+    all &&
+    (territorialSecretaryId === "" || territorialSecretaryId === undefined) &&
+    (municipalityId === "" || municipalityId === undefined) &&
+    (sectorId === "" || sectorId === undefined) &&
+    (name === "" || name === undefined)
+  ) {
+    const response = await axios.get(`${config.apiUrl}/aca-projects`);
 
-  /*
-"id": "5bc82c1c-1b6e-437b-8361-46ab0bda8548",
-      "name": "Proyecto ACA SAN JUAN",
-      "areaId": "69bc0778-2008-4bc2-b572-7f4ecb611bb9",
-      "territorialSecretaryId": "ts-001",
-      "municipalityId": "mun-001",
-      "communityCircuitId": "95dd036e-2b18-4860-93e8-9772d9d0c49d",
-      "sectorId": "2fffa26d-7c49-4de1-b304-5381bfb9ea06",
-  */
+    return response.data;
+  }
+
   const queryParams: any = {};
-
   queryParams.territorialSecretaryId = territorialSecretaryId;
   if (municipalityId) queryParams.municipalityId = municipalityId;
 
@@ -56,6 +53,7 @@ export const getAcaProjectsByFilter = async ({
   const response = await axios.get(`${config.apiUrl}/aca-projects`, {
     params: queryParams,
   });
+
   return response.data;
 };
 
@@ -67,6 +65,7 @@ export type AcaProject = {
   municipalityId: string;
   communityCircuitId?: string;
   sectorId?: string;
+  projectCount: number;
 };
 
 type AcaProjectsQueryParams = {
@@ -74,6 +73,7 @@ type AcaProjectsQueryParams = {
   communityCircuitId?: string;
   sectorId?: string;
   territorialSecretaryId?: string;
+  all?: boolean;
   name?: string;
 };
 
