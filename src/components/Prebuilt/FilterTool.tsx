@@ -8,6 +8,7 @@ import {
   MapPinned,
   Building,
   Layers,
+  Users,
 } from "lucide-react";
 import { useAppStore } from "../../store/store";
 import { SecretarySelect } from "./SecretarySelect";
@@ -17,6 +18,7 @@ import { ParrishSelect } from "./ParrishSelect";
 import { Flex } from "../Layout/Flex";
 import LocateToMap from "./LocateToMap";
 import { useLocation } from "react-router";
+import { CommunityCircuitSelect } from "./CommunityCircuitSelect";
 
 const FilterTool = () => {
   const store = useAppStore();
@@ -123,6 +125,21 @@ const FilterTool = () => {
             />
           </FilterContainer>
         </Filter>
+        <Filter style={{ gridColumn: "span 4" }}>
+          <FilterContainer>
+            <FilterHeader
+              icon={<Users color="white" height={"16px"} width={"16px"} />}
+              fill="linear-gradient(180deg,rgb(46, 167, 136) 0%, #008000 100%)"
+            >
+              Circuito comunal
+            </FilterHeader>
+            <CommunityCircuitSelect
+              onChange={(circuitId) => store.setCircuitId(circuitId)}
+              value={store.circuitId}
+              parishId={store.parrishId}
+            />
+          </FilterContainer>
+        </Filter>
       </Container>
     </FilterToolCard>
   );
@@ -148,8 +165,10 @@ const Container = styled.div<{ isOpen: boolean }>`
   grid-template-columns: repeat(8, 1fr);
   gap: 4px;
   width: 100%;
-  transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out, opa;
   max-height: ${({ isOpen }) => (isOpen ? "1000px" : "0")};
   opacity: ${({ isOpen }) => (isOpen ? "1" : "0")};
-  overflow: ${({ isOpen }) => (isOpen ? "visible" : "hidden")};
+  visibility: ${({ isOpen }) => (isOpen ? "visible" : "hidden")};
+  
 `;
+

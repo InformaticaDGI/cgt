@@ -1,24 +1,26 @@
-import { createBrowserRouter, Navigate } from "react-router";
-import HomeView from "./pages/Home/HomeView";
-import ProgramView from "./pages/Home/[programId]/Program/ProgramView";
-import ProjectView from "./pages/Home/[programId]/Program/[projectId]/Project/ProjectView";
-import ActivityView from "./pages/Home/[programId]/Program/[projectId]/Project/[activityId]/Activity/ActivityView";
-import TaskView from "./pages/Home/[programId]/Program/[projectId]/Project/[activityId]/Activity/[taskId]/Task/TaskView";
-import CreateProgramView from "./pages/Registration/CreateProgram/CreateProgramView";
-import CreateProjectView from "./pages/Registration/CreateProject/CreateProjectView";
-import ProjectDetailView from "./pages/Registration/ProjectDetailView";
-import { LoginView } from "./pages/Login/LoginView";
-import { ProtectedRoute } from "./components/ProtectedRoute/ProtectedRoute";
-import NotFoundView from "./pages/NotFound/NotFoundView";
-import MapView from "./pages/Management/Map/MapView";
-import Navigation from "./components/Navigation/Navigation";
-import SecurityView from "./pages/Security/SecurityView";
-import ProjectsListView from "./pages/Management/ProjectListView";
-import ContactsView from "./pages/Contacts/ContactsView";
-import CreateContactView from "./pages/Contacts/CreateContactView";
-import ContactView from "./pages/Contacts/ContactView";
-import IndicatorsView from "./pages/indicators/IndicatorsView";
-import TransformationsView from "./pages/indicators/[transformationsId]/TransformationsView";
+import { createBrowserRouter, Navigate } from 'react-router'
+import HomeView from './pages/Home/HomeView'
+import ProgramView from './pages/Home/[programId]/Program/ProgramView'
+import ProjectView from './pages/Home/[programId]/Program/[projectId]/Project/ProjectView'
+import ActivityView from './pages/Home/[programId]/Program/[projectId]/Project/[activityId]/Activity/ActivityView'
+import TaskView from './pages/Home/[programId]/Program/[projectId]/Project/[activityId]/Activity/[taskId]/Task/TaskView'
+import CreateProgramView from './pages/Registration/CreateProgram/CreateProgramView'
+import CreateProjectView from './pages/Registration/CreateProject/CreateProjectView'
+import ProjectDetailView from './pages/Registration/ProjectDetailView'
+import { LoginView } from './pages/Login/LoginView'
+import { ProtectedRoute } from './components/ProtectedRoute/ProtectedRoute'
+import NotFoundView from './pages/NotFound/NotFoundView'
+import MapView from './pages/Management/Map/MapView'
+import Navigation from './components/Navigation/Navigation'
+import SecurityView from './pages/Security/SecurityView'
+import ProjectsListView from './pages/Management/ProjectListView'
+import ContactsView from './pages/Contacts/ContactsView'
+import CreateContactView from './pages/Contacts/CreateContactView'
+import ContactView from './pages/Contacts/ContactView'
+// import ACASView from './pages/ACAS/ACASView'
+import CreateACAView from './pages/ACA/CreateACAView'
+import IndicatorsView from './pages/indicators/IndicatorsView'
+import TransformationsView from './pages/indicators/[transformationsId]/TransformationsView'
 
 const router = createBrowserRouter([
   {
@@ -36,6 +38,19 @@ const router = createBrowserRouter([
       {
         path: "mapa",
         element: <MapView />,
+      },
+      {
+        path: 'acas',
+        children: [
+          // {
+          //     index: true,
+          //     element: <ACASView />
+          // },
+          {
+            path: 'crear',
+            element: <CreateACAView />
+          }
+        ]
       },
       {
         path: "indicadores",

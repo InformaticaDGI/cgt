@@ -10,6 +10,7 @@ import authRoles from "./authRoles.ts";
 import { FaClipboardList, FaCogs, FaHome } from "react-icons/fa";
 import { BsFillClipboard2PlusFill } from "react-icons/bs";
 import { TbActivity } from "react-icons/tb";
+import { MdAssignmentAdd, MdAssignmentLate } from "react-icons/md";
 
 const createNavItems = (logout: () => void): NavItems => [
   {

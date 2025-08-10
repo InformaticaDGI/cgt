@@ -10,7 +10,7 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { useMunicipalities } from "../../hooks/queries/useMunicipalities";
 import { useParrishes } from "../../hooks/queries/useParrishes";
-import { useCommunityCircuitsByParish } from "../../hooks/queries/useCommunityCircuitsByParish";
+import { useCommunityCircuits } from "../../hooks/queries/useCommunityCircuits";
 import markerIconPng from "../../assets/marker-icon.png";
 import markerShadowPng from "../../assets/marker-shadow.png";
 
@@ -49,7 +49,7 @@ function LocationMarker({
     territorialSecretaryId: undefined,
   });
   const { data: parrishes } = useParrishes(municipalityId ?? "");
-  const { data: circuits } = useCommunityCircuitsByParish(parrishId ?? "");
+  const { data: circuits } = useCommunityCircuits({ parishId: parrishId ?? "" });
 
   useEffect(() => {
     if (value) {

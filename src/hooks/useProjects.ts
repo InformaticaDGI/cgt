@@ -3,7 +3,7 @@ import axios from "axios";
 import { config } from "../config";
 import type { Parrish } from "./queries/useParrishes";
 import type { Secretary } from "./useSecretary";
-import type { CommunityCircuit } from "./queries/useCommunityCircuitsByParish";
+import type { CommunityCircuit } from "./queries/useCommunityCircuits";
 import type { Municipality } from "./useMunicipality";
 import type { TerritorialSecretary } from "./useTerritorialSecretaries";
 
