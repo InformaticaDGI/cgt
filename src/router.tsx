@@ -96,7 +96,7 @@ const router = createBrowserRouter([
                 ]
             },
             {
-                path: 'seguridad',
+                path: 'registro-actividad',
                 element: <SecurityView />
             }
         ]

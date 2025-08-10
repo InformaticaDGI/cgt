@@ -2,15 +2,16 @@ import React, { useState, useMemo, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
 export const SearchableSelect = ({ options, value, onChange, placeholder, style }: SearchableSelectProps) => {
-    const [searchTerm, setSearchTerm] = useState('');
+    const [searchTerm, setSearchTerm] = useState(value);
     const [isOpen, setIsOpen] = useState(false);
     const [highlightedIndex, setHighlightedIndex] = useState(-1);
     const optionsListRef = useRef<HTMLUListElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
 
-    useEffect(() => {
-        setSearchTerm('');
-        setHighlightedIndex(-1);
-    }, [value]);
+    // useEffect(() => {
+    //     setSearchTerm('');
+    //     setHighlightedIndex(-1);
+    // }, [value]);
 
     const filteredOptions = useMemo(() => {
         if (!searchTerm) {
@@ -39,7 +40,9 @@ export const SearchableSelect = ({ options, value, onChange, placeholder, style 
     const handleSelect = (selectedValue: string) => {
         onChange?.(selectedValue);
         setIsOpen(false);
-        setSearchTerm(options.find(option => option.value === selectedValue)?.label || '');
+        const selectedOption = options.find(option => option.value === selectedValue);
+        setSearchTerm(selectedOption?.label || '');
+        inputRef.current?.blur();
     };
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -70,6 +73,12 @@ export const SearchableSelect = ({ options, value, onChange, placeholder, style 
                     handleSelect(filteredOptions[highlightedIndex].value);
                 }
                 break;
+            case 'Backspace':
+                e.preventDefault();
+                setSearchTerm('');
+                setHighlightedIndex(-1);
+                onChange?.('');
+                break;
             default:
                 break;
         }
@@ -83,6 +92,7 @@ export const SearchableSelect = ({ options, value, onChange, placeholder, style 
         <$Container style={style}>
             <$InputContainer isOpen={isOpen}>
                 <input
+                    ref={inputRef}
                     type="text"
                     placeholder={placeholder}
                     value={isOpen ? searchTerm : displayValue}

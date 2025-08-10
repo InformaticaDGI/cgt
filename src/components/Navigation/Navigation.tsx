@@ -24,7 +24,7 @@ export default Navigation;
 
 const DrawerWrapper = styled.div`
     display: flex;
-    background: rgba(244,245,251,1);
+    background: #fcfcfc;
   `;
 
 

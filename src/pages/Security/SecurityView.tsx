@@ -23,7 +23,7 @@ const SecurityView = () => {
                 <CardHeader>
                     <Text style={{ fontSize: '16px', fontWeight: '600', color: '#5A787A' }}>Registro de cambios</Text>
                 </CardHeader>
-                <CardBody style={{ paddingTop: '16px' }}>
+                <CardBody >
                     <ChangeLogTable />
                 </CardBody>
             </Card>

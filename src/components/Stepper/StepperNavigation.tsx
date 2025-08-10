@@ -24,6 +24,8 @@ export default StepperNavigation
 
 
 const StyledStepperNavigation = styled.div`
+    background: #ffffff;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 10px 0px;
     display: flex;
     flex-direction: row;
     align-items: center;

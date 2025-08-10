@@ -6,12 +6,14 @@ const AccessLogTable = () => {
 
     const { data: accessLogs } = useAccessLogs()
 
+    const filteredAccessLogs = accessLogs?.filter((log: any) => log.appId === 'db701dae-f19d-484d-909c-ea0d0a5e02dc')
+
     const columnsAccess: HeaderConfig[] = [
         {
             key: 'user',
             label: 'Usuario',
             align: 'left',
-            render: (row: any) => <Text style={{ fontSize: '12px', fontWeight: '500', maxWidth: '300px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{row.payload.name}</Text>
+            render: (row: any) => <Text style={{ fontSize: '12px', fontWeight: '500', maxWidth: '300px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{row.payload.name?.toUpperCase()}</Text>
         },
         {
             key: 'institution',
@@ -39,7 +41,7 @@ const AccessLogTable = () => {
         }
     ]
 
-    return <Table columns={columnsAccess} data={accessLogs ?? []} />
+    return <Table columns={columnsAccess} data={filteredAccessLogs ?? []} />
 }
 
 export default AccessLogTable;
