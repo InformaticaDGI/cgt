@@ -30,8 +30,7 @@ const LocationStep = () => {
     if (!values.municipalityId)
       errors.municipalityId = "El municipio es requerido";
     if (!values.parrishId) errors.parrishId = "La parroquia es requerida";
-    if (!values.circuitCode)
-      errors.circuitCode = "El circuito comunal es requerido";
+    if (!values.circuitId) errors.circuitId = "El circuito comunal es requerido";
     if (!values.coords.lat) errors.coords.lat = "La latitud es requerida";
     if (!values.coords.lng) errors.coords.lng = "La longitud es requerida";
     return errors;
@@ -41,6 +40,7 @@ const LocationStep = () => {
     initialValues: {
       municipalityId: formState.projectMunicipalityId,
       parrishId: formState.projectParrishId,
+      circuitId: '',
       circuitCode: formState.projectCommunityCircuitCode,
       communityId: formState.projectCommunityId || "",
       acaProjectId: formState.projectAcaProjectId || "",
@@ -159,15 +159,16 @@ const LocationStep = () => {
               label="Circuito Comunal"
               required
               error={
-                formik.errors.circuitCode && formik.touched.circuitCode
-                  ? formik.errors.circuitCode
+                formik.errors.circuitId && formik.touched.circuitId
+                  ? formik.errors.circuitId
                   : undefined
               }
             >
               <CommunityCircuitSelect
-                value={formik.values.circuitCode}
+                value={formik.values.circuitId}
                 onChange={(value) => {
-                  formik.setFieldValue("circuitCode", value);
+                  formik.setFieldValue("circuitId", value.id);
+                  formik.setFieldValue("circuitCode", value.code);
                   formik.setFieldValue("communityId", ""); // Reset community when circuit changes
                 }}
                 parishId={formik.values.parrishId}
@@ -192,7 +193,7 @@ const LocationStep = () => {
                 }
                 areaId={formState.projectAreaId}
                 municipalityId={formik.values.municipalityId}
-                communityCircuitId={formik.values.circuitCode}
+                communityCircuitId={formik.values.circuitId}
                 sectorId={formik.values.communityId}
                 parrishId={formik.values.parrishId}
               />

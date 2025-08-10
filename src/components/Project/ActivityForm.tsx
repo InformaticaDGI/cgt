@@ -6,6 +6,7 @@ import { MunicipalitySelect } from "../Prebuilt/MunicipalitySelect";
 import { ParrishSelect } from "../Prebuilt/ParrishSelect";
 import { CommunityCircuitSelect } from "../Prebuilt/CommunityCircuit";
 import { CommunitySelect } from "../Prebuilt/CommunitySelect";
+import { CommunityCircuitSelectTemp } from '../Prebuilt/CommunityCircuitTemp';
 
 interface ActivityFormData {
   name: string;
@@ -125,10 +126,12 @@ export const ActivityForm: React.FC<ActivityFormProps> = ({
       
       <div style={{ marginTop: "40px", display: "flex", gap: "20px" }}>
         <FormControl label="Circuito" required style={{ flex: 1 }}>
-          <CommunityCircuitSelect
+          <CommunityCircuitSelectTemp
             parishId={formData.parishId}
             value={formData.circuitCode}
-            onChange={(value) => handleInputChange('circuitCode', value)}
+            onChange={(value) => {
+              handleInputChange('circuitCode', value)
+            }}
           />
         </FormControl>
         
