@@ -10,6 +10,7 @@ import authRoles from "./authRoles.ts";
 import { FaClipboardList, FaCogs, FaHome } from "react-icons/fa";
 import { BsFillClipboard2PlusFill } from "react-icons/bs";
 import { TbActivity } from "react-icons/tb";
+import { MdAssignmentAdd, MdAssignmentLate } from "react-icons/md";
 
 const createNavItems = (logout: () => void): NavItems => [
   {
@@ -53,6 +54,18 @@ const createNavItems = (logout: () => void): NavItems => [
   //     roles: authRoles.Public
   // },
 
+  {
+    sectionTitle: "ACAS",
+    roles: authRoles.Usuario,
+    icon: MdAssignmentLate,
+  },
+  {
+    id: "create-aca",
+    to: "/acas/crear",
+    label: "Crear ACA",
+    icon: MdAssignmentAdd,
+    roles: authRoles.Usuario,
+  },
   {
     sectionTitle: "Programas",
     roles: authRoles.Usuario,
