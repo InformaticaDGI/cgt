@@ -51,6 +51,7 @@ const LocationStep = () => {
     onSubmit: (values) => {
       setFormState({
         ...formState,
+        projectAcaProjectId: values.acaProjectId,
         projectMunicipalityId: values.municipalityId,
         projectParrishId: values.parrishId,
         projectCommunityCircuitCode: values.circuitCode,
