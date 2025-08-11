@@ -115,7 +115,7 @@ export const ActivityUpdateModal: React.FC<ActivityUpdateModalProps> = ({
         .filter(([_, value]) => value && value !== '0' && value !== '')
         .map(([kpiId, value]) => ({
           kpiInstanceId: kpiId,
-          value: +unformatNumber(value)
+          value: +value
         }));
 
       console.log('Guardando datos:', {
@@ -130,10 +130,12 @@ export const ActivityUpdateModal: React.FC<ActivityUpdateModalProps> = ({
         observations
       });
 
-      await uploadFiles({
-        activityId: activityResult.id,
-        formData
-      });
+      if(startFiles.length > 0 || middleFiles.length > 0 || endFiles.length > 0){
+        await uploadFiles({
+          activityId: activityResult.id,
+          formData
+        });
+      }
 
       handleClose();
     } catch (err) {

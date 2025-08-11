@@ -112,6 +112,7 @@ export const useUpdateActivityKPIs = () => {
       // Invalidar consultas relacionadas para que se actualicen
       queryClient.invalidateQueries({ queryKey: ['kpiinstances'] });
       queryClient.invalidateQueries({ queryKey: ['activities'] });
+      queryClient.invalidateQueries({ queryKey: ['project'] });
     }
   });
 };

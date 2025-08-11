@@ -157,6 +157,7 @@ export type Sector = {
 export type ProjectPayloadExtension = {
   projectBudget: ProjectBudget[]
   scheduledActivities: any[]
+  activities: any[]
   kpiInstances: any[]
   sector: Sector
   parish: Parrish & { municipality: Municipality & { territorialSecretary: TerritorialSecretary } }

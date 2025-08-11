@@ -19,7 +19,6 @@ export default function ProjectDetailView() {
   const { data: project, isLoading, error } = useProject(projectId);
 
 
-
   // No state needed here anymore as it's all in the ProjectActivities component
 
   if (isLoading) return <div>Cargando...</div>;
