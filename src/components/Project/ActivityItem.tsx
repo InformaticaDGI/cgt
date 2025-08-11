@@ -5,6 +5,7 @@ import Text from '../Ui/Text/Text';
 import { ActivityUpdateModal } from './ActivityUpdateModal';
 import './ActivityItem.css';
 import { useProjectKPIs } from '../../hooks/useActivityKPIs';
+import { Grid, GridItem } from '../Layout/Grid';
 
 interface ActivityItemProps {
   activity: Activity;
@@ -18,10 +19,10 @@ interface ActivityItemProps {
 export const ActivityItem: React.FC<ActivityItemProps> = ({ activity, isLast, projectId }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [hasKPIs, setHasKPIs] = useState(false);
-  
+
   // Consultar KPIs para verificar si esta actividad tiene KPIs asociados
   const { data: kpiData } = useProjectKPIs(projectId);
-  
+
   useEffect(() => {
     if (kpiData && kpiData.instances) {
       const activityInstances = kpiData.instances.filter(
@@ -30,19 +31,19 @@ export const ActivityItem: React.FC<ActivityItemProps> = ({ activity, isLast, pr
       setHasKPIs(activityInstances.length > 0);
     }
   }, [kpiData, activity.id]);
-  
+
   const formatDate = (dateString: string) => {
     return dateString ? new Date(dateString).toISOString().split('T')[0] : '';
   };
-  
+
   const handleActivityClick = () => {
     setModalOpen(true);
   };
 
   return (
-    <div 
-      style={{ 
-        padding: "16px 8px", 
+    <div
+      style={{
+        padding: "16px 8px",
         borderBottom: isLast ? "none" : "1px solid #eee",
         transition: "background 0.2s",
         cursor: "pointer",
@@ -57,16 +58,16 @@ export const ActivityItem: React.FC<ActivityItemProps> = ({ activity, isLast, pr
           <Text $fontSize="14px" $fontWeight="500">
             {activity.name}
           </Text>
-          <div style={{ display: "flex", gap: "30px", fontSize: "14px", color: "#666", alignItems: "center" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
+          <Grid $columns="repeat(3, 1fr)" $paddingBottom="10px" $gap="5px" $columnsXs="repeat(1, 1fr)" $columnsSm="repeat(1, 1fr)" $columnsMd="repeat(1, 1fr)" $columnsLg="repeat(1, 1fr)" $columnsXl="repeat(1, 1fr)">
+            <GridItem style={{ display: "flex", alignItems: "center", gap: "5px" }}>
               <FaCalendarAlt size={12} color="#16a085" />
               <span>Inicio: {formatDate(activity.startDate)}</span>
-            </div>
-            <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
+            </GridItem>
+            <GridItem style={{ display: "flex", alignItems: "center", gap: "5px" }}>
               <FaClock size={12} color="#e74c3c" />
               <span>Fin: {formatDate(activity.endDate)}</span>
-            </div>
-            <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
+            </GridItem>
+            <GridItem style={{ display: "flex", alignItems: "center", gap: "5px" }}>
               {activity.isCompleted ? (
                 <>
                   <FaCheckCircle size={14} color="#27ae60" />
@@ -78,17 +79,17 @@ export const ActivityItem: React.FC<ActivityItemProps> = ({ activity, isLast, pr
                   <span style={{ color: "#f39c12" }}>En progreso</span>
                 </>
               )}
-            </div>
+            </GridItem>
             {hasKPIs && (
-              <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
+              <GridItem style={{ display: "flex", alignItems: "center", gap: "5px" }}>
                 <FaChartLine size={14} color="#16a085" />
                 <span style={{ color: "#16a085" }}>KPIs configurados</span>
-              </div>
+              </GridItem>
             )}
-          </div>
+          </Grid>
         </div>
       </div>
-      
+
       {/* Modal de actualización */}
       <ActivityUpdateModal
         isOpen={modalOpen}

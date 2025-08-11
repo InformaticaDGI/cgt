@@ -1,0 +1,63 @@
+[
+  {
+    "id": "T-1",
+    "transformation": "TRANSFORMACION CIUDAD HUMANA PARA EL BUEN VIVIR, SERVICIOS PUBLICOS E INFRAESTRUCTURA.",
+    "areas": [
+      { "id": "a8cd9700-69db-47b5-b8c8-6428ccdd5185", "name": "AGUA" },
+      { "id": "", "name": "VIVIENDA" },
+      { "id": "2171fc83-5b84-40c8-b21e-c49e961d508a", "name": "ELECTRICIDAD" },
+      { "id": "6e22213c-7fa2-4974-a16d-8d28c944a9e8", "name": "VIALIDAD" },
+      { "id": "", "name": "GAS" },
+      { "id": "", "name": "RECOLECCIÓN DE DESECHOS" },
+      { "id": "70480dc8-7680-46b9-b004-d5c6b3461e03", "name": "TRANSPORTE" },
+      { "id": "", "name": "TELECOMUNICACIONES" },
+      { "id": "69bc0778-2008-4bc2-b572-7f4ecb611bb9", "name": "DEPORTE" },
+      { "id": "2171fc83-5b84-40c8-b21e-c49e961d508a", "name": "SISTEMA ELÉCTRICO" }
+    ]
+  },
+  {
+    "id": "T-2",
+    "transformation": "TRANSFORMACIÓN SOCIAL.",
+    "areas": [
+      { "id": "8286a11c-1db9-4e31-8008-f50142bcdda8", "name": "CULTURA" },
+      { "id": "a692e595-6020-4017-9a3f-7ac9b806cd24", "name": "EDUCACIÓN" },
+      { "id": "e832692d-7767-4721-a721-45acb0689468", "name": "SALUD" },
+      { "id": "69bc0778-2008-4bc2-b572-7f4ecb611bb9", "name": "DEPORTE" },
+      { "id": "", "name": "ALIMENTACIÓN" },
+      { "id": "", "name": "MISIONES" },
+      { "id": "d09dd7cb-849a-430d-86c1-fca4c8c23c29", "name": "SEGURIDAD" },
+      { "id": "", "name": "POBREZA" }
+    ]
+  },
+  {
+    "id": "T-3",
+    "transformation": "TRANSFORMACION ECONOMICA.",
+    "areas": [
+      { "id": "fc27c887-aada-453c-84c9-ea0f758f05a1", "name": "ECONOMÍA" },
+      { "id": "", "name": "VIVIENDA" },
+      { "id": "", "name": "PROYECTOS SOCIOPRODUCTIVOS" }
+    ]
+  },
+  {
+    "id": "T-4",
+    "transformation": "TRANSFORMACION SEGURIDAD CIUDADANA Y DEFENSA.",
+    "areas": [
+      { "id": "d09dd7cb-849a-430d-86c1-fca4c8c23c29", "name": "SEGURIDAD" }
+    ]
+  },
+  {
+    "id": "T-5",
+    "transformation": "TRANSFORMACIÓN DEL ECOSOCIALISMO, CIENCIA Y TECNOLOGIA.",
+    "areas": [
+      { "id": "", "name": "CIENCIA Y TECNOLOGÍA" },
+      { "id": "4f5e31a4-adf3-4cac-bcac-4e9990af55d7", "name": "ECOSOCIALISMO" }
+    ]
+  },
+  {
+    "id": "T-6",
+    "transformation": "TRANSFORMACIÓN POLÍTICA Y PODER POPULAR.",
+    "areas": [
+      { "id": "", "name": "POLITICO" }
+    ]
+  }
+]

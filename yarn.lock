@@ -1061,6 +1061,11 @@
   resolved "https://registry.npmjs.org/@types/use-sync-external-store/-/use-sync-external-store-0.0.6.tgz"
   integrity sha512-zFDAD+tlpf2r4asuHEj0XH6pY6i0g5NeAHPn+15wk3BV6JA69eERFXC1gyGThDkVa1zCyKr5jox1+2LbV/AMLg==
 
+"@types/utm@^1.1.4":
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/@types/utm/-/utm-1.1.4.tgz#fa83735ec4ae1ec52040ac1a27c3bf2d8528078a"
+  integrity sha512-L9vu2DLzfumvZaBhr4Aq9jOCGX0CMF5pBlvaUO4ryZXEEM1BF6A3G/xnR30SZBgBizco9JNdC0Q5WoYqaYf3WA==
+
 "@typescript-eslint/eslint-plugin@8.36.0":
   version "8.36.0"
   resolved "https://registry.npmjs.org/@typescript-eslint/eslint-plugin/-/eslint-plugin-8.36.0.tgz"
@@ -2784,6 +2789,11 @@ util-deprecate@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
   integrity sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==
+
+utm@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/utm/-/utm-1.1.1.tgz#c6ec8789a59aae21ffad160e7b51bd4bdebec18f"
+  integrity sha512-rJIv6i1u86OVy91Burh/6oRFfE8zOCd6Unc8fvA0N7fjQT43ogqhVeUp5NByaZPe278QyiA5wMMEaAU9Jx6QRA==
 
 victory-vendor@^37.0.2:
   version "37.3.6"

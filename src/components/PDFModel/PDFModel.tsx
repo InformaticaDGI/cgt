@@ -188,14 +188,14 @@ type PDFModelProps = {
     beneficitPopulation: string,
     beneficitChildren: string,
     kpiInstances: any[],
-    scheduledActivities: any[]
+    activities: any[]
 }
 
 // Create Document Component
 const PDFModel = (props: PDFModelProps) => {
 
     const {
-        scheduledActivities,
+        activities,
         beneficitChildren,
         beneficitPopulation,
         budgetInUSD,
@@ -345,20 +345,24 @@ const PDFModel = (props: PDFModelProps) => {
                                     </View>
 
                                     {/* Filas de datos */}
-                                    {scheduledActivities?.map((item) => (
-                                        <View style={activityTable.tableRow} key={item.id}>
+                                    {activities?.map((item) => {
+
+                                        const kpiResultTotal = item.kpiResults?.reduce?.((acc: number, curr: any) => acc + curr.value, 0) || 0;
+                                        const kpiResultMeasurement = item.kpiResults?.[0]?.kpiInstance?.kpi?.measurement || '';
+
+                                       return <View style={activityTable.tableRow} key={item.id}>
                                             <View style={activityTable.tableCol}>
                                                 <Text style={activityTable.tableCell}>{item.name}</Text>
                                             </View>
                                             <View style={activityTable.tableCol}>
-                                                <Text style={activityTable.tableCell}>%</Text>
+                                                <Text style={activityTable.tableCell}>{kpiResultMeasurement?.name} ({kpiResultMeasurement?.symbol})</Text>
                                             </View>
                                             <View style={activityTable.tableCol}>
-                                                <Text style={activityTable.tableCell}>0</Text>
+                                                <Text style={activityTable.tableCell}>{kpiResultTotal}</Text>
                                             </View>
 
                                         </View>
-                                    ))}
+                                    })}
                                 </View>
                             </View>
                         </View>

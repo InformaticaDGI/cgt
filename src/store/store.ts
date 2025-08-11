@@ -20,6 +20,7 @@ interface FormState {
   projectParrishId: string;
   projectCommunityCircuitCode: string;
   projectCommunityId: string;
+  projectAcaProjectId: string;
   projectLatitude: number;
   projectLongitude: number;
 
@@ -35,9 +36,9 @@ interface FormState {
   projectMaleLabor: string;
 
   // KPI
-  projectKpiInstances: KpiInstance[]
-  projectBenefitedPopulation: string
-  projectBenefitedChildren: string
+  projectKpiInstances: KpiInstance[];
+  projectBenefitedPopulation: string;
+  projectBenefitedChildren: string;
 }
 
 const initialFormState: FormState = {
@@ -51,24 +52,24 @@ const initialFormState: FormState = {
   projectAreaId: [],
   projectParrishId: "",
   projectCommunityCircuitCode: "",
+  projectAcaProjectId: "",
   projectLatitude: 9.9156947,
   projectLongitude: -67.3601931,
-  projectBudgetSourceId: '',
-  projectDirectLabor: '',
-  projectIndirectLabor: '',
-  projectQualifiedLabor: '',
-  projectUnqualifiedLabor: '',
-  projectFemaleLabor: '',
-  projectMaleLabor: '',
+  projectBudgetSourceId: "",
+  projectDirectLabor: "",
+  projectIndirectLabor: "",
+  projectQualifiedLabor: "",
+  projectUnqualifiedLabor: "",
+  projectFemaleLabor: "",
+  projectMaleLabor: "",
   projectKpiInstances: [],
-  projectBenefitedPopulation: '',
-  projectBenefitedChildren: '',
-  projectMunicipalityId: '',
-  projectCommunityId: '',
-  projectInitialBudget: '',
-  projectInitialBudgetUsd: '',
-}
-
+  projectBenefitedPopulation: "",
+  projectBenefitedChildren: "",
+  projectMunicipalityId: "",
+  projectCommunityId: "",
+  projectInitialBudget: "",
+  projectInitialBudgetUsd: "",
+};
 
 interface AppState {
   secretaries: Secretary[];
@@ -77,8 +78,12 @@ interface AppState {
   secretaryParentId: string;
   municipalityId: string;
   parrishId: string;
+  circuitId: string;
+  communityId: string;
   formState: FormState;
   activities: Activity[];
+  openFilter: boolean;
+  setOpenFilter: (openFilter: boolean) => void;
   resetFormState: () => void;
   setFormState: (formState: FormState) => void;
   setSecretaries: (secretaries: Secretary[]) => void;
@@ -88,6 +93,8 @@ interface AppState {
   setSecretaryParentId: (secretaryParentId: string) => void;
   setMunicipalityId: (municipalityId: string) => void;
   setParrishId: (parrishId: string) => void;
+  setCircuitId: (circuitId: string) => void;
+  setCommunityId: (communityId: string) => void;
   setActivities: (activities: Activity[]) => void;
 }
 
@@ -100,8 +107,12 @@ export const useAppStore = create<AppState>()(
     secretaryParentId: "",
     municipalityId: "",
     parrishId: "",
+    circuitId: "",
+    communityId: "",
     secretaries: [],
     formState: initialFormState,
+    openFilter: false,
+    setOpenFilter: (openFilter) => set({ openFilter }),
     resetFormState: () => set({ formState: initialFormState }),
     setFormState: (formState) => set({ formState }),
     setActivities: (activities) => set({ activities }),
@@ -115,5 +126,7 @@ export const useAppStore = create<AppState>()(
     setSecretaryParentId: (secretaryParentId) => set({ secretaryParentId }),
     setMunicipalityId: (municipalityId) => set({ municipalityId }),
     setParrishId: (parrishId) => set({ parrishId }),
+    setCircuitId: (circuitId) => set({ circuitId }),
+    setCommunityId: (communityId) => set({ communityId }),
   }))
 );

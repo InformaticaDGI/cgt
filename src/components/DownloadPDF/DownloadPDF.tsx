@@ -17,13 +17,13 @@ const defaultProjectBudget: ProjectBudget = {
     }
 }
 
-const DownloadPDF = ({ project }: { project: ProjectPayload<Project, 'projectBudget' | 'scheduledActivities' | 'kpiInstances' | 'sector' | 'parish'> }) => {
+const DownloadPDF = ({ project }: { project: ProjectPayload<Project, 'projectBudget' | 'activities' | 'kpiInstances' | 'sector' | 'parish'> }) => {
 
     const projectToken = (project.id.slice(0, 6) || "").toUpperCase()
 
     const projectBudget = project.projectBudget[0] || defaultProjectBudget
 
-    const scheduledActivities = project.scheduledActivities
+    const activities = project.activities
     const projectName = project.name
     const projectDescription = project.observations
     const status = project.status
@@ -85,7 +85,7 @@ const DownloadPDF = ({ project }: { project: ProjectPayload<Project, 'projectBud
             qualifiedLabor={qualifiedLabor.toString()}
             unqualifiedLabor={unqualifiedLabor.toString()}
             projectToken={projectToken}
-            scheduledActivities={scheduledActivities}
+            activities={activities}
         />}
         >
             {({ blob }) => <Button $backgroundColor="var(--gradient-quinary)" style={{ height: 'auto', padding: '8px 12px' }} onClick={() => downloadPDF(blob)}>

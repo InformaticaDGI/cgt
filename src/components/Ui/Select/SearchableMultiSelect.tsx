@@ -47,6 +47,24 @@ export const SearchableMultiSelect = ({ options, value, onChange, placeholder, s
         onChange?.(newSelected);
     };
 
+    const handleSelectAll = () => {
+        const currentSelected = value || [];
+        const filteredValues = filteredOptions.map(option => option.value);
+        
+        // Check if all filtered options are already selected
+        const allSelected = filteredValues.every(val => currentSelected.includes(val));
+        
+        if (allSelected) {
+            // If all are selected, deselect all filtered options
+            const newSelected = currentSelected.filter(val => !filteredValues.includes(val));
+            onChange?.(newSelected);
+        } else {
+            // If not all are selected, select all filtered options
+            const newSelected = [...new Set([...currentSelected, ...filteredValues])];
+            onChange?.(newSelected);
+        }
+    };
+
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Escape') {
             setIsOpen(false);
@@ -90,9 +108,17 @@ export const SearchableMultiSelect = ({ options, value, onChange, placeholder, s
         return options.filter(option => value?.includes(option.value));
     }, [options, value]);
 
+    // Check if all filtered options are selected
+    const allFilteredSelected = useMemo(() => {
+        const currentSelected = value || [];
+        const filteredValues = filteredOptions.map(option => option.value);
+        return filteredValues.length > 0 && filteredValues.every(val => currentSelected.includes(val));
+    }, [filteredOptions, value]);
+
     return (
         <$Container style={style}>
             <$InputContainer isOpen={isOpen} onClick={() => inputRef.current?.focus()}>
+
                 {selectedOptions.map(option => (
                     <$Pill key={option.value}>
                         {option.label}
@@ -119,17 +145,29 @@ export const SearchableMultiSelect = ({ options, value, onChange, placeholder, s
             {isOpen && (
                 <$OptionsList ref={optionsListRef}>
                     {filteredOptions.length > 0 ? (
-                        filteredOptions.map((option, index) => (
-                            <$OptionItem
-                                key={option.value}
-                                isHighlighted={index === highlightedIndex}
-                                isSelected={value?.includes(option.value)}
-                                onClick={() => handleSelect(option.value)}
-                                onMouseDown={(e) => e.preventDefault()} // Prevents blur before click
+                        <>
+                            <$SelectAllButton 
+                                onClick={handleSelectAll}
+                                isSelected={allFilteredSelected}
                             >
-                                {option.label}
-                            </$OptionItem>
-                        ))
+                                <$SelectAllIcon isSelected={allFilteredSelected}>
+                                    {allFilteredSelected ? '☑' : '☐'}
+                                </$SelectAllIcon>
+                                {allFilteredSelected ? 'Deseleccionar todos' : 'Seleccionar todos'}
+                            </$SelectAllButton>
+                            <$Divider />
+                            {filteredOptions.map((option, index) => (
+                                <$OptionItem
+                                    key={option.value}
+                                    isHighlighted={index === highlightedIndex}
+                                    isSelected={value?.includes(option.value)}
+                                    onClick={() => handleSelect(option.value)}
+                                    onMouseDown={(e) => e.preventDefault()} // Prevents blur before click
+                                >
+                                    {option.label}
+                                </$OptionItem>
+                            ))}
+                        </>
                     ) : (
                         <$NoResults>No results found</$NoResults>
                     )}
@@ -151,6 +189,8 @@ const $Container = styled.div`
     position: relative;
     width: 100%;
 `;
+
+
 
 const $InputContainer = styled.div<{ isOpen: boolean }>`
     position: relative;
@@ -268,4 +308,39 @@ const $NoResults = styled.li`
     font-size: 0.9em;
     color: var(--text-secondary);
     text-align: center;
+`;
+
+const $SelectAllButton = styled.button<{ isSelected?: boolean }>`
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px 12px;
+    background-color: ${props => props.isSelected ? 'var(--primary-light)' : 'transparent'};
+    color: ${props => props.isSelected ? 'var(--white)' : 'var(--text-secondary)'};
+    border: none;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: ${props => props.isSelected ? 'bold' : 'normal'};
+    transition: all 0.2s ease;
+
+    &:hover {
+        background-color: var(--primary-light);
+        color: var(--white);
+    }
+
+    &:active {
+        transform: translateY(1px);
+    }
+`;
+
+const $SelectAllIcon = styled.span<{ isSelected?: boolean }>`
+    margin-right: 8px;
+    font-size: 1.1em;
+    color: ${props => props.isSelected ? 'var(--white)' : 'var(--text-secondary)'};
+`;
+
+const $Divider = styled.div`
+    height: 1px;
+    background-color: var(--border-color, #e0e0e0);
+    margin: 4px 12px;
 `;

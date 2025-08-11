@@ -14,82 +14,135 @@ import MapView from './pages/Management/Map/MapView'
 import Navigation from './components/Navigation/Navigation'
 import SecurityView from './pages/Security/SecurityView'
 import ProjectsListView from './pages/Management/ProjectListView'
+import ContactsView from './pages/Contacts/ContactsView'
+import CreateContactView from './pages/Contacts/CreateContactView'
+import ContactView from './pages/Contacts/ContactView'
+// import ACASView from './pages/ACAS/ACASView'
+import CreateACAView from './pages/ACA/CreateACAView'
+import IndicatorsView from './pages/indicators/IndicatorsView'
+import TransformationsView from './pages/indicators/[transformationsId]/TransformationsView'
+import ACAView from './pages/ACA/ACAView'
 
 const router = createBrowserRouter([
-
-    {
-        path: '/',
-        element: <ProtectedRoute><Navigation /></ProtectedRoute>,
+  {
+    path: "/",
+    element: (
+      <ProtectedRoute>
+        <Navigation />
+      </ProtectedRoute>
+    ),
+    children: [
+      {
+        index: true,
+        element: <Navigate to={"/mapa"} replace />,
+      },
+      {
+        path: "mapa",
+        element: <MapView />,
+      },
+      {
+        path: 'aca',
         children: [
-            
-            {
-                index: true,
-                element: <Navigate to={'/mapa'} replace />
-            },
-            {
-                path: 'mapa',
-                element: <MapView />
-            },
-            {
-                path: 'indicadores',
-                children: [
-                    {
-                        index: true,
-                        element: <HomeView />
-                    },
-                    {
-                        path: ':programId',
-                        element: <ProgramView />
-                    },
-                    {
-                        path: ':programId/:projectId',
-                        element: <ProjectView />
-                    },
-                    {
-                        path: ':programId/:projectId/:activityId',
-                        element: <ActivityView />
-                    },
-                    {
-                        path: ':programId/:projectId/:activityId/:taskId',
-                        element: <TaskView />
-                    }
-                ]
-            },
-            {
-                path: 'crear-programa',
-                element: <CreateProgramView />
-            },
-            {
-                path: 'crear-proyecto',
-                element: <CreateProjectView />
-            },
-            {
-                path: 'proyectos',
-                children: [
-                    {
-                        index: true,
-                        element: <ProjectsListView />
-                    },
-                    {
-                        path: ':projectId',
-                        element: <ProjectDetailView />
-                    }
-                ]
-            },
-            {
-                path: 'seguridad',
-                element: <SecurityView />
-            }
+          {
+            index: true,
+            element: <ACAView />
+          },
+          {
+            path: 'crear',
+            element: <CreateACAView />
+          }
         ]
-    },
-    {
-        path: 'login',
-        element: <LoginView />
-    },
-    {
-        path: '*',
-        element: <NotFoundView />
-    }
-])
+      },
+      {
+        path: "indicadores",
+        children: [
+          {
+            index: true,
+            element: <HomeView />,
+          },
+          {
+            path: ":programId",
+            element: <ProgramView />,
+          },
+          {
+            path: ":programId/:projectId",
+            element: <ProjectView />,
+          },
+          {
+            path: ":programId/:projectId/:activityId",
+            element: <ActivityView />,
+          },
+          {
+            path: ":programId/:projectId/:activityId/:taskId",
+            element: <TaskView />,
+          },
+        ],
+      },
+      {
+        path: "indicadoresACA",
+        children: [
+          {
+            index: true,
+            element: <IndicatorsView />,
+          },
+          {
+            path: ":transformationsId",
+            element: <TransformationsView />,
+          },
+        ],
+      },
+      {
+        path: "contactos",
+        children: [
+          {
+            index: true,
+            element: <ContactsView />,
+          },
+          {
+            path: "crear",
+            element: <CreateContactView />,
+          },
+          {
+            path: ":contactId",
+            element: <ContactView />,
+          },
+        ],
+      },
+      {
+        path: "crear-programa",
+        element: <CreateProgramView />,
+      },
+      {
+        path: "crear-proyecto",
+        element: <CreateProjectView />,
+      },
+      {
+        path: "proyectos",
+        children: [
+          {
+            index: true,
+            element: <ProjectsListView />,
+          },
+          {
+            path: ":projectId",
+            element: <ProjectDetailView />,
+          },
+        ],
+      },
+      {
+        path: "registro-actividad",
+        element: <SecurityView />,
+      },
+    ],
+  },
+  {
+    path: "login",
+    element: <LoginView />,
+  },
+  {
+    path: "*",
+    element: <NotFoundView />,
+  },
+]);
 
-export default router
+export default router;

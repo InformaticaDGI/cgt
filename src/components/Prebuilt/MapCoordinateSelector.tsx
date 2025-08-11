@@ -10,20 +10,20 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { useMunicipalities } from "../../hooks/queries/useMunicipalities";
 import { useParrishes } from "../../hooks/queries/useParrishes";
-import { useCommunityCircuitsByParish } from "../../hooks/queries/useCommunityCircuitsByParish";
-import markerIconPng from '../../assets/marker-icon.png'
-import markerShadowPng from '../../assets/marker-shadow.png'
+import { useCommunityCircuits } from "../../hooks/queries/useCommunityCircuits";
+import markerIconPng from "../../assets/marker-icon.png";
+import markerShadowPng from "../../assets/marker-shadow.png";
 
 const LAT_LNG_DEFAULT = { lat: 8.9237, lng: -67.4266 };
 
 const customIcon = L.icon({
-    iconUrl: markerIconPng,
-    iconSize: [25, 41], // Tamaño del ícono [ancho, alto]
-    iconAnchor: [12, 41], // Punto del ícono que corresponderá a la ubicación del marcador
-    popupAnchor: [1, -34], // Punto desde el cual se abrirá el popup en relación con iconAnchor
-    shadowUrl: markerShadowPng,
-    shadowSize: [41, 41],
-    shadowAnchor: [12, 41]
+  iconUrl: markerIconPng,
+  iconSize: [25, 41], // Tamaño del ícono [ancho, alto]
+  iconAnchor: [12, 41], // Punto del ícono que corresponderá a la ubicación del marcador
+  popupAnchor: [1, -34], // Punto desde el cual se abrirá el popup en relación con iconAnchor
+  shadowUrl: markerShadowPng,
+  shadowSize: [41, 41],
+  shadowAnchor: [12, 41],
 });
 
 interface MapCoordinateSelectorProps {
@@ -49,7 +49,7 @@ function LocationMarker({
     territorialSecretaryId: undefined,
   });
   const { data: parrishes } = useParrishes(municipalityId ?? "");
-  const { data: circuits } = useCommunityCircuitsByParish(parrishId ?? "");
+  const { data: circuits } = useCommunityCircuits({ parishId: parrishId ?? "" });
 
   useEffect(() => {
     if (value) {
@@ -102,7 +102,9 @@ function LocationMarker({
     }
   }, [municipalityId, parrishId, circuitCode]);
 
-  return value ? <Marker position={value} ref={markerRef} icon={customIcon} /> : null;
+  return value ? (
+    <Marker position={value} ref={markerRef} icon={customIcon} />
+  ) : null;
 }
 
 export default function MapCoordinateSelector({
@@ -116,6 +118,9 @@ export default function MapCoordinateSelector({
     <div style={{ width: "100%", height: "300px" }}>
       <MapContainer
         center={LAT_LNG_DEFAULT}
+        doubleClickZoom={false}
+        zoomControl={false}
+        scrollWheelZoom={true}
         zoom={12}
         style={{ width: "100%", height: "100%" }}
       >

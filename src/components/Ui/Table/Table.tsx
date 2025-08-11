@@ -34,7 +34,7 @@ export const Table = ({
 }: TableProps) => {
     return (
         <TableContainer>
-            <TableHeader $size={size}>
+            <TableHeader $size={size} >
                 {columns.map((header, index) => {
                     const headerKey = getHeaderKey(header, index)
                     const headerWidth = getHeaderWidth(header, index, columnWidths)
@@ -143,7 +143,8 @@ const TableContainer = styled.div`
     width: 100%;
     border: 1px solid #e2e8f0;
     border-radius: 8px;
-    overflow: hidden;
+    overflow: auto;
+    max-height: 500px;
     background: white;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 `
@@ -152,6 +153,9 @@ const TableHeader = styled.div<{ $size: TableSize }>`
     display: flex;
     background: #f8fafc;
     border-bottom: 1px solid #e2e8f0;
+    position: sticky;
+    top: 0;
+    z-index: 1;
 `
 
 const TableHeaderCell = styled.div<{ 
