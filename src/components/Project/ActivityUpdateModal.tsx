@@ -89,10 +89,6 @@ export const ActivityUpdateModal: React.FC<ActivityUpdateModalProps> = ({
   // Formatear número con separadores de miles
 
 
-  // Desformatear número para guardar
-  const unformatNumber = (value: string): string => {
-    return value.replace(/\./g, '');
-  };
 
   // Guardar cambios
   const handleSave = async () => {
