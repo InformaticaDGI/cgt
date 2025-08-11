@@ -60,6 +60,7 @@ const KpiStep = () => {
         projectKpiInstances: values.kpiInstances,
         projectBenefitedPopulation: +values.benefitedPopulation,
         projectBenefitedChildren: +values.benefitedChildren,
+        projectAcaProjectId: formState.projectAcaProjectId,
       };
 
       const result = await createProject({
