@@ -55,15 +55,22 @@ const createNavItems = (logout: () => void): NavItems => [
   // },
 
   {
-    sectionTitle: "ACAS",
+    sectionTitle: "ACA",
     roles: authRoles.Usuario,
     icon: MdAssignmentLate,
   },
   {
     id: "create-aca",
-    to: "/acas/crear",
-    label: "Crear ACA",
+    to: "/aca/crear",
+    label: "Cargar ACA",
     icon: MdAssignmentAdd,
+    roles: authRoles.Usuario,
+  },
+  {
+    id: "aca-projects",
+    to: "/aca",
+    label: "Ver ACA",
+    icon: FaFolderOpen,
     roles: authRoles.Usuario,
   },
   {
