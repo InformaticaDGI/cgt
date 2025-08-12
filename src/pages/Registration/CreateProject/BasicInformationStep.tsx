@@ -76,7 +76,7 @@ const BasicInformation = () => {
 
           <GridItem $colSpan={12}>
             <FormControl
-              label="Transformación"
+              label="Secretaría Ejecutiva"
               required
               error={
                 formik.errors.parentId && formik.touched.parentId
@@ -93,7 +93,7 @@ const BasicInformation = () => {
           </GridItem>
           <GridItem $colSpan={12}>
             <FormControl
-              label="Secretaría"
+              label="Dependencia"
               required
               error={
                 formik.errors.secretaryId && formik.touched.secretaryId

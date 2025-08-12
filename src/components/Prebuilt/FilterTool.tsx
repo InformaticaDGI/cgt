@@ -7,8 +7,7 @@ import {
   MapPin,
   MapPinned,
   Building,
-  Layers,
-  Users,
+  Network,
 } from "lucide-react";
 import { useAppStore } from "../../store/store";
 import { SecretarySelect } from "./SecretarySelect";
@@ -18,7 +17,6 @@ import { ParrishSelect } from "./ParrishSelect";
 import { Flex } from "../Layout/Flex";
 import LocateToMap from "./LocateToMap";
 import { useLocation } from "react-router";
-import { CommunityCircuitSelect } from "./CommunityCircuitSelect";
 
 const FilterTool = () => {
   const store = useAppStore();
@@ -43,14 +41,9 @@ const FilterTool = () => {
         {!pathname.pathname.includes("mapa") && <LocateToMap />}
       </Flex>
       <Container isOpen={store.openFilter}>
-        <Filter style={{ gridColumn: "span 3" }}>
+        <Filter style={{ gridColumn: "span 6" }}>
           <FilterContainer>
-            <FilterHeader
-              icon={<Layers color="white" height={"16px"} width={"16px"} />}
-              fill="linear-gradient(180deg,  #e94c6f 0%, #a72d73 100%)"
-            >
-              Transformaciones
-            </FilterHeader>
+            <FilterHeader icon={<Network color="white" height={"16px"} width={"16px"} />} fill="linear-gradient(180deg, #FFDEAD 0%, #A0522D 100%)">Secretaria Ejecutiva</FilterHeader>
             <SecretarySelect
               rootOnly
               onChange={(secretaryRootId) =>
@@ -60,7 +53,7 @@ const FilterTool = () => {
             />
           </FilterContainer>
         </Filter>
-        <Filter style={{ gridColumn: "span 3" }}>
+        <Filter style={{ gridColumn: "span 6" }}>
           <FilterContainer>
             <FilterHeader
               icon={<Building color="white" height={"16px"} width={"16px"} />}
@@ -77,7 +70,7 @@ const FilterTool = () => {
             />
           </FilterContainer>
         </Filter>
-        <Filter style={{ gridColumn: "span 2" }}>
+        <Filter style={{ gridColumn: "span 4" }}>
           <FilterContainer>
             <FilterHeader
               icon={<Map color="white" height={"16px"} width={"16px"} />}
@@ -93,7 +86,7 @@ const FilterTool = () => {
             />
           </FilterContainer>
         </Filter>
-        <Filter style={{ gridColumn: "span 2" }}>
+        <Filter style={{ gridColumn: "span 4" }}>
           <FilterContainer>
             <FilterHeader
               icon={<MapPinned color="white" height={"16px"} width={"16px"} />}
@@ -110,7 +103,7 @@ const FilterTool = () => {
             />
           </FilterContainer>
         </Filter>
-        <Filter style={{ gridColumn: "span 2" }}>
+        <Filter style={{ gridColumn: "span 4" }}>
           <FilterContainer>
             <FilterHeader
               icon={<MapPin color="white" height={"16px"} width={"16px"} />}
@@ -122,21 +115,6 @@ const FilterTool = () => {
               onChange={(parrishId) => store.setParrishId(parrishId)}
               value={store.parrishId}
               municipalityId={store.municipalityId}
-            />
-          </FilterContainer>
-        </Filter>
-        <Filter style={{ gridColumn: "span 4" }}>
-          <FilterContainer>
-            <FilterHeader
-              icon={<Users color="white" height={"16px"} width={"16px"} />}
-              fill="linear-gradient(180deg,rgb(46, 167, 136) 0%, #008000 100%)"
-            >
-              Circuito comunal
-            </FilterHeader>
-            <CommunityCircuitSelect
-              onChange={(circuitId) => store.setCircuitId(circuitId)}
-              value={store.circuitId}
-              parishId={store.parrishId}
             />
           </FilterContainer>
         </Filter>
@@ -162,7 +140,7 @@ const FilterToolCard = styled.div`
 
 const Container = styled.div<{ isOpen: boolean }>`
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
+  grid-template-columns: repeat(12, 1fr);
   gap: 4px;
   width: 100%;
   transition: transform 0.3s ease-in-out, opa;

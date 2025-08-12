@@ -8,6 +8,7 @@ import { CommunityCircuitSelect } from "../Prebuilt/CommunityCircuit";
 import { CommunitySelect } from "../Prebuilt/CommunitySelect";
 import { ContactMultiSelect } from "../Prebuilt/ContactMultiSelect";
 import { MunicipalityMultiSelect } from "../Prebuilt/MunicipalityMultiSelect";
+import { TransformationSelect } from "../Prebuilt/TransformationSelect";
 
 export default function CreateACAForm({ onSubmit, initialValues, isLoading }: CreateACAFormProps) {
 
@@ -22,7 +23,7 @@ export default function CreateACAForm({ onSubmit, initialValues, isLoading }: Cr
         <GridItem $colSpan={24} $colSpanSm={24}>
             <h3 style={{ color: "var(--text-secondary)", marginBottom: "12px" }}>Información del ACA</h3>
         </GridItem>
-        <GridItem $colSpan={12}>
+        <GridItem $colSpan={24}>
             <FormControl label="Nombre de la necesidad" required>
                 <Input $size="medium" name="name" placeholder="Nombre de la necesidad"
                     value={formik.values.name} onChange={(e: React.ChangeEvent<HTMLInputElement>) => formik.setFieldValue('name', e.target.value)}
@@ -31,8 +32,13 @@ export default function CreateACAForm({ onSubmit, initialValues, isLoading }: Cr
             </FormControl>
         </GridItem>
         <GridItem $colSpan={12} $colSpanSm={24}>
+            <FormControl label="Transformación" required={false}>
+                <TransformationSelect onChange={(e: any) => formik.setFieldValue('transformationId', e)} value={formik.values.transformationId} />
+            </FormControl>
+        </GridItem>
+        <GridItem $colSpan={12} $colSpanSm={24}>
             <FormControl label="Area" required={false}>
-                <AreaSelect onChange={(e: any) => formik.setFieldValue('areaId', e)} value={formik.values.areaId} />
+                <AreaSelect transformationId={formik.values.transformationId} onChange={(e: any) => formik.setFieldValue('areaId', e)} value={formik.values.areaId} />
             </FormControl>
         </GridItem>
         <GridItem $colSpan={24} $colSpanSm={24}>
@@ -83,6 +89,7 @@ export default function CreateACAForm({ onSubmit, initialValues, isLoading }: Cr
 
 export type CreateACAFormValues = {
     name: string
+    transformationId: string
     areaId: string
     municipalityId: string[]
     contacts: string[]
