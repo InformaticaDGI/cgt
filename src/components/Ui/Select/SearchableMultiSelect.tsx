@@ -9,6 +9,7 @@ export const SearchableMultiSelect = ({ options, value, onChange, placeholder, s
     const optionsListRef = useRef<HTMLUListElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
 
+
     const filteredOptions = useMemo(() => {
         if (!searchTerm) {
             return options;

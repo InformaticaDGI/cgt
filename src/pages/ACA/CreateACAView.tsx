@@ -1,9 +1,9 @@
 import Swal from "sweetalert2"
 import Card from "../../components/Card/Card"
-import { type CreateACAFormValues } from "../../components/Forms/CreateACAForm"
+import { type ACAFormValues } from "../../components/Forms/ACAForm"
 // import { useCreateACA } from "../../hooks/mutations/useCreateACA"
 // import { useNavigate } from "react-router-dom"
-import CreateACAForm from "../../components/Forms/CreateACAForm"
+import CreateACAForm from "../../components/Forms/ACAForm"
 import { useCreateACA } from "../../hooks/mutations/useCreateACA"
 import type { FormikHelpers } from "formik"
 
@@ -12,7 +12,7 @@ export default function CreateACAView() {
     // const navigate = useNavigate()
     const { mutate: createACA, isPending, } = useCreateACA()
 
-    const handleSubmit = (values: CreateACAFormValues, helpers: FormikHelpers<CreateACAFormValues>) => {
+    const handleSubmit = (values: ACAFormValues, helpers: FormikHelpers<ACAFormValues>) => {
         createACA(values, {
             onSuccess: () => {
                 Swal.fire({

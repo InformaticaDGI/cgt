@@ -13,4 +13,14 @@ export const useAcas = (): UseQueryResult<PaginatedResponse<AcaProject>, Error> 
 export type AcaProject = {
     id: string
     name: string
+    transformationId: string
+    areaId: string
+    municipalityId: string[]
+    contacts: string[]
+    communityCircuit: { id: string, code: string }
+    sectorId: string
+    potential: string
+    criticalAspects: string
+    estimatedBudget: string
+    estimatedDuration: string
 }
