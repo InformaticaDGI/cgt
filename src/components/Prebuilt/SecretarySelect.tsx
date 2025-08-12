@@ -6,7 +6,7 @@ export const SecretarySelect = ({ value, onChange, rootOnly = false, parentId }:
     const { data: secretaries } = useSecretary({ rootOnly, parentId })
     // const permissions = usePermisionTemp(rootOnly)
     const options = secretaries
-    return <SearchableSelect options={options} value={value} onChange={onChange} placeholder={rootOnly ? "Seleccione una transformación" : "Seleccione una secretaría"} />
+    return <SearchableSelect options={options} value={value} onChange={onChange} placeholder={rootOnly ? "Seleccione una secretaría" : "Seleccione una dependencia"} />
 }
 
 type SecretarySelectProps = {

@@ -41,6 +41,7 @@ export default function CreateACAView() {
                 isLoading={isPending}
                 onSubmit={handleSubmit} initialValues={{
                     name: '',
+                    transformationId: '', 
                     areaId: '',
                     municipalityId: [],
                     contacts: [],
