@@ -1,42 +1,33 @@
-import { BsBarChartFill } from "react-icons/bs";
-import {
-  FaFolderOpen,
-  FaFolderPlus,
-  /*FaUsersGear, */ FaUserPlus,
-  FaUsers,
-} from "react-icons/fa6";
-import { IoIosExit } from "react-icons/io";
+
 import authRoles from "./authRoles.ts";
-import { FaClipboardList, FaCogs, FaHome } from "react-icons/fa";
-import { BsFillClipboard2PlusFill } from "react-icons/bs";
-import { TbActivity } from "react-icons/tb";
-import { MdAssignmentAdd, MdAssignmentLate } from "react-icons/md";
+import { MdAddCircle, MdBarChart, MdDashboard, MdFolder, MdHome, MdLogout, MdPeople, MdSettings, MdTimeline, MdViewList, MdWork } from "react-icons/md";
+import { FaCalendarCheck } from "react-icons/fa6";
 
 const createNavItems = (logout: () => void): NavItems => [
   {
     id: "home",
     to: "/mapa",
     label: "Inicio",
-    icon: FaHome,
+    icon: MdHome,
     roles: authRoles.Public,
   },
   {
     sectionTitle: "Indicadores",
     roles: authRoles.Public,
-    icon: BsBarChartFill,
+    icon: MdDashboard,
   },
   {
     id: "indicators-programs",
     to: "/indicadores",
     label: "Programas",
-    icon: BsBarChartFill,
+    icon: MdBarChart,
     roles: authRoles.Public,
   },
   {
     id: "indicatorsACA",
     to: "/indicadoresACA",
     label: "ACA",
-    icon: BsBarChartFill,
+    icon: MdBarChart,
     roles: authRoles.Public,
   },
   // {
@@ -57,53 +48,53 @@ const createNavItems = (logout: () => void): NavItems => [
   {
     sectionTitle: "ACA",
     roles: authRoles.Usuario,
-    icon: MdAssignmentLate,
+    icon: FaCalendarCheck,
   },
   {
     id: "create-aca",
     to: "/aca/crear",
-    label: "Cargar ACA",
-    icon: MdAssignmentAdd,
+    label: "Registrar",
+    icon: MdAddCircle,
     roles: authRoles.Usuario,
   },
   {
     id: "aca-projects",
     to: "/aca",
-    label: "Ver ACA",
-    icon: FaFolderOpen,
+    label: "Ver",
+    icon: MdViewList,
     roles: authRoles.Usuario,
   },
   {
     sectionTitle: "Programas",
     roles: authRoles.Usuario,
-    icon: FaClipboardList,
+    icon: MdWork,
   },
   {
     id: "create-program",
     to: "/crear-programa",
-    label: "Crear Programa",
-    icon: BsFillClipboard2PlusFill,
+    label: "Registrar",
+    icon: MdAddCircle,
     roles: authRoles.Usuario,
   },
 
   {
     sectionTitle: "Proyectos",
     roles: authRoles.Public,
-    icon: FaFolderOpen,
+    icon: MdFolder,
   },
 
   {
     id: "projects",
     to: "/proyectos",
-    label: "Ver Proyectos",
-    icon: FaFolderOpen,
+    label: "Ver",
+    icon: MdViewList,
     roles: authRoles.Public,
   },
   {
     id: "create-project",
     to: "/crear-proyecto",
-    label: "Crear Proyecto",
-    icon: FaFolderPlus,
+    label: "Registrar",
+    icon: MdAddCircle,
     roles: authRoles.Usuario,
   },
 
@@ -118,40 +109,40 @@ const createNavItems = (logout: () => void): NavItems => [
   {
     sectionTitle: "Contactos",
     roles: authRoles.Public,
-    icon: FaUsers,
+    icon: MdPeople,
   },
   {
     id: "list-contacts",
     to: "/contactos",
-    label: "Ver Contactos",
-    icon: FaUsers,
+    label: "Ver",
+    icon: MdViewList,
     roles: authRoles.Public,
   },
   {
     id: "create-contact",
     to: "/contactos/crear",
-    label: "Crear Contacto",
-    icon: FaUserPlus,
+    label: "Registrar",
+    icon: MdAddCircle,
     roles: authRoles.Public,
   },
 
   {
     sectionTitle: "Opciones",
     roles: authRoles.Public,
-    icon: FaCogs,
+    icon: MdSettings,
   },
   {
     id: "logs",
     to: "/registro-actividad",
     label: "Registro de Actividad",
-    icon: TbActivity,
+    icon: MdTimeline,
     roles: authRoles.Admin,
   },
 
   {
     id: "exit",
     label: "Salir",
-    icon: IoIosExit,
+    icon: MdLogout,
     button: true,
     onClick: () => {
       logout();
