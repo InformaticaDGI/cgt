@@ -13,7 +13,7 @@ export const useAreas = (transformationId?: string) => {
     }
 
     return useQuery({
-        queryKey: ['areas'],
+        queryKey: ['areas', transformationId],
         queryFn: () => axios.get<Area[]>(`${config.apiUrl}/areas`, {
             params
         }),
