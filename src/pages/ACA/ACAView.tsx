@@ -15,22 +15,25 @@ export default function ACAView() {
         {
             key: 'name',
             label: 'Nombre',
-            render: (row) => <Flex $align="start" $gap={'1px'}>
-                <Text $fontSize="14px">{row.name}</Text>
+            align: 'left',
+            render: (row) => <Flex $align="start" $gap={'1px'} $width="auto">
+                <Text $fontSize="11px" $fontWeight="normal">{row.name}</Text>
             </Flex>
         },
         {
             key: 'potential',
             label: 'Potencial',
-            render: (row) => <Flex $direction="row" $gap="10px" $justify="end">
-                <Text $fontSize="14px">{row.potential || 'N/A'}</Text>
+            align: 'left',
+            render: (row) => <Flex $direction="row" $gap="10px" $width="auto">
+                <Text $fontSize="11px" $fontWeight="normal">{row.potential || 'N/A'}</Text>
             </Flex>
         },
         {
             key: 'criticalAspects',
             label: 'Aspectos críticos',
-            render: (row) => <Flex $direction="row" $gap="10px" $justify="end">
-                <Text $fontSize="14px">{row.criticalAspects || 'N/A'}</Text>
+            align: 'left',
+            render: (row) => <Flex $direction="row" $gap="10px" $width="auto">
+                <Text $fontSize="11px" $fontWeight="normal">{row.criticalAspects || 'N/A'}</Text>
             </Flex>
         }
     ]

@@ -9,7 +9,7 @@ import { CommunitySelect } from "../Prebuilt/CommunitySelect";
 import { ContactMultiSelect } from "../Prebuilt/ContactMultiSelect";
 import { MunicipalityMultiSelect } from "../Prebuilt/MunicipalityMultiSelect";
 import { TransformationSelect } from "../Prebuilt/TransformationSelect";
-import { TextArea } from "../Ui/TextArea/TextArea";
+import { $TextArea } from "../Ui/TextArea/TextArea";
 
 export default function CreateACAForm({ onSubmit, initialValues, isLoading }: CreateACAFormProps) {
 
@@ -64,12 +64,12 @@ export default function CreateACAForm({ onSubmit, initialValues, isLoading }: Cr
         </GridItem>
         <GridItem $colSpan={24} $colSpanSm={24}>
             <FormControl label="Potencial" required={false}>
-                <TextArea placeholder="Potencial" onChange={(e) => formik.setFieldValue('potential', e.target.value)} value={formik.values.potential} />
+                <$TextArea placeholder="Potencial" onChange={(e) => formik.setFieldValue('potential', e.target.value)} value={formik.values.potential} />
             </FormControl>
         </GridItem>
         <GridItem $colSpan={24} $colSpanSm={24}>
             <FormControl label="Aspectos Criticos" required={false}>
-                <TextArea placeholder="Aspectos Criticos" onChange={(e) => formik.setFieldValue('criticalAspects', e.target.value)} value={formik.values.criticalAspects} />
+                <$TextArea placeholder="Aspectos Criticos" onChange={(e) => formik.setFieldValue('criticalAspects', e.target.value)} value={formik.values.criticalAspects} />
             </FormControl>
         </GridItem>
         <GridItem $colSpan={12} $colSpanSm={24}>
