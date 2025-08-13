@@ -121,7 +121,7 @@ const renderCellContent = (row: any, header: HeaderConfig, rowIndex: number, col
 export type HeaderConfig = {
     key: string
     label: string
-    align?: "left" | "center" | "right"
+    align?: "left" | "center" | "right" | "justify"
     width?: string | number
     colSpan?: number
     render?: (row: any, rowIndex: number, colIndex: number) => React.ReactNode
@@ -160,7 +160,7 @@ const TableHeader = styled.div<{ $size: TableSize }>`
 
 const TableHeaderCell = styled.div<{ 
     $size: TableSize; 
-    align?: "left" | "center" | "right";
+    align?: "left" | "center" | "right" | "justify";
     $colSpan?: number;
 }>`
     flex: ${props => props.$colSpan || 1};
@@ -199,7 +199,7 @@ const TableBodyRow = styled.div<{ $clickable: boolean; $size: TableSize }>`
 
 const TableBodyCell = styled.div<{ 
     $size: TableSize; 
-    align?: "left" | "center" | "right";
+    align?: "left" | "center" | "right" | "justify";
     $colSpan?: number;
 }>`
     flex: ${props => props.$colSpan || 1};

@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query"
 import api from "../../lib/api"
+import type { Area } from "./useAreas"
 
 export const useAca = (acaId?: string) => {
     return useQuery({
@@ -19,7 +20,7 @@ export const useAcaById = async (acaId?: string) => {
 export type AcaProject = {
     id: string
     name: string
-    transformationId: string
+    area: Area
     areaId: string
     municipalityId: string[]
     contacts: string[]

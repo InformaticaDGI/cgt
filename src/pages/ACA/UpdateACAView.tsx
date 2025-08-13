@@ -48,7 +48,7 @@ export default function UpdateACAView() {
                 isLoading={isPending}
                 onSubmit={handleSubmit} initialValues={{
                     name: acaProject.name,
-                    transformationId: acaProject.transformationId,
+                    transformationId: acaProject.area.transformationId,
                     areaId: acaProject.areaId,
                     municipalityId: typeof acaProject.municipalityId === 'string' ? [acaProject.municipalityId] : acaProject.municipalityId,
                     contacts: acaProject.contacts,

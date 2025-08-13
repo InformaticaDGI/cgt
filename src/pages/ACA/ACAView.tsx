@@ -6,6 +6,7 @@ import { Table, type HeaderConfig } from "../../components/Ui/Table/Table";
 import { Flex } from "../../components/Layout/Flex";
 import { Button } from "../../components/Ui/Button/Button";
 import { useAcas } from "../../hooks/queries/useAcas";
+import { Eye } from "lucide-react";
 
 export default function ACAView() {
 
@@ -15,7 +16,7 @@ export default function ACAView() {
         {
             key: 'name',
             label: 'Nombre',
-            align: 'left',
+            align: 'justify',
             render: (row) => <Flex $align="start" $gap={'1px'} $width="auto">
                 <Text $fontSize="11px" $fontWeight="normal">{row.name}</Text>
             </Flex>
@@ -23,7 +24,7 @@ export default function ACAView() {
         {
             key: 'potential',
             label: 'Potencial',
-            align: 'left',
+            align: 'justify',
             render: (row) => <Flex $direction="row" $gap="10px" $width="auto">
                 <Text $fontSize="11px" $fontWeight="normal">{row.potential || 'N/A'}</Text>
             </Flex>
@@ -31,9 +32,20 @@ export default function ACAView() {
         {
             key: 'criticalAspects',
             label: 'Aspectos críticos',
-            align: 'left',
+            align: 'justify',
             render: (row) => <Flex $direction="row" $gap="10px" $width="auto">
                 <Text $fontSize="11px" $fontWeight="normal">{row.criticalAspects || 'N/A'}</Text>
+            </Flex>
+        },
+        {
+            key: 'actions',
+            label: 'Acciones',
+            align: 'center',
+            width: '80px',
+            render: (row) => <Flex $direction="column" $gap="10px" $width="auto" $justify="end" >
+                <Button $size="small" $variant="primary" as="a" href={`/aca/actualizar/${row.id}`}>
+                    <Eye size="16px" />
+                </Button>
             </Flex>
         }
     ]

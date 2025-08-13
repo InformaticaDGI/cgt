@@ -24,4 +24,5 @@ export const useAreas = (transformationId?: string) => {
 export type Area = {
     id: string
     name: string
+    transformationId: string
 }
