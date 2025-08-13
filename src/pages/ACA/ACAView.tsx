@@ -14,6 +14,15 @@ export default function ACAView() {
 
     const columns: HeaderConfig[] = [
         {
+            key: 'id',
+            label: 'N°',
+            align: 'justify',
+            width: '50px',
+            render: (_, index) => <Flex $align="start" $gap={'1px'} $width="auto">
+                <Text $fontSize="11px" $fontWeight="normal">{index + 1}</Text>
+            </Flex>
+        },
+        {
             key: 'name',
             label: 'Nombre',
             align: 'justify',

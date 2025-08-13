@@ -2,17 +2,14 @@ import { useQuery } from "@tanstack/react-query"
 import api from "../../lib/api"
 import type { Area } from "./useAreas"
 
-export const useAca = (acaId?: string) => {
+export const useAca = (acaId: string) => {
     return useQuery({
         queryKey: ['aca-projects', acaId],
         queryFn: () => useAcaById(acaId)
     })
 }
 
-export const useAcaById = async (acaId?: string) => {
-    if (!acaId) {
-        throw new Error('ACA ID is required')
-    }
+export const useAcaById = async (acaId: string) => {
     const { data } = await api.cgt.get<AcaProject>(`/aca-projects/${acaId}`)
     return data
 }
