@@ -10,13 +10,17 @@ import { useParams } from "react-router"
 import { useAca } from "../../hooks/queries/useAca"
 
 export default function UpdateACAView() {
-    const { acaId } = useParams()
+    const params = useParams()
+    const acaId = params.acaId || '';
     const { mutate: updateACA, isPending, } = useUpdateACA()
-    const { data: acaProject } = useAca(acaId)
-    
+    const { data: acaProject, isLoading, isError } = useAca(acaId)
 
-    if (!acaProject) {
-        return <div>ACA no encontrado</div>
+    if (isLoading) {
+        return <div>Cargando...</div>
+    }
+
+    if (isError) {
+        return <div>Error al cargar el ACA</div>
     }
 
     const handleSubmit = (values: ACAFormValues, helpers: FormikHelpers<ACAFormValues>) => {
