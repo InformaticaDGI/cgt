@@ -2,10 +2,10 @@ import { useMutation } from "@tanstack/react-query"
 import type { ACAFormValues } from "../../components/Forms/ACAForm"
 import api from "../../lib/api"
 
-export const useCreateACA = () => {
+export const useUpdateACA = () => {
     return useMutation({
         mutationFn: (aca: ACAFormValues) => {
-            const { name, areaId, municipalityId, communityCircuit, sectorId, contacts, potential, criticalAspects, estimatedBudget, estimatedDuration } = aca
+            const { id, name, areaId, municipalityId, communityCircuit, sectorId, contacts, potential, criticalAspects, estimatedBudget, estimatedDuration } = aca
 
             const body: ACAProjectRequest = {
                 name,
@@ -22,12 +22,13 @@ export const useCreateACA = () => {
             estimatedDuration && Object.assign(body, { estimatedDuration })
 
             console.log(body)
-            return api.cgt.post('/aca-projects', body)
+            return api.cgt.put(`/aca-projects/${id}`, body)
         }
     })
 }
 
 type ACAProjectRequest = {
+    id?: string
     name: string
     areaId: string
     municipalityId: string[]

@@ -22,6 +22,7 @@ import CreateACAView from './pages/ACA/CreateACAView'
 import IndicatorsView from './pages/indicators/IndicatorsView'
 import TransformationsView from './pages/indicators/[transformationsId]/TransformationsView'
 import ACAView from './pages/ACA/ACAView'
+import UpdateACAView from './pages/ACA/UpdateACAView'
 
 const router = createBrowserRouter([
   {
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
           {
             index: true,
             element: <ACAView />
+          },
+          {
+            path: 'actualizar/:acaId',
+            element: <UpdateACAView />
           },
           {
             path: 'crear',

@@ -11,7 +11,7 @@ import { MunicipalityMultiSelect } from "../Prebuilt/MunicipalityMultiSelect";
 import { TransformationSelect } from "../Prebuilt/TransformationSelect";
 import { $TextArea } from "../Ui/TextArea/TextArea";
 
-export default function CreateACAForm({ onSubmit, initialValues, isLoading }: CreateACAFormProps) {
+export default function ACAForm({ onSubmit, initialValues, isLoading, isUpdate = false }: ACAFormProps) {
 
     const formik = useFormik({
         initialValues,
@@ -83,12 +83,13 @@ export default function CreateACAForm({ onSubmit, initialValues, isLoading }: Cr
             </FormControl>
         </GridItem>
         <GridItem $colSpan={24} style={{ display: 'flex', justifyContent: 'center', paddingTop: "12px" }}>
-            <Button $size="large" type="submit" onClick={() => formik.handleSubmit()} $variant="primary" disabled={!formik.isValid || isLoading}>Crear ACA</Button>
+            <Button $size="large" type="submit" onClick={() => formik.handleSubmit()} $variant="primary" disabled={!formik.isValid || isLoading}>{isUpdate ? 'Actualizar' : 'Crear'} ACA</Button>
         </GridItem>
     </Grid>
 }
 
-export type CreateACAFormValues = {
+export type ACAFormValues = {
+    id?: string
     name: string
     transformationId: string
     areaId: string
@@ -102,8 +103,9 @@ export type CreateACAFormValues = {
     sectorId?: string
 }
 
-type CreateACAFormProps = {
-    onSubmit: (values: CreateACAFormValues, helpers: FormikHelpers<CreateACAFormValues>) => void
-    initialValues: CreateACAFormValues
+type ACAFormProps = {
+    onSubmit: (values: ACAFormValues, helpers: FormikHelpers<ACAFormValues>) => void
+    initialValues: ACAFormValues
     isLoading?: boolean
+    isUpdate?: boolean
 }
