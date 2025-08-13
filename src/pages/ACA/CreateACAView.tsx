@@ -34,7 +34,7 @@ export default function CreateACAView() {
         height: '100%',
         width: '100%',
         padding: '20px',
-        paddingTop: '5%'
+        paddingTop: '1%'
     }}>
         <Card>
             <CreateACAForm
