@@ -9,6 +9,7 @@ import { CommunitySelect } from "../Prebuilt/CommunitySelect";
 import { ContactMultiSelect } from "../Prebuilt/ContactMultiSelect";
 import { MunicipalityMultiSelect } from "../Prebuilt/MunicipalityMultiSelect";
 import { TransformationSelect } from "../Prebuilt/TransformationSelect";
+import { $TextArea } from "../Ui/TextArea/TextArea";
 
 export default function ACAForm({ onSubmit, initialValues, isLoading, isUpdate = false }: ACAFormProps) {
 
@@ -56,27 +57,27 @@ export default function ACAForm({ onSubmit, initialValues, isLoading, isUpdate =
                 <CommunitySelect circuitCode={formik.values.communityCircuit?.code || ''} value={formik.values.sectorId || ''} onChange={(e) => formik.setFieldValue('sectorId', e)} />
             </FormControl>
         </GridItem>
-        <GridItem $colSpan={12} $colSpanSm={24}>
+        <GridItem $colSpan={24} $colSpanSm={24}>
             <FormControl label="Contactos" required={false}>
                 <ContactMultiSelect onChange={(e: any) => formik.setFieldValue('contacts', e)} value={formik.values.contacts || []} />
             </FormControl>
         </GridItem>
-        <GridItem $colSpan={12} $colSpanSm={24}>
+        <GridItem $colSpan={24} $colSpanSm={24}>
             <FormControl label="Potencial" required={false}>
-                <Input $size="medium" placeholder="Potencial" onChange={(e) => formik.setFieldValue('potential', e.target.value)} value={formik.values.potential} />
+                <$TextArea placeholder="Potencial" onChange={(e) => formik.setFieldValue('potential', e.target.value)} value={formik.values.potential} />
             </FormControl>
         </GridItem>
-        <GridItem $colSpan={8} $colSpanSm={24}>
+        <GridItem $colSpan={24} $colSpanSm={24}>
             <FormControl label="Aspectos Criticos" required={false}>
-                <Input $size="medium" placeholder="Aspectos Criticos" onChange={(e) => formik.setFieldValue('criticalAspects', e.target.value)} value={formik.values.criticalAspects} />
+                <$TextArea placeholder="Aspectos Criticos" onChange={(e) => formik.setFieldValue('criticalAspects', e.target.value)} value={formik.values.criticalAspects} />
             </FormControl>
         </GridItem>
-        <GridItem $colSpan={8} $colSpanSm={24}>
+        <GridItem $colSpan={12} $colSpanSm={24}>
             <FormControl label="Recursos Estimados" required={false}>
                 <Input $size="medium" placeholder="Recursos Estimados" onChange={(e) => formik.setFieldValue('estimatedBudget', e.target.value)} value={formik.values.estimatedBudget} />
             </FormControl>
         </GridItem>
-        <GridItem $colSpan={8} $colSpanSm={24}>
+        <GridItem $colSpan={12} $colSpanSm={24}>
             <FormControl label="Duración Estimada" required={false}>
                 <Input $size="medium" placeholder="Duración Estimada" onChange={(e) => formik.setFieldValue('estimatedDuration', e.target.value)} value={formik.values.estimatedDuration} />
             </FormControl>
