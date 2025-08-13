@@ -19,9 +19,13 @@ export type AcaProject = {
     name: string
     area: Area
     areaId: string
-    municipalityId: string[]
+    municipalityId: string
     contacts: string[]
     communityCircuitId: string
+    communityCircuit: {
+        id: string
+        code: string
+    }
     sectorId: string
     potential: string
     criticalAspects: string

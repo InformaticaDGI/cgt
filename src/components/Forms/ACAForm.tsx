@@ -10,6 +10,7 @@ import { ContactMultiSelect } from "../Prebuilt/ContactMultiSelect";
 import { MunicipalityMultiSelect } from "../Prebuilt/MunicipalityMultiSelect";
 import { TransformationSelect } from "../Prebuilt/TransformationSelect";
 import { $TextArea } from "../Ui/TextArea/TextArea";
+import { MunicipalitySelect } from "../Prebuilt/MunicipalitySelect";
 
 export default function ACAForm({ onSubmit, initialValues, isLoading, isUpdate = false }: ACAFormProps) {
 
@@ -34,22 +35,22 @@ export default function ACAForm({ onSubmit, initialValues, isLoading, isUpdate =
         </GridItem>
         <GridItem $colSpan={12} $colSpanSm={24}>
             <FormControl label="Transformación" required={false}>
-                <TransformationSelect onChange={(e: any) => formik.setFieldValue('transformationId', e)} value={formik.values.transformationId} />
+                <TransformationSelect onChange={(e) => formik.setFieldValue('transformationId', e)} value={formik.values.transformationId} />
             </FormControl>
         </GridItem>
         <GridItem $colSpan={12} $colSpanSm={24}>
             <FormControl label="Area" required={false}>
-                <AreaSelect transformationId={formik.values.transformationId} onChange={(e: any) => formik.setFieldValue('areaId', e)} value={formik.values.areaId} />
+                <AreaSelect transformationId={formik.values.transformationId} onChange={(e) => formik.setFieldValue('areaId', e)} value={formik.values.areaId} />
             </FormControl>
         </GridItem>
         <GridItem $colSpan={24} $colSpanSm={24}>
             <FormControl label="Municipio" required={false}>
-                <MunicipalityMultiSelect onChange={(e) => formik.setFieldValue('municipalityId', e)} value={formik.values.municipalityId} />
+                {typeof formik.values.municipalityId === 'string' ? <MunicipalitySelect onChange={(e) => formik.setFieldValue('municipalityId', e)} value={formik.values.municipalityId} /> : <MunicipalityMultiSelect onChange={(e) => formik.setFieldValue('municipalityId', e)} value={formik.values.municipalityId} />}
             </FormControl>
         </GridItem>
         <GridItem $colSpan={12} $colSpanSm={24}>
             <FormControl label="Circuito" required={false}>
-                <CommunityCircuitSelect municipalityId={formik.values.municipalityId} value={formik.values.communityCircuit?.id || ''} onChange={(e) => formik.setFieldValue('communityCircuit', e)} />
+                <CommunityCircuitSelect municipalityId={typeof formik.values.municipalityId === 'string' ? [formik.values.municipalityId] : formik.values.municipalityId} value={formik.values.communityCircuit?.id || ''} onChange={(e) => formik.setFieldValue('communityCircuit', e)} />
             </FormControl>
         </GridItem>
         <GridItem $colSpan={12} $colSpanSm={24}>
@@ -93,7 +94,7 @@ export type ACAFormValues = {
     name: string
     transformationId: string
     areaId: string
-    municipalityId: string[]
+    municipalityId: string[] | string
     contacts: string[]
     potential?: string
     criticalAspects?: string

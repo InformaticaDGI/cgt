@@ -2,7 +2,7 @@ import React, { useState, useMemo, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
 export const SearchableSelect = ({ options, value, onChange, placeholder, style }: SearchableSelectProps) => {
-    const [searchTerm, setSearchTerm] = useState(value);
+    const [searchTerm, setSearchTerm] = useState('');
     const [isOpen, setIsOpen] = useState(false);
     const [highlightedIndex, setHighlightedIndex] = useState(-1);
     const optionsListRef = useRef<HTMLUListElement>(null);
@@ -40,8 +40,7 @@ export const SearchableSelect = ({ options, value, onChange, placeholder, style 
     const handleSelect = (selectedValue: string) => {
         onChange?.(selectedValue);
         setIsOpen(false);
-        const selectedOption = options.find(option => option.value === selectedValue);
-        setSearchTerm(selectedOption?.label || '');
+        setSearchTerm('');
         inputRef.current?.blur();
     };
 
@@ -85,8 +84,10 @@ export const SearchableSelect = ({ options, value, onChange, placeholder, style 
     };
 
     const displayValue = useMemo(() => {
-        return options.find(option => option.value === value)?.label || '';
-    }, [options, value]);
+        if (isOpen && searchTerm.length > 0) return searchTerm;
+        const option = options.find(option => option.value === value)?.label || '';
+        return option;
+    }, [options, value, searchTerm]);
 
     return (
         <$Container style={style}>
@@ -95,7 +96,7 @@ export const SearchableSelect = ({ options, value, onChange, placeholder, style 
                     ref={inputRef}
                     type="text"
                     placeholder={placeholder}
-                    value={isOpen ? searchTerm : displayValue}
+                    value={displayValue}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     onFocus={() => setIsOpen(true)}
                     onBlur={() => setTimeout(() => setIsOpen(false), 200)} // Delay to allow click on options
