@@ -18,7 +18,7 @@ export default function ACAView() {
             label: 'N°',
             align: 'justify',
             width: '50px',
-            render: (row, index) => <Flex $align="start" $gap={'1px'} $width="auto">
+            render: (_, index) => <Flex $align="start" $gap={'1px'} $width="auto">
                 <Text $fontSize="11px" $fontWeight="normal">{index + 1}</Text>
             </Flex>
         },
