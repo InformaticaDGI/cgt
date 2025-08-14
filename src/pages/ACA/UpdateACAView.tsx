@@ -24,7 +24,7 @@ export default function UpdateACAView() {
     }
 
     const handleSubmit = (values: ACAFormValues, helpers: FormikHelpers<ACAFormValues>) => {
-        updateACA(values, {
+        updateACA({ ...values, id: acaId }, {
             onSuccess: () => {
                 Swal.fire({
                     title: 'ACA actualizado',

@@ -7,6 +7,7 @@ export const useUpdateACA = () => {
         mutationFn: (aca: ACAFormValues) => {
             const { id, name, areaId, municipalityId, communityCircuit, sectorId, contacts, potential, criticalAspects, estimatedBudget, estimatedDuration } = aca
 
+            console.log(aca)
             const body: ACAProjectRequest = {
                 name,
                 areaId,
