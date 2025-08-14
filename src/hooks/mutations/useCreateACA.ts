@@ -30,7 +30,7 @@ export const useCreateACA = () => {
 type ACAProjectRequest = {
     name: string
     areaId: string
-    municipalityId: string[]
+    municipalityId: string[] | string
     contacts: string[]
     potential?: string
     criticalAspects?: string

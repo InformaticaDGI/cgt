@@ -21,7 +21,6 @@ export const useUpdateACA = () => {
             estimatedBudget && Object.assign(body, { estimatedBudget })
             estimatedDuration && Object.assign(body, { estimatedDuration })
 
-            console.log(body)
             return api.cgt.put(`/aca-projects/${id}`, body)
         }
     })
@@ -31,7 +30,7 @@ type ACAProjectRequest = {
     id?: string
     name: string
     areaId: string
-    municipalityId: string[]
+    municipalityId: string[] | string
     contacts: string[]
     potential?: string
     criticalAspects?: string
