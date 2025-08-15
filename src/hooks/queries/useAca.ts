@@ -4,7 +4,7 @@ import type { Area } from "./useAreas"
 
 export const useAca = (acaId: string) => {
     return useQuery({
-        queryKey: ['aca-projects', acaId],
+        queryKey: ['aca-project', acaId],
         queryFn: () => useAcaById(acaId)
     })
 }

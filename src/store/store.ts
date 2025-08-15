@@ -3,7 +3,6 @@ import { devtools } from "zustand/middleware";
 import type { Secretary } from "../hooks/useSecretary";
 import type { KpiInstance } from "../hooks/mutations/useKpiInstances";
 import type { Activity } from "../hooks/useActivities";
-import type { AcaProject } from "../hooks/queries/useAcas";
 
 interface FormState {
   // Basic Information
@@ -73,8 +72,6 @@ const initialFormState: FormState = {
 };
 
 interface AppState {
-  acaProject: AcaProject | null;
-  setAcaProject: (acaProject: AcaProject) => void;
   secretaries: Secretary[];
   secretaryRootId: string;
   secretarialTerritoryId: string;
@@ -103,8 +100,6 @@ interface AppState {
 
 export const useAppStore = create<AppState>()(
   devtools((set, get) => ({
-    acaProject: null,
-    setAcaProject: (acaProject) => set({ acaProject }),
     // Initial State
     secretaryRootId: "",
     activities: [],
