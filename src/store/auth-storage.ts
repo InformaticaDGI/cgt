@@ -13,6 +13,7 @@ interface User {
   institution: string | number;
   name: string;
   role: Role;
+  metadata: any;
 }
 
 interface UserState {
