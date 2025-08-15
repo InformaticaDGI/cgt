@@ -1,17 +1,28 @@
-import { SearchableSelect } from "../Ui/Select/SearchableSelect"
-import useSecretary from "../../hooks/useSecretary"
-// import usePermisionTemp from "../../hooks/usePermisionTemp"
+import { SearchableSelect } from "../Ui/Select/SearchableSelect";
+import useSecretary from "../../hooks/useSecretary";
 
-export const SecretarySelect = ({ value, onChange, rootOnly = false, parentId }: SecretarySelectProps) => {
-    const { data: secretaries } = useSecretary({ rootOnly, parentId })
-    // const permissions = usePermisionTemp(rootOnly)
-    const options = secretaries
-    return <SearchableSelect options={options} value={value} onChange={onChange} placeholder={rootOnly ? "Seleccione una secretaría" : "Seleccione una dependencia"} />
-}
+export const SecretarySelect = ({
+  value,
+  onChange,
+  rootOnly = false,
+  parentId,
+}: SecretarySelectProps) => {
+  const { data: secretaries } = useSecretary({ rootOnly, parentId });
+  return (
+    <SearchableSelect
+      options={secretaries}
+      value={value}
+      onChange={onChange}
+      placeholder={
+        rootOnly ? "Seleccione una secretaría" : "Seleccione una dependencia"
+      }
+    />
+  );
+};
 
 type SecretarySelectProps = {
-    rootOnly?: boolean
-    parentId?: string
-    value?: string
-    onChange?: (value: string) => void
-}
+  rootOnly?: boolean;
+  parentId?: string;
+  value?: string;
+  onChange?: (value: string) => void;
+};
