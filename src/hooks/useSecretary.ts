@@ -5,23 +5,31 @@ import axios from "axios";
 
 const useSecretary = (props: UseSecretaryProps = {}) => {
   const { user } = useAuthStorage();
-  if (!user) return [];
-  const {
-    role: { name },
-    institution,
-  } = user;
 
-  const isAdmin = name === "Admin" || name === "Superusuario";
-  const isUserSecretary = user.metadata.typeUser === "secretary";
+  const isUser = false;
+  let isAdmin = false;
+  let isUserSecretary = false;
+  let code = "";
+
+  if (user) {
+    const {
+      role: { name },
+      institution,
+    } = user;
+    isAdmin = name === "Admin" || name === "Superusuario";
+    isUserSecretary = user.metadata.typeUser === "secretary";
+    code = institution?.toString() || "";
+  }
 
   return useQuery({
     queryKey: ["secretaries", props.rootOnly, props.parentId],
     queryFn: () =>
       getQueryFn({
         ...props,
+        isUser,
         isAdmin,
         isUserSecretary,
-        institution: institution.toString(),
+        code: code,
       }),
     enabled: getEnabled(props),
     initialData: [],
@@ -33,21 +41,22 @@ type UseSecretaryProps = {
   parentId?: string;
   isAdmin?: boolean;
   isUserSecretary?: boolean;
-  institution?: string;
+  isUser?: boolean;
+  code?: string;
 };
 
 const fetchRootSecretaries = async ({
   isAdmin,
   isUserSecretary,
-  institution,
+  code,
 }: UseSecretaryProps): Promise<SecretaryOption[]> => {
   const url = `${config.apiUrl}/secretaries/root/list`;
   const params: { code?: string; childrenCode?: string } = {};
   if (!isAdmin) {
     if (isUserSecretary) {
-      params.code = institution;
+      params.code = code;
     } else {
-      params.childrenCode = institution;
+      params.childrenCode = code;
     }
   }
 
@@ -64,13 +73,13 @@ const fetchSecretaries = async ({
   parentId,
   isAdmin,
   isUserSecretary,
-  institution,
+  code,
 }: UseSecretaryProps): Promise<SecretaryOption[]> => {
   const url = `${config.apiUrl}/secretaries/${parentId}/hierarchy`;
   const params: { code?: string } = {};
   if (!isAdmin) {
     if (!isUserSecretary) {
-      params.code = institution;
+      params.code = code;
     }
   }
 
@@ -85,14 +94,16 @@ const fetchSecretaries = async ({
 };
 
 const getQueryFn = (props: UseSecretaryProps) => {
-  if (props.rootOnly) {
-    return fetchRootSecretaries({
-      isAdmin: props.isAdmin ?? false,
-      institution: props.institution ?? "",
-      isUserSecretary: props.isUserSecretary ?? false,
-    });
-  } else if (props.parentId) {
-    return fetchSecretaries(props);
+  if (props.isUser) {
+    if (props.rootOnly) {
+      return fetchRootSecretaries({
+        isAdmin: props.isAdmin ?? false,
+        code: props.code ?? "",
+        isUserSecretary: props.isUserSecretary ?? false,
+      });
+    } else if (props.parentId) {
+      return fetchSecretaries(props);
+    }
   }
   return [];
 };
