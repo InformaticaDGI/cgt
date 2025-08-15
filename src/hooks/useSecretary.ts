@@ -6,7 +6,7 @@ import axios from "axios";
 const useSecretary = (props: UseSecretaryProps = {}) => {
   const { user } = useAuthStorage();
 
-  const isUser = false;
+  let isUser = false;
   let isAdmin = false;
   let isUserSecretary = false;
   let code = "";
@@ -16,6 +16,7 @@ const useSecretary = (props: UseSecretaryProps = {}) => {
       role: { name },
       institution,
     } = user;
+    isUser = true;
     isAdmin = name === "Admin" || name === "Superusuario";
     isUserSecretary = user.metadata.typeUser === "secretary";
     code = institution?.toString() || "";
