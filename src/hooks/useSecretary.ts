@@ -17,7 +17,7 @@ const useSecretary = (props: UseSecretaryProps = {}) => {
       role: { name },
       institution,
     } = user;
-    isUser = Boolean(user);
+    isUser = true;
     isAdmin = name === "Admin" || name === "Superusuario";
     isUserSecretary = user.metadata.typeUser === "secretary";
     code = institution?.toString() || "";
