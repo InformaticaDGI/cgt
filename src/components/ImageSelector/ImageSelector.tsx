@@ -1,22 +1,21 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { LuImagePlus } from 'react-icons/lu';
 import styled from 'styled-components';
 
 interface ImageSelectorProps {
-  onImageSelect: (files: File[]) => void;
+  onImageSelect: (file: File | null) => void;
   acceptedTypes?: string;
   maxSize?: number; // in MB
-  maxFiles?: number;
   width?: string;
   height?: string;
   placeholder?: string;
   compressImages?: boolean;
   maxCompressedSize?: number; // in MB
   convertToWebP?: boolean; // Nueva propiedad para conversión a WebP
+  existingImage?: string; // URL de la imagen existente para mostrar como previsualización
 }
 
 interface ImagePreview {
-  id: string;
   file: File;
   preview: string;
 }
@@ -31,22 +30,104 @@ const formatFileSize = (size: number) => {
   return `${(size / (1024 * 1024)).toFixed(1)}MB`;
 };
 
+// Styled Components for Loading State
+const LoadingContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 16px;
+  width: 100%;
+  height: 100%;
+`;
+
+const LoadingSpinner = styled.div`
+  width: 24px;
+  height: 24px;
+  border: 2px solid #e5e7eb;
+  border-top: 2px solid #3b82f6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+`;
+
+const LoadingText = styled.div`
+  color: #6b7280;
+  font-size: 12px;
+  font-weight: 500;
+  text-align: center;
+`;
+
+const ProgressBarContainer = styled.div`
+  width: 100%;
+  max-width: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+`;
+
+const ProgressBar = styled.div<{ progress: number }>`
+  width: 100%;
+  height: 4px;
+  background-color: #e5e7eb;
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: ${props => props.progress}%;
+    background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+  }
+`;
+
+const ProgressText = styled.div`
+  color: #6b7280;
+  font-size: 10px;
+  font-weight: 500;
+`;
+
 const ImageSelector: React.FC<ImageSelectorProps> = ({
   onImageSelect,
   acceptedTypes = 'image/*',
   maxSize = 5, // 5MB default
-  maxFiles = 2,
-  width = '140px',
-  height = '120px',
-  placeholder = 'Agregar imágenes',
+  width = '220px',
+  height = '180px',
+  placeholder = 'Agregar imágen',
   compressImages = true,
   maxCompressedSize = 1, // 1MB default
-  convertToWebP = true // Por defecto convertir a WebP
+  convertToWebP = true, // Por defecto convertir a WebP
+  existingImage
 }) => {
   const [isDragOver, setIsDragOver] = useState(false);
-  const [previews, setPreviews] = useState<ImagePreview[]>([]);
+  const [preview, setPreview] = useState<ImagePreview | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [existingImageRemoved, setExistingImageRemoved] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // Inicializar con imagen existente si se proporciona
+  useEffect(() => {
+    if (existingImage && !preview && !existingImageRemoved) {
+      setPreview({
+        file: new File([], 'existing-image.jpg', { type: 'image/jpeg' }),
+        preview: existingImage
+      });
+    }
+  }, [existingImage, existingImageRemoved]); // Agregado existingImageRemoved como dependencia
 
   const validateFile = (file: File): boolean => {
     // Check file type
@@ -61,12 +142,6 @@ const ImageSelector: React.FC<ImageSelectorProps> = ({
       return false;
     }
 
-    // Check if we already have max files
-    if (previews.length >= maxFiles) {
-      setError(`Máximo ${maxFiles} imágenes permitidas`);
-      return false;
-    }
-
     setError(null);
     return true;
   };
@@ -78,6 +153,8 @@ const ImageSelector: React.FC<ImageSelectorProps> = ({
       const img = new Image();
       
       img.onload = () => {
+        setProgress(30); // 30% when image loads
+        
         // Calculate new dimensions while maintaining aspect ratio
         const maxWidth = 1920;
         const maxHeight = 1080;
@@ -95,6 +172,8 @@ const ImageSelector: React.FC<ImageSelectorProps> = ({
         // Draw image on canvas
         ctx.drawImage(img, 0, 0, width, height);
         
+        setProgress(60); // 60% when canvas is ready
+        
         // Determinar el formato de salida basado en convertToWebP
         const outputFormat = convertToWebP ? 'image/webp' : 'image/jpeg';
         const fileExtension = convertToWebP ? '.webp' : '.jpg';
@@ -111,8 +190,11 @@ const ImageSelector: React.FC<ImageSelectorProps> = ({
                 if (compressedSize > maxCompressedSize && quality > 0.1) {
                   // Reduce quality and try again
                   quality -= 0.1;
+                  setProgress(70 + (0.9 - quality) * 20); // Progress based on quality reduction
                   compressWithQuality();
                 } else {
+                  setProgress(90); // 90% when compression is done
+                  
                   // Create new file with compressed data
                   // Cambiar la extensión del archivo si se convierte a WebP
                   const originalName = file.name.substring(0, file.name.lastIndexOf('.')) || file.name;
@@ -152,16 +234,22 @@ const ImageSelector: React.FC<ImageSelectorProps> = ({
       const img = new Image();
       
       img.onload = () => {
+        setProgress(50); // 50% when image loads for WebP conversion
+        
         canvas.width = img.width;
         canvas.height = img.height;
         
         // Draw image on canvas
         ctx.drawImage(img, 0, 0);
         
+        setProgress(80); // 80% when canvas is ready
+        
         // Convert to WebP with high quality (0.9)
         canvas.toBlob(
           (blob) => {
             if (blob) {
+              setProgress(95); // 95% when WebP conversion is done
+              
               const originalName = file.name.substring(0, file.name.lastIndexOf('.')) || file.name;
               const newFileName = `${originalName}.webp`;
               
@@ -194,11 +282,12 @@ const ImageSelector: React.FC<ImageSelectorProps> = ({
       processedFile = await convertToWebPFormat(file);
     }
     
+    setProgress(100); // 100% when processing is complete
+    
     return new Promise((resolve) => {
       const reader = new FileReader();
       reader.onload = (e) => {
         resolve({
-          id: Math.random().toString(36).substr(2, 9),
           file: processedFile,
           preview: e.target?.result as string
         });
@@ -207,29 +296,25 @@ const ImageSelector: React.FC<ImageSelectorProps> = ({
     });
   }, [compressImages, compressImage, convertToWebP, convertToWebPFormat]);
 
-  const handleMultipleFiles = useCallback(async (files: FileList) => {
-    const validFiles: File[] = [];
-    
-    for (let i = 0; i < files.length; i++) {
-      const file = files[i];
-      if (validateFile(file)) {
-        validFiles.push(file);
-      }
-      if (previews.length + validFiles.length >= maxFiles) {
-        break;
-      }
+  const handleFile = useCallback(async (file: File) => {
+    if (!validateFile(file)) return;
+
+    setIsLoading(true);
+    setProgress(0);
+    setError(null);
+
+    try {
+      const newPreview = await createPreview(file);
+      setPreview(newPreview);
+      setExistingImageRemoved(false); // Resetear el estado cuando se selecciona una nueva imagen
+      onImageSelect(newPreview.file);
+    } catch (error) {
+      setError('Error al procesar la imagen');
+    } finally {
+      setIsLoading(false);
+      setProgress(0);
     }
-
-    if (validFiles.length === 0) return;
-
-    const newPreviews = await Promise.all(
-      validFiles.map(file => createPreview(file))
-    );
-
-    const updatedPreviews = [...previews, ...newPreviews];
-    setPreviews(updatedPreviews);
-    onImageSelect(updatedPreviews.map(p => p.file));
-  }, [previews, onImageSelect, maxSize, maxFiles, createPreview]);
+  }, [onImageSelect, maxSize, createPreview]);
 
   const handleDragOver = useCallback((e: React.DragEvent) => {
     e.preventDefault();
@@ -247,9 +332,9 @@ const ImageSelector: React.FC<ImageSelectorProps> = ({
 
     const files = e.dataTransfer.files;
     if (files.length > 0) {
-      handleMultipleFiles(files);
+      handleFile(files[0]); // Only take the first file
     }
-  }, [handleMultipleFiles]);
+  }, [handleFile]);
 
   const handleClick = () => {
     fileInputRef.current?.click();
@@ -258,16 +343,25 @@ const ImageSelector: React.FC<ImageSelectorProps> = ({
   const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (files && files.length > 0) {
-      handleMultipleFiles(files);
+      handleFile(files[0]); // Only take the first file
     }
   };
 
-  const handleRemove = (e: React.MouseEvent, id: string) => {
+  const handleRemove = (e: React.MouseEvent) => {
     e.stopPropagation();
-    const updatedPreviews = previews.filter(p => p.id !== id);
-    setPreviews(updatedPreviews);
-    setError(null);
-    onImageSelect(updatedPreviews.map(p => p.file));
+    
+    // Si hay una imagen existente y se está eliminando, marcar como removida
+    if (existingImage && preview?.preview === existingImage) {
+      setExistingImageRemoved(true);
+      setPreview(null);
+      setError(null);
+      onImageSelect(null);
+    } else {
+      // Para imágenes nuevas seleccionadas, limpiar completamente
+      setPreview(null);
+      setError(null);
+      onImageSelect(null);
+    }
   };
 
   return (
@@ -276,7 +370,7 @@ const ImageSelector: React.FC<ImageSelectorProps> = ({
         width={width}
         height={height}
         isDragOver={isDragOver}
-        hasPreview={previews.length > 0}
+        hasPreview={!!preview}
         hasError={!!error}
         onClick={handleClick}
         onDragOver={handleDragOver}
@@ -288,37 +382,36 @@ const ImageSelector: React.FC<ImageSelectorProps> = ({
           type="file"
           accept={acceptedTypes}
           onChange={handleFileInputChange}
-          multiple
         />
         
-        {previews.length > 0 ? (
+        {isLoading ? (
+          <LoadingContainer>
+            <LoadingSpinner />
+            <LoadingText>Procesando imagen...</LoadingText>
+            <ProgressBarContainer>
+              <ProgressBar progress={progress} />
+              <ProgressText>{Math.round(progress)}%</ProgressText>
+            </ProgressBarContainer>
+          </LoadingContainer>
+        ) : preview ? (
           <PreviewContainer>
-            {previews.map((preview, index) => (
-              <PreviewItem key={preview.id}>
-                <PreviewImage src={preview.preview} alt={`Preview ${index + 1}`} />
-                <RemoveButton onClick={(e) => handleRemove(e, preview.id)}>
-                  <RemoveIcon>×</RemoveIcon>
-                </RemoveButton>
-                <ImageNumber>{index + 1}</ImageNumber>
-                <FileSizeBadge>
-                  {formatFileSize(preview.file.size)}
-                </FileSizeBadge>
-              </PreviewItem>
-            ))}
-            {previews.length < maxFiles && (
-              <AddMoreButton>
-                <AddIcon>+</AddIcon>
-                <AddText>Agregar más</AddText>
-              </AddMoreButton>
-            )}
+            <PreviewItem>
+              <PreviewImage src={preview.preview} alt="Preview" />
+              <RemoveButton onClick={handleRemove}>
+                <RemoveIcon>×</RemoveIcon>
+              </RemoveButton>
+              <FileSizeBadge>
+                {formatFileSize(preview.file.size)}
+              </FileSizeBadge>
+            </PreviewItem>
           </PreviewContainer>
         ) : (
           <PlaceholderContent>
             <UploadIcon>
-              <LuImagePlus />
+              <LuImagePlus size={28} />
             </UploadIcon>
             <PlaceholderText>{placeholder}</PlaceholderText>
-            <MaxFilesText>Máximo {maxFiles} imágenes</MaxFilesText>
+            <MaxFilesText style={{ maxWidth: '120px' }}>Arrastra y suelta tu imagen aquí, o haz clic para seleccionarla</MaxFilesText>
           </PlaceholderContent>
         )}
       </SelectorContainer>
@@ -383,9 +476,9 @@ const PreviewContainer = styled.div`
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 4px;
-  padding: 6px;
+  padding: 8px;
   align-items: center;
   justify-items: center;
 `;
@@ -402,10 +495,11 @@ const PreviewItem = styled.div`
 const PreviewImage = styled.img`
   max-width: 100%;
   max-height: 100%;
-  object-fit: cover;
+  object-fit: fill;
   border-radius: 8px;
   width: 100%;
   height: 100%;
+  aspect-ratio: 4/3;
 `;
 
 const RemoveButton = styled.button`
@@ -438,24 +532,6 @@ const RemoveIcon = styled.span`
   line-height: 1;
 `;
 
-const ImageNumber = styled.div`
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background-color: rgba(0, 0, 0, 0.8);
-  color: white;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 9px;
-  font-weight: bold;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-`;
-
 const FileSizeBadge = styled.div`
   position: absolute;
   bottom: 2px;
@@ -467,40 +543,6 @@ const FileSizeBadge = styled.div`
   font-size: 8px;
   font-weight: 500;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-`;
-
-const AddMoreButton = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  border: 1.5px dashed #d1d5db;
-  border-radius: 6px;
-  background-color: #fafafa;
-  cursor: pointer;
-  transition: all 0.15s ease;
-
-  &:hover {
-    border-color: #3b82f6;
-    background-color: #eff6ff;
-    transform: scale(1.02);
-  }
-`;
-
-const AddIcon = styled.div`
-  font-size: 18px;
-  color: #6b7280;
-  font-weight: bold;
-  margin-bottom: 2px;
-`;
-
-const AddText = styled.div`
-  font-size: 8px;
-  color: #6b7280;
-  text-align: center;
-  font-weight: 500;
 `;
 
 const PlaceholderContent = styled.div`

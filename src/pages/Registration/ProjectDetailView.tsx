@@ -13,6 +13,7 @@ import IndicatorProgress from "../../components/Indicator/IndicatorProgress";
 import DownloadPDF from "../../components/DownloadPDF/DownloadPDF";
 import GanttChart from "../../components/GanttChart/GanttChart";
 import { GobMap } from "../../components/Map/map.components";
+import ImageProject from "../../components/Project/ImageProject";
 
 export default function ProjectDetailView() {
   const { projectId } = useParams();
@@ -38,7 +39,7 @@ export default function ProjectDetailView() {
         alignItems: "center",
         gap: 40
       }} className="project-header">
-        <Text $fontSize="20px" $fontWeight="500" className="project-header-title">{project.name}</Text>
+        <Text $fontSize="12px" $fontWeight="600" className="project-header-title">{project.name}</Text>
         <div style={{ display: "flex", flexDirection: "row", gap: 40, flex: 1 }} className="project-header-dates">
           <div style={{ display: "flex", alignItems: "center" }} className="project-header-date">
             <FaCalendarAlt size={18} style={{ color: "#16a085", marginRight: 12 }} />
@@ -115,12 +116,18 @@ export default function ProjectDetailView() {
             />
           </Card>
         </GridItem>
-        <GridItem $colSpan={15} $colSpanSm={30} $colSpanXs={30}>
+        <GridItem $colSpan={15} $colSpanSm={30} $colSpanXs={30} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <Card $isSelectable={false} $height="300px">
             <CardHeader>
-              <Text style={{ fontSize: '14px', fontWeight: 'normal', textWrap: 'nowrap', textAlign: 'justify' }}>Ubicaciónes del proyecto</Text>
+              <Text style={{ fontSize: '14px', fontWeight: 'normal', textWrap: 'nowrap', textAlign: 'justify' }}>Ubicación del proyecto</Text>
             </CardHeader>
             <GobMap />
+          </Card>
+          <Card $isSelectable={false} $height="300px">
+            {/* <CardHeader>
+              <Text style={{ fontSize: '14px', fontWeight: 'normal', textWrap: 'nowrap', textAlign: 'justify' }}>Fotos del proyecto</Text>
+            </CardHeader> */}
+            <ImageProject projectId={project.id} projectImages={project.projectImage} />
           </Card>
         </GridItem>
       </Grid>

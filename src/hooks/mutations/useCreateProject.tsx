@@ -20,7 +20,7 @@ export const useCreateProject = () => {
         parishId: data.parishId,
         communityCircuitCode: data.communityCircuitCode,
         areaId: data.areaId,
-        acaProjectId: data.acaProjectId,
+        acaProjectId: data.acaProjectId !== "" ? data.acaProjectId : undefined,
         directLabor: data.directLabor,
         indirectLabor: data.indirectLabor,
         qualifiedLabor: data.qualifiedLabor,

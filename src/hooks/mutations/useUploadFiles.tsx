@@ -1,23 +1,27 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { config } from "../../config";
 import axios from "axios";
 
 export const useUploadFiles = (onProgress?: (progress: number) => void) => {
+    const queryClient = useQueryClient();
     return useMutation({
         mutationFn: async (data: UploadFilesFormValues) => {
             const response = await uploadFiles(data, onProgress)
             return response
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['project'] })
         }
     })
 }
 
 type UploadFilesFormValues = {
     formData: FormData;
-    activityId: string;
+    projectId: string;
 }
 
 const uploadFiles = async (data: UploadFilesFormValues, onProgress?: (progress: number) => void) => {
-    const response = await axios.post(`${config.apiUrl}/activities-images/${data.activityId}/upload`, data.formData, {
+    const response = await axios.post(`${config.apiUrl}/project-images/${data.projectId}/upload`, data.formData, {
         headers: {
             'Content-Type': 'multipart/form-data'
         },

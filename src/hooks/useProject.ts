@@ -11,7 +11,7 @@ const useProject = (projectId: string | undefined) => {
 
 const fetchProjectById = async (projectId: string | undefined) => {
     if (!projectId) throw new Error('Project ID is required');
-    const response = await fetch(`${config.apiUrl}/projects/${projectId}?include=sector.communitycircuit,parish.municipality.territorialsecretary,kpiInstances.kpi.measurement,projectbudget.budgetsource,scheduledactivities,activities.kpiResults.kpiInstance.kpi.measurement`);
+    const response = await fetch(`${config.apiUrl}/projects/${projectId}?include=sector.communitycircuit,parish.municipality.territorialsecretary,kpiInstances.kpi.measurement,projectbudget.budgetsource,scheduledactivities,activities.kpiResults.kpiInstance.kpi.measurement,projectimage`);
     if (!response.ok) throw new Error('Project not found');
     return response.json();
 }

@@ -42,22 +42,16 @@ export const ActivityUpdateModal: React.FC<ActivityUpdateModalProps> = ({
   };
 
   // Estado para manejar los valores de todos los KPIs
-  const [startFiles, setStartFiles] = useState<File[]>([]);
-  const [middleFiles, setMiddleFiles] = useState<File[]>([]);
-  const [endFiles, setEndFiles] = useState<File[]>([]);
   const [kpiValues, setKpiValues] = useState<Record<string, string>>({});
   const [observations, setObservations] = useState<string>('');
   const [error, setError] = useState<string>('');
-  const [uploadProgress, setUploadProgress] = useState<number>(0);
 
   // Consultar KPIs disponibles y las instancias existentes
   const { data: kpiData } = useProjectKPIs(isOpen ? projectId : undefined);
 
   // Mutación para guardar las actualizaciones
   const { mutateAsync: updateActivity, isPending: isSubmitting } = useUpdateActivityKPIs();
-  const { mutateAsync: uploadFiles, isPending: isUploading } = useUploadFiles((progress) => {
-    setUploadProgress(progress);
-  });
+
 
   // Inicializar los valores de los KPIs cuando se cargan los datos
   useEffect(() => {
@@ -95,18 +89,8 @@ export const ActivityUpdateModal: React.FC<ActivityUpdateModalProps> = ({
     if (!activity) return;
 
     try {
-      setUploadProgress(0);
-      const formData = new FormData();
-      startFiles.forEach(file => {
-        formData.append('startFiles', file);
-      });
-      middleFiles.forEach(file => {
-        formData.append('middleFiles', file);
-      });
-      endFiles.forEach(file => {
-        formData.append('endFiles', file);
-      });
-      // Filtrar KPIs con valor distinto de 0 y convertir al formato esperado
+
+      // // Filtrar KPIs con valor distinto de 0 y convertir al formato esperado
       const kpiResults: KPIResult[] = Object.entries(kpiValues)
         .filter(([_, value]) => value && value !== '0' && value !== '')
         .map(([kpiId, value]) => ({
@@ -120,18 +104,18 @@ export const ActivityUpdateModal: React.FC<ActivityUpdateModalProps> = ({
         observations
       });
 
-      const activityResult = await updateActivity({
+      await updateActivity({
         scheduledActivityId: activity.id,
         kpiResults,
         observations
       });
 
-      if(startFiles.length > 0 || middleFiles.length > 0 || endFiles.length > 0){
-        await uploadFiles({
-          activityId: activityResult.id,
-          formData
-        });
-      }
+      // if(startFiles.length > 0 || middleFiles.length > 0 || endFiles.length > 0){
+      //   await uploadFiles({
+      //     activityId: activityResult.id,
+      //     formData
+      //   });
+      // }
 
       handleClose();
     } catch (err) {
@@ -145,20 +129,6 @@ export const ActivityUpdateModal: React.FC<ActivityUpdateModalProps> = ({
       <div style={{ padding: '20px', maxWidth: '600px', margin: '0 auto' }}>
         <Flex $direction="column" $gap="16px">
 
-          <Flex $direction="row" $gap="16px">
-            <Flex $direction="column" $gap="16px">
-              <Text $fontSize="16px" $fontWeight="500">Inicio</Text>
-              <ImageSelector onImageSelect={(files) => setStartFiles(files)} compressImages={true} maxCompressedSize={0.35} />
-            </Flex>
-            <Flex $direction="column" $gap="16px">
-              <Text $fontSize="16px" $fontWeight="500">Durante</Text>
-              <ImageSelector onImageSelect={(files) => setMiddleFiles(files)} compressImages={true} maxCompressedSize={0.35} />
-            </Flex>
-            <Flex $direction="column" $gap="16px">
-              <Text $fontSize="16px" $fontWeight="500">Después</Text>
-              <ImageSelector onImageSelect={(files) => setEndFiles(files)} compressImages={true} maxCompressedSize={0.35} />
-            </Flex>
-          </Flex>
           <Flex $direction="column" $gap="16px" $align="stretch">
           {/* Lista de KPIs */}
           <div style={{ marginBottom: '20px' }}>
@@ -243,30 +213,16 @@ export const ActivityUpdateModal: React.FC<ActivityUpdateModalProps> = ({
             </div>
           )}
 
-          {/* Barra de progreso de subida */}
-          {isUploading && uploadProgress > 0 && (
-            <Flex $direction="column" $gap="8px">
-              <Text $fontSize="14px" $fontWeight="500">
-                Subiendo imágenes...
-              </Text>
-              <ProgressBar
-                progress={uploadProgress}
-                height="12px"
-                color="#10b981"
-                animated={true}
-              />
-            </Flex>
-          )}
+
 
           {/* Botones de acción */}
           <Flex $justify="end" $gap="10px">
-
             <Button
               $variant="primary"
               onClick={handleSave}
-              disabled={isSubmitting || isUploading}
+              disabled={isSubmitting}
             >
-              {isSubmitting || isUploading ? 'Guardando...' : 'Guardar Cambios'}
+              {isSubmitting ? 'Guardando...' : 'Guardar Cambios'}
             </Button>
           </Flex>
           </Flex>
