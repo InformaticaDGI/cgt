@@ -8,9 +8,6 @@ import Text from '../Ui/Text/Text';
 import type { Activity } from '../../hooks/useActivities';
 import { $TextArea } from '../Ui/TextArea/TextArea';
 import { useProjectKPIs, useUpdateActivityKPIs, type KPI, type KPIResult } from '../../hooks/useActivityKPIs';
-import { useUploadFiles } from '../../hooks/mutations/useUploadFiles';
-import ImageSelector from '../ImageSelector/ImageSelector';
-import ProgressBar from '../Ui/ProgressBar/ProgressBar';
 
 interface ActivityUpdateModalProps {
   isOpen: boolean;

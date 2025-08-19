@@ -23,6 +23,8 @@ export const Button = styled.button<ButtonProps>`
             ? "12px 24px"
             : $size === "large"
             ? "16px 32px"
+            : $size === "xsmall"
+            ? "10px 12px"
             : "12px 24px"};
     height: ${({ $size }) =>
         $size === "small"
@@ -31,6 +33,8 @@ export const Button = styled.button<ButtonProps>`
             ? "40px"
             : $size === "large"
             ? "48px"
+            : $size === "xsmall"
+            ? "24px"
             : "40px"};
     border-radius: var(--border-radius);
     border: none;
@@ -42,6 +46,8 @@ export const Button = styled.button<ButtonProps>`
             ? "var(--input-font-size-small)"
             : $size === "large"
             ? "var(--input-font-size-large)"
+            : $size === "xsmall"
+            ? "var(--input-font-size-xsmall)"
             : "var(--input-font-size-small)"};
     font-weight: 600;
     transition: all 0.3s ease;
@@ -78,6 +84,6 @@ type ButtonProps = {
     $htmlType?: "button" | "submit" | "reset"
     $variant?: "primary" | "secondary" | "tertiary"
     $disabled?: boolean
-    $size?: "small" | "medium" | "large"
+    $size?: "small" | "medium" | "large" | "xsmall"
     $backgroundColor?: string
 }

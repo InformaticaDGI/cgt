@@ -13,6 +13,7 @@ interface ImageSelectorProps {
   maxCompressedSize?: number; // in MB
   convertToWebP?: boolean; // Nueva propiedad para conversión a WebP
   existingImage?: string; // URL de la imagen existente para mostrar como previsualización
+  onImageRemoved?: () => void;
 }
 
 interface ImagePreview {
@@ -109,7 +110,8 @@ const ImageSelector: React.FC<ImageSelectorProps> = ({
   compressImages = true,
   maxCompressedSize = 1, // 1MB default
   convertToWebP = true, // Por defecto convertir a WebP
-  existingImage
+  existingImage,
+  onImageRemoved
 }) => {
   const [isDragOver, setIsDragOver] = useState(false);
   const [preview, setPreview] = useState<ImagePreview | null>(null);
@@ -354,6 +356,7 @@ const ImageSelector: React.FC<ImageSelectorProps> = ({
     if (existingImage && preview?.preview === existingImage) {
       setExistingImageRemoved(true);
       setPreview(null);
+      onImageRemoved?.();
       setError(null);
       onImageSelect(null);
     } else {
