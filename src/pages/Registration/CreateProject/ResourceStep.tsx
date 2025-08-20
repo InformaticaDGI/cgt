@@ -47,12 +47,6 @@ const ResourceStep = () => {
     if (!values.directLabor) {
       errors.directLabor = "La mano de obra directa es requerida";
     }
-    if (!values.femaleLabor) {
-      errors.femaleLabor = "Las mujeres son requeridas";
-    }
-    if (!values.maleLabor) {
-      errors.maleLabor = "Los hombres son requeridos";
-    }
 
     console.log(errors);
 
@@ -86,8 +80,8 @@ const ResourceStep = () => {
         projectUnqualifiedLabor: values.unqualifiedLabor,
         projectIndirectLabor: values.indirectLabor,
         projectDirectLabor: values.directLabor,
-        projectFemaleLabor: values.femaleLabor,
-        projectMaleLabor: values.maleLabor,
+        projectFemaleLabor: values.femaleLabor || '0',
+        projectMaleLabor: values.maleLabor || '0',
       })
       nextStep()
 
@@ -198,7 +192,7 @@ const ResourceStep = () => {
             <Text $fontSize="14px" $color="#2d2d2d">Cantidad de personal</Text>
           </GridItem>
           <GridItem $colSpan={6}>
-            <FormControl label="Mujeres" required error={formik.errors.femaleLabor && formik.touched.femaleLabor ? formik.errors.femaleLabor : undefined}>
+            <FormControl label="Mujeres">
               <Input
                 name="femaleLabor"
                 value={formik.values.femaleLabor}
@@ -209,7 +203,7 @@ const ResourceStep = () => {
             </FormControl>
           </GridItem>
           <GridItem $colSpan={6}>
-            <FormControl label="Hombres" required error={formik.errors.maleLabor && formik.touched.maleLabor ? formik.errors.maleLabor : undefined}>
+            <FormControl label="Hombres">
               <Input
                 name="maleLabor"
                 value={formik.values.maleLabor}

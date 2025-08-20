@@ -31,9 +31,6 @@ const KpiStep = () => {
     if (!values.benefitedChildren)
       errors.benefitedChildren =
         "La cantidad de beneficiarios menores de 18 años es requerida";
-    if (+values.benefitedChildren >= +values.benefitedPopulation)
-      errors.benefitedChildren =
-        "La cantidad de beneficiarios menores de 18 años no puede ser mayor o igual a la cantidad de beneficiarios";
     return errors;
   };
 
