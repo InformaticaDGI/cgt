@@ -234,7 +234,7 @@ async function convertWebPToBase64PNG(webpBase64: string): Promise<string> {
             }
         };
         
-        img.onerror = (e) => {
+        img.onerror = (_) => {
             clearTimeout(timeout);
             reject(new Error('Error al cargar imagen'));
         };
