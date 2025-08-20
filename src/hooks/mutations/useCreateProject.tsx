@@ -37,7 +37,7 @@ export const useCreateProject = () => {
           sectorId: data.sectorId
       };
       if (data.acaProjectId) dataProps.acaProjectId = data.acaProjectId;
-      if(data.budgetSourceId) dataProps.budgetSourceId = data.budgetSourceId;
+      if(data.budgetSourceId !== 'without-budget') dataProps.budgetSourceId = data.budgetSourceId;
       const response = await createProject(dataProps);
       return response;
     },
