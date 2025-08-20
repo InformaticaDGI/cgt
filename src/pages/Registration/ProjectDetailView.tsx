@@ -15,12 +15,10 @@ import GanttChart from "../../components/GanttChart/GanttChart";
 import { GobMap } from "../../components/Map/map.components";
 import ImageProject from "../../components/Project/ImageProject";
 
+
 export default function ProjectDetailView() {
   const { projectId } = useParams();
   const { data: project, isLoading, error } = useProject(projectId);
-
-
-  // No state needed here anymore as it's all in the ProjectActivities component
 
   if (isLoading) return <div>Cargando...</div>;
   if (error || !project) return <div>Error al cargar el proyecto</div>;
@@ -124,9 +122,6 @@ export default function ProjectDetailView() {
             <GobMap />
           </Card>
           <Card $isSelectable={false} $height="300px">
-            {/* <CardHeader>
-              <Text style={{ fontSize: '14px', fontWeight: 'normal', textWrap: 'nowrap', textAlign: 'justify' }}>Fotos del proyecto</Text>
-            </CardHeader> */}
             <ImageProject projectId={project.id} projectImages={project.projectImage} />
           </Card>
         </GridItem>
@@ -134,3 +129,5 @@ export default function ProjectDetailView() {
     </Flex>)
 
 }
+
+

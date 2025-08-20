@@ -4,39 +4,41 @@ import axios from "axios";
 import type { KpiInstance } from "./useKpiInstances";
 
 export const useCreateProject = () => {
+
   return useMutation({
     mutationFn: async (data: CreateProjectFormValues) => {
-      const response = await createProject({
-        name: data.name,
-        secretaryId: data.secretaryId,
-        programId: data.programId,
-        kpiInstances: data.kpiInstances.map((kpi) => ({
-          expected: kpi.expectedValue,
-          baseKpiId: kpi.kpiBaseId,
-        })),
-        initialDate: data.initialDate,
-        finalDate: data.finalDate,
-        observations: data.observations,
-        parishId: data.parishId,
-        communityCircuitCode: data.communityCircuitCode,
-        areaId: data.areaId,
-        acaProjectId: data.acaProjectId !== "" ? data.acaProjectId : undefined,
-        directLabor: data.directLabor,
-        indirectLabor: data.indirectLabor,
-        qualifiedLabor: data.qualifiedLabor,
-        unqualifiedLabor: data.unqualifiedLabor,
-        femaleLabor: data.femaleLabor,
-        maleLabor: data.maleLabor,
-        benefitedPopulation: data.benefitedPopulation,
-        benefitedChildren: data.benefitedChildren,
-        initialBudget: data.initialBudget,
-        initialBudgetUsd: data.initialBudgetUsd,
-        latitude: data.latitude,
-        longitude: data.longitude,
-        status: "in_progress",
-        sectorId: data.sectorId,
-        budgetSourceId: data.budgetSourceId,
-      });
+      const dataProps: any = {
+          name: data.name,
+          secretaryId: data.secretaryId,
+          programId: data.programId,
+          kpiInstances: data.kpiInstances.map((kpi) => ({
+            expected: kpi.expectedValue,
+            baseKpiId: kpi.kpiBaseId,
+          })),
+          initialDate: data.initialDate,
+          finalDate: data.finalDate,
+          observations: data.observations,
+          parishId: data.parishId,
+          communityCircuitCode: data.communityCircuitCode,
+          areaId: data.areaId,
+          directLabor: data.directLabor,
+          indirectLabor: data.indirectLabor,
+          qualifiedLabor: data.qualifiedLabor,
+          unqualifiedLabor: data.unqualifiedLabor,
+          femaleLabor: data.femaleLabor,
+          maleLabor: data.maleLabor,
+          benefitedPopulation: data.benefitedPopulation,
+          benefitedChildren: data.benefitedChildren,
+          initialBudget: data.initialBudget,
+          initialBudgetUsd: data.initialBudgetUsd,
+          latitude: data.latitude,
+          longitude: data.longitude,
+          status: "in_progress",
+          sectorId: data.sectorId
+      };
+      if (data.acaProjectId) dataProps.acaProjectId = data.acaProjectId;
+      if(data.budgetSourceId) dataProps.budgetSourceId = data.budgetSourceId;
+      const response = await createProject(dataProps);
       return response;
     },
   });

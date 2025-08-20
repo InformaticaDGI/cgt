@@ -1,5 +1,5 @@
 import { Page, Text, View, Document, StyleSheet, Image, Svg, G, Defs, Polygon, Path, Font } from '@react-pdf/renderer';
-import type { ReactNode } from 'react';
+import { type ReactNode } from 'react';
 import gobLogo from '../../assets/por-amor-a-guarico.png';
 import type { Stage } from '../Prebuilt/StatusBadge';
 import { formatCurrencyBdv } from '../Prebuilt/CurrencyInput';
@@ -26,6 +26,11 @@ const body = StyleSheet.create({
         color: "#058473",
         fontFamily: 'CanvaSansBold'
     },
+    textNoImage: {
+        fontSize: '10px',
+        color: "#2d2d2d",
+        fontFamily: 'CanvaSansRegular'
+    },
     page: {
         flexDirection: 'row',
         backgroundColor: '#FFFFFF',
@@ -45,6 +50,13 @@ const body = StyleSheet.create({
         alignItems: 'flex-end',
         width: '100%',
         gap: '4px'
+    },
+    image: {
+        width: '100%',
+        height: '250px',
+        objectFit: 'cover',
+        borderRadius: 10,
+        border: '1px solid #bfbfbf',
     }
 });
 
@@ -188,7 +200,8 @@ type PDFModelProps = {
     beneficitPopulation: string,
     beneficitChildren: string,
     kpiInstances: any[],
-    activities: any[]
+    activities: any[],
+    projectImage: any
 }
 
 // Create Document Component
@@ -219,7 +232,11 @@ const PDFModel = (props: PDFModelProps) => {
         startDate,
         status,
         territorialSecretary,
-        unqualifiedLabor } = props;
+        unqualifiedLabor,
+        projectImage
+    } = props;
+
+
 
 
     return <Document>
@@ -350,7 +367,7 @@ const PDFModel = (props: PDFModelProps) => {
                                         const kpiResultTotal = item.kpiResults?.reduce?.((acc: number, curr: any) => acc + curr.value, 0) || 0;
                                         const kpiResultMeasurement = item.kpiResults?.[0]?.kpiInstance?.kpi?.measurement || '';
 
-                                       return <View style={activityTable.tableRow} key={item.id}>
+                                        return <View style={activityTable.tableRow} key={item.id}>
                                             <View style={activityTable.tableCol}>
                                                 <Text style={activityTable.tableCell}>{item.name}</Text>
                                             </View>
@@ -360,10 +377,40 @@ const PDFModel = (props: PDFModelProps) => {
                                             <View style={activityTable.tableCol}>
                                                 <Text style={activityTable.tableCell}>{kpiResultTotal}</Text>
                                             </View>
-
                                         </View>
                                     })}
+
                                 </View>
+                            </View>
+                        </View>
+                    </View>
+                    {/** FOTOS DEL PROYECTO */}
+                    <View style={{ display: 'flex', flexDirection: 'column', width: '100%', gap: '6px', marginTop: '10px' }}>
+                        <Title>FOTOS DEL PROYECTO</Title>
+                        <View style={{ display: 'flex', flexDirection: 'row', gap: '16px', width: '100%' }}>
+                            {/** INICIO */}
+                            <View style={{ display: 'flex', flexDirection: 'column', width: '100%', gap: '6px' }}>
+                                <ArticleHeader title='INICIO' />
+                                {projectImage?.startImageUrl !== "" ? <Image
+                                    style={body.image}
+                                    source={projectImage?.startImageUrl}
+                                /> : <View style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '250px', backgroundColor: '#f3fcfa', borderRadius: '10px' }}><Text style={body.textNoImage}>No hay Imagen</Text></View>}
+                            </View>
+                            {/** DURANTE */}
+                            <View style={{ display: 'flex', flexDirection: 'column', width: '100%', gap: '6px' }}>
+                                <ArticleHeader title='DURANTE' />
+                                {projectImage?.middleImageUrl !== "" ? <Image
+                                    style={body.image}
+                                    source={projectImage?.middleImageUrl}
+                                /> : <View style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '250px', backgroundColor: '#f3fcfa', borderRadius: '10px' }}><Text style={body.textNoImage}>No hay Imagen</Text></View>}
+                            </View>
+                            {/** DESPUES */}
+                            <View style={{ display: 'flex', flexDirection: 'column', width: '100%', gap: '6px' }}>
+                                <ArticleHeader title='DESPUES' />
+                                {projectImage?.endImageUrl !== "" ? <Image
+                                    style={body.image}
+                                    source={projectImage?.endImageUrl}
+                                /> : <View style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '250px', backgroundColor: '#f3fcfa', borderRadius: '10px' }}><Text style={body.textNoImage}>No hay Imagen</Text></View>}
                             </View>
                         </View>
                     </View>
@@ -747,8 +794,5 @@ const CGTLOGO = () => {
 const GOBLOGO = () => {
     return <Image src={gobLogo} style={{ width: '2.02cm', height: '1.89cm' }} />
 }
-
-
-
 
 export default PDFModel
