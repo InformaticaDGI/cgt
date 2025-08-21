@@ -6,6 +6,7 @@ export const CommunityCircuitCodeSelect = ({
   onChange,
   parishId,
   style,
+  disabled,
 }: CommunityCircuitCodeSelectProps) => {
   const { data: circuits } = useCommunityCircuitsByParish(parishId);
   return (
@@ -20,6 +21,7 @@ export const CommunityCircuitCodeSelect = ({
       onChange={onChange}
       placeholder="Seleccione un circuito comunal"
       style={style}
+      disabled={disabled}
     />
   );
 };
@@ -29,4 +31,5 @@ type CommunityCircuitCodeSelectProps = {
   onChange: (value: string) => void;
   parishId: string;
   style?: React.CSSProperties;
+  disabled?: boolean;
 };

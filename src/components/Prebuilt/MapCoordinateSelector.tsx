@@ -13,6 +13,7 @@ import { useParrishes } from "../../hooks/queries/useParrishes";
 import { useCommunityCircuits } from "../../hooks/queries/useCommunityCircuits";
 import markerIconPng from "../../assets/marker-icon.png";
 import markerShadowPng from "../../assets/marker-shadow.png";
+import styled from "styled-components";
 
 const LAT_LNG_DEFAULT = { lat: 8.9237, lng: -67.4266 };
 
@@ -33,6 +34,7 @@ interface MapCoordinateSelectorProps {
   municipalityId?: string;
   parrishId?: string;
   circuitCode?: string;
+  disabled?: boolean;
 }
 
 function LocationMarker({
@@ -41,6 +43,7 @@ function LocationMarker({
   municipalityId,
   parrishId,
   circuitCode,
+  disabled = false,
 }: MapCoordinateSelectorProps) {
   const markerRef = useRef<any>(null);
   const map = useMap();
@@ -59,6 +62,7 @@ function LocationMarker({
 
   useMapEvents({
     click(e) {
+      if (disabled) return;
       onChange(e.latlng);
     },
   });
@@ -107,22 +111,76 @@ function LocationMarker({
   ) : null;
 }
 
+const MapContainerWrapper = styled.div<{ disabled: boolean }>`
+  position: relative;
+  width: 100%;
+  height: 300px;
+  
+  ${props => props.disabled && `
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.3);
+      z-index: 1000;
+      pointer-events: all;
+      cursor: not-allowed;
+    }
+    
+    &::before {
+      content: 'Mapa deshabilitado';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 4px;
+      font-size: 14px;
+      z-index: 1001;
+      pointer-events: none;
+    }
+  `}
+`;
+
 export default function MapCoordinateSelector({
   value,
   onChange,
   municipalityId,
   parrishId,
   circuitCode,
+  disabled = false,
 }: MapCoordinateSelectorProps) {
+  const handleContainerClick = (e: React.MouseEvent) => {
+    if (disabled) {
+      e.preventDefault();
+      e.stopPropagation();
+      return false;
+    }
+  };
+
   return (
-    <div style={{ width: "100%", height: "300px" }}>
+    <MapContainerWrapper 
+      disabled={disabled} 
+      onClick={handleContainerClick}
+      onMouseDown={handleContainerClick}
+      onMouseUp={handleContainerClick}
+    >
       <MapContainer
         center={LAT_LNG_DEFAULT}
-        doubleClickZoom={false}
+        doubleClickZoom={!disabled}
         zoomControl={false}
-        scrollWheelZoom={true}
+        scrollWheelZoom={!disabled}
         zoom={12}
         style={{ width: "100%", height: "100%" }}
+        dragging={!disabled}
+        touchZoom={!disabled}
+        boxZoom={!disabled}
+        keyboard={!disabled}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -134,8 +192,9 @@ export default function MapCoordinateSelector({
           municipalityId={municipalityId}
           parrishId={parrishId}
           circuitCode={circuitCode}
+          disabled={disabled}
         />
       </MapContainer>
-    </div>
+    </MapContainerWrapper>
   );
 }

@@ -1,7 +1,7 @@
 import React, { useState, useMemo, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
-export const SearchableSelect = ({ options, value, onChange, placeholder, style }: SearchableSelectProps) => {
+export const SearchableSelect = ({ options, value, onChange, placeholder, style, disabled = false }: SearchableSelectProps) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [isOpen, setIsOpen] = useState(false);
     const [highlightedIndex, setHighlightedIndex] = useState(-1);
@@ -38,6 +38,7 @@ export const SearchableSelect = ({ options, value, onChange, placeholder, style 
     }, [highlightedIndex]);
 
     const handleSelect = (selectedValue: string) => {
+        if (disabled) return;
         onChange?.(selectedValue);
         setIsOpen(false);
         setSearchTerm('');
@@ -45,6 +46,8 @@ export const SearchableSelect = ({ options, value, onChange, placeholder, style 
     };
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (disabled) return;
+
         if (e.key === 'Escape') {
             setIsOpen(false);
             return;
@@ -83,6 +86,21 @@ export const SearchableSelect = ({ options, value, onChange, placeholder, style 
         }
     };
 
+    const handleFocus = () => {
+        if (disabled) return;
+        setIsOpen(true);
+    };
+
+    const handleBlur = () => {
+        if (disabled) return;
+        setTimeout(() => setIsOpen(false), 200); // Delay to allow click on options
+    };
+
+    const handleArrowClick = () => {
+        if (disabled) return;
+        setIsOpen(!isOpen);
+    };
+
     const displayValue = useMemo(() => {
         if (isOpen && searchTerm.length > 0) return searchTerm;
         const option = options.find(option => option.value === value)?.label || '';
@@ -91,20 +109,21 @@ export const SearchableSelect = ({ options, value, onChange, placeholder, style 
 
     return (
         <$Container style={style}>
-            <$InputContainer isOpen={isOpen}>
+            <$InputContainer isOpen={isOpen} disabled={disabled}>
                 <input
                     ref={inputRef}
                     type="text"
                     placeholder={placeholder}
                     value={displayValue}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    onFocus={() => setIsOpen(true)}
-                    onBlur={() => setTimeout(() => setIsOpen(false), 200)} // Delay to allow click on options
+                    onChange={(e) => !disabled && setSearchTerm(e.target.value)}
+                    onFocus={handleFocus}
+                    onBlur={handleBlur}
                     onKeyDown={handleKeyDown}
+                    disabled={disabled}
                 />
-                <$ArrowIcon isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} />
+                <$ArrowIcon isOpen={isOpen} disabled={disabled} onClick={handleArrowClick} />
             </$InputContainer>
-            {isOpen && (
+            {isOpen && !disabled && (
                 <$OptionsList ref={optionsListRef}>
                     {filteredOptions.length > 0 ? (
                         filteredOptions.map((option, index) => (
@@ -132,6 +151,7 @@ type SearchableSelectProps = {
     onChange?: (value: string) => void;
     placeholder?: string;
     style?: React.CSSProperties;
+    disabled?: boolean;
 };
 
 const $Container = styled.div`
@@ -139,29 +159,33 @@ const $Container = styled.div`
     width: 100%;
 `;
 
-const $InputContainer = styled.div<{ isOpen: boolean }>`
+const $InputContainer = styled.div<{ isOpen: boolean; disabled: boolean }>`
     position: relative;
     width: 100%;
     input {
         width: 100%;
         height: 40px;
         border-radius: ${props => props.isOpen ? 'var(--border-radius) var(--border-radius) 0 0' : 'var(--border-radius)'};
-        border: 1px solid var(--primary);
+        border: 1px solid ${props => props.disabled ? 'var(--border-color-disabled, #ccc)' : 'var(--primary)'};
         padding: 0 12px;
-        color: var(--text-secondary);
-        background-color: var(--input-background);
+        color: ${props => props.disabled ? 'var(--text-disabled, #999)' : 'var(--text-secondary)'};
+        background-color: ${props => props.disabled ? 'var(--input-background-disabled, #f5f5f5)' : 'var(--input-background)'};
         outline: none;
         transition: border-color 0.2s;
         font-size: var(--input-font-size);
-        cursor: pointer;
+        cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
+        opacity: ${props => props.disabled ? 0.6 : 1};
         &:focus {
-            border-color: var(--primary);
-            background-color: var(--input-background-focus);
+            border-color: ${props => props.disabled ? 'var(--border-color-disabled, #ccc)' : 'var(--primary)'};
+            background-color: ${props => props.disabled ? 'var(--input-background-disabled, #f5f5f5)' : 'var(--input-background-focus)'};
+        }
+        &:disabled {
+            cursor: not-allowed;
         }
     }
 `;
 
-const $ArrowIcon = styled.div<{ isOpen: boolean }>`
+const $ArrowIcon = styled.div<{ isOpen: boolean; disabled: boolean }>`
     position: absolute;
     right: 12px;
     top: 50%;
@@ -170,9 +194,10 @@ const $ArrowIcon = styled.div<{ isOpen: boolean }>`
     height: 0;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
-    border-top: 5px solid var(--text-secondary);
+    border-top: 5px solid ${props => props.disabled ? 'var(--text-disabled, #999)' : 'var(--text-secondary)'};
     transition: transform 0.2s;
-    cursor: pointer;
+    cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
+    opacity: ${props => props.disabled ? 0.6 : 1};
 `;
 
 const $OptionsList = styled.ul`

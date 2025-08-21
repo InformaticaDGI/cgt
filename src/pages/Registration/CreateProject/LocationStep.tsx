@@ -22,6 +22,7 @@ const LocationStep = () => {
   const { nextStep, previousStep } = useStepper();
   const { formState, setFormState } = useAppStore();
   const [isUtm, setIsUtm] = useState(false);
+  const [isNonLocation, setIsNonLocation] = useState(false);
   const [north, setNorth] = useState<number | string>("");
   const [east, setEast] = useState<number | string>("");
 
@@ -49,20 +50,40 @@ const LocationStep = () => {
       },
     },
     onSubmit: (values) => {
+      const resolvedValues = resolveValues(values);
       setFormState({
         ...formState,
-        projectAcaProjectId: values.acaProjectId,
-        projectMunicipalityId: values.municipalityId,
-        projectParrishId: values.parrishId,
-        projectCommunityCircuitCode: values.circuitCode,
-        projectCommunityId: values.communityId,
-        projectLatitude: values.coords.lat,
-        projectLongitude: values.coords.lng,
+        ...resolvedValues,
       });
       nextStep();
     },
-    validate,
+    validate: isNonLocation ? () => false : validate,
   });
+
+  const resolveValues = (values: any) => {
+    if(isNonLocation) {
+      return {
+        ...values,
+          projectAcaProjectId: "",
+          projectMunicipalityId: "",
+          projectParrishId: "",
+          projectCommunityCircuitCode: "",
+          projectCommunityId: "",
+          projectLatitude: 0,
+          projectLongitude: 0,
+      }
+    }
+    return {
+      ...values,
+      projectAcaProjectId: values.acaProjectId,
+      projectMunicipalityId: values.municipalityId,
+      projectParrishId: values.parrishId,
+      projectCommunityCircuitCode: values.circuitCode,
+      projectCommunityId: values.communityId,
+      projectLatitude: values.coords.lat,
+      projectLongitude: values.coords.lng,
+    }
+  }
 
   useEffect(() => {
     if (formik.values.coords.lat && formik.values.coords.lng) {
@@ -109,10 +130,16 @@ const LocationStep = () => {
     <form onSubmit={formik.handleSubmit}>
       <Card $isSelectable={false} $padding="32px">
         <Grid $columns="repeat(24, 1fr)" $gap="12px">
-          <GridItem $colSpan={24}>
+          <GridItem $colSpan={24} style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
             <Text $fontSize="14px" $color="#2d2d2d">
               Ubicación del Proyecto
             </Text>
+            <Switch
+              checked={isNonLocation}
+              onChange={() => setIsNonLocation(!isNonLocation)}
+              fontSize={"14px"}
+              label="No tiene Ubicación Geografica"
+            />
           </GridItem>
           <GridItem $colSpan={24}>
             <FormControl
@@ -131,6 +158,7 @@ const LocationStep = () => {
                   formik.setFieldValue("parrishId", "");
                   formik.setFieldValue("circuitId", "");
                 }}
+                disabled={isNonLocation}
               />
             </FormControl>
           </GridItem>
@@ -151,6 +179,7 @@ const LocationStep = () => {
                   formik.setFieldValue("circuitId", "");
                 }}
                 municipalityId={formik.values.municipalityId}
+                disabled={isNonLocation}
               />
             </FormControl>
           </GridItem>
@@ -171,6 +200,7 @@ const LocationStep = () => {
                   formik.setFieldValue("communityId", ""); // Reset community when circuit changes
                 }}
                 parishId={formik.values.parrishId}
+                disabled={isNonLocation}
               />
             </FormControl>
           </GridItem>
@@ -180,6 +210,7 @@ const LocationStep = () => {
                 value={formik.values.communityId}
                 onChange={(value) => formik.setFieldValue("communityId", value)}
                 circuitCode={formik.values.circuitCode}
+                disabled={isNonLocation}
               />
             </FormControl>
           </GridItem>
@@ -195,6 +226,7 @@ const LocationStep = () => {
                 communityCircuitId={formik.values.circuitCode}
                 sectorId={formik.values.communityId}
                 parrishId={formik.values.parrishId}
+                disabled={isNonLocation}
               />
             </FormControl>
           </GridItem>
@@ -203,6 +235,7 @@ const LocationStep = () => {
               checked={isUtm}
               onChange={() => setIsUtm(!isUtm)}
               label="Usar coordenadas UTM"
+              disabled={isNonLocation}
             />
           </GridItem>
           {isUtm ? (
@@ -248,6 +281,7 @@ const LocationStep = () => {
                       formik.setFieldValue("coords.lat", e.target.value)
                     }
                     onBlur={formik.handleBlur}
+                    disabled={isNonLocation}
                   />
                 </FormControl>
               </GridItem>
@@ -268,6 +302,7 @@ const LocationStep = () => {
                     onChange={(e) =>
                       formik.setFieldValue("coords.lng", e.target.value)
                     }
+                    disabled={isNonLocation}
                     onBlur={formik.handleBlur}
                   />
                 </FormControl>
@@ -295,6 +330,7 @@ const LocationStep = () => {
                   formik.setFieldValue("coords", value);
                 }}
                 height={220}
+                disabled={isNonLocation}
               />
             </FormControl>
           </GridItem>

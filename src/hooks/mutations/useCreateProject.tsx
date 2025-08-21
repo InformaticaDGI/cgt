@@ -18,8 +18,6 @@ export const useCreateProject = () => {
           initialDate: data.initialDate,
           finalDate: data.finalDate,
           observations: data.observations,
-          parishId: data.parishId,
-          communityCircuitCode: data.communityCircuitCode,
           areaId: data.areaId,
           directLabor: data.directLabor,
           indirectLabor: data.indirectLabor,
@@ -34,8 +32,10 @@ export const useCreateProject = () => {
           latitude: data.latitude,
           longitude: data.longitude,
           status: "in_progress",
-          sectorId: data.sectorId
       };
+      if(data.sectorId) dataProps.sectorId = data.sectorId;
+      if(data.communityCircuitCode) dataProps.communityCircuitCode = data.communityCircuitCode;
+      if(data.parishId) dataProps.parishId = data.parishId;
       if (data.acaProjectId) dataProps.acaProjectId = data.acaProjectId;
       if(data.budgetSourceId !== 'without-budget') dataProps.budgetSourceId = data.budgetSourceId;
       const response = await createProject(dataProps);

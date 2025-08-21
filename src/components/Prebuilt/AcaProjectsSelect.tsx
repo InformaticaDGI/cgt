@@ -10,6 +10,7 @@ export const AcaProjectsSelect = ({
   communityCircuitId,
   sectorId,
   style,
+  disabled,
 }: AcaProjectsSelectProps) => {
   const { data: acaProjects } = useAcaProjectsByFilter({
     municipalityId,
@@ -47,6 +48,7 @@ export const AcaProjectsSelect = ({
       onChange={onChange}
       placeholder="Seleccione una comunidad"
       style={style}
+      disabled={disabled}
     />
   );
 };
@@ -60,4 +62,5 @@ type AcaProjectsSelectProps = {
   communityCircuitId: string;
   sectorId: string;
   style?: React.CSSProperties;
+  disabled?: boolean;
 };
