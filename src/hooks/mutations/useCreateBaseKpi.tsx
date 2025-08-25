@@ -4,7 +4,7 @@ import { config } from "../../config"
 
 export const useCreateBaseKpi = () => {
     const { mutate, isPending, isSuccess, isError } = useMutation({
-        mutationFn: (baseKpi: CreateKpiBaseValues) => createBaseKpi(baseKpi),
+        mutationFn: (baseKpi: CreateKpiBaseValues) => createBaseKpi(baseKpi)
     })
 
     return { createBaseKpi: mutate, isPending, isSuccess, isError }

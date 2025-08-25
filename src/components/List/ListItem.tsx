@@ -33,7 +33,7 @@ const ListItem = ({ project }: { project: Project }) => {
             <GridItem $colSpan={6} style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem', justifyContent: 'start', alignItems: 'start' }}>
                 <Text $fontSize='14px' $fontWeight='500' $color='#2D3748' style={{ fontWeight: '600', fontSize: '12px' }}>{rootSecretary?.name}</Text>
                 <Text $fontSize='14px' $fontWeight='500' $color='var(--text-secondary)' style={{ fontWeight: '500', fontSize: '12px' }}>{secretary.name}</Text>
-                <Text $fontSize='14px' $fontWeight='500' $color='var(--text-secondary)' style={{ fontWeight: '500', fontSize: '12px' }}>{parish.municipality.name} · {parish.name}</Text>
+                <Text $fontSize='14px' $fontWeight='500' $color='var(--text-secondary)' style={{ fontWeight: '500', fontSize: '12px' }}>{parish?.municipality?.name ? `${parish?.municipality?.name} · ${parish?.name}` : 'Todo el territorio'}</Text>
             </GridItem>
 
             <GridItem $colSpan={6} style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', justifyContent: 'end', alignItems: 'end' }}>

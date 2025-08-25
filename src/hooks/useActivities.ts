@@ -20,9 +20,9 @@ type ActivityPayload = {
   name: string;
   startDate: string | null;
   endDate: string | null;
-  sectorId: string;
-  parishId: string;
-  communityCircuitCode: string;
+  sectorId?: string;
+  parishId?: string;
+  communityCircuitCode?: string;
   projectId: string | undefined;
 };
 
@@ -58,7 +58,22 @@ const useCreateActivity = () => {
 }
 
 const createActivity = async (activity: ActivityPayload) => {
-  const { data } = await axios.post<Activity>(`${config.apiUrl}/scheduled-activities`, activity);
+  const payload: ActivityPayload = {
+    name: activity.name,
+    startDate: activity.startDate,
+    endDate: activity.endDate,
+    projectId: activity.projectId,
+  }
+  if (activity.communityCircuitCode) {
+    payload.communityCircuitCode = activity.communityCircuitCode;
+  }
+  if (activity.parishId) {
+    payload.parishId = activity.parishId;
+  }
+  if (activity.sectorId) {
+    payload.sectorId = activity.sectorId;
+  }
+  const { data } = await axios.post<Activity>(`${config.apiUrl}/scheduled-activities`, payload);
   return data;
 }
 

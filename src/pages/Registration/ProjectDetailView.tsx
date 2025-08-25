@@ -20,6 +20,8 @@ export default function ProjectDetailView() {
   const { projectId } = useParams();
   const { data: project, isLoading, error } = useProject(projectId);
 
+  console.log(project)
+
   if (isLoading) return <div>Cargando...</div>;
   if (error || !project) return <div>Error al cargar el proyecto</div>;
 
@@ -109,8 +111,8 @@ export default function ProjectDetailView() {
               projectCommunityId={project.sectorId}
               projectStartDate={project.initialDate}
               projectEndDate={project.finalDate}
-              projectMunicipalityId={project.parish.municipality.id}
-              projectParishId={project.parish.id}
+              projectMunicipalityId={project.parish?.municipality?.id}
+              projectParishId={project.parish?.id}
             />
           </Card>
         </GridItem>

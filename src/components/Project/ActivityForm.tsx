@@ -23,6 +23,7 @@ interface ActivityFormProps {
   onSubmit: () => Promise<void>;
   isSubmitting: boolean;
   submitError: string;
+  isNoTerritory?: boolean;
 }
 
 /**
@@ -34,6 +35,7 @@ export const ActivityForm: React.FC<ActivityFormProps> = ({
   onSubmit,
   isSubmitting,
   submitError,
+  isNoTerritory = false,
 }) => {
   const handleInputChange = (field: keyof ActivityFormData, value: string) => {
     let updatedData = { ...formData, [field]: value };
@@ -107,43 +109,45 @@ export const ActivityForm: React.FC<ActivityFormProps> = ({
           />
         </FormControl>
       </div>
+      {!isNoTerritory && <>
+        <div style={{ marginTop: "40px", display: "flex", gap: "20px" }}>
+          <FormControl label="Municipio" required style={{ flex: 1 }}>
+            <MunicipalitySelect
+              value={formData.municipalityId}
+              onChange={(value) => handleInputChange("municipalityId", value)}
+            />
+          </FormControl>
 
-      <div style={{ marginTop: "40px", display: "flex", gap: "20px" }}>
-        <FormControl label="Municipio" required style={{ flex: 1 }}>
-          <MunicipalitySelect
-            value={formData.municipalityId}
-            onChange={(value) => handleInputChange("municipalityId", value)}
-          />
-        </FormControl>
+          <FormControl label="Parroquia" required style={{ flex: 1 }}>
+            <ParrishSelect
+              municipalityId={formData.municipalityId}
+              value={formData.parishId}
+              onChange={(value) => handleInputChange("parishId", value)}
+            />
+          </FormControl>
+        </div>
 
-        <FormControl label="Parroquia" required style={{ flex: 1 }}>
-          <ParrishSelect
-            municipalityId={formData.municipalityId}
-            value={formData.parishId}
-            onChange={(value) => handleInputChange("parishId", value)}
-          />
-        </FormControl>
-      </div>
+        <div style={{ marginTop: "40px", display: "flex", gap: "20px" }}>
+          <FormControl label="Circuito" required style={{ flex: 1 }}>
+            <CommunityCircuitSelectTemp
+              parishId={formData.parishId}
+              value={formData.circuitCode}
+              onChange={(value) => {
+                handleInputChange('circuitCode', value)
+              }}
+            />
+          </FormControl>
 
-      <div style={{ marginTop: "40px", display: "flex", gap: "20px" }}>
-        <FormControl label="Circuito" required style={{ flex: 1 }}>
-          <CommunityCircuitSelectTemp
-            parishId={formData.parishId}
-            value={formData.circuitCode}
-            onChange={(value) => {
-              handleInputChange('circuitCode', value)
-            }}
-          />
-        </FormControl>
-
-        <FormControl label="Comunidad" required style={{ flex: 1 }}>
-          <CommunitySelect
-            circuitCode={formData.circuitCode}
-            value={formData.communityId}
-            onChange={(value) => handleInputChange("communityId", value)}
-          />
-        </FormControl>
-      </div>
+          <FormControl label="Comunidad" required style={{ flex: 1 }}>
+            <CommunitySelect
+              circuitCode={formData.circuitCode}
+              value={formData.communityId}
+              onChange={(value) => handleInputChange("communityId", value)}
+            />
+          </FormControl>
+        </div>
+      </>
+      }
 
       <div
         style={{ marginTop: "40px", display: "flex", justifyContent: "center" }}

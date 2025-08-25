@@ -33,22 +33,6 @@ const ResourceStep = () => {
     if(!values.initialBudgetUsd && values.budgetSourceId !== 'without-budget') {
        errors.initialBudgetUsd = "Este campo es requerido";
     }
-    
-
-    if (!values.qualifiedLabor) {
-      errors.qualifiedLabor = "La mano de obra calificada es requerida";
-    }
-    if (!values.unqualifiedLabor) {
-      errors.unqualifiedLabor = "La mano de obra no calificada es requerida";
-    }
-    if (!values.indirectLabor) {
-      errors.indirectLabor = "La mano de obra indirecta es requerida";
-    }
-    if (!values.directLabor) {
-      errors.directLabor = "La mano de obra directa es requerida";
-    }
-
-    console.log(errors);
 
     return errors;
   }
@@ -76,10 +60,10 @@ const ResourceStep = () => {
         projectBudgetSourceId: values.budgetSourceId,
         projectInitialBudget: values.initialBudget,
         projectInitialBudgetUsd: values.initialBudgetUsd,
-        projectQualifiedLabor: values.qualifiedLabor,
-        projectUnqualifiedLabor: values.unqualifiedLabor,
-        projectIndirectLabor: values.indirectLabor,
-        projectDirectLabor: values.directLabor,
+        projectQualifiedLabor: values.qualifiedLabor || '0',
+        projectUnqualifiedLabor: values.unqualifiedLabor || '0',
+        projectIndirectLabor: values.indirectLabor || '0',
+        projectDirectLabor: values.directLabor || '0',
         projectFemaleLabor: values.femaleLabor || '0',
         projectMaleLabor: values.maleLabor || '0',
       })
@@ -135,7 +119,7 @@ const ResourceStep = () => {
                 onChange={(value) => formik.setFieldValue("initialBudgetUsd", value)}
                 placeholder="0,00"
                 maxLength={20}
-		disabled={formik.values.budgetSourceId === "without-budget"}
+		            disabled={formik.values.budgetSourceId === "without-budget"}
               />
             </FormControl>
           </GridItem>
@@ -143,7 +127,7 @@ const ResourceStep = () => {
             <Text $fontSize="14px" $color="#2d2d2d">Cantidad de mano de obra</Text>
           </GridItem>
           <GridItem $colSpan={6}>
-            <FormControl label="Calificada" required error={formik.errors.qualifiedLabor && formik.touched.qualifiedLabor ? formik.errors.qualifiedLabor : undefined}>
+            <FormControl label="Calificada" error={formik.errors.qualifiedLabor && formik.touched.qualifiedLabor ? formik.errors.qualifiedLabor : undefined}>
               <Input
                 name="qualifiedLabor"
                 value={formik.values.qualifiedLabor}
@@ -155,7 +139,7 @@ const ResourceStep = () => {
             </FormControl>
           </GridItem>
           <GridItem $colSpan={6}>
-            <FormControl label="No calificada" required error={formik.errors.unqualifiedLabor && formik.touched.unqualifiedLabor ? formik.errors.unqualifiedLabor : undefined}>
+            <FormControl label="No calificada" error={formik.errors.unqualifiedLabor && formik.touched.unqualifiedLabor ? formik.errors.unqualifiedLabor : undefined}>
               <Input
                 name="unqualifiedLabor"
                 value={formik.values.unqualifiedLabor}
@@ -167,7 +151,7 @@ const ResourceStep = () => {
             </FormControl>
           </GridItem>
           <GridItem $colSpan={6}>
-            <FormControl label="Indirecta" required error={formik.errors.indirectLabor && formik.touched.indirectLabor ? formik.errors.indirectLabor : undefined}>
+            <FormControl label="Indirecta" error={formik.errors.indirectLabor && formik.touched.indirectLabor ? formik.errors.indirectLabor : undefined}>
               <Input
                 name="indirectLabor"
                 value={formik.values.indirectLabor}
@@ -178,7 +162,7 @@ const ResourceStep = () => {
             </FormControl>
           </GridItem>
           <GridItem $colSpan={6}>
-            <FormControl label="Directa" required error={formik.errors.directLabor && formik.touched.directLabor ? formik.errors.directLabor : undefined}>
+            <FormControl label="Directa" error={formik.errors.directLabor && formik.touched.directLabor ? formik.errors.directLabor : undefined}>
               <Input
                 name="directLabor"
                 value={formik.values.directLabor}
@@ -199,6 +183,7 @@ const ResourceStep = () => {
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => formik.setFieldValue("femaleLabor", e.target.value.replace(/[^0-9]/g, ''))}
                 placeholder="0"
                 maxLength={6}
+                $size="medium"
               />
             </FormControl>
           </GridItem>
@@ -206,6 +191,7 @@ const ResourceStep = () => {
             <FormControl label="Hombres">
               <Input
                 name="maleLabor"
+                $size="medium"
                 value={formik.values.maleLabor}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => formik.setFieldValue("maleLabor", e.target.value.replace(/[^0-9]/g, ''))}
                 placeholder="0"

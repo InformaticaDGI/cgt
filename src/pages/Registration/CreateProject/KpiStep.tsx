@@ -26,11 +26,6 @@ const KpiStep = () => {
       errors.kpiInstances = "Debe agregar al menos una meta al proyecto";
     if (values.kpiInstances.some((kpi: any) => kpi.expectedValue === 0))
       errors.kpiInstances = "El valor esperado de las metas no puede ser 0";
-    if (!values.benefitedPopulation)
-      errors.benefitedPopulation = "La cantidad de beneficiarios es requerida";
-    if (!values.benefitedChildren)
-      errors.benefitedChildren =
-        "La cantidad de beneficiarios menores de 18 años es requerida";
     return errors;
   };
 
@@ -55,8 +50,8 @@ const KpiStep = () => {
         projectFemaleLabor: +formState.projectFemaleLabor,
         projectMaleLabor: +formState.projectMaleLabor,
         projectKpiInstances: values.kpiInstances,
-        projectBenefitedPopulation: +values.benefitedPopulation,
-        projectBenefitedChildren: +values.benefitedChildren,
+        projectBenefitedPopulation: +values.benefitedPopulation || 0,
+        projectBenefitedChildren: +values.benefitedChildren || 0,
         projectAcaProjectId: formState.projectAcaProjectId,
       };
 
@@ -131,7 +126,7 @@ const KpiStep = () => {
           <GridItem $colSpan={12}>
             <FormControl
               label="Cantidad de beneficiarios"
-              required
+              
               error={
                 formik.errors.benefitedPopulation &&
                 formik.touched.benefitedPopulation
@@ -156,7 +151,7 @@ const KpiStep = () => {
           <GridItem $colSpan={12}>
             <FormControl
               label="Cantidad de beneficiarios menores de 18 años"
-              required
+              
               error={
                 formik.errors.benefitedChildren &&
                 formik.touched.benefitedChildren

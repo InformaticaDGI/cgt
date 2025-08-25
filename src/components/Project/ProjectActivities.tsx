@@ -78,8 +78,11 @@ const ProjectActivities: React.FC<ProjectActivitiesProps> = ({
 
   const handleAddActivity = async () => {
     // Validar que todos los campos requeridos estén completos
-    if (!formData.name || !formData.startDate || !formData.endDate ||
-      !formData.municipalityId || !formData.parishId || !formData.circuitCode || !formData.communityId) {
+    if (!formData.name || !formData.startDate || !formData.endDate) {
+      setSubmitError("Por favor complete todos los campos requeridos");
+    }
+
+    if (projectMunicipalityId && (!formData.municipalityId || !formData.parishId || !formData.circuitCode || !formData.communityId)) {
       setSubmitError("Por favor complete todos los campos requeridos");
       return;
     }
@@ -175,6 +178,7 @@ const ProjectActivities: React.FC<ProjectActivitiesProps> = ({
           onSubmit={handleAddActivity}
           isSubmitting={isSubmitting}
           submitError={submitError}
+          isNoTerritory={!projectMunicipalityId}
         />
       </Modal>
     </div>

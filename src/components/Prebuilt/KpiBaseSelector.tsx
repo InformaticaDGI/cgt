@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { useCreateBaseKpi } from "../../hooks/mutations/useCreateBaseKpi";
 import { Input } from "../Ui/Input/Input";
 import type { KpiInstance } from "../../hooks/mutations/useKpiInstances";
+import { QueryClient } from "@tanstack/react-query";
 
 type KpiInstanceSelectorProps = {
     value: KpiInstance[];
@@ -240,6 +241,7 @@ export const KpiInstanceSelector = ({ value, onChange }: KpiInstanceSelectorProp
     // --- Handlers ---
 
     const handleCreateBaseKpi = (values: CreateKpiBaseFormValues) => {
+        const queryClient = new QueryClient()
         createBaseKpi(
             {
                 name: values.name,
@@ -248,6 +250,7 @@ export const KpiInstanceSelector = ({ value, onChange }: KpiInstanceSelectorProp
             },
             {
                 onSuccess: (data) => {
+                    queryClient.invalidateQueries({ queryKey: ['base-kpis'] });
                     setAvailableKpiBases([...availableKpiBases, data]);
                     setIsCreateKpiBaseOpen(false);
                 },
