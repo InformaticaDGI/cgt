@@ -2,7 +2,6 @@ import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 import type { Secretary } from "../hooks/useSecretary";
 import type { KpiInstance } from "../hooks/mutations/useKpiInstances";
-import type { Activity } from "../hooks/useActivities";
 
 interface FormState {
   // Basic Information
@@ -23,6 +22,7 @@ interface FormState {
   projectAcaProjectId: string;
   projectLatitude: number;
   projectLongitude: number;
+  projectIsNonLocation: boolean;
 
   // Budget
   projectBudgetSourceId: string;
@@ -53,8 +53,8 @@ const initialFormState: FormState = {
   projectParrishId: "",
   projectCommunityCircuitCode: "",
   projectAcaProjectId: "",
-  projectLatitude: 9.9156947,
-  projectLongitude: -67.3601931,
+  projectLatitude: 0,
+  projectLongitude: 0,
   projectBudgetSourceId: "",
   projectDirectLabor: "",
   projectIndirectLabor: "",
@@ -69,6 +69,7 @@ const initialFormState: FormState = {
   projectCommunityId: "",
   projectInitialBudget: "",
   projectInitialBudgetUsd: "",
+  projectIsNonLocation: false,
 };
 
 interface AppState {
@@ -81,11 +82,11 @@ interface AppState {
   circuitId: string;
   communityId: string;
   formState: FormState;
-  activities: Activity[];
   openFilter: boolean;
   setOpenFilter: (openFilter: boolean) => void;
   resetFormState: () => void;
   setFormState: (formState: FormState) => void;
+  setProjectIsNonLocation: (projectIsNonLocation: boolean) => void;
   setSecretaries: (secretaries: Secretary[]) => void;
   findSecretary: (id: string) => Secretary | undefined;
   setSecretaryRootId: (secretaryRootId: string) => void;
@@ -95,14 +96,12 @@ interface AppState {
   setParrishId: (parrishId: string) => void;
   setCircuitId: (circuitId: string) => void;
   setCommunityId: (communityId: string) => void;
-  setActivities: (activities: Activity[]) => void;
 }
 
 export const useAppStore = create<AppState>()(
   devtools((set, get) => ({
     // Initial State
     secretaryRootId: "",
-    activities: [],
     secretarialTerritoryId: "",
     secretaryParentId: "",
     municipalityId: "",
@@ -114,8 +113,12 @@ export const useAppStore = create<AppState>()(
     openFilter: false,
     setOpenFilter: (openFilter) => set({ openFilter }),
     resetFormState: () => set({ formState: initialFormState }),
+    setProjectIsNonLocation: (projectIsNonLocation) => {
+      const formState = get().formState;
+      formState.projectIsNonLocation = projectIsNonLocation;
+      set({ formState });
+    },
     setFormState: (formState) => set({ formState }),
-    setActivities: (activities) => set({ activities }),
     // Setter Functions
     setSecretaries: (secretaries) => set({ secretaries }),
     findSecretary: (id) =>

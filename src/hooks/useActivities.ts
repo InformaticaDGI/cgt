@@ -1,7 +1,6 @@
 import axios from 'axios';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { config } from '../config';
-import { useAppStore } from '../store/store';
 
 export type Activity = {
   id: number;
@@ -14,6 +13,7 @@ export type Activity = {
   circuitId: string;
   communityId: string;
   isCompleted?: boolean;
+  projectId: string;
 };
 
 type ActivityPayload = {
@@ -27,15 +27,11 @@ type ActivityPayload = {
 };
 
 const useActivities = (projectId: string | undefined) => {
-  const { setActivities } = useAppStore();
   return useQuery({
     queryKey: ['activities', projectId],
     queryFn: () => fetchActivities(projectId),
     enabled: !!projectId,
     initialData: [],
-    onSuccess: (data) => {
-      setActivities(data);
-    }
   })
 }
 
@@ -48,11 +44,11 @@ const fetchActivities = async (projectId: string | undefined): Promise<Activity[
 
 
 const useCreateActivity = () => {
-  const { setActivities, activities } = useAppStore();
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (activity: ActivityPayload) => createActivity(activity),
     onSuccess: (data) => {
-      setActivities([...activities, data]);
+      queryClient.invalidateQueries({ queryKey: ['activities', data.projectId] });
     }
   })
 }

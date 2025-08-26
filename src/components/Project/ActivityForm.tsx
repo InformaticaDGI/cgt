@@ -23,7 +23,6 @@ interface ActivityFormProps {
   onSubmit: () => Promise<void>;
   isSubmitting: boolean;
   submitError: string;
-  isNoTerritory?: boolean;
 }
 
 /**
@@ -35,7 +34,6 @@ export const ActivityForm: React.FC<ActivityFormProps> = ({
   onSubmit,
   isSubmitting,
   submitError,
-  isNoTerritory = false,
 }) => {
   const handleInputChange = (field: keyof ActivityFormData, value: string) => {
     let updatedData = { ...formData, [field]: value };
@@ -109,7 +107,7 @@ export const ActivityForm: React.FC<ActivityFormProps> = ({
           />
         </FormControl>
       </div>
-      {!isNoTerritory && <>
+      <>
         <div style={{ marginTop: "40px", display: "flex", gap: "20px" }}>
           <FormControl label="Municipio" required style={{ flex: 1 }}>
             <MunicipalitySelect
@@ -147,7 +145,7 @@ export const ActivityForm: React.FC<ActivityFormProps> = ({
           </FormControl>
         </div>
       </>
-      }
+      
 
       <div
         style={{ marginTop: "40px", display: "flex", justifyContent: "center" }}

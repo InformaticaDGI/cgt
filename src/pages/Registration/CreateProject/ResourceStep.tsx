@@ -26,11 +26,11 @@ const ResourceStep = () => {
     }
     
 
-    if(!values.initialBudget && values.budgetSourceId !== 'without-budget') {
+    if(!values.initialBudget && values.budgetSourceId !== 'without-budget' && values.budgetSourceId !== '') {
        errors.initialBudget = "Este campo es requerido";
     }
 
-    if(!values.initialBudgetUsd && values.budgetSourceId !== 'without-budget') {
+    if(!values.initialBudgetUsd && values.budgetSourceId !== 'without-budget' && values.budgetSourceId !== '') {
        errors.initialBudgetUsd = "Este campo es requerido";
     }
 
@@ -100,26 +100,26 @@ const ResourceStep = () => {
             </FormControl>
           </GridItem>
           <GridItem $colSpan={6}>
-            <FormControl label="Presupuesto (Bs)" required={formik.values.budgetSourceId !== "without-budget"} error={formik.errors.initialBudget && formik.touched.initialBudget ? formik.errors.initialBudget : undefined}>
+            <FormControl label="Presupuesto (Bs)" required={formik.values.budgetSourceId !== "without-budget" && formik.values.budgetSourceId !== ''} error={formik.errors.initialBudget && formik.touched.initialBudget ? formik.errors.initialBudget : undefined}>
               <CurrencyInput
                 name="initialBudget"
                 value={formik.values.initialBudget}
                 onChange={handleChangeSource}
                 placeholder="0,00"
                 maxLength={20}
-                disabled={formik.values.budgetSourceId === "without-budget"}
+                disabled={formik.values.budgetSourceId === "without-budget" || !formik.values.budgetSourceId}
               />
             </FormControl>
           </GridItem>
           <GridItem $colSpan={6}>
-            <FormControl label="Presupuesto (USD)" required={formik.values.budgetSourceId !== "without-budget"} error={formik.errors.initialBudgetUsd && formik.touched.initialBudgetUsd ? formik.errors.initialBudgetUsd : undefined}>
+            <FormControl label="Presupuesto (USD)" required={formik.values.budgetSourceId !== "without-budget" && formik.values.budgetSourceId !== ''} error={formik.errors.initialBudgetUsd && formik.touched.initialBudgetUsd ? formik.errors.initialBudgetUsd : undefined}>
               <CurrencyInput
                 name="initialBudgetUsd"
                 value={formik.values.initialBudgetUsd}
                 onChange={(value) => formik.setFieldValue("initialBudgetUsd", value)}
                 placeholder="0,00"
                 maxLength={20}
-		            disabled={formik.values.budgetSourceId === "without-budget"}
+		            disabled={formik.values.budgetSourceId === "without-budget" || !formik.values.budgetSourceId}
               />
             </FormControl>
           </GridItem>
@@ -134,7 +134,7 @@ const ResourceStep = () => {
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => formik.setFieldValue("qualifiedLabor", e.target.value.replace(/[^0-9]/g, ''))}
                 placeholder="0"
                 $size="medium"
-                
+                disabled={!formik.values.budgetSourceId}
               />
             </FormControl>
           </GridItem>
@@ -145,7 +145,7 @@ const ResourceStep = () => {
                 value={formik.values.unqualifiedLabor}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => formik.setFieldValue("unqualifiedLabor", e.target.value.replace(/[^0-9]/g, ''))}
                 placeholder="0"
-                
+                disabled={!formik.values.budgetSourceId}
                 $size="medium"
               />
             </FormControl>
@@ -158,6 +158,7 @@ const ResourceStep = () => {
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => formik.setFieldValue("indirectLabor", e.target.value.replace(/[^0-9]/g, ''))}
                 placeholder="0"
                 $size="medium"
+                disabled={!formik.values.budgetSourceId}
               />
             </FormControl>
           </GridItem>
@@ -169,6 +170,7 @@ const ResourceStep = () => {
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => formik.setFieldValue("directLabor", e.target.value.replace(/[^0-9]/g, ''))}
                 placeholder="0"
                 $size="medium"
+                disabled={!formik.values.budgetSourceId}
               />
             </FormControl>
           </GridItem>
@@ -184,6 +186,7 @@ const ResourceStep = () => {
                 placeholder="0"
                 maxLength={6}
                 $size="medium"
+                disabled={!formik.values.budgetSourceId}
               />
             </FormControl>
           </GridItem>
@@ -196,6 +199,7 @@ const ResourceStep = () => {
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => formik.setFieldValue("maleLabor", e.target.value.replace(/[^0-9]/g, ''))}
                 placeholder="0"
                 maxLength={6}
+                disabled={!formik.values.budgetSourceId}
               />
             </FormControl>
           </GridItem>

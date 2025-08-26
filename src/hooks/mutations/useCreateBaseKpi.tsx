@@ -1,10 +1,14 @@
-import { useMutation } from "@tanstack/react-query"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 import axios from "axios"
 import { config } from "../../config"
 
 export const useCreateBaseKpi = () => {
+    const queryClient = useQueryClient()
     const { mutate, isPending, isSuccess, isError } = useMutation({
-        mutationFn: (baseKpi: CreateKpiBaseValues) => createBaseKpi(baseKpi)
+        mutationFn: (baseKpi: CreateKpiBaseValues) => createBaseKpi(baseKpi),
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['base-kpis'] });
+        },
     })
 
     return { createBaseKpi: mutate, isPending, isSuccess, isError }

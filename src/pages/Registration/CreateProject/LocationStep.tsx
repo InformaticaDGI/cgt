@@ -20,9 +20,8 @@ import { CommunityCircuitCodeSelect } from "../../../components/Prebuilt/Communi
 
 const LocationStep = () => {
   const { nextStep, previousStep } = useStepper();
-  const { formState, setFormState } = useAppStore();
+  const { formState, setFormState, setProjectIsNonLocation } = useAppStore();
   const [isUtm, setIsUtm] = useState(false);
-  const [isNonLocation, setIsNonLocation] = useState(false);
   const [north, setNorth] = useState<number | string>("");
   const [east, setEast] = useState<number | string>("");
 
@@ -57,11 +56,11 @@ const LocationStep = () => {
       });
       nextStep();
     },
-    validate: isNonLocation ? () => false : validate,
+    validate: formState.projectIsNonLocation ? () => false : validate,
   });
 
   const resolveValues = (values: any) => {
-    if(isNonLocation) {
+    if(formState.projectIsNonLocation) {
       return {
         ...values,
           projectAcaProjectId: "",
@@ -135,8 +134,8 @@ const LocationStep = () => {
               Ubicación del Proyecto
             </Text>
             <Switch
-              checked={isNonLocation}
-              onChange={() => setIsNonLocation(!isNonLocation)}
+              checked={formState.projectIsNonLocation}
+              onChange={() => setProjectIsNonLocation(!formState.projectIsNonLocation)}
               fontSize={"14px"}
               label="No tiene Ubicación Geografica"
             />
@@ -158,7 +157,7 @@ const LocationStep = () => {
                   formik.setFieldValue("parrishId", "");
                   formik.setFieldValue("circuitId", "");
                 }}
-                disabled={isNonLocation}
+                disabled={formState.projectIsNonLocation}
               />
             </FormControl>
           </GridItem>
@@ -179,7 +178,7 @@ const LocationStep = () => {
                   formik.setFieldValue("circuitId", "");
                 }}
                 municipalityId={formik.values.municipalityId}
-                disabled={isNonLocation}
+                disabled={formState.projectIsNonLocation}
               />
             </FormControl>
           </GridItem>
@@ -200,7 +199,7 @@ const LocationStep = () => {
                   formik.setFieldValue("communityId", ""); // Reset community when circuit changes
                 }}
                 parishId={formik.values.parrishId}
-                disabled={isNonLocation}
+                disabled={formState.projectIsNonLocation}
               />
             </FormControl>
           </GridItem>
@@ -210,7 +209,7 @@ const LocationStep = () => {
                 value={formik.values.communityId}
                 onChange={(value) => formik.setFieldValue("communityId", value)}
                 circuitCode={formik.values.circuitCode}
-                disabled={isNonLocation}
+                disabled={formState.projectIsNonLocation}
               />
             </FormControl>
           </GridItem>
@@ -226,7 +225,7 @@ const LocationStep = () => {
                 communityCircuitId={formik.values.circuitCode}
                 sectorId={formik.values.communityId}
                 parrishId={formik.values.parrishId}
-                disabled={isNonLocation}
+                disabled={formState.projectIsNonLocation}
               />
             </FormControl>
           </GridItem>
@@ -235,7 +234,7 @@ const LocationStep = () => {
               checked={isUtm}
               onChange={() => setIsUtm(!isUtm)}
               label="Usar coordenadas UTM"
-              disabled={isNonLocation}
+              disabled={formState.projectIsNonLocation}
             />
           </GridItem>
           {isUtm ? (
@@ -281,7 +280,7 @@ const LocationStep = () => {
                       formik.setFieldValue("coords.lat", e.target.value)
                     }
                     onBlur={formik.handleBlur}
-                    disabled={isNonLocation}
+                    disabled={formState.projectIsNonLocation}
                   />
                 </FormControl>
               </GridItem>
@@ -302,7 +301,7 @@ const LocationStep = () => {
                     onChange={(e) =>
                       formik.setFieldValue("coords.lng", e.target.value)
                     }
-                    disabled={isNonLocation}
+                    disabled={formState.projectIsNonLocation}
                     onBlur={formik.handleBlur}
                   />
                 </FormControl>
@@ -330,7 +329,7 @@ const LocationStep = () => {
                   formik.setFieldValue("coords", value);
                 }}
                 height={220}
-                disabled={isNonLocation}
+                disabled={formState.projectIsNonLocation}
               />
             </FormControl>
           </GridItem>

@@ -6,7 +6,6 @@ import { useActivities, useCreateActivity } from '../../hooks/useActivities';
 import { ActivityItem } from './ActivityItem';
 import { ActivityForm } from './ActivityForm';
 import type { ActivityFormData } from './ActivityForm';
-import { useAppStore } from "../../store/store";
 import Text from "../Ui/Text/Text";
 import { Flex } from "../Layout/Flex";
 
@@ -31,8 +30,8 @@ const ProjectActivities: React.FC<ProjectActivitiesProps> = ({
 }) => {
   const {
     isLoading,
+    data: activities,
   } = useActivities(projectId);
-  const { activities } = useAppStore();
   const { mutateAsync: createActivity, isPending: isSubmitting } = useCreateActivity();
 
 
@@ -178,7 +177,6 @@ const ProjectActivities: React.FC<ProjectActivitiesProps> = ({
           onSubmit={handleAddActivity}
           isSubmitting={isSubmitting}
           submitError={submitError}
-          isNoTerritory={!projectMunicipalityId}
         />
       </Modal>
     </div>
